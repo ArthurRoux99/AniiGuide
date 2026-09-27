@@ -1,4 +1,4 @@
-import solver from 'javascript-lp-solver';
+import { solveLP } from '../lp';
 import type { AbilityId } from '../abilities';
 import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Recipe } from '../../data/homeland';
 import { uncoveredFactor, wateredSeconds, workSeconds } from './speed';
@@ -36,10 +36,44 @@ export interface WorkerSlot {
 
 /** Les ouvriers disponibles, par capacité (un même Aniimo peut apparaître sous plusieurs capacités). */
 export interface WorkerPool {
-  kind: 'ideal' | 'roster';
+  kind: 'ideal' | 'roster' | 'team';
   byAbility: Partial<Record<AbilityId, WorkerSlot[]>>;
   /** Nombre d'Aniimo pouvant travailler en même temps. */
   total: number;
+  /** Mode « équipe à composer » : l'optimiseur choisit aussi les Aniimo (voir teamPool). */
+  team?: TeamSpec;
+}
+
+export interface TeamProfile {
+  key: string;
+  homeland: Partial<Record<AbilityId, number>>;
+  /** Aniimo de ce profil déjà au logis : l'optimiseur les garde en priorité. */
+  owned?: number;
+}
+
+export interface TeamSpec {
+  profiles: TeamProfile[];
+  /** Places d'Aniimo disponibles. */
+  cap: number;
+  /** Suppose que chaque recrue a la bonne personnalité pour son poste. */
+  personality: boolean;
+  /** Capacités dont il faut au moins un Aniimo (travail aux champs, transport). */
+  mustHave: AbilityId[];
+}
+
+/**
+ * Équipe à composer : l'optimiseur choisit combien d'Aniimo de chaque profil recruter (nombres
+ * entiers, `cap` au plus) en même temps que la production. Chaque Aniimo occupe un poste à la fois,
+ * dans l'une de ses capacités.
+ */
+export function teamPool(spec: TeamSpec): WorkerPool {
+  const byAbility: WorkerPool['byAbility'] = {};
+  for (const p of spec.profiles) {
+    for (const [a, level] of Object.entries(p.homeland) as [AbilityId, number][]) {
+      (byAbility[a] ??= []).push({ level, personality: spec.personality ? 'IENSFTPJ' : null });
+    }
+  }
+  return { kind: 'team', byAbility, total: spec.cap, team: spec };
 }
 
 /** Des Aniimo « idéaux » : niveau 3 (maximum hors prismana) avec la bonne personnalité partout. */
@@ -95,6 +129,8 @@ export interface Plan {
   facilityUse: { facility: string; used: number; count: number }[];
   workersUsed: Partial<Record<AbilityId, number>>;
   blockers: string[];
+  /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
+  team?: { key: string; count: number }[];
 }
 
 const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
@@ -156,6 +192,15 @@ export function plan(o: PlanOptions): Plan {
       blockers.add(`${r.ability}:${r.abilityLevel}`);
       continue;
     }
+    // Travail aux champs : chaque récolte demande des tâches (défricher, semer, arroser, récolter)
+    // faites par n'importe quel Aniimo de la capacité. Quelques secondes par récolte, mais il faut
+    // au moins un Aniimo de chaque capacité.
+    const jobs = r.kind === 'grower' ? [...(r.steps ?? []), ...(o.watering ? [{ ability: 'water' as AbilityId, level: 1, workload: 6 }] : [])] : [];
+    const missing = jobs.find((j) => !(o.workers.byAbility[j.ability] ?? []).some((w) => w.level >= j.level));
+    if (missing) {
+      blockers.add(`${missing.ability}:${missing.level}`);
+      continue;
+    }
     const variants: { key: string; covered: boolean; factor: number }[] = [];
     if (!r.environment) variants.push({ key: r.id, covered: false, factor: 1 });
     else {
@@ -190,6 +235,11 @@ export function plan(o: PlanOptions): Plan {
         col.profit = -r.seedCost * cycles;
       }
       if (v.covered && r.environment) col[`env:${ENV_BUILDING[r.environment]}`] = 1 / COVER(r.facility);
+      for (const j of jobs) {
+        const busy = j.workload / seconds; // Aniimo occupés en moyenne par exemplaire
+        col[`ab:${j.ability}:1`] = (col[`ab:${j.ability}:1`] ?? 0) + busy;
+        col.workers = (col.workers ?? 0) + busy;
+      }
       if (r.kind !== 'grower' && r.ability) {
         // Un Aniimo de niveau ≥ w.level (et de la bonne lettre si bonus) est occupé par exemplaire.
         col.workers = 1;
@@ -211,12 +261,40 @@ export function plan(o: PlanOptions): Plan {
   // Contraintes : installations, climat, ouvriers, bilans.
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
   for (const b of ['heat-furnace', 'cooling-unit', 'sunlamp']) constraints[`env:${b}`] = { max: o.setup.facilities[b]?.count ?? 0 };
-  constraints.workers = { max: o.workers.total };
-  for (const [a, list] of Object.entries(o.workers.byAbility)) {
-    for (let l = 1; l <= 4; l++) {
-      const able = list!.filter((w) => w.level >= l);
-      constraints[`ab:${a}:${l}`] = { max: able.length };
-      for (const x of 'IENSFTPJ') constraints[`pb:${a}:${x}:${l}`] = { max: able.filter((w) => w.personality?.includes(x)).length };
+  const ints: Record<string, 1> = {};
+  const team = o.workers.team;
+  if (!team) {
+    constraints.workers = { max: o.workers.total };
+    for (const [a, list] of Object.entries(o.workers.byAbility)) {
+      for (let l = 1; l <= 4; l++) {
+        const able = list!.filter((w) => w.level >= l);
+        constraints[`ab:${a}:${l}`] = { max: able.length };
+        for (const x of 'IENSFTPJ') constraints[`pb:${a}:${x}:${l}`] = { max: able.filter((w) => w.personality?.includes(x)).length };
+      }
+    }
+  } else {
+    // y:p = Aniimo recrutés du profil p (entier) ; w:p:a = ceux affectés à un poste de capacité a.
+    // Les postes demandant le niveau ≥ T sont couverts par des affectations de niveau ≥ T.
+    for (const [a] of Object.entries(o.workers.byAbility)) for (let l = 1; l <= 4; l++) constraints[`ab:${a}:${l}`] = { max: 0 };
+    constraints.team = { max: team.cap };
+    for (const a of team.mustHave) constraints[`need:${a}`] = { min: 1 };
+    for (const p of team.profiles) {
+      // y:p = recrues, k:p = Aniimo déjà au logis gardés (au plus `owned`).
+      // Coût symbolique d'1 pièce/h par Aniimo : à rythme égal, la plus petite équipe l'emporte.
+      const base: Record<string, number> = { team: 1, [`asg:${p.key}`]: -1, profit: -1 };
+      for (const a of Object.keys(p.homeland)) base[`need:${a}`] = 1;
+      variables[`y:${p.key}`] = { ...base, recruits: 1 };
+      if (p.owned) {
+        variables[`k:${p.key}`] = { ...base, [`own:${p.key}`]: 1 };
+        constraints[`own:${p.key}`] = { max: p.owned };
+      }
+      // Relaxation continue : les nombres entiers sont retrouvés ensuite (voir team.ts), le calcul exact en entiers étant trop lent.
+      constraints[`asg:${p.key}`] = { max: 0 };
+      for (const [a, lvl] of Object.entries(p.homeland) as [AbilityId, number][]) {
+        const w: Record<string, number> = { [`asg:${p.key}`]: 1 };
+        for (let l = 1; l <= lvl; l++) w[`ab:${a}:${l}`] = -1;
+        variables[`w:${p.key}:${a}`] = w;
+      }
     }
   }
   const itemKeys = new Set(Object.values(variables).flatMap((c) => Object.keys(c).filter((k) => k.startsWith('item:'))));
@@ -239,7 +317,7 @@ export function plan(o: PlanOptions): Plan {
     if (!needs) hours = 0;
     else {
       variables.t = t;
-      const r1 = solver.Solve({ optimize: 't', opType: 'max', constraints, variables }) as Record<string, number> & { feasible: boolean };
+      const r1 = solveLP({ optimize: 't', opType: 'max', constraints, variables, ints });
       const best = r1.feasible ? r1.t ?? 0 : 0;
       if (best <= 1e-9) return emptyPlan(target, remaining, [...blockers], o);
       hours = 1 / best;
@@ -248,9 +326,17 @@ export function plan(o: PlanOptions): Plan {
       variables.t = { ...t, tmin: 1 };
     }
   }
-  const r2 = solver.Solve({ optimize: 'profit', opType: 'max', constraints, variables }) as Record<string, number> & { feasible: boolean };
+  const r2 = solveLP({ optimize: 'profit', opType: 'max', constraints, variables, ints });
   if (!r2.feasible) return emptyPlan(target, remaining, [...blockers], o);
   solution = r2;
+  if (team?.profiles.some((p) => p.owned)) {
+    // Passe 3 : au même rythme (et presque autant de pièces), le moins de recrues possible,
+    // pour changer au minimum l'équipe du joueur.
+    constraints.profitmin = { min: r2.result - Math.abs(r2.result) * 0.002 };
+    for (const v of Object.values(variables)) if ('profit' in v) v.profitmin = v.profit;
+    const r3 = solveLP({ optimize: 'recruits', opType: 'min', constraints, variables, ints });
+    if (r3.feasible) solution = r3;
+  }
 
   const rows: PlanRow[] = [];
   for (const [key, m] of meta) {
@@ -284,7 +370,11 @@ export function plan(o: PlanOptions): Plan {
   const workersUsed: Plan['workersUsed'] = {};
   for (const r of rows) if (r.recipe.ability && r.recipe.kind !== 'grower') workersUsed[r.recipe.ability] = (workersUsed[r.recipe.ability] ?? 0) + r.units;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers] };
+  const teamOut = team
+    ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
+    : undefined;
+
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], team: teamOut };
 }
 
 function emptyPlan(target: Plan['target'], remaining: Plan['remaining'], blockers: string[], o: PlanOptions): Plan {

@@ -769,3 +769,75 @@ summary {
     font-size: 0.8rem;
   }
 }
+
+.loading {
+  text-align: center;
+  color: var(--muted);
+  padding: 48px 16px;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  justify-self: start;
+}
+
+.segmented button {
+  font: inherit;
+  font-weight: 600;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.segmented button.is-active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.team {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.team__row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 8px;
+  align-items: start;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--panel-2);
+}
+
+.team__count {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--accent);
+  text-align: center;
+}
+
+.diff {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.diff h3 {
+  font-size: 0.95rem;
+  margin: 0 0 6px;
+}
+
+.diff .chips {
+  display: inline-flex;
+}

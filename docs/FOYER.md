@@ -299,3 +299,18 @@ Et deux infos : **ton RV actuel** et tes **Aniimo ouvriers** actuels (on s'en se
 | F5 | Plan de terrain + climat | Plan visuel |
 | F6 | Tableau de bord « Quoi faire maintenant » + guide rédigé | Outil complet |
 | F7 | Import par capture (OCR) | Saisie quasi automatique |
+
+---
+
+## 8. Codes « Combo » (partage de placements)
+
+- Un combo regroupe de 2 à 500 éléments sélectionnés en mode Construire ; son **code de 8 caractères** se copie depuis sa fiche et s'importe via « Importer ».
+- Le code **ne fonctionne que sur le serveur où il a été créé**, et un code inconnu répond « Ce code de combo n'existe pas ».
+- Conclusion : c'est un **identifiant stocké sur les serveurs du jeu**, pas une description du placement (8 caractères ne peuvent pas décrire 500 éléments). **AniiGuide ne peut donc pas générer de code** hors du jeu.
+- Piste réaliste : AniiGuide propose le placement optimal (plan visuel) ; le joueur le construit une fois, l'enregistre en combo et partage son code (bibliothèque de codes par serveur et par niveau).
+
+Sources : [aniimo.guide (outils de construction)](https://aniimo.guide/en/guides/homeland-building-tools), [aniimo.pro](https://aniimo.pro/homeland-and-housing). ❓ À confirmer avec un vrai code (longueur, caractères).
+
+## 9. Équipe optimale (onglet Recruter)
+
+L'optimiseur choisit en même temps la production **et** les Aniimo : programme linéaire HiGHS où chaque profil de capacités peut être recruté (relaxation continue arrondie, puis vérification exacte Aniimo par Aniimo ; l'écart mesuré est nul sur tous les niveaux testés). Contraintes : places du logis (éclatants déduits), un poste par Aniimo à la fois, au moins un Aniimo Plante, Ténèbres, Terre, Eau et Transport. À rythme égal : le moins d'Aniimo possible, et l'option « garder mon équipe » minimise le nombre de recrues.

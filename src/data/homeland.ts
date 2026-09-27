@@ -21,6 +21,8 @@ export interface Recipe {
   /** Cultures : durée d'un cycle en secondes (minuterie fixe) et coût des graines. */
   seconds?: number;
   seedCost?: number;
+  /** Cultures : tâches des Aniimo à chaque récolte (défricher, semer, récolter…). */
+  steps?: { step: string; ability: AbilityId; level: number; workload: number }[];
   /** Installations travaillées : charge de travail et capacité requise. */
   workload?: number;
   ability?: AbilityId | null;
