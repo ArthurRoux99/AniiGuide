@@ -20,6 +20,7 @@ npm run build:single  # site en un seul fichier : dist-single/index.html
 
 - **Mon logis** : niveau du Camping-car, places d'Aniimo, distribution des capacités (identique à l'écran du jeu), ouvriers avec personnalité, capacités à renforcer et Aniimo conseillés, export/import du profil.
 - **Optimiser** : pour ton niveau de Camping-car, quoi produire dans chaque installation pour monter au niveau suivant au plus vite (ou gagner un maximum de pièces), avec tes ouvriers ou des ouvriers idéaux ; conseils de personnalité ; feuille de route jusqu'au niveau 20.
+- **Recruter** : les Aniimo (et leurs formes) qui feraient gagner le plus de temps à ton logis, au niveau actuel et au suivant, calculés avec l'optimiseur ; qui retirer si le logis est plein.
 - **Ouvriers** : les 207 fiches Aniimo et formes du wiki officiel, filtrables par capacité de logis et niveau.
 
 ## Données

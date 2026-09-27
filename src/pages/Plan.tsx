@@ -242,7 +242,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
                 <table>
                   <tbody>
                     {rows.filter((r) => !grower || whole.get(r)! > 0).map((r) => (
-                      <tr key={r.recipe.id + r.covered}>
+                      <tr key={`${r.recipe.id}${r.covered}${r.workerLevel}${r.personalityBonus}`}>
                         <td>
                           <Name id={r.recipe.output.item} kind="item" />
                           {r.recipe.environment && (

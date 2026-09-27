@@ -3,10 +3,12 @@ import { useProfile } from './state/profile';
 import { MonLogis } from './pages/MonLogis';
 import { Ouvriers } from './pages/Ouvriers';
 import { PlanPage } from './pages/Plan';
+import { Recruter } from './pages/Recruter';
 
 const PAGES = [
   { id: 'logis', label: 'Mon logis', icon: '🏡' },
   { id: 'plan', label: 'Optimiser', icon: '📈' },
+  { id: 'recruter', label: 'Recruter', icon: '🎯' },
   { id: 'ouvriers', label: 'Ouvriers', icon: '🐾' },
 ] as const;
 type PageId = (typeof PAGES)[number]['id'];
@@ -40,6 +42,7 @@ export function App() {
       <main>
         {page === 'logis' && <MonLogis api={api} />}
         {page === 'plan' && <PlanPage api={api} />}
+        {page === 'recruter' && <Recruter api={api} />}
         {page === 'ouvriers' && <Ouvriers profile={api.profile} />}
       </main>
       <footer className="footer">

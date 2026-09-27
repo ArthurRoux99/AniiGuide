@@ -116,15 +116,23 @@ function recipeAllowed(r: Recipe, o: PlanOptions): boolean {
   return cur === 'coins' || cur === 'none';
 }
 
-/** Le meilleur ouvrier disponible pour une recette travaillée, ou null si personne n'a le niveau. */
-function bestWorker(r: Recipe, pool: WorkerPool): { level: number; bonus: boolean } | null {
-  if (r.kind === 'grower' || !r.ability) return { level: 0, bonus: false };
+/**
+ * Les « profils » d'ouvrier possibles pour une recette travaillée : chaque niveau présent dans
+ * l'équipe (≥ niveau requis), avec ou sans la personnalité de l'installation. Chaque exemplaire
+ * d'installation reçoit son propre Aniimo : 4 mines demandent 4 Aniimo Terre, et seules celles qui
+ * ont un Aniimo niv. 3 vont à la vitesse du niveau 3. null si personne n'a le niveau requis.
+ */
+function workerTiers(r: Recipe, pool: WorkerPool): { level: number; bonus: boolean }[] | null {
+  if (r.kind === 'grower' || !r.ability) return [{ level: 0, bonus: false }];
   const letter = FACILITY_BY_ID.get(r.facility)?.personality;
   const able = (pool.byAbility[r.ability] ?? []).filter((w) => w.level >= (r.abilityLevel ?? 1));
   if (!able.length) return null;
-  const level = able[0].level;
-  const bonus = !!letter && able.some((w) => w.level === level && w.personality?.includes(letter));
-  return { level, bonus };
+  const tiers = new Map<string, { level: number; bonus: boolean }>();
+  for (const w of able) {
+    const bonus = !!letter && !!w.personality?.includes(letter);
+    tiers.set(`${w.level}${bonus}`, { level: w.level, bonus });
+  }
+  return [...tiers.values()];
 }
 
 export function plan(o: PlanOptions): Plan {
@@ -143,8 +151,8 @@ export function plan(o: PlanOptions): Plan {
 
   for (const r of RECIPES) {
     if (!recipeAllowed(r, o)) continue;
-    const w = bestWorker(r, o.workers);
-    if (!w) {
+    const tiers = workerTiers(r, o.workers);
+    if (!tiers) {
       blockers.add(`${r.ability}:${r.abilityLevel}`);
       continue;
     }
@@ -155,7 +163,9 @@ export function plan(o: PlanOptions): Plan {
       const u = r.kind === 'grower' ? uncoveredFactor(r.environment) : null;
       if (u) variants.push({ key: `${r.id}~hors-zone`, covered: false, factor: u });
     }
-    for (const v of variants) {
+    const letter = FACILITY_BY_ID.get(r.facility)?.personality;
+    for (const v of variants) for (const w of tiers) {
+      const key = r.kind === 'grower' ? v.key : `${v.key}@${w.level}${w.bonus ? '+' : ''}`;
       let seconds: number;
       if (r.kind === 'grower') {
         const grow = r.seconds! / v.factor;
@@ -181,11 +191,15 @@ export function plan(o: PlanOptions): Plan {
       }
       if (v.covered && r.environment) col[`env:${ENV_BUILDING[r.environment]}`] = 1 / COVER(r.facility);
       if (r.kind !== 'grower' && r.ability) {
+        // Un Aniimo de niveau ≥ w.level (et de la bonne lettre si bonus) est occupé par exemplaire.
         col.workers = 1;
-        for (let l = 1; l <= (r.abilityLevel ?? 1); l++) col[`ab:${r.ability}:${l}`] = 1;
+        for (let l = 1; l <= w.level; l++) {
+          col[`ab:${r.ability}:${l}`] = 1;
+          if (w.bonus) col[`pb:${r.ability}:${letter}:${l}`] = 1;
+        }
       }
-      variables[v.key] = col;
-      meta.set(v.key, { recipe: r, covered: v.covered, cycleSeconds: seconds, workerLevel: r.kind === 'grower' ? null : w.level, personalityBonus: w.bonus, perUnit: r.output.qty * cycles });
+      variables[key] = col;
+      meta.set(key, { recipe: r, covered: v.covered, cycleSeconds: seconds, workerLevel: r.kind === 'grower' ? null : w.level, personalityBonus: w.bonus, perUnit: r.output.qty * cycles });
     }
   }
 
@@ -199,7 +213,11 @@ export function plan(o: PlanOptions): Plan {
   for (const b of ['heat-furnace', 'cooling-unit', 'sunlamp']) constraints[`env:${b}`] = { max: o.setup.facilities[b]?.count ?? 0 };
   constraints.workers = { max: o.workers.total };
   for (const [a, list] of Object.entries(o.workers.byAbility)) {
-    for (let l = 1; l <= 4; l++) constraints[`ab:${a}:${l}`] = { max: list!.filter((w) => w.level >= l).length };
+    for (let l = 1; l <= 4; l++) {
+      const able = list!.filter((w) => w.level >= l);
+      constraints[`ab:${a}:${l}`] = { max: able.length };
+      for (const x of 'IENSFTPJ') constraints[`pb:${a}:${x}:${l}`] = { max: able.filter((w) => w.personality?.includes(x)).length };
+    }
   }
   const itemKeys = new Set(Object.values(variables).flatMap((c) => Object.keys(c).filter((k) => k.startsWith('item:'))));
   for (const k of itemKeys) constraints[k] = { min: 0 };
