@@ -109,6 +109,9 @@ const combos = await read('data/combos.json');
 await writeFile(join(ROOT, 'src/data/combos.gen.json'), JSON.stringify(combos) + '\n');
 console.log(`src/data/combos.gen.json : ${combos.combos.length} combos`);
 
+// Placements optimaux autour des appareils climatiques (scripts/build-climate-layouts.mjs).
+await copyFile(join(ROOT, 'data/climate-layouts.json'), join(ROOT, 'src/data/climate-layouts.gen.json'));
+
 // Références de reconnaissance des portraits (générées par scripts/build-portraits.mjs).
 await copyFile(join(ROOT, 'data/portraits.bin'), join(ROOT, 'src/data/portraits.gen.bin'));
 await copyFile(join(ROOT, 'data/portraits.json'), join(ROOT, 'src/data/portraits.gen.json'));
