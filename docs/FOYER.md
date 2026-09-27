@@ -314,3 +314,7 @@ Sources : [aniimo.guide (outils de construction)](https://aniimo.guide/en/guides
 ## 9. Équipe optimale (onglet Recruter)
 
 L'optimiseur choisit en même temps la production **et** les Aniimo : programme linéaire HiGHS où chaque profil de capacités peut être recruté (relaxation continue arrondie, puis vérification exacte Aniimo par Aniimo ; l'écart mesuré est nul sur tous les niveaux testés). Contraintes : places du logis (éclatants déduits), un poste par Aniimo à la fois, au moins un Aniimo Plante, Ténèbres, Terre, Eau et Transport. À rythme égal : le moins d'Aniimo possible, et l'option « garder mon équipe » minimise le nombre de recrues.
+
+### Aniimo attitrés ou mobiles ❓
+
+Les sources divergent : certaines décrivent des Aniimo **attitrés à une installation**, d'autres des Aniimo qui **passent d'une installation à l'autre**. AniiGuide suppose par défaut un Aniimo attitré par installation travaillée (entier, même si l'installation ne tourne qu'une fraction du temps), et propose l'autre règle en option. À confirmer en jeu. Dans les deux cas, au RV 8, le rythme est fixé par les champs et les installations de collecte qui tournent à 100 % ; les ateliers (dont les cuisines au Feu) attendent leurs ingrédients.

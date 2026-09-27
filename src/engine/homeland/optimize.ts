@@ -101,6 +101,11 @@ export interface PlanOptions {
   /** Les Aniimo Eau arrosent les cultures (−25 % de temps de pousse). */
   watering: boolean;
   includeUnverified: boolean;
+  /**
+   * Un Aniimo attitré par installation travaillée (par défaut) : une cuisine utilisée 5 % du temps
+   * occupe quand même un Aniimo entier. Sinon, les Aniimo passent d'une installation à l'autre.
+   */
+  dedicated?: boolean;
 }
 
 export interface PlanRow {
@@ -131,6 +136,8 @@ export interface Plan {
   blockers: string[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
+  /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
+  staffing?: { facility: string; ability: AbilityId; level: number; bonus: boolean; count: number }[];
 }
 
 const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
@@ -184,6 +191,8 @@ export function plan(o: PlanOptions): Plan {
   const constraints: Record<string, { min?: number; max?: number; equal?: number }> = {};
   const meta = new Map<string, Omit<PlanRow, 'units' | 'outputPerHour'> & { perUnit: number }>();
   const blockers = new Set<string>();
+  const dedicated = o.dedicated ?? true;
+  const staffTiers = new Map<string, { facility: string; ability: AbilityId; level: number; bonus: boolean; letter: string | null | undefined }>();
 
   for (const r of RECIPES) {
     if (!recipeAllowed(r, o)) continue;
@@ -241,11 +250,18 @@ export function plan(o: PlanOptions): Plan {
         col.workers = (col.workers ?? 0) + busy;
       }
       if (r.kind !== 'grower' && r.ability) {
-        // Un Aniimo de niveau ≥ w.level (et de la bonne lettre si bonus) est occupé par exemplaire.
-        col.workers = 1;
-        for (let l = 1; l <= w.level; l++) {
-          col[`ab:${r.ability}:${l}`] = 1;
-          if (w.bonus) col[`pb:${r.ability}:${letter}:${l}`] = 1;
+        if (dedicated) {
+          // Le temps passé sur cette recette doit être couvert par un Aniimo posté à l'installation.
+          const st = `st:${r.facility}:${w.level}:${w.bonus ? 1 : 0}`;
+          col[st] = 1;
+          staffTiers.set(st, { facility: r.facility, ability: r.ability, level: w.level, bonus: w.bonus, letter });
+        } else {
+          // Un Aniimo de niveau ≥ w.level (et de la bonne lettre si bonus) est occupé par exemplaire.
+          col.workers = 1;
+          for (let l = 1; l <= w.level; l++) {
+            col[`ab:${r.ability}:${l}`] = 1;
+            if (w.bonus) col[`pb:${r.ability}:${letter}:${l}`] = 1;
+          }
         }
       }
       variables[key] = col;
@@ -262,6 +278,18 @@ export function plan(o: PlanOptions): Plan {
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
   for (const b of ['heat-furnace', 'cooling-unit', 'sunlamp']) constraints[`env:${b}`] = { max: o.setup.facilities[b]?.count ?? 0 };
   const ints: Record<string, 1> = {};
+  // Aniimo postés (nombre entier par installation et par niveau) : ils occupent un ouvrier entier.
+  for (const [st, t] of staffTiers) {
+    const col: Record<string, number> = { [st]: -1, [`staff:${t.facility}`]: 1, workers: 1 };
+    for (let l = 1; l <= t.level; l++) {
+      col[`ab:${t.ability}:${l}`] = 1;
+      if (t.bonus) col[`pb:${t.ability}:${t.letter}:${l}`] = 1;
+    }
+    variables[`s:${st}`] = col;
+    ints[`s:${st}`] = 1;
+    constraints[st] = { max: 0 };
+    constraints[`staff:${t.facility}`] = { max: o.setup.facilities[t.facility]?.count ?? 0 };
+  }
   const team = o.workers.team;
   if (!team) {
     constraints.workers = { max: o.workers.total };
@@ -368,13 +396,23 @@ export function plan(o: PlanOptions): Plan {
     .filter(([, f]) => f.count > 0)
     .map(([id, f]) => ({ facility: id, count: f.count, used: rows.filter((r) => r.recipe.facility === id).reduce((s, r) => s + r.units, 0) }));
   const workersUsed: Plan['workersUsed'] = {};
-  for (const r of rows) if (r.recipe.ability && r.recipe.kind !== 'grower') workersUsed[r.recipe.ability] = (workersUsed[r.recipe.ability] ?? 0) + r.units;
+  const staffing: NonNullable<Plan['staffing']> = [];
+  if (dedicated) {
+    for (const [st, t] of staffTiers) {
+      const count = Math.round(solution[`s:${st}`] ?? 0);
+      if (count <= 0) continue;
+      staffing.push({ facility: t.facility, ability: t.ability, level: t.level, bonus: t.bonus, count });
+      workersUsed[t.ability] = (workersUsed[t.ability] ?? 0) + count;
+    }
+  } else {
+    for (const r of rows) if (r.recipe.ability && r.recipe.kind !== 'grower') workersUsed[r.recipe.ability] = (workersUsed[r.recipe.ability] ?? 0) + r.units;
+  }
 
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], team: teamOut };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], team: teamOut, staffing: dedicated ? staffing : undefined };
 }
 
 function emptyPlan(target: Plan['target'], remaining: Plan['remaining'], blockers: string[], o: PlanOptions): Plan {
@@ -394,7 +432,7 @@ export interface RoadmapStep {
 }
 
 /** Temps pour passer chaque niveau, du niveau `from` jusqu'au 20, en partant de zéro à chaque fois. */
-export function roadmap(from: number, workers: (rv: number) => WorkerPool, opts: Pick<PlanOptions, 'watering' | 'includeUnverified'>): RoadmapStep[] {
+export function roadmap(from: number, workers: (rv: number) => WorkerPool, opts: Pick<PlanOptions, 'watering' | 'includeUnverified' | 'dedicated'>): RoadmapStep[] {
   const steps: RoadmapStep[] = [];
   for (let rv = Math.max(1, from); rv < 20; rv++) {
     const p = plan({ ...opts, setup: setupForRv(rv), workers: workers(rv), goal: { kind: 'levelUp', stock: { coins: 0, items: {} } } });

@@ -24,7 +24,7 @@ export interface RecruitInput {
   stock: { coins: number; items: Record<string, number> };
   maxAniimo: number;
   shinies: number;
-  opts: Pick<PlanOptions, 'watering' | 'includeUnverified'>;
+  opts: Pick<PlanOptions, 'watering' | 'includeUnverified' | 'dedicated'>;
 }
 
 export interface RecruitScore {
