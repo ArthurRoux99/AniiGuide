@@ -1,0 +1,58 @@
+{
+  "_doc": "Noms français relevés dans le jeu (captures d'écran). Clé = identifiant interne AniiGuide. Seuls les noms vus en jeu figurent ici ; les autres restent à relever.",
+  "_releves": [
+    { "date": "2026-09-27", "plateforme": "iOS", "captures": "Dépôt, mode Modifier, Camping-car, liste des Aniimo du logis, Moulin-carrousel, Sélectionner un produit, menu de construction" }
+  ],
+  "termes": {
+    "homeland": "Logis",
+    "rv": "Camping-car",
+    "rvLevelUp": "Camping-car au niveau supérieur",
+    "rvLevelUpConditions": "Conditions de gain de niveau",
+    "rvModules": "Modules du camping-car",
+    "warehouse": "Entrepôt du Logis",
+    "depot": "Dépôt",
+    "inventory": "Inventaire",
+    "homeStock": "Foyer",
+    "workload": "Charge de travail",
+    "efficiency": "Efficacité",
+    "recommended": "Recommandé",
+    "homelandAbilities": "Capacités de logis",
+    "abilityDistribution": "Distribution des capacités",
+    "habitability": "Habitabilité",
+    "productionZone": "Zone de production",
+    "buildZone": "Zone de construction de logis",
+    "food": "Nourriture",
+    "selectProduct": "Sélectionner un produit",
+    "insufficientItems": "Objets insuffisants.",
+    "editMode": "Modifier",
+    "recycle": "Recycler",
+    "conditionsMet": "Conditions remplies",
+    "recommendationsFollowed": "Recommandations suivies",
+    "unlocked": "Déverrouillé(es)",
+    "lockedAccess": "Accès verrouillé",
+    "electricModule": "Module électrique"
+  },
+  "categoriesConstruction": {
+    "functional": "Équipements fonctionnels",
+    "materialsProduction": "Production de matériaux",
+    "materialsProcessing": "Traitement de matériaux",
+    "itemProduction": "Production d'objets",
+    "auxiliary": "Équipements auxiliaires",
+    "aniimoEquipment": "Équipements d'Aniimo",
+    "outdoorDecor": "Décorations extérieures",
+    "indoorDecor": "Décorations intérieures",
+    "favorites": "Favoris",
+    "combo": "Combo"
+  },
+  "installations": {
+    "farmland": "Ferme",
+    "woodland": "Pépinière",
+    "well": "Puits",
+    "carousel-mill": "Moulin-carrousel",
+    "aniipod-maker": "Machine à Aniipod"
+  },
+  "objets": {
+    "aniipod-pro": "Aniipod pro",
+    "milled-rice": "Riz décortiqué"
+  }
+}

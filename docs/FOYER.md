@@ -13,6 +13,10 @@ Légende de fiabilité utilisée partout dans ce document et dans les données :
 
 ---
 
+## 0. Vocabulaire du jeu en français ✅
+
+Le jeu n'emploie pas « Foyer » pour le système : c'est le **Logis** (Entrepôt du Logis, Capacités de logis…), et le RV s'appelle le **Camping-car**. « Foyer » désigne le stock d'un objet rangé au logis (vs « Inventaire »). L'outil utilisera les termes du jeu, et la recherche acceptera aussi « Foyer » et « RV ». Glossaire complet : `data/i18n/fr.json` ; faits vérifiés : `data/verification.json`.
+
 ## 1. Ce que la recherche a donné
 
 ### 1.1 Sources de données
@@ -76,7 +80,9 @@ Chaînes de matériaux de RV 🟡 :
 - **Four à cheminée** : Sable minéral ×8 → Minerai tamisé ×8 → Brique frittée ×8 → Minerai raffiné ×4 → Plaque microcristalline
 - Les Blocs de bois et le Sable minéral sont des **sous-produits** des Bois et des Mines.
 
-Nombre maximal d'Aniimo au Foyer ❓ : 5, 8, 11, 14, 17, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 43, 44, 45 (RV 1 → 20) selon une source ; un guide FR parle de 30 dès le RV 9. **À vérifier en jeu.**
+Nombre maximal d'Aniimo au logis : 5, 8, 11, 14, 17, 20, 22, **24, 26**, 28, 30, 32, 34, 36, 38, 40, 42, 43, 44, 45 (RV 1 → 20). ✅ RV 8 = 24 et RV 9 = 26 vus en jeu (le « 30 au RV 9 » d'un guide FR est faux) ; le reste 🟡.
+
+Chaque passage de niveau a aussi des **conditions de placement** (ex. RV 9 : 18 fermes, 9 pépinières, 2 puits) ✅ et une **durée** (RV 9 : 3 h) ✅.
 
 ### 2.2 Terrain
 
