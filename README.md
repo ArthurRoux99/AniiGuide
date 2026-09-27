@@ -2,6 +2,8 @@
 
 Outil d'aide en français pour **Aniimo**, centré sur le **Logis** (le « Foyer ») : tes ouvriers, leurs capacités, et bientôt l'optimisation de la production et du Camping-car.
 
+Site en ligne : https://arthurroux99.github.io/AniiGuide/ (publié automatiquement à chaque modification de `main`).
+
 ## Lancer le site
 
 ```bash

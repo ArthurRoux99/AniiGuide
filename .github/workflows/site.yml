@@ -1,4 +1,4 @@
-name: Site (tests + fichier à télécharger)
+name: Site (tests + GitHub Pages)
 
 on:
   push:
@@ -8,6 +8,12 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -27,3 +33,22 @@ jobs:
         with:
           name: aniiguide-html
           path: dist-single/index.html
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Active GitHub Pages (source « GitHub Actions ») s'il ne l'est pas encore.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - id: deployment
+        uses: actions/deploy-pages@v4
