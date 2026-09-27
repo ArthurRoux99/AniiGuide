@@ -3,7 +3,7 @@
  "url": "https://www.hideoutgacha.com/games/aniimo/tier-list",
  "note": "Établie pendant la bêta, avant la sortie du 16/09.",
  "pageDate": "2026-09-23",
- "fetchedAt": "2026-09-27T12:04:02.267Z",
+ "fetchedAt": "2026-09-27T12:13:48.461Z",
  "scale": [
   "S",
   "A",
@@ -37,7 +37,7 @@
    "tier": "S"
   },
   {
-   "id": "en:Irisalis",
+   "id": "10001-prismana-form",
    "tier": "S"
   },
   {
@@ -85,7 +85,7 @@
    "tier": "A"
   },
   {
-   "id": "en:Somniwing",
+   "id": "030-prismana-form",
    "tier": "A"
   },
   {
@@ -309,9 +309,7 @@
   "Malevsera (Basic Form) : S",
   "Fennelun (Basic Form) : S",
   "Helion (Basic Form) : S",
-  "Irisalis (Basic Form) : S",
   "Soleon (Basic Form) : S",
-  "Somniwing (Basic Form) : A",
   "Coraliz (Basic Form) : A",
   "Glameep (Basic Form) : A",
   "Cheekie (Basic Form) : B",

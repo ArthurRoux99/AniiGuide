@@ -3,7 +3,7 @@
  "url": "https://www.oslink.io/blog/guide/aniimo-tier-list.html",
  "note": null,
  "pageDate": null,
- "fetchedAt": "2026-09-27T12:04:06.540Z",
+ "fetchedAt": "2026-09-27T12:13:52.651Z",
  "scale": [
   "SS",
   "S",
@@ -12,11 +12,11 @@
  ],
  "entries": [
   {
-   "id": "en:Somniwing",
+   "id": "030-prismana-form",
    "tier": "SS"
   },
   {
-   "id": "en:Irisalis",
+   "id": "10001-prismana-form",
    "tier": "SS"
   },
   {
@@ -177,8 +177,6 @@
   }
  ],
  "unmatched": [
-  "Somniwing (Basic Form) : SS",
-  "Irisalis (Basic Form) : SS",
   "Helion (Basic Form) : S",
   "Glameep (Basic Form) : B",
   "Gachapus (Basic Form) : B",
