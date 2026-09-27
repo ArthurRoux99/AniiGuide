@@ -2,6 +2,8 @@
 
 Outil d'aide en français pour **Aniimo**, centré sur le **Logis** (le « Foyer ») : tes ouvriers, leurs capacités, et bientôt l'optimisation de la production et du Camping-car.
 
+Site en ligne : https://arthurroux99.github.io/AniiGuide/ (publié automatiquement à chaque modification de `main`).
+
 ## Lancer le site
 
 ```bash
@@ -9,7 +11,10 @@ npm install
 npm run dev      # http://localhost:5173
 npm test         # tests des calculs
 npm run build    # site statique dans dist/
+npm run build:single  # site en un seul fichier : dist-single/index.html
 ```
+
+**Tester sans rien installer** : ouvre `dist-single/index.html` dans Chrome, Edge ou Safari (double-clic). Chaque exécution de GitHub Actions fournit aussi ce fichier dans l'artefact `aniiguide-html`.
 
 ## Ce qui existe
 
@@ -22,8 +27,6 @@ npm run build    # site statique dans dist/
 - `data/i18n/fr.json` : noms français relevés en jeu. Quand un nom FR manque, le site affiche le nom anglais.
 - `data/verification.json` : faits vérifiés en jeu.
 - `data/profils/` : profils réels servant de cas de test.
-
-Site : https://arthurroux99.github.io/AniiGuide/ (publié automatiquement depuis `main`).
 
 Documentation : [`docs/PLAN.md`](docs/PLAN.md) (projet) et [`docs/FOYER.md`](docs/FOYER.md) (mécaniques du Logis).
 

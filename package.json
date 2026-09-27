@@ -13,7 +13,8 @@
     "data:app": "node scripts/build-app-data.mjs",
     "predev": "node scripts/build-app-data.mjs",
     "prebuild": "node scripts/build-app-data.mjs",
-    "pretest": "node scripts/build-app-data.mjs"
+    "pretest": "node scripts/build-app-data.mjs",
+    "build:single": "node scripts/build-app-data.mjs && vite build --mode single"
   },
   "dependencies": {
     "react": "^19.3.0",
@@ -25,6 +26,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",
+    "vite-plugin-singlefile": "^2.3.3",
     "vitest": "^5.0.2"
   }
 }

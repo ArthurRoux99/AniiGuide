@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: site-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -27,6 +27,12 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npm run build:single
+      # Le site en un seul fichier HTML, téléchargeable depuis l'onglet Actions.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aniiguide-html
+          path: dist-single/index.html
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'
         with:
@@ -40,5 +46,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Active GitHub Pages (source « GitHub Actions ») s'il ne l'est pas encore.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - id: deployment
         uses: actions/deploy-pages@v4
