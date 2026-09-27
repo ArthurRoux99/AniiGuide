@@ -1412,3 +1412,7 @@ label.btn {
 .capture-list select {
   max-width: 100%;
 }
+.mini {
+  color: var(--ink);
+  text-decoration: none;
+}
