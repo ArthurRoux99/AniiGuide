@@ -48,8 +48,10 @@ const aniimo = official.entries.map((e) => {
     head: e.headIcon,
     elements: e.elements,
     roles: e.roles,
+    statTotal: e.stats?.total ?? null,
     homeland: Object.fromEntries(e.homeland.map((h) => [h.ability, h.level])),
-    habitats: e.habitats.fr,
+    // Quelques zones ne sont pas encore traduites sur le wiki (texte chinois, même en anglais) : écartées.
+    habitats: e.habitats.fr.filter((h) => !/[\u3400-\u9fff]/.test(h)),
   };
 });
 

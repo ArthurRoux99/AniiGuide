@@ -1363,3 +1363,21 @@ label.btn {
   align-items: center;
   justify-content: center;
 }
+
+/* Où trouver */
+.zone-route h3 {
+  margin: 12px 0 4px;
+}
+.zone-all {
+  border-top: 1px solid var(--line);
+  padding: 8px 0;
+}
+.zone-all summary {
+  cursor: pointer;
+}
+.zone-all .tier-row__items {
+  margin-top: 8px;
+}
+.zone-all .tier-tile {
+  text-decoration: none;
+}

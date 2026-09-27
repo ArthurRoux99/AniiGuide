@@ -14,9 +14,11 @@ const Recruter = page(() => import('./pages/Recruter'), 'Recruter');
 const Combos = page(() => import('./pages/Combos'), 'Combos');
 const Ouvriers = page(() => import('./pages/Ouvriers'), 'Ouvriers');
 const Aniidex = page(() => import('./pages/Aniidex'), 'Aniidex');
+const OuTrouver = page(() => import('./pages/OuTrouver'), 'OuTrouver');
 const TierList = page(() => import('./pages/TierList'), 'TierList');
 const Equipes = page(() => import('./pages/Equipes'), 'Equipes');
 const Codes = page(() => import('./pages/Codes'), 'Codes');
+const Mesures = page(() => import('./pages/Mesures'), 'Mesures');
 
 const PAGES = [
   { id: 'jour', label: "Aujourd'hui", icon: '☀️', Page: Aujourdhui },
@@ -26,9 +28,11 @@ const PAGES = [
   { id: 'combos', label: 'Combos', icon: '🧩', Page: Combos },
   { id: 'ouvriers', label: 'Ouvriers', icon: '🐾', Page: Ouvriers },
   { id: 'aniidex', label: 'Aniidex', icon: '📖', Page: Aniidex },
+  { id: 'carte', label: 'Où trouver', icon: '🗺️', Page: OuTrouver },
   { id: 'tier', label: 'Tier list', icon: '🏆', Page: TierList },
   { id: 'equipes', label: 'Équipes', icon: '⚔️', Page: Equipes },
   { id: 'codes', label: 'Codes', icon: '🎁', Page: Codes },
+  { id: 'mesures', label: 'Vérifier', icon: '⏱️', Page: Mesures, hidden: true },
 ] as const;
 type PageId = (typeof PAGES)[number]['id'];
 
@@ -64,7 +68,7 @@ export function App() {
           Anii<b>Guide</b>
         </span>
         <nav className="tabs" ref={nav}>
-          {PAGES.map((x) => (
+          {PAGES.filter((x) => !('hidden' in x) || current === x.id).map((x) => (
             <a key={x.id} href={`#${x.id}`} className={current === x.id ? 'is-active' : ''} aria-current={current === x.id ? 'page' : undefined}>
               <span aria-hidden>{x.icon}</span> {x.label}
             </a>

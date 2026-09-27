@@ -10,7 +10,7 @@ export function ImportBanner({ api }: { api: ProfileApi }) {
   useEffect(() => {
     const m = location.hash.match(/^#import=([\w-]+)/);
     if (!m) return;
-    history.replaceState(null, '', location.pathname + '#logis');
+    history.replaceState(null, '', location.pathname);
     decodeProfile(m[1]).then(setIncoming, () => setError('Ce lien de synchronisation est illisible (incomplet ?).'));
   }, []);
 
@@ -38,6 +38,7 @@ export function ImportBanner({ api }: { api: ProfileApi }) {
           onClick={() => {
             api.replace(incoming);
             setIncoming(null);
+            location.hash = 'logis';
           }}
         >
           Remplacer

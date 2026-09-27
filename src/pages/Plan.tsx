@@ -131,9 +131,13 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <ul className="assumptions">
             <li>Données de production : projet Aniimax (MIT), vérifiées en jeu installation par installation ; formules de vitesse relevées en jeu.</li>
             <li>Production continue : tu récoltes assez souvent pour que rien ne déborde, et les graines sont achetées au besoin.</li>
-            <li>Chaque installation travaillée reçoit ton meilleur Aniimo dans la capacité demandée (avec le bonus de personnalité s'il en a un).</li>
-            <li>Le temps de semis/récolte des champs par les Aniimo n'est pas encore limité par ton nombre d'ouvriers.</li>
+            <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
+            <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
+            <li>Mode électrique (niveau 12 et plus) non pris en compte : pas encore de données fiables.</li>
             <li>Zone des bâtiments climatiques : environ 9×9 cases (❓ à confirmer). Coûts d'amélioration des installations et durée d'amélioration du Camping-car non inclus.</li>
+            <li>
+              Un écart avec le jeu ? <a href="#mesures">Vérifie une durée en jeu</a> et signale-le.
+            </li>
           </ul>
         </details>
       </section>

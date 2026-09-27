@@ -67,6 +67,7 @@ export function Aujourdhui({ api }: { api: ProfileApi }) {
           <a href="#recruter">🎯 Prochaine recrue</a>
           <a href="#equipes">⚔️ Équipe contre un boss</a>
           <a href="#aniidex">📖 Chercher un Aniimo</a>
+          <a href="#mesures">⏱️ Vérifier une durée en jeu</a>
         </div>
       </section>
     </div>
