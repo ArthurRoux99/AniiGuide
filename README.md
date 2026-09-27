@@ -23,6 +23,8 @@ npm run build    # site statique dans dist/
 - `data/verification.json` : faits vérifiés en jeu.
 - `data/profils/` : profils réels servant de cas de test.
 
+Site : https://arthurroux99.github.io/AniiGuide/ (publié automatiquement depuis `main`).
+
 Documentation : [`docs/PLAN.md`](docs/PLAN.md) (projet) et [`docs/FOYER.md`](docs/FOYER.md) (mécaniques du Logis).
 
 Projet de fans non officiel. Aniimo © Pawprint Studio / FunPlus.
