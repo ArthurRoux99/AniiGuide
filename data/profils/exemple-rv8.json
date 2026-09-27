@@ -1,0 +1,222 @@
+{
+ "_doc": "Profil réel d’un joueur (RV 8), relevé par captures le 27/09/2026. Sert de cas de test pour les calculs. Personnalités à compléter.",
+ "rv": 8,
+ "pieces": 40001,
+ "maxAniimo": 24,
+ "zones": {
+  "production": 22,
+  "construction": 2
+ },
+ "ouvriers": [
+  {
+   "aniimo": "014-sea-of-flowers-form",
+   "nom": "Filoutus (Sea of Flowers Form)",
+   "capacites": {
+    "hauling": 2,
+    "water": 2
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "072-basic-form",
+   "nom": "Magmarex",
+   "capacites": {
+    "earth": 2,
+    "fire": 3,
+    "hauling": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "010-beach-form",
+   "nom": "Tubabec (Beach Form)",
+   "capacites": {
+    "wind": 3,
+    "water": 2
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "033-basic-form",
+   "nom": "Bourgeonnet",
+   "capacites": {
+    "grass": 1,
+    "artisanship": 1
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "041-basic-form",
+   "nom": "Igniti",
+   "capacites": {
+    "artisanship": 3,
+    "dark": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "052-basic-form",
+   "nom": "Terriloutre",
+   "capacites": {
+    "leisure": 3,
+    "water": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "006-basic-form",
+   "nom": "Stellaria",
+   "capacites": {
+    "leisure": 3,
+    "dark": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "045-mountain-woods-form",
+   "nom": "Voltige (Mountain Woods Form)",
+   "capacites": {
+    "lightning": 1,
+    "artisanship": 1
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "038-basic-form",
+   "nom": "Plumiel",
+   "capacites": {
+    "perfumery": 1,
+    "dark": 1,
+    "leisure": 1
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "024-basic-form",
+   "nom": "Crabiflore",
+   "capacites": {
+    "earth": 3,
+    "grass": 2,
+    "hauling": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "078-basic-form",
+   "nom": "Voilueur",
+   "capacites": {
+    "lightning": 2,
+    "artisanship": 2
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "016-basic-form",
+   "nom": "Voilotus",
+   "capacites": {
+    "water": 2,
+    "grass": 3,
+    "hauling": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "10003-basic-form",
+   "nom": "Fulmi",
+   "capacites": {
+    "lightning": 3,
+    "artisanship": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "058-basic-form",
+   "nom": "Boulabée",
+   "capacites": {
+    "hauling": 3,
+    "earth": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "041-highland-form",
+   "nom": "Igniti (Highland Form)",
+   "capacites": {
+    "artisanship": 3,
+    "fire": 2,
+    "dark": 3
+   },
+   "personnalite": "ENTP"
+  },
+  {
+   "aniimo": "046-basic-form",
+   "nom": "Voltignasse",
+   "capacites": {
+    "lightning": 3,
+    "artisanship": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "069-basic-form",
+   "nom": "Grizzo",
+   "capacites": {
+    "hauling": 3,
+    "earth": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "039-basic-form",
+   "nom": "Fragrancier",
+   "capacites": {
+    "perfumery": 3,
+    "dark": 3,
+    "leisure": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "071-basic-form",
+   "nom": "Lavasaure",
+   "capacites": {
+    "earth": 1,
+    "fire": 2,
+    "hauling": 2
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "014-snowfield-form",
+   "nom": "Filoutus (Snowfield Form)",
+   "capacites": {
+    "ice": 1,
+    "water": 2,
+    "hauling": 2
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "076-basic-form",
+   "nom": "Bastiroc",
+   "capacites": {
+    "hauling": 3,
+    "earth": 3
+   },
+   "personnalite": null
+  },
+  {
+   "aniimo": "029-sea-of-flowers-form",
+   "nom": "Voletti (Sea of Flowers Form)",
+   "capacites": {
+    "leisure": 3,
+    "grass": 2,
+    "wind": 3
+   },
+   "personnalite": null
+  }
+ ],
+ "eclatants": 2,
+ "ticketsBourgeonParJour": 360,
+ "ticketsBourgeon": 322
+}

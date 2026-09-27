@@ -1,7 +1,9 @@
 # AniiGuide — Plan du projet
 
 > Outil d'aide tout-en-un pour **Aniimo** : Aniidex, tier list, carte interactive, et surtout un **guide + planificateur complet du Foyer (Homeland)**.
-> Français d'abord, anglais ensuite.
+> **En français**, avec les noms et images officiels des Aniimo.
+>
+> 👉 Le détail du Foyer (recherche, mécaniques, cahier des charges) est dans [`FOYER.md`](FOYER.md).
 
 Dernière mise à jour : 27/09/2026
 
@@ -81,7 +83,7 @@ Relevé dans les outils existants — **chaque point doit être confirmé en jeu
 
 | Sujet | Choix | Pourquoi |
 |---|---|---|
-| Framework | **Astro + îlots React + TypeScript** | Guides en Markdown rapides et bien référencés (SEO), outils interactifs en React |
+| Framework | **Vite + React + TypeScript** (choisi au démarrage) | Application rapide et installable ; les guides pourront être ajoutés en Markdown |
 | Style | Tailwind CSS | Rapide, cohérent, mode sombre facile |
 | État local | Zustand + localStorage | Collection et plans de Foyer sans compte ni serveur |
 | Carte | Leaflet (tuiles maison) | Standard, léger |
@@ -117,9 +119,14 @@ Relevé dans les outils existants — **chaque point doit être confirmé en jeu
 
 ---
 
-## 7. Questions ouvertes
-1. Priorité : on commence bien par le **Foyer** (le plus différenciant) ?
-2. Tu joues activement ? (indispensable pour vérifier les mécaniques et relever des données)
-3. Français seulement au début, ou FR + EN dès le départ ?
-4. Hébergement et nom de domaine souhaités ?
-5. Comptes utilisateurs (sauvegarde en ligne, partage) ou tout en local pour commencer ?
+## 7. Décisions prises (27/09/2026)
+
+| Question | Décision |
+|---|---|
+| Priorité | **Le Foyer d'abord**, avec l'objectif de l'outil le plus détaillé et fiable possible |
+| Vérification en jeu | Tu joues tous les jours (iOS + PC) → relevés par captures d'écran |
+| Langue | **Français uniquement** pour l'instant (noms officiels FR + images) |
+| Sauvegarde | **Locale** (navigateur + export/lien), comptes plus tard |
+| Vision du jeu | Captures d'écran d'abord, import par OCR ensuite ; jamais de lecture mémoire/fichiers du jeu |
+
+La feuille de route §5 est donc réordonnée : **Données → Foyer (F0 à F7, voir FOYER.md) → Aniidex complet → Tier list → Carte.**
