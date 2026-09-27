@@ -65,12 +65,3 @@ export function Distribution({ counts, onPick, active }: { counts: Record<Abilit
     </div>
   );
 }
-
-/** Réglage partagé : un Aniimo attitré par installation, ou des Aniimo qui passent de l'une à l'autre. */
-export function DedicatedToggle({ value, onChange }: { value: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <label title="Si chaque installation garde son propre Aniimo, une cuisine peu utilisée occupe quand même un Aniimo entier.">
-      <input type="checkbox" checked={value} onChange={(e) => onChange(e.target.checked)} /> Un Aniimo attitré par installation
-    </label>
-  );
-}

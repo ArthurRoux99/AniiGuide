@@ -6,7 +6,7 @@ import { PERSONALITY_BONUS as LETTERS } from '../engine/personality';
 import { idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan as PlanResult, type PlanRow } from '../engine/homeland/optimize';
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
-import { AbilityChip, Badge, DedicatedToggle } from '../components/ui';
+import { AbilityChip, Badge } from '../components/ui';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -56,9 +56,8 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : { kind: 'coins' },
         watering,
         includeUnverified: unverified,
-        dedicated: profile.dedicated,
       }),
-    [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock, profile.dedicated],
+    [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock],
   );
 
   return (
@@ -106,7 +105,6 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <label>
             <input type="checkbox" checked={unverified} onChange={(e) => setUnverified(e.target.checked)} /> Inclure les recettes non vérifiées
           </label>
-          <DedicatedToggle value={profile.dedicated} onChange={api.setDedicated} />
         </div>
       </section>
 
@@ -132,7 +130,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
 
       <Result result={result} goal={goal} rv={rv} who={who} />
 
-      <Roadmap rv={rv} pool={who === 'roster' && hasRoster ? roster : null} shinies={profile.shinies} watering={watering} unverified={unverified} dedicated={profile.dedicated} />
+      <Roadmap rv={rv} pool={who === 'roster' && hasRoster ? roster : null} shinies={profile.shinies} watering={watering} unverified={unverified} />
 
       <section className="card">
         <details>
@@ -312,11 +310,11 @@ function Need({ label, need, left, rate }: { label: React.ReactNode; need: numbe
 
 const envFr = (e: string) => ({ Warm: 'chaude', Scorching: 'brûlante', Cool: 'fraîche', Freeze: 'gel', Adequate: 'lumière' })[e] ?? e;
 
-function Roadmap({ rv, pool, shinies, watering, unverified, dedicated }: { rv: number; pool: ReturnType<typeof rosterPool> | null; shinies: number; watering: boolean; unverified: boolean; dedicated: boolean }) {
+function Roadmap({ rv, pool, shinies, watering, unverified }: { rv: number; pool: ReturnType<typeof rosterPool> | null; shinies: number; watering: boolean; unverified: boolean }) {
   const [show, setShow] = useState(false);
   const steps = useMemo(
-    () => (show ? roadmap(Math.max(2, rv), (r) => pool ?? idealPool(MAX_ANIIMO_BY_RV[r] - shinies), { watering, includeUnverified: unverified, dedicated }) : []),
-    [show, rv, pool, shinies, watering, unverified, dedicated],
+    () => (show ? roadmap(Math.max(2, rv), (r) => pool ?? idealPool(MAX_ANIIMO_BY_RV[r] - shinies), { watering, includeUnverified: unverified }) : []),
+    [show, rv, pool, shinies, watering, unverified],
   );
   let total = 0;
   return (

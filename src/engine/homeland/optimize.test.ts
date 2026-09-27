@@ -59,7 +59,7 @@ describe('roadmap', () => {
 describe('Aniimo attitrés', () => {
   it('chaque installation travaillée utilisée a son Aniimo entier ; même rythme, plus d’Aniimo', () => {
     const goal = { kind: 'levelUp' as const, stock: { coins: 0, items: {} } };
-    const mobile = plan({ ...base, dedicated: false, setup: setupForRv(8), workers: idealPool(24), goal });
+    const mobile = plan({ ...base, setup: setupForRv(8), workers: idealPool(24), goal });
     const fixed = plan({ ...base, dedicated: true, setup: setupForRv(8), workers: idealPool(24), goal });
     expect(fixed.hours!).toBeGreaterThanOrEqual(mobile.hours! - 1e-6);
     const used = new Set(fixed.rows.filter((r) => r.recipe.kind !== 'grower').map((r) => r.recipe.facility));

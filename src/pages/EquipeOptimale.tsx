@@ -5,7 +5,7 @@ import { candidateProfiles } from '../engine/homeland/recruit';
 import { diffTeam, optimalTeam, type TeamMember, type TeamResult } from '../engine/homeland/team';
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
-import { AbilityList, Avatar, DedicatedToggle } from '../components/ui';
+import { AbilityList, Avatar } from '../components/ui';
 import { facilityName } from '../data/homeland';
 import { fmtDuration } from './Plan';
 
@@ -14,7 +14,7 @@ const BASE_OPTS = { watering: true, includeUnverified: false };
 /** L'équipe d'Aniimo optimale pour un niveau de Camping-car, et comment y arriver depuis la sienne. */
 export function EquipeOptimale({ api }: { api: ProfileApi }) {
   const { profile } = api;
-  const OPTS = useMemo(() => ({ ...BASE_OPTS, dedicated: profile.dedicated }), [profile.dedicated]);
+  const OPTS = BASE_OPTS;
   const [rv, setRv] = useState(Math.min(19, Math.max(2, profile.rv)));
   const [personality, setPersonality] = useState(false);
   const [prismana, setPrismana] = useState(false);
@@ -66,7 +66,6 @@ export function EquipeOptimale({ api }: { api: ProfileApi }) {
           <label>
             <input type="checkbox" checked={prismana} onChange={(e) => setPrismana(e.target.checked)} /> Autoriser les formes prismana
           </label>
-          <DedicatedToggle value={profile.dedicated} onChange={api.setDedicated} />
           {current.length > 0 && (
             <label>
               <input type="checkbox" checked={keep} onChange={(e) => setKeep(e.target.checked)} /> Garder au maximum mon équipe (moins de recrues, même rythme)
@@ -77,7 +76,7 @@ export function EquipeOptimale({ api }: { api: ProfileApi }) {
 
       <TeamSummary result={result} mine={mine?.hours ?? null} cap={cap} rv={rv} useStock={useStock} />
       <TeamList members={result.members} owned={new Set(profile.workers.map((w) => w.aniimoId))} />
-      <WhyThisTeam result={result} dedicated={profile.dedicated} />
+      <WhyThisTeam result={result} />
       {rv < 19 && cap - result.size > 0 && (
         <PrepareNext rv={rv} team={result} cap={cap} shinies={profile.shinies} personality={personality} prismana={prismana} opts={OPTS} />
       )}
@@ -203,7 +202,7 @@ function TeamDiffView({ diff, api, cap }: { diff: NonNullable<ReturnType<typeof 
 }
 
 /** Pour chaque niveau : durée avec l'équipe optimale et avec l'équipe actuelle, calculé niveau par niveau. */
-function TeamRoadmap({ current, shinies, personality, prismana, opts: OPTS }: { current: { homeland: Record<string, number>; personality: string | null }[]; shinies: number; personality: boolean; prismana: boolean; opts: typeof BASE_OPTS & { dedicated: boolean } }) {
+function TeamRoadmap({ current, shinies, personality, prismana, opts: OPTS }: { current: { homeland: Record<string, number>; personality: string | null }[]; shinies: number; personality: boolean; prismana: boolean; opts: typeof BASE_OPTS }) {
   const [rows, setRows] = useState<{ rv: number; best: number | null; size: number; mine: number | null }[]>([]);
   const [run, setRun] = useState(false);
   useEffect(() => {
@@ -269,7 +268,7 @@ function TeamRoadmap({ current, shinies, personality, prismana, opts: OPTS }: { 
 }
 
 /** Pourquoi cette taille d'équipe : ce qui tourne à plein (et fixe le rythme), ce qui tourne peu. */
-function WhyThisTeam({ result, dedicated }: { result: TeamResult; dedicated: boolean }) {
+function WhyThisTeam({ result }: { result: TeamResult }) {
   const use = result.plan.facilityUse.filter((f) => !['heat-furnace', 'cooling-unit', 'sunlamp'].includes(f.facility));
   const processors = new Set(result.plan.rows.filter((r) => r.recipe.kind === 'processor').map((r) => r.recipe.facility));
   const isProcessor = (id: string) => processors.has(id) || ['carousel-mill', 'crafting-table', 'claw-game-cooker', 'jukebox-dryer', 'simmering-pot', 'phonolfactory-table', 'bouncy-brew-keg', 'blazing-stove', 'pickling-jar', 'joy-wheel-loom', 'dance-pad-polisher', 'aniipod-maker', 'woodworking-bench', 'chimney-kiln'].includes(id);
@@ -294,7 +293,6 @@ function WhyThisTeam({ result, dedicated }: { result: TeamResult; dedicated: boo
           <li>
             <b>Utilisées en partie :</b>{' '}
             {partial.map((f) => `${name(f.facility)} (${Math.max(1, Math.round((f.used / f.count) * 100))} % du temps)`).join(', ') || '—'}
-            {dedicated && partial.length > 0 && <span className="muted"> — chacune garde quand même son Aniimo attitré.</span>}
           </li>
           <li>
             <b>Pas utilisées :</b> {idle.map((f) => name(f.facility)).join(', ') || '—'}
@@ -307,7 +305,7 @@ function WhyThisTeam({ result, dedicated }: { result: TeamResult; dedicated: boo
 }
 
 /** Utiliser les places libres pour préparer le niveau suivant. */
-function PrepareNext({ rv, team, cap, shinies, personality, prismana, opts }: { rv: number; team: TeamResult; cap: number; shinies: number; personality: boolean; prismana: boolean; opts: typeof BASE_OPTS & { dedicated: boolean } }) {
+function PrepareNext({ rv, team, cap, shinies, personality, prismana, opts }: { rv: number; team: TeamResult; cap: number; shinies: number; personality: boolean; prismana: boolean; opts: typeof BASE_OPTS }) {
   const free = cap - team.size;
   const next = useMemo(() => {
     const current = team.members.flatMap((m) => Array.from({ length: m.count }, () => ({ homeland: m.candidate.homeland })));
