@@ -538,3 +538,165 @@ select {
     text-align: center;
   }
 }
+
+/* Optimiseur */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.toggles {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  gap: 16px;
+}
+
+.toggles input {
+  min-height: auto;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.headline strong {
+  font-size: 2.2rem;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.needs {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.need__label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  overflow: hidden;
+  margin: 4px 0 2px;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+}
+
+.tip {
+  border-color: color-mix(in srgb, var(--warn) 50%, var(--line));
+}
+
+.plain {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.plan {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.plan__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.plan td:first-child {
+  width: 40%;
+}
+
+.plan table,
+.roadmap {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.plan td,
+.roadmap td,
+.roadmap th {
+  padding: 5px 6px;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.roadmap th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+  border-top: 0;
+}
+
+.num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.roadmap tr.is-current td {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.sales {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 6px;
+}
+
+.sales li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--panel-2);
+  font-size: 0.88rem;
+}
+
+.sales li b {
+  margin-left: auto;
+}
+
+.assumptions {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  display: grid;
+  gap: 4px;
+}
+
+summary {
+  cursor: pointer;
+}

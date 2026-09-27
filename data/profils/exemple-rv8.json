@@ -1,5 +1,5 @@
 {
- "_doc": "Profil réel d’un joueur (RV 8), relevé par captures le 27/09/2026. Sert de cas de test pour les calculs. Personnalités à compléter.",
+ "_doc": "Profil réel d’un joueur (RV 8), relevé par captures le 27/09/2026. Sert de cas de test pour les calculs. Personnalités à compléter. Stock relevé sur l'écran du Camping-car (niv. 9).",
  "rv": 8,
  "pieces": 40001,
  "maxAniimo": 24,
@@ -218,5 +218,9 @@
  ],
  "eclatants": 2,
  "ticketsBourgeonParJour": 360,
- "ticketsBourgeon": 322
+ "ticketsBourgeon": 322,
+ "stock": {
+  "rough_lumber": 1767,
+  "coarse_sifted_ore": 1838
+ }
 }

@@ -1,0 +1,7663 @@
+{
+ "source": {
+  "repo": "https://github.com/ae-bii/aniimax",
+  "sha": "26e6b6f0df756015317e4515bb67b4458a5d1636",
+  "license": "MIT",
+  "importedAt": "2026-09-27T10:16:34.096Z"
+ },
+ "facilities": [
+  {
+   "id": "farmland",
+   "name": "Farmland",
+   "category": "Materials",
+   "hasLevels": true,
+   "ability": null,
+   "personality": null,
+   "unlocks": {
+    "1": 1,
+    "2": 2,
+    "3": 5,
+    "4": 7,
+    "5": 9,
+    "6": 12,
+    "7": 16
+   },
+   "counts": [
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    42
+   ]
+  },
+  {
+   "id": "woodland",
+   "name": "Woodland",
+   "category": "Materials",
+   "hasLevels": true,
+   "ability": null,
+   "personality": null,
+   "unlocks": {
+    "1": 2,
+    "2": 4,
+    "3": 7,
+    "4": 11,
+    "5": 14,
+    "6": 18
+   },
+   "counts": [
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "id": "mine",
+   "name": "Mine",
+   "category": "Materials",
+   "hasLevels": true,
+   "ability": "earth",
+   "personality": "P",
+   "unlocks": {
+    "1": 3,
+    "2": 6,
+    "3": 9,
+    "4": 12,
+    "5": 15,
+    "6": 18
+   },
+   "counts": [
+    0,
+    0,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    8,
+    8,
+    9,
+    9,
+    10,
+    10
+   ]
+  },
+  {
+   "id": "well",
+   "name": "Well",
+   "category": "Materials",
+   "hasLevels": true,
+   "ability": "water",
+   "personality": "F",
+   "unlocks": {
+    "1": 4,
+    "2": 8,
+    "3": 11,
+    "4": 13,
+    "5": 17
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "tidewhisper-sandcastle",
+   "name": "Tidewhisper Sandcastle",
+   "category": "Aniimo Materials",
+   "hasLevels": true,
+   "ability": "leisure",
+   "personality": "J",
+   "unlocks": {
+    "1": 5,
+    "2": 8,
+    "3": 13
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "dewy-house",
+   "name": "Dewy House",
+   "category": "Aniimo Materials",
+   "hasLevels": true,
+   "ability": "leisure",
+   "personality": "I",
+   "unlocks": {
+    "1": 6,
+    "2": 11
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "nimbus-bed",
+   "name": "Nimbus Bed",
+   "category": "Aniimo Materials",
+   "hasLevels": true,
+   "ability": "leisure",
+   "personality": "J",
+   "unlocks": {
+    "1": 10,
+    "2": 13,
+    "3": 16
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "starfall-hammock",
+   "name": "Starfall Hammock",
+   "category": "Aniimo Materials",
+   "hasLevels": false,
+   "ability": "leisure",
+   "personality": "F",
+   "unlocks": {
+    "1": 12
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "floral-windmill",
+   "name": "Floral Windmill",
+   "category": "Aniimo Materials",
+   "hasLevels": false,
+   "ability": "leisure",
+   "personality": "N",
+   "unlocks": {
+    "1": 18
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "heat-furnace",
+   "name": "Heat Furnace",
+   "category": "Environment",
+   "hasLevels": false,
+   "ability": null,
+   "personality": null,
+   "unlocks": {
+    "1": 7
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "cooling-unit",
+   "name": "Cooling Unit",
+   "category": "Environment",
+   "hasLevels": false,
+   "ability": null,
+   "personality": null,
+   "unlocks": {
+    "1": 7
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "id": "sunlamp",
+   "name": "Sunlamp",
+   "category": "Environment",
+   "hasLevels": false,
+   "ability": null,
+   "personality": null,
+   "unlocks": {
+    "1": 9
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "id": "carousel-mill",
+   "name": "Carousel Mill",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "wind",
+   "personality": "T",
+   "unlocks": {
+    "1": 2,
+    "2": 5,
+    "3": 9,
+    "4": 13,
+    "5": 16,
+    "6": 18
+   },
+   "counts": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "crafting-table",
+   "name": "Crafting Table",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "artisanship",
+   "personality": "J",
+   "unlocks": {
+    "1": 3,
+    "2": 5,
+    "3": 7,
+    "4": 9,
+    "5": 12,
+    "6": 15,
+    "7": 18,
+    "8": 20
+   },
+   "counts": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "claw-game-cooker",
+   "name": "Claw Game Cooker",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "fire",
+   "personality": "S",
+   "unlocks": {
+    "1": 4,
+    "2": 5,
+    "3": 7,
+    "4": 9,
+    "5": 12,
+    "6": 16,
+    "7": 19
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "jukebox-dryer",
+   "name": "Jukebox Dryer",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "dark",
+   "personality": "N",
+   "unlocks": {
+    "1": 4,
+    "2": 5,
+    "3": 7,
+    "4": 10,
+    "5": 12,
+    "6": 14,
+    "7": 18
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "simmering-pot",
+   "name": "Simmering Pot",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "fire",
+   "personality": "T",
+   "unlocks": {
+    "1": 5,
+    "2": 7,
+    "3": 9,
+    "4": 12,
+    "5": 15,
+    "6": 18
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "phonolfactory-table",
+   "name": "Phonolfactory Table",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "perfumery",
+   "personality": "I",
+   "unlocks": {
+    "1": 6,
+    "2": 7,
+    "3": 10,
+    "4": 14,
+    "5": 17,
+    "6": 19
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "bouncy-brew-keg",
+   "name": "Bouncy Brew Keg",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "water",
+   "personality": "E",
+   "unlocks": {
+    "1": 6,
+    "2": 9,
+    "3": 13,
+    "4": 17,
+    "5": 19
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "blazing-stove",
+   "name": "Blazing Stove",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "fire",
+   "personality": "N",
+   "unlocks": {
+    "1": 8,
+    "2": 10,
+    "3": 13,
+    "4": 16,
+    "5": 18
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pickling-jar",
+   "name": "Pickling Jar",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "dark",
+   "personality": "P",
+   "unlocks": {
+    "1": 8,
+    "2": 10,
+    "3": 13,
+    "4": 16,
+    "5": 19
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "joy-wheel-loom",
+   "name": "Joy Wheel Loom",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "wind",
+   "personality": "F",
+   "unlocks": {
+    "1": 7,
+    "2": 10,
+    "3": 15,
+    "4": 19
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "dance-pad-polisher",
+   "name": "Dance Pad Polisher",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "lightning",
+   "personality": null,
+   "unlocks": {
+    "1": 2,
+    "2": 5,
+    "3": 7
+   },
+   "counts": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": "aniipod-maker",
+   "name": "Aniipod Maker",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "lightning",
+   "personality": null,
+   "unlocks": {
+    "1": 3,
+    "2": 6,
+    "3": 9
+   },
+   "counts": [
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "id": "woodworking-bench",
+   "name": "Woodworking Bench",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "artisanship",
+   "personality": "E",
+   "unlocks": {
+    "1": 6,
+    "2": 10,
+    "3": 14,
+    "4": 18
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "chimney-kiln",
+   "name": "Chimney Kiln",
+   "category": "Materials Processing",
+   "hasLevels": true,
+   "ability": "fire",
+   "personality": "S",
+   "unlocks": {
+    "1": 6,
+    "2": 10,
+    "3": 14,
+    "4": 18
+   },
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    2
+   ]
+  }
+ ],
+ "recipes": [
+  {
+   "id": "farmland:wheat",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 1,
+   "output": {
+    "item": "wheat",
+    "qty": 5
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 240,
+   "seedCost": 0,
+   "steps": [
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:potato",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 2,
+   "output": {
+    "item": "potato",
+    "qty": 2
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 640,
+   "seedCost": 1,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:quick_wheat",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 2,
+   "output": {
+    "item": "quick_wheat",
+    "qty": 42
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 1
+   },
+   "environment": null,
+   "verified": true,
+   "seconds": 1200,
+   "seedCost": 0,
+   "steps": [
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:rice",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 3,
+   "output": {
+    "item": "rice",
+    "qty": 18
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 12,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:soybean",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 3,
+   "output": {
+    "item": "soybean",
+    "qty": 16
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 12,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:rose",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "rose",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Cool",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 21,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:cotton",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "cotton",
+    "qty": 7
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 21,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:quick_potato",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "quick_potato",
+    "qty": 46
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 3
+   },
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 1,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:strawberry",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "strawberry",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Cool",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 32,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:lavender",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "lavender",
+    "qty": 7
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 32,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:sugarcane",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "sugarcane",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 32,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:ginseng",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "ginseng",
+    "qty": 3
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Cool",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 56,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:grape",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "grape",
+    "qty": 9
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 56,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:premium_wheat",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "premium_wheat",
+    "qty": 15
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 0,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:quick_rice",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "quick_rice",
+    "qty": 79
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 5
+   },
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 12,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:cranberry",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 7,
+   "output": {
+    "item": "cranberry",
+    "qty": 7
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Freeze",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 97,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:agave",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 7,
+   "output": {
+    "item": "agave",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 97,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:quick_strawberry",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 7,
+   "output": {
+    "item": "quick_strawberry",
+    "qty": 26
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 7
+   },
+   "environment": "Cool",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 32,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "woodland:willow_wood",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 1,
+   "output": {
+    "item": "willow_wood",
+    "qty": 5
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 640,
+   "seedCost": 1,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 1
+   }
+  },
+  {
+   "id": "woodland:bamboo",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 2,
+   "output": {
+    "item": "bamboo",
+    "qty": 10
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 8,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 8
+   }
+  },
+  {
+   "id": "woodland:lemon",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 2,
+   "output": {
+    "item": "lemon",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 8,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 8
+   }
+  },
+  {
+   "id": "woodland:cherry_blossom",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 3,
+   "output": {
+    "item": "cherry_blossom",
+    "qty": 7
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Warm",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 21,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 21
+   }
+  },
+  {
+   "id": "woodland:apple",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 3,
+   "output": {
+    "item": "apple",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Cool",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 21,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 21
+   }
+  },
+  {
+   "id": "woodland:maple_syrup",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 3,
+   "output": {
+    "item": "maple_syrup",
+    "qty": 9
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Freeze",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 21,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 21
+   }
+  },
+  {
+   "id": "woodland:quick_bamboo",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 3,
+   "output": {
+    "item": "quick_bamboo",
+    "qty": 23
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 2
+   },
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 8,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 21
+   }
+  },
+  {
+   "id": "woodland:palm_bark",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "palm_bark",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 47,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 47
+   }
+  },
+  {
+   "id": "woodland:chestnut",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "chestnut",
+    "qty": 7
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Warm",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 47,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 47
+   }
+  },
+  {
+   "id": "woodland:walnut",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "walnut",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 47,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 47
+   }
+  },
+  {
+   "id": "woodland:quick_lemon",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 4,
+   "output": {
+    "item": "quick_lemon",
+    "qty": 42
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 4
+   },
+   "environment": null,
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 8,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 47
+   }
+  },
+  {
+   "id": "woodland:natural_rubber",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "natural_rubber",
+    "qty": 3
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 75,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 75
+   }
+  },
+  {
+   "id": "woodland:coconut",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "coconut",
+    "qty": 5
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 75,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 75
+   }
+  },
+  {
+   "id": "woodland:quick_maple_syrup",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "quick_maple_syrup",
+    "qty": 30
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 6
+   },
+   "environment": "Freeze",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 21,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Logging",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 75
+   }
+  },
+  {
+   "id": "woodland:cocoa",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "cocoa",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 122,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 122
+   }
+  },
+  {
+   "id": "woodland:orange_flower",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "orange_flower",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 122,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 122
+   }
+  },
+  {
+   "id": "woodland:quick_coconut",
+   "facility": "woodland",
+   "kind": "grower",
+   "level": 6,
+   "output": {
+    "item": "quick_coconut",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": {
+    "id": "ecological_module",
+    "level": 8
+   },
+   "environment": "Scorching",
+   "verified": true,
+   "seconds": 2400,
+   "seedCost": 75,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Collecting",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    }
+   ],
+   "byproduct": {
+    "item": "wood_block",
+    "qty": 122
+   }
+  },
+  {
+   "id": "mine:rock",
+   "facility": "mine",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "rock",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 900,
+   "ability": "earth",
+   "abilityLevel": 1,
+   "byproduct": {
+    "item": "mineral_sand",
+    "qty": 3
+   }
+  },
+  {
+   "id": "mine:clay",
+   "facility": "mine",
+   "kind": "gatherer",
+   "level": 2,
+   "output": {
+    "item": "clay",
+    "qty": 10
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "earth",
+   "abilityLevel": 2,
+   "byproduct": {
+    "item": "mineral_sand",
+    "qty": 16
+   }
+  },
+  {
+   "id": "mine:shell",
+   "facility": "mine",
+   "kind": "gatherer",
+   "level": 3,
+   "output": {
+    "item": "shell",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "earth",
+   "abilityLevel": 2,
+   "byproduct": {
+    "item": "mineral_sand",
+    "qty": 32
+   }
+  },
+  {
+   "id": "mine:copper_ore",
+   "facility": "mine",
+   "kind": "gatherer",
+   "level": 4,
+   "output": {
+    "item": "copper_ore",
+    "qty": 5
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "earth",
+   "abilityLevel": 3,
+   "byproduct": {
+    "item": "mineral_sand",
+    "qty": 56
+   }
+  },
+  {
+   "id": "mine:quartz_ore",
+   "facility": "mine",
+   "kind": "gatherer",
+   "level": 5,
+   "output": {
+    "item": "quartz_ore",
+    "qty": 4
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "earth",
+   "abilityLevel": 3,
+   "byproduct": {
+    "item": "mineral_sand",
+    "qty": 86
+   }
+  },
+  {
+   "id": "mine:gem",
+   "facility": "mine",
+   "kind": "gatherer",
+   "level": 6,
+   "output": {
+    "item": "gem",
+    "qty": 2
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "earth",
+   "abilityLevel": 3,
+   "byproduct": {
+    "item": "mineral_sand",
+    "qty": 122
+   }
+  },
+  {
+   "id": "well:well_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "well_water",
+    "qty": 10
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 1800,
+   "ability": "water",
+   "abilityLevel": 1
+  },
+  {
+   "id": "well:quick_well_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "quick_well_water",
+    "qty": 15
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 1
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 1800,
+   "ability": "water",
+   "abilityLevel": 1
+  },
+  {
+   "id": "well:fresh_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 2,
+   "output": {
+    "item": "fresh_water",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "well:quick_fresh_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 3,
+   "output": {
+    "item": "quick_fresh_water",
+    "qty": 17
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 4
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "well:deep_rock_spring_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 4,
+   "output": {
+    "item": "deep_rock_spring_water",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "well:quick_deep_rock_spring_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 4,
+   "output": {
+    "item": "quick_deep_rock_spring_water",
+    "qty": 9
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 6
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "well:natural_mineral_spring_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 5,
+   "output": {
+    "item": "natural_mineral_spring_water",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "well:quick_natural_mineral_spring_water",
+   "facility": "well",
+   "kind": "gatherer",
+   "level": 5,
+   "output": {
+    "item": "quick_natural_mineral_spring_water",
+    "qty": 9
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 7
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "tidewhisper-sandcastle:sea_salt",
+   "facility": "tidewhisper-sandcastle",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "sea_salt",
+    "qty": 10
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 1800,
+   "ability": "leisure",
+   "abilityLevel": 1
+  },
+  {
+   "id": "tidewhisper-sandcastle:quick_sea_salt",
+   "facility": "tidewhisper-sandcastle",
+   "kind": "gatherer",
+   "level": 2,
+   "output": {
+    "item": "quick_sea_salt",
+    "qty": 23
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 2
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "leisure",
+   "abilityLevel": 2
+  },
+  {
+   "id": "tidewhisper-sandcastle:pearl",
+   "facility": "tidewhisper-sandcastle",
+   "kind": "gatherer",
+   "level": 3,
+   "output": {
+    "item": "pearl",
+    "qty": 2
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Warm",
+   "verified": true,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "dewy-house:aromathyst",
+   "facility": "dewy-house",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "aromathyst",
+    "qty": 4
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "leisure",
+   "abilityLevel": 2
+  },
+  {
+   "id": "dewy-house:quick_aromathyst",
+   "facility": "dewy-house",
+   "kind": "gatherer",
+   "level": 2,
+   "output": {
+    "item": "quick_aromathyst",
+    "qty": 12
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 3
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "nimbus-bed:wool",
+   "facility": "nimbus-bed",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "wool",
+    "qty": 4
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "leisure",
+   "abilityLevel": 2
+  },
+  {
+   "id": "nimbus-bed:quick_wool",
+   "facility": "nimbus-bed",
+   "kind": "gatherer",
+   "level": 2,
+   "output": {
+    "item": "quick_wool",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 5
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "nimbus-bed:petals",
+   "facility": "nimbus-bed",
+   "kind": "gatherer",
+   "level": 3,
+   "output": {
+    "item": "petals",
+    "qty": 6
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "starfall-hammock:star",
+   "facility": "starfall-hammock",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "star",
+    "qty": 2
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Cool",
+   "verified": false,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "floral-windmill:scales",
+   "facility": "floral-windmill",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "scales",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": false,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "floral-windmill:quick_scales",
+   "facility": "floral-windmill",
+   "kind": "gatherer",
+   "level": 1,
+   "output": {
+    "item": "quick_scales",
+    "qty": 12
+   },
+   "inputs": [],
+   "module": {
+    "id": "resource_detector",
+    "level": 8
+   },
+   "environment": "Adequate",
+   "verified": false,
+   "workload": 2700,
+   "ability": "leisure",
+   "abilityLevel": 3
+  },
+  {
+   "id": "carousel-mill:wheatmeal",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "wheatmeal",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wheat",
+     "qty": 50
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "wind",
+   "abilityLevel": 1
+  },
+  {
+   "id": "carousel-mill:tofu",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "tofu",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "soybean",
+     "qty": 16
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "wind",
+   "abilityLevel": 1
+  },
+  {
+   "id": "carousel-mill:milled_rice",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "milled_rice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rice",
+     "qty": 18
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "wind",
+   "abilityLevel": 1
+  },
+  {
+   "id": "carousel-mill:lavender_powder",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "lavender_powder",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lavender",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "wind",
+   "abilityLevel": 2
+  },
+  {
+   "id": "carousel-mill:rice_drink",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "rice_drink",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "milled_rice",
+     "qty": 2
+    },
+    {
+     "item": "fresh_water",
+     "qty": 16
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "carousel-mill:ginseng_powder",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "ginseng_powder",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "ginseng",
+     "qty": 3
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "carousel-mill:refined_flour",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "refined_flour",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "premium_wheat",
+     "qty": 15
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "carousel-mill:coconut_oil",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "coconut_oil",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut",
+     "qty": 5
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "carousel-mill:cocoa_powder",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "cocoa_powder",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cocoa",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "carousel-mill:coconut_milk",
+   "facility": "carousel-mill",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "coconut_milk",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut",
+     "qty": 5
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:wood_sculpture",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "wood_sculpture",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "willow_wood",
+     "qty": 19
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "artisanship",
+   "abilityLevel": 1
+  },
+  {
+   "id": "crafting-table:bamboo_ware",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "bamboo_ware",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "bamboo",
+     "qty": 10
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "artisanship",
+   "abilityLevel": 1
+  },
+  {
+   "id": "crafting-table:river_washed_stones",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "river_washed_stones",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rock",
+     "qty": 18
+    },
+    {
+     "item": "well_water",
+     "qty": 5
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 108,
+   "ability": "artisanship",
+   "abilityLevel": 1
+  },
+  {
+   "id": "crafting-table:premium_river_washed_stones",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "premium_river_washed_stones",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rock",
+     "qty": 18
+    },
+    {
+     "item": "well_water",
+     "qty": 5
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 1
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 108,
+   "ability": "artisanship",
+   "abilityLevel": 1
+  },
+  {
+   "id": "crafting-table:rose_freshener",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "rose_freshener",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose_incense",
+     "qty": 1
+    },
+    {
+     "item": "bamboo",
+     "qty": 13
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:pottery",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "pottery",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "clay",
+     "qty": 15
+    },
+    {
+     "item": "well_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:premium_rose_freshener",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "premium_rose_freshener",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose_incense",
+     "qty": 1
+    },
+    {
+     "item": "bamboo",
+     "qty": 13
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 2
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:bouquet",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "bouquet",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose",
+     "qty": 8
+    },
+    {
+     "item": "lavender",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:shell_ornament",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "shell_ornament",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "shell",
+     "qty": 6
+    },
+    {
+     "item": "cotton_thread",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:lavender_sachet",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "lavender_sachet",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lavender_powder",
+     "qty": 1
+    },
+    {
+     "item": "cotton_fabric",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:wind_chime",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "wind_chime",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "copper_ore",
+     "qty": 5
+    },
+    {
+     "item": "woolen_yarn",
+     "qty": 1
+    },
+    {
+     "item": "star",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:star_wish_lantern",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "star_wish_lantern",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "copper_ore",
+     "qty": 5
+    },
+    {
+     "item": "star",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:dream_catcher",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "dream_catcher",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cotton_thread",
+     "qty": 1
+    },
+    {
+     "item": "woolen_yarn",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:advanced_wind_chime",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "advanced_wind_chime",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "copper_ore",
+     "qty": 5
+    },
+    {
+     "item": "woolen_yarn",
+     "qty": 1
+    },
+    {
+     "item": "star",
+     "qty": 2
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 4
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:rubber_duck",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "rubber_duck",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "natural_rubber",
+     "qty": 3
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:pearl_necklace",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "pearl_necklace",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "pearl",
+     "qty": 2
+    },
+    {
+     "item": "palm_rope",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:woven_toy",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "woven_toy",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "palm_rope",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:porcelain",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "porcelain",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "quartz_ore",
+     "qty": 4
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:dye",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "dye",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "petals",
+     "qty": 6
+    },
+    {
+     "item": "scales",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:gemstone_dust",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "gemstone_dust",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "gem",
+     "qty": 2
+    },
+    {
+     "item": "scales",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:flowers_in_a_bottle",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "flowers_in_a_bottle",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dried_flowers",
+     "qty": 1
+    },
+    {
+     "item": "porcelain",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:advanced_gemstone_dust",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "advanced_gemstone_dust",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "gem",
+     "qty": 2
+    },
+    {
+     "item": "scales",
+     "qty": 8
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 6
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:doll",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 8,
+   "output": {
+    "item": "doll",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dyed_cotton_fabric",
+     "qty": 1
+    },
+    {
+     "item": "wool_fabric",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 324,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:bread",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "bread",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wheatmeal",
+     "qty": 2
+    },
+    {
+     "item": "well_water",
+     "qty": 5
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 108,
+   "ability": "fire",
+   "abilityLevel": 1
+  },
+  {
+   "id": "claw-game-cooker:premium_bread",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "premium_bread",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wheatmeal",
+     "qty": 2
+    },
+    {
+     "item": "well_water",
+     "qty": 5
+    }
+   ],
+   "module": {
+    "id": "kitchen_module",
+    "level": 2
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 108,
+   "ability": "fire",
+   "abilityLevel": 1
+  },
+  {
+   "id": "claw-game-cooker:roasted_soybeans",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "roasted_soybeans",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "soybean",
+     "qty": 16
+    },
+    {
+     "item": "sea_salt",
+     "qty": 10
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 108,
+   "ability": "fire",
+   "abilityLevel": 1
+  },
+  {
+   "id": "claw-game-cooker:maple_candy_roasted_potatoes",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "maple_candy_roasted_potatoes",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "potato",
+     "qty": 8
+    },
+    {
+     "item": "maple_syrup",
+     "qty": 9
+    },
+    {
+     "item": "sea_salt",
+     "qty": 10
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "claw-game-cooker:apple_tart",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "apple_tart",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wheatmeal",
+     "qty": 1
+    },
+    {
+     "item": "apple",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "claw-game-cooker:rose_shortbread",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "rose_shortbread",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose_concentrate",
+     "qty": 1
+    },
+    {
+     "item": "wheatmeal",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "claw-game-cooker:lavender_cookies",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "lavender_cookies",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lavender_powder",
+     "qty": 1
+    },
+    {
+     "item": "wheatmeal",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "claw-game-cooker:apple_candy",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "apple_candy",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "apple",
+     "qty": 8
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "claw-game-cooker:grape_candy",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "grape_candy",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "grape",
+     "qty": 9
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:caramel_nut_chips",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "caramel_nut_chips",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "nuts",
+     "qty": 1
+    },
+    {
+     "item": "maple_syrup",
+     "qty": 9
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:maple_candy_star",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "maple_candy_star",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "maple_sugar_chunk",
+     "qty": 1
+    },
+    {
+     "item": "star",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:coconut_cookie",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "coconut_cookie",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "shredded_coconut",
+     "qty": 1
+    },
+    {
+     "item": "refined_flour",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:flower_bread",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "flower_bread",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "refined_flour",
+     "qty": 1
+    },
+    {
+     "item": "dried_flowers",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:berry_chocolate_coconut_pudding",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "berry_chocolate_coconut_pudding",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cocoa_spread",
+     "qty": 1
+    },
+    {
+     "item": "strawberry",
+     "qty": 16
+    },
+    {
+     "item": "coconut_milk",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 567,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "claw-game-cooker:premium_berry_chocolate_coconut_pudding",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "premium_berry_chocolate_coconut_pudding",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cocoa_spread",
+     "qty": 1
+    },
+    {
+     "item": "strawberry",
+     "qty": 16
+    },
+    {
+     "item": "coconut_milk",
+     "qty": 1
+    }
+   ],
+   "module": {
+    "id": "kitchen_module",
+    "level": 7
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 567,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "jukebox-dryer:potato_chips",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "potato_chips",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "potato",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "dark",
+   "abilityLevel": 1
+  },
+  {
+   "id": "jukebox-dryer:dried_lemon_slices",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "dried_lemon_slices",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lemon",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 54,
+   "ability": "dark",
+   "abilityLevel": 1
+  },
+  {
+   "id": "jukebox-dryer:dried_cherry_blossom",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "dried_cherry_blossom",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cherry_blossom",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "jukebox-dryer:dried_bean_curd",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "dried_bean_curd",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "tofu",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "jukebox-dryer:dried_apple_slices",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "dried_apple_slices",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "apple",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "jukebox-dryer:dried_strawberries",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "dried_strawberries",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "strawberry",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "jukebox-dryer:nuts",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "nuts",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "chestnut",
+     "qty": 7
+    },
+    {
+     "item": "walnut",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "jukebox-dryer:dried_ginseng",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "dried_ginseng",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "ginseng",
+     "qty": 3
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "jukebox-dryer:dried_grapes",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "dried_grapes",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "grape",
+     "qty": 9
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "jukebox-dryer:shredded_coconut",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "shredded_coconut",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut",
+     "qty": 5
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "jukebox-dryer:dried_cranberries",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "dried_cranberries",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cranberry",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "jukebox-dryer:dried_flowers",
+   "facility": "jukebox-dryer",
+   "kind": "processor",
+   "level": 7,
+   "output": {
+    "item": "dried_flowers",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "petals",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:plain_rice_porridge",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "plain_rice_porridge",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "milled_rice",
+     "qty": 2
+    },
+    {
+     "item": "well_water",
+     "qty": 5
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 108,
+   "ability": "fire",
+   "abilityLevel": 1
+  },
+  {
+   "id": "simmering-pot:rose_concentrate",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "rose_concentrate",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose",
+     "qty": 12
+    },
+    {
+     "item": "well_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "simmering-pot:rock_candy",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "rock_candy",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "sugarcane",
+     "qty": 6
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "simmering-pot:strawberry_jam",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "strawberry_jam",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "strawberry",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "simmering-pot:maple_candy_apple_jam",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "maple_candy_apple_jam",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "maple_syrup",
+     "qty": 9
+    },
+    {
+     "item": "apple",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "simmering-pot:chestnut_puree",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "chestnut_puree",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "chestnut",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:grape_jam",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "grape_jam",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "grape",
+     "qty": 9
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:ginseng_porridge",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "ginseng_porridge",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dried_ginseng",
+     "qty": 1
+    },
+    {
+     "item": "milled_rice",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:maple_sugar_chunk",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "maple_sugar_chunk",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "maple_syrup",
+     "qty": 18
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:malt_sugar",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "malt_sugar",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "premium_wheat",
+     "qty": 15
+    },
+    {
+     "item": "milled_rice",
+     "qty": 2
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:cocoa_spread",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "cocoa_spread",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cocoa_powder",
+     "qty": 1
+    },
+    {
+     "item": "malt_sugar",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 324,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:cranberry_jam",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "cranberry_jam",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cranberry",
+     "qty": 7
+    },
+    {
+     "item": "malt_sugar",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 324,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:agave_syrup",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "agave_syrup",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "agave",
+     "qty": 6
+    },
+    {
+     "item": "fresh_water",
+     "qty": 9
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:bamboo_joss_stick",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "bamboo_joss_stick",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "bamboo",
+     "qty": 15
+    },
+    {
+     "item": "aromathyst",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "perfumery",
+   "abilityLevel": 2
+  },
+  {
+   "id": "phonolfactory-table:rose_incense",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "rose_incense",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose",
+     "qty": 12
+    },
+    {
+     "item": "aromathyst",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "perfumery",
+   "abilityLevel": 2
+  },
+  {
+   "id": "phonolfactory-table:cherry_incense",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "cherry_incense",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dried_cherry_blossom",
+     "qty": 1
+    },
+    {
+     "item": "aromathyst",
+     "qty": 4
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "perfumery",
+   "abilityLevel": 2
+  },
+  {
+   "id": "phonolfactory-table:lavender_incense",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "lavender_incense",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lavender",
+     "qty": 11
+    },
+    {
+     "item": "aromathyst",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "perfumery",
+   "abilityLevel": 2
+  },
+  {
+   "id": "phonolfactory-table:lemon_incense",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "lemon_incense",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lemon",
+     "qty": 12
+    },
+    {
+     "item": "aromathyst",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "perfumery",
+   "abilityLevel": 2
+  },
+  {
+   "id": "phonolfactory-table:advanced_lemon_incense",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "advanced_lemon_incense",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lemon",
+     "qty": 12
+    },
+    {
+     "item": "aromathyst",
+     "qty": 2
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 3
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "perfumery",
+   "abilityLevel": 2
+  },
+  {
+   "id": "phonolfactory-table:herbal_ginseng_aroma",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "herbal_ginseng_aroma",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "ginseng_powder",
+     "qty": 1
+    },
+    {
+     "item": "aromathyst",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:soap",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "soap",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut_oil",
+     "qty": 1
+    },
+    {
+     "item": "petals",
+     "qty": 6
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:premium_soap",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "premium_soap",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut_oil",
+     "qty": 1
+    },
+    {
+     "item": "petals",
+     "qty": 6
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 5
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:orange_flower_incense",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "orange_flower_incense",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "orange_flower",
+     "qty": 8
+    },
+    {
+     "item": "aromathyst",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:mixed_perfume",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "mixed_perfume",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dried_flowers",
+     "qty": 1
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:lotion",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "lotion",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "orange_flower",
+     "qty": 8
+    },
+    {
+     "item": "coconut_oil",
+     "qty": 2
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "phonolfactory-table:premium_mixed_perfume",
+   "facility": "phonolfactory-table",
+   "kind": "processor",
+   "level": 6,
+   "output": {
+    "item": "premium_mixed_perfume",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dried_flowers",
+     "qty": 1
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": {
+    "id": "crafting_module",
+    "level": 7
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "perfumery",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:wheat_tea",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "wheat_tea",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wheat",
+     "qty": 50
+    },
+    {
+     "item": "well_water",
+     "qty": 10
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:toasted_rice_green_tea",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "toasted_rice_green_tea",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "milled_rice",
+     "qty": 2
+    },
+    {
+     "item": "well_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:potato_kvass",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "potato_kvass",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "potato",
+     "qty": 15
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 270,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:strawberry_juice",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "strawberry_juice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "strawberry",
+     "qty": 8
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:apple_juice",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "apple_juice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "apple",
+     "qty": 8
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:sugarcane_juice",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "sugarcane_juice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "sugarcane",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:grape_juice",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "grape_juice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "grape",
+     "qty": 9
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:ginseng_water",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "ginseng_water",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "dried_ginseng",
+     "qty": 1
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:grape_lemon_drink",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "grape_lemon_drink",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "grape",
+     "qty": 9
+    },
+    {
+     "item": "lemon",
+     "qty": 16
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:walnut_milk",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "walnut_milk",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "walnut",
+     "qty": 6
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:cranberry_juice",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "cranberry_juice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cranberry",
+     "qty": 7
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:coconut_cooler",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "coconut_cooler",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut",
+     "qty": 5
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:agave_drink",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "agave_drink",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "agave_syrup",
+     "qty": 1
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:hot_cocoa",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "hot_cocoa",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cocoa_powder",
+     "qty": 1
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:coconut_cocoa",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "coconut_cocoa",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coconut",
+     "qty": 5
+    },
+    {
+     "item": "cocoa_powder",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "bouncy-brew-keg:orange_flower_dew",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "orange_flower_dew",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "orange_flower",
+     "qty": 8
+    },
+    {
+     "item": "natural_mineral_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "water",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:soy_sauce_fried_rice",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "soy_sauce_fried_rice",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "milled_rice",
+     "qty": 1
+    },
+    {
+     "item": "soy_sauce",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:creamy_potato_soup",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "creamy_potato_soup",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "potato",
+     "qty": 15
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:cherry_blossom_rice_ball",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "cherry_blossom_rice_ball",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "salted_cherry_blossom",
+     "qty": 1
+    },
+    {
+     "item": "milled_rice",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:premium_potato_soup",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "premium_potato_soup",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "potato",
+     "qty": 15
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": {
+    "id": "kitchen_module",
+    "level": 3
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:tanghulu",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "tanghulu",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "strawberry",
+     "qty": 8
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:soy_sauce_tofu",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "soy_sauce_tofu",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "tofu",
+     "qty": 1
+    },
+    {
+     "item": "soy_sauce",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:sugar_roasted_chestnuts",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "sugar_roasted_chestnuts",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "chestnut",
+     "qty": 7
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:steamed_vermicelli_roll",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "steamed_vermicelli_roll",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rice_drink",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:ginseng_chestnut_cake",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "ginseng_chestnut_cake",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "ginseng_powder",
+     "qty": 1
+    },
+    {
+     "item": "chestnut",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:walnut_cake",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "walnut_cake",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "walnut",
+     "qty": 6
+    },
+    {
+     "item": "rice_drink",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:jello",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "jello",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "petals",
+     "qty": 6
+    },
+    {
+     "item": "maple_sugar_chunk",
+     "qty": 1
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:strawberry_candy",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "strawberry_candy",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "strawberry",
+     "qty": 8
+    },
+    {
+     "item": "malt_sugar",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 324,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:rich_grape_compote",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "rich_grape_compote",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "grape_juice",
+     "qty": 1
+    },
+    {
+     "item": "dried_grapes",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:premium_jello",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "premium_jello",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "petals",
+     "qty": 6
+    },
+    {
+     "item": "maple_sugar_chunk",
+     "qty": 1
+    },
+    {
+     "item": "deep_rock_spring_water",
+     "qty": 6
+    }
+   ],
+   "module": {
+    "id": "kitchen_module",
+    "level": 6
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:strawberry_cream_puff",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "strawberry_cream_puff",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "refined_flour",
+     "qty": 1
+    },
+    {
+     "item": "strawberry",
+     "qty": 16
+    },
+    {
+     "item": "coconut_oil",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:cranberry_chocolate",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "cranberry_chocolate",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cocoa_spread",
+     "qty": 1
+    },
+    {
+     "item": "dried_cranberries",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 405,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "pickling-jar:soy_sauce",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "soy_sauce",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "soybean",
+     "qty": 16
+    },
+    {
+     "item": "sea_salt",
+     "qty": 13
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "pickling-jar:salted_cherry_blossom",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "salted_cherry_blossom",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cherry_blossom",
+     "qty": 7
+    },
+    {
+     "item": "sea_salt",
+     "qty": 13
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 135,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "pickling-jar:sweet_rice_drink",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "sweet_rice_drink",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "milled_rice",
+     "qty": 1
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 270,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "pickling-jar:cider_vinegar",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "cider_vinegar",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "apple",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "pickling-jar:premium_sweet_rice_wine",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "premium_sweet_rice_wine",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "milled_rice",
+     "qty": 1
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": {
+    "id": "kitchen_module",
+    "level": 4
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 270,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "pickling-jar:rice_vinegar",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "rice_vinegar",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rice_drink",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "pickling-jar:salted_lemon",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "salted_lemon",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lemon",
+     "qty": 16
+    },
+    {
+     "item": "sea_salt",
+     "qty": 13
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "pickling-jar:premium_salted_lemon",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "premium_salted_lemon",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "lemon",
+     "qty": 16
+    },
+    {
+     "item": "sea_salt",
+     "qty": 13
+    }
+   ],
+   "module": {
+    "id": "kitchen_module",
+    "level": 5
+   },
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "pickling-jar:candied_strawberries",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "candied_strawberries",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "maple_syrup",
+     "qty": 18
+    },
+    {
+     "item": "strawberry",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 162,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "pickling-jar:candied_orange_flower",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "candied_orange_flower",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "agave_syrup",
+     "qty": 1
+    },
+    {
+     "item": "orange_flower",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "joy-wheel-loom:cotton_thread",
+   "facility": "joy-wheel-loom",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "cotton_thread",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cotton",
+     "qty": 7
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "wind",
+   "abilityLevel": 2
+  },
+  {
+   "id": "joy-wheel-loom:woolen_yarn",
+   "facility": "joy-wheel-loom",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "woolen_yarn",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wool",
+     "qty": 4
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "wind",
+   "abilityLevel": 2
+  },
+  {
+   "id": "joy-wheel-loom:cotton_fabric",
+   "facility": "joy-wheel-loom",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "cotton_fabric",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cotton_thread",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 68,
+   "ability": "wind",
+   "abilityLevel": 2
+  },
+  {
+   "id": "joy-wheel-loom:palm_rope",
+   "facility": "joy-wheel-loom",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "palm_rope",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "palm_bark",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "joy-wheel-loom:wool_fabric",
+   "facility": "joy-wheel-loom",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "wool_fabric",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "woolen_yarn",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 81,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "joy-wheel-loom:dyed_cotton_fabric",
+   "facility": "joy-wheel-loom",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "dyed_cotton_fabric",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "cotton_fabric",
+     "qty": 1
+    },
+    {
+     "item": "dye",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 243,
+   "ability": "wind",
+   "abilityLevel": 3
+  },
+  {
+   "id": "dance-pad-polisher:growth_bud",
+   "facility": "dance-pad-polisher",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "growth_bud",
+    "qty": 3
+   },
+   "inputs": [
+    {
+     "item": "potato",
+     "qty": 23
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 1200,
+   "ability": "lightning",
+   "abilityLevel": 1
+  },
+  {
+   "id": "dance-pad-polisher:growth_flower",
+   "facility": "dance-pad-polisher",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "growth_flower",
+    "qty": 2
+   },
+   "inputs": [
+    {
+     "item": "soybean",
+     "qty": 16
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 3000,
+   "ability": "lightning",
+   "abilityLevel": 2
+  },
+  {
+   "id": "dance-pad-polisher:growth_fruit",
+   "facility": "dance-pad-polisher",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "growth_fruit",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rose",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 5400,
+   "ability": "lightning",
+   "abilityLevel": 3
+  },
+  {
+   "id": "aniipod-maker:aniipod",
+   "facility": "aniipod-maker",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "aniipod",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rock",
+     "qty": 12
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 1800,
+   "ability": "lightning",
+   "abilityLevel": 1
+  },
+  {
+   "id": "aniipod-maker:aniipod_pro",
+   "facility": "aniipod-maker",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "aniipod_pro",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "clay",
+     "qty": 10
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2250,
+   "ability": "lightning",
+   "abilityLevel": 2
+  },
+  {
+   "id": "aniipod-maker:aniipod_mega",
+   "facility": "aniipod-maker",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "aniipod_mega",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "shell",
+     "qty": 6
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 2700,
+   "ability": "lightning",
+   "abilityLevel": 3
+  },
+  {
+   "id": "woodworking-bench:rough_lumber",
+   "facility": "woodworking-bench",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "rough_lumber",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "wood_block",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 34,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "woodworking-bench:standard_planks",
+   "facility": "woodworking-bench",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "standard_planks",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "rough_lumber",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 34,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "woodworking-bench:laminated_beams",
+   "facility": "woodworking-bench",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "laminated_beams",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "standard_planks",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 41,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "woodworking-bench:densified_timber_component",
+   "facility": "woodworking-bench",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "densified_timber_component",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "laminated_beams",
+     "qty": 4
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 41,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "chimney-kiln:coarse_sifted_ore",
+   "facility": "chimney-kiln",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "coarse_sifted_ore",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "mineral_sand",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 34,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "chimney-kiln:sintered_ore_brick",
+   "facility": "chimney-kiln",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "sintered_ore_brick",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "coarse_sifted_ore",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 34,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "chimney-kiln:refined_ore",
+   "facility": "chimney-kiln",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "refined_ore",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "sintered_ore_brick",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 41,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "chimney-kiln:microcrystalline_ore_plate",
+   "facility": "chimney-kiln",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "microcrystalline_ore_plate",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "refined_ore",
+     "qty": 4
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "workload": 41,
+   "ability": "fire",
+   "abilityLevel": 2
+  }
+ ],
+ "items": {
+  "wheat": {
+   "name": "Wheat",
+   "sellValue": 1,
+   "currency": "coins"
+  },
+  "potato": {
+   "name": "Potato",
+   "sellValue": 8,
+   "currency": "coins"
+  },
+  "quick_wheat": {
+   "name": "Quick Wheat",
+   "sellValue": 1,
+   "currency": "coins"
+  },
+  "rice": {
+   "name": "Rice",
+   "sellValue": 10,
+   "currency": "coins"
+  },
+  "soybean": {
+   "name": "Soybean",
+   "sellValue": 11,
+   "currency": "coins"
+  },
+  "rose": {
+   "name": "Rose",
+   "sellValue": 39,
+   "currency": "coins"
+  },
+  "cotton": {
+   "name": "Cotton",
+   "sellValue": 44,
+   "currency": "coins"
+  },
+  "quick_potato": {
+   "name": "Quick Potato",
+   "sellValue": 8,
+   "currency": "coins"
+  },
+  "strawberry": {
+   "name": "Strawberry",
+   "sellValue": 61,
+   "currency": "coins"
+  },
+  "lavender": {
+   "name": "Lavender",
+   "sellValue": 69,
+   "currency": "coins"
+  },
+  "sugarcane": {
+   "name": "Sugarcane",
+   "sellValue": 81,
+   "currency": "coins"
+  },
+  "ginseng": {
+   "name": "Ginseng",
+   "sellValue": 280,
+   "currency": "coins"
+  },
+  "grape": {
+   "name": "Grape",
+   "sellValue": 93,
+   "currency": "coins"
+  },
+  "premium_wheat": {
+   "name": "Premium Wheat",
+   "sellValue": 52,
+   "currency": "coins"
+  },
+  "quick_rice": {
+   "name": "Quick Rice",
+   "sellValue": 10,
+   "currency": "coins"
+  },
+  "cranberry": {
+   "name": "Cranberry",
+   "sellValue": 210,
+   "currency": "coins"
+  },
+  "agave": {
+   "name": "Agave",
+   "sellValue": 240,
+   "currency": "coins"
+  },
+  "quick_strawberry": {
+   "name": "Quick Strawberry",
+   "sellValue": 61,
+   "currency": "coins"
+  },
+  "willow_wood": {
+   "name": "Willow Wood",
+   "sellValue": 3,
+   "currency": "coins"
+  },
+  "wood_block": {
+   "name": "Wood Block",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "bamboo": {
+   "name": "Bamboo",
+   "sellValue": 13,
+   "currency": "coins"
+  },
+  "lemon": {
+   "name": "Lemon",
+   "sellValue": 16,
+   "currency": "coins"
+  },
+  "cherry_blossom": {
+   "name": "Cherry Blossom",
+   "sellValue": 44,
+   "currency": "coins"
+  },
+  "apple": {
+   "name": "Apple",
+   "sellValue": 39,
+   "currency": "coins"
+  },
+  "maple_syrup": {
+   "name": "Maple Syrup",
+   "sellValue": 35,
+   "currency": "coins"
+  },
+  "quick_bamboo": {
+   "name": "Quick Bamboo",
+   "sellValue": 13,
+   "currency": "coins"
+  },
+  "palm_bark": {
+   "name": "Palm Bark",
+   "sellValue": 120,
+   "currency": "coins"
+  },
+  "chestnut": {
+   "name": "Chestnut",
+   "sellValue": 100,
+   "currency": "coins"
+  },
+  "walnut": {
+   "name": "Walnut",
+   "sellValue": 120,
+   "currency": "coins"
+  },
+  "quick_lemon": {
+   "name": "Quick Lemon",
+   "sellValue": 16,
+   "currency": "coins"
+  },
+  "natural_rubber": {
+   "name": "Natural Rubber",
+   "sellValue": 370,
+   "currency": "coins"
+  },
+  "coconut": {
+   "name": "Coconut",
+   "sellValue": 220,
+   "currency": "coins"
+  },
+  "quick_maple_syrup": {
+   "name": "Quick Maple Syrup",
+   "sellValue": 35,
+   "currency": "coins"
+  },
+  "cocoa": {
+   "name": "Cocoa",
+   "sellValue": 310,
+   "currency": "coins"
+  },
+  "orange_flower": {
+   "name": "Orange Flower",
+   "sellValue": 230,
+   "currency": "coins"
+  },
+  "quick_coconut": {
+   "name": "Quick Coconut",
+   "sellValue": 220,
+   "currency": "coins"
+  },
+  "rock": {
+   "name": "Rock",
+   "sellValue": 7,
+   "currency": "coins"
+  },
+  "mineral_sand": {
+   "name": "Mineral Sand",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "clay": {
+   "name": "Clay",
+   "sellValue": 22,
+   "currency": "coins"
+  },
+  "shell": {
+   "name": "Shell",
+   "sellValue": 76,
+   "currency": "coins"
+  },
+  "copper_ore": {
+   "name": "Copper Ore",
+   "sellValue": 160,
+   "currency": "coins"
+  },
+  "quartz_ore": {
+   "name": "Quartz Ore",
+   "sellValue": 300,
+   "currency": "coins"
+  },
+  "gem": {
+   "name": "Gem",
+   "sellValue": 850,
+   "currency": "coins"
+  },
+  "well_water": {
+   "name": "Well Water",
+   "sellValue": 12,
+   "currency": "coins"
+  },
+  "quick_well_water": {
+   "name": "Quick Well Water",
+   "sellValue": 12,
+   "currency": "coins"
+  },
+  "fresh_water": {
+   "name": "Fresh Water",
+   "sellValue": 46,
+   "currency": "coins"
+  },
+  "quick_fresh_water": {
+   "name": "Quick Fresh Water",
+   "sellValue": 46,
+   "currency": "coins"
+  },
+  "deep_rock_spring_water": {
+   "name": "Deep Rock Spring Water",
+   "sellValue": 150,
+   "currency": "coins"
+  },
+  "quick_deep_rock_spring_water": {
+   "name": "Quick Deep Rock Spring Water",
+   "sellValue": 150,
+   "currency": "coins"
+  },
+  "natural_mineral_spring_water": {
+   "name": "Natural Mineral Spring Water",
+   "sellValue": 250,
+   "currency": "coins"
+  },
+  "quick_natural_mineral_spring_water": {
+   "name": "Quick Natural Mineral Spring Water",
+   "sellValue": 250,
+   "currency": "coins"
+  },
+  "sea_salt": {
+   "name": "Sea Salt",
+   "sellValue": 16,
+   "currency": "coins"
+  },
+  "quick_sea_salt": {
+   "name": "Quick Sea Salt",
+   "sellValue": 16,
+   "currency": "coins"
+  },
+  "pearl": {
+   "name": "Pearl",
+   "sellValue": 450,
+   "currency": "coins"
+  },
+  "aromathyst": {
+   "name": "Aromathyst",
+   "sellValue": 56,
+   "currency": "coins"
+  },
+  "quick_aromathyst": {
+   "name": "Quick Aromathyst",
+   "sellValue": 56,
+   "currency": "coins"
+  },
+  "wool": {
+   "name": "Wool",
+   "sellValue": 140,
+   "currency": "coins"
+  },
+  "quick_wool": {
+   "name": "Quick Wool",
+   "sellValue": 140,
+   "currency": "coins"
+  },
+  "petals": {
+   "name": "Petals",
+   "sellValue": 230,
+   "currency": "coins"
+  },
+  "star": {
+   "name": "Star",
+   "sellValue": 390,
+   "currency": "coins"
+  },
+  "scales": {
+   "name": "Scales",
+   "sellValue": 210,
+   "currency": "coins"
+  },
+  "quick_scales": {
+   "name": "Quick Scales",
+   "sellValue": 210,
+   "currency": "coins"
+  },
+  "wheatmeal": {
+   "name": "Wheatmeal",
+   "sellValue": 70,
+   "currency": "coins"
+  },
+  "tofu": {
+   "name": "Tofu",
+   "sellValue": 230,
+   "currency": "coins"
+  },
+  "milled_rice": {
+   "name": "Milled Rice",
+   "sellValue": 240,
+   "currency": "coins"
+  },
+  "lavender_powder": {
+   "name": "Lavender Powder",
+   "sellValue": 650,
+   "currency": "coins"
+  },
+  "rice_drink": {
+   "name": "Rice Drink",
+   "sellValue": 1860,
+   "currency": "coins"
+  },
+  "ginseng_powder": {
+   "name": "Ginseng Powder",
+   "sellValue": 1160,
+   "currency": "coins"
+  },
+  "refined_flour": {
+   "name": "Refined Flour",
+   "sellValue": 1260,
+   "currency": "coins"
+  },
+  "coconut_oil": {
+   "name": "Coconut Oil",
+   "sellValue": 1580,
+   "currency": "coins"
+  },
+  "cocoa_powder": {
+   "name": "Cocoa Powder",
+   "sellValue": 2470,
+   "currency": "coins"
+  },
+  "coconut_milk": {
+   "name": "Coconut Milk",
+   "sellValue": 3820,
+   "currency": "coins"
+  },
+  "wood_sculpture": {
+   "name": "Wood Sculpture",
+   "sellValue": 90,
+   "currency": "coins"
+  },
+  "bamboo_ware": {
+   "name": "Bamboo Ware",
+   "sellValue": 190,
+   "currency": "coins"
+  },
+  "river_washed_stones": {
+   "name": "River Washed Stones",
+   "sellValue": 300,
+   "currency": "coins"
+  },
+  "premium_river_washed_stones": {
+   "name": "Premium River Washed Stones",
+   "sellValue": 360,
+   "currency": "coins"
+  },
+  "rose_freshener": {
+   "name": "Rose Freshener",
+   "sellValue": 1270,
+   "currency": "coins"
+  },
+  "rose_incense": {
+   "name": "Rose Incense",
+   "sellValue": 790,
+   "currency": "coins"
+  },
+  "pottery": {
+   "name": "Pottery",
+   "sellValue": 630,
+   "currency": "coins"
+  },
+  "premium_rose_freshener": {
+   "name": "Premium Rose Freshener",
+   "sellValue": 1420,
+   "currency": "coins"
+  },
+  "bouquet": {
+   "name": "Bouquet",
+   "sellValue": 1120,
+   "currency": "coins"
+  },
+  "shell_ornament": {
+   "name": "Shell Ornament",
+   "sellValue": 1190,
+   "currency": "coins"
+  },
+  "cotton_thread": {
+   "name": "Cotton Thread",
+   "sellValue": 410,
+   "currency": "coins"
+  },
+  "lavender_sachet": {
+   "name": "Lavender Sachet",
+   "sellValue": 1580,
+   "currency": "coins"
+  },
+  "cotton_fabric": {
+   "name": "Cotton Fabric",
+   "sellValue": 610,
+   "currency": "coins"
+  },
+  "wind_chime": {
+   "name": "Wind Chime",
+   "sellValue": 3180,
+   "currency": "coins"
+  },
+  "woolen_yarn": {
+   "name": "Woolen Yarn",
+   "sellValue": 760,
+   "currency": "coins"
+  },
+  "star_wish_lantern": {
+   "name": "Star Wish Lantern",
+   "sellValue": 2140,
+   "currency": "coins"
+  },
+  "dream_catcher": {
+   "name": "Dream Catcher",
+   "sellValue": 1730,
+   "currency": "coins"
+  },
+  "advanced_wind_chime": {
+   "name": "Advanced Wind Chime",
+   "sellValue": 3600,
+   "currency": "coins"
+  },
+  "rubber_duck": {
+   "name": "Rubber Duck",
+   "sellValue": 1540,
+   "currency": "coins"
+  },
+  "pearl_necklace": {
+   "name": "Pearl Necklace",
+   "sellValue": 3210,
+   "currency": "coins"
+  },
+  "palm_rope": {
+   "name": "Palm Rope",
+   "sellValue": 1150,
+   "currency": "coins"
+  },
+  "woven_toy": {
+   "name": "Woven Toy",
+   "sellValue": 1580,
+   "currency": "coins"
+  },
+  "porcelain": {
+   "name": "Porcelain",
+   "sellValue": 2960,
+   "currency": "coins"
+  },
+  "dye": {
+   "name": "Dye",
+   "sellValue": 4280,
+   "currency": "coins"
+  },
+  "gemstone_dust": {
+   "name": "Gemstone Dust",
+   "sellValue": 4600,
+   "currency": "coins"
+  },
+  "flowers_in_a_bottle": {
+   "name": "Flowers In A Bottle",
+   "sellValue": 7700,
+   "currency": "coins"
+  },
+  "dried_flowers": {
+   "name": "Dried Flowers",
+   "sellValue": 1990,
+   "currency": "coins"
+  },
+  "advanced_gemstone_dust": {
+   "name": "Advanced Gemstone Dust",
+   "sellValue": 5210,
+   "currency": "coins"
+  },
+  "doll": {
+   "name": "Doll",
+   "sellValue": 11110,
+   "currency": "coins"
+  },
+  "dyed_cotton_fabric": {
+   "name": "Dyed Cotton Fabric",
+   "sellValue": 6920,
+   "currency": "coins"
+  },
+  "wool_fabric": {
+   "name": "Wool Fabric",
+   "sellValue": 1190,
+   "currency": "coins"
+  },
+  "bread": {
+   "name": "Bread",
+   "sellValue": 280,
+   "currency": "coins"
+  },
+  "premium_bread": {
+   "name": "Premium Bread",
+   "sellValue": 330,
+   "currency": "coins"
+  },
+  "roasted_soybeans": {
+   "name": "Roasted Soybeans",
+   "sellValue": 450,
+   "currency": "coins"
+  },
+  "maple_candy_roasted_potatoes": {
+   "name": "Maple Candy Roasted Potatoes",
+   "sellValue": 850,
+   "currency": "coins"
+  },
+  "apple_tart": {
+   "name": "Apple Tart",
+   "sellValue": 590,
+   "currency": "coins"
+  },
+  "rose_shortbread": {
+   "name": "Rose Shortbread",
+   "sellValue": 1310,
+   "currency": "coins"
+  },
+  "rose_concentrate": {
+   "name": "Rose Concentrate",
+   "sellValue": 770,
+   "currency": "coins"
+  },
+  "lavender_cookies": {
+   "name": "Lavender Cookies",
+   "sellValue": 1040,
+   "currency": "coins"
+  },
+  "apple_candy": {
+   "name": "Apple Candy",
+   "sellValue": 1980,
+   "currency": "coins"
+  },
+  "rock_candy": {
+   "name": "Rock Candy",
+   "sellValue": 1180,
+   "currency": "coins"
+  },
+  "grape_candy": {
+   "name": "Grape Candy",
+   "sellValue": 2850,
+   "currency": "coins"
+  },
+  "caramel_nut_chips": {
+   "name": "Caramel Nut Chips",
+   "sellValue": 3130,
+   "currency": "coins"
+  },
+  "nuts": {
+   "name": "Nuts",
+   "sellValue": 1980,
+   "currency": "coins"
+  },
+  "maple_candy_star": {
+   "name": "Maple Candy Star",
+   "sellValue": 2810,
+   "currency": "coins"
+  },
+  "maple_sugar_chunk": {
+   "name": "Maple Sugar Chunk",
+   "sellValue": 1060,
+   "currency": "coins"
+  },
+  "coconut_cookie": {
+   "name": "Coconut Cookie",
+   "sellValue": 3700,
+   "currency": "coins"
+  },
+  "shredded_coconut": {
+   "name": "Shredded Coconut",
+   "sellValue": 1470,
+   "currency": "coins"
+  },
+  "flower_bread": {
+   "name": "Flower Bread",
+   "sellValue": 4610,
+   "currency": "coins"
+  },
+  "berry_chocolate_coconut_pudding": {
+   "name": "Berry Chocolate Coconut Pudding",
+   "sellValue": 17890,
+   "currency": "coins"
+  },
+  "cocoa_spread": {
+   "name": "Cocoa Spread",
+   "sellValue": 8350,
+   "currency": "coins"
+  },
+  "premium_berry_chocolate_coconut_pudding": {
+   "name": "Premium Berry Chocolate Coconut Pudding",
+   "sellValue": 20270,
+   "currency": "coins"
+  },
+  "potato_chips": {
+   "name": "Potato Chips",
+   "sellValue": 110,
+   "currency": "coins"
+  },
+  "dried_lemon_slices": {
+   "name": "Dried Lemon Slices",
+   "sellValue": 190,
+   "currency": "coins"
+  },
+  "dried_cherry_blossom": {
+   "name": "Dried Cherry Blossom",
+   "sellValue": 410,
+   "currency": "coins"
+  },
+  "dried_bean_curd": {
+   "name": "Dried Bean Curd",
+   "sellValue": 330,
+   "currency": "coins"
+  },
+  "dried_apple_slices": {
+   "name": "Dried Apple Slices",
+   "sellValue": 510,
+   "currency": "coins"
+  },
+  "dried_strawberries": {
+   "name": "Dried Strawberries",
+   "sellValue": 690,
+   "currency": "coins"
+  },
+  "dried_ginseng": {
+   "name": "Dried Ginseng",
+   "sellValue": 1120,
+   "currency": "coins"
+  },
+  "dried_grapes": {
+   "name": "Dried Grapes",
+   "sellValue": 1210,
+   "currency": "coins"
+  },
+  "dried_cranberries": {
+   "name": "Dried Cranberries",
+   "sellValue": 2080,
+   "currency": "coins"
+  },
+  "plain_rice_porridge": {
+   "name": "Plain Rice Porridge",
+   "sellValue": 660,
+   "currency": "coins"
+  },
+  "strawberry_jam": {
+   "name": "Strawberry Jam",
+   "sellValue": 650,
+   "currency": "coins"
+  },
+  "maple_candy_apple_jam": {
+   "name": "Maple Candy Apple Jam",
+   "sellValue": 950,
+   "currency": "coins"
+  },
+  "chestnut_puree": {
+   "name": "Chestnut Puree",
+   "sellValue": 980,
+   "currency": "coins"
+  },
+  "grape_jam": {
+   "name": "Grape Jam",
+   "sellValue": 1120,
+   "currency": "coins"
+  },
+  "ginseng_porridge": {
+   "name": "Ginseng Porridge",
+   "sellValue": 2440,
+   "currency": "coins"
+  },
+  "malt_sugar": {
+   "name": "Malt Sugar",
+   "sellValue": 3440,
+   "currency": "coins"
+  },
+  "cranberry_jam": {
+   "name": "Cranberry Jam",
+   "sellValue": 7350,
+   "currency": "coins"
+  },
+  "agave_syrup": {
+   "name": "Agave Syrup",
+   "sellValue": 3080,
+   "currency": "coins"
+  },
+  "bamboo_joss_stick": {
+   "name": "Bamboo Joss Stick",
+   "sellValue": 470,
+   "currency": "coins"
+  },
+  "cherry_incense": {
+   "name": "Cherry Incense",
+   "sellValue": 840,
+   "currency": "coins"
+  },
+  "lavender_incense": {
+   "name": "Lavender Incense",
+   "sellValue": 1270,
+   "currency": "coins"
+  },
+  "lemon_incense": {
+   "name": "Lemon Incense",
+   "sellValue": 700,
+   "currency": "coins"
+  },
+  "advanced_lemon_incense": {
+   "name": "Advanced Lemon Incense",
+   "sellValue": 900,
+   "currency": "coins"
+  },
+  "herbal_ginseng_aroma": {
+   "name": "Herbal Ginseng Aroma",
+   "sellValue": 2360,
+   "currency": "coins"
+  },
+  "soap": {
+   "name": "Soap",
+   "sellValue": 5500,
+   "currency": "coins"
+  },
+  "premium_soap": {
+   "name": "Premium Soap",
+   "sellValue": 6320,
+   "currency": "coins"
+  },
+  "orange_flower_incense": {
+   "name": "Orange Flower Incense",
+   "sellValue": 3640,
+   "currency": "coins"
+  },
+  "mixed_perfume": {
+   "name": "Mixed Perfume",
+   "sellValue": 4850,
+   "currency": "coins"
+  },
+  "lotion": {
+   "name": "Lotion",
+   "sellValue": 7030,
+   "currency": "coins"
+  },
+  "premium_mixed_perfume": {
+   "name": "Premium Mixed Perfume",
+   "sellValue": 5520,
+   "currency": "coins"
+  },
+  "wheat_tea": {
+   "name": "Wheat Tea",
+   "sellValue": 330,
+   "currency": "coins"
+  },
+  "toasted_rice_green_tea": {
+   "name": "Toasted Rice Green Tea",
+   "sellValue": 740,
+   "currency": "coins"
+  },
+  "potato_kvass": {
+   "name": "Potato Kvass",
+   "sellValue": 2640,
+   "currency": "coins"
+  },
+  "strawberry_juice": {
+   "name": "Strawberry Juice",
+   "sellValue": 1180,
+   "currency": "coins"
+  },
+  "apple_juice": {
+   "name": "Apple Juice",
+   "sellValue": 1000,
+   "currency": "coins"
+  },
+  "sugarcane_juice": {
+   "name": "Sugarcane Juice",
+   "sellValue": 650,
+   "currency": "coins"
+  },
+  "grape_juice": {
+   "name": "Grape Juice",
+   "sellValue": 2390,
+   "currency": "coins"
+  },
+  "ginseng_water": {
+   "name": "Ginseng Water",
+   "sellValue": 2670,
+   "currency": "coins"
+  },
+  "grape_lemon_drink": {
+   "name": "Grape Lemon Drink",
+   "sellValue": 2970,
+   "currency": "coins"
+  },
+  "walnut_milk": {
+   "name": "Walnut Milk",
+   "sellValue": 2270,
+   "currency": "coins"
+  },
+  "cranberry_juice": {
+   "name": "Cranberry Juice",
+   "sellValue": 4060,
+   "currency": "coins"
+  },
+  "coconut_cooler": {
+   "name": "Coconut Cooler",
+   "sellValue": 1650,
+   "currency": "coins"
+  },
+  "agave_drink": {
+   "name": "Agave Drink",
+   "sellValue": 6610,
+   "currency": "coins"
+  },
+  "hot_cocoa": {
+   "name": "Hot Cocoa",
+   "sellValue": 5330,
+   "currency": "coins"
+  },
+  "coconut_cocoa": {
+   "name": "Coconut Cocoa",
+   "sellValue": 4930,
+   "currency": "coins"
+  },
+  "orange_flower_dew": {
+   "name": "Orange Flower Dew",
+   "sellValue": 4700,
+   "currency": "coins"
+  },
+  "soy_sauce_fried_rice": {
+   "name": "Soy Sauce Fried Rice",
+   "sellValue": 1280,
+   "currency": "coins"
+  },
+  "soy_sauce": {
+   "name": "Soy Sauce",
+   "sellValue": 650,
+   "currency": "coins"
+  },
+  "creamy_potato_soup": {
+   "name": "Creamy Potato Soup",
+   "sellValue": 750,
+   "currency": "coins"
+  },
+  "cherry_blossom_rice_ball": {
+   "name": "Cherry Blossom Rice Ball",
+   "sellValue": 1410,
+   "currency": "coins"
+  },
+  "salted_cherry_blossom": {
+   "name": "Salted Cherry Blossom",
+   "sellValue": 780,
+   "currency": "coins"
+  },
+  "premium_potato_soup": {
+   "name": "Premium Potato Soup",
+   "sellValue": 880,
+   "currency": "coins"
+  },
+  "tanghulu": {
+   "name": "Tanghulu",
+   "sellValue": 2260,
+   "currency": "coins"
+  },
+  "soy_sauce_tofu": {
+   "name": "Soy Sauce Tofu",
+   "sellValue": 1470,
+   "currency": "coins"
+  },
+  "sugar_roasted_chestnuts": {
+   "name": "Sugar Roasted Chestnuts",
+   "sellValue": 2470,
+   "currency": "coins"
+  },
+  "steamed_vermicelli_roll": {
+   "name": "Steamed Vermicelli Roll",
+   "sellValue": 2510,
+   "currency": "coins"
+  },
+  "ginseng_chestnut_cake": {
+   "name": "Ginseng Chestnut Cake",
+   "sellValue": 2510,
+   "currency": "coins"
+  },
+  "walnut_cake": {
+   "name": "Walnut Cake",
+   "sellValue": 3550,
+   "currency": "coins"
+  },
+  "jello": {
+   "name": "Jello",
+   "sellValue": 4790,
+   "currency": "coins"
+  },
+  "strawberry_candy": {
+   "name": "Strawberry Candy",
+   "sellValue": 6840,
+   "currency": "coins"
+  },
+  "rich_grape_compote": {
+   "name": "Rich Grape Compote",
+   "sellValue": 5050,
+   "currency": "coins"
+  },
+  "premium_jello": {
+   "name": "Premium Jello",
+   "sellValue": 5520,
+   "currency": "coins"
+  },
+  "strawberry_cream_puff": {
+   "name": "Strawberry Cream Puff",
+   "sellValue": 5650,
+   "currency": "coins"
+  },
+  "cranberry_chocolate": {
+   "name": "Cranberry Chocolate",
+   "sellValue": 13480,
+   "currency": "coins"
+  },
+  "sweet_rice_drink": {
+   "name": "Sweet Rice Drink",
+   "sellValue": 2580,
+   "currency": "coins"
+  },
+  "cider_vinegar": {
+   "name": "Cider Vinegar",
+   "sellValue": 510,
+   "currency": "coins"
+  },
+  "premium_sweet_rice_wine": {
+   "name": "Premium Sweet Rice Wine",
+   "sellValue": 2980,
+   "currency": "coins"
+  },
+  "rice_vinegar": {
+   "name": "Rice Vinegar",
+   "sellValue": 2510,
+   "currency": "coins"
+  },
+  "salted_lemon": {
+   "name": "Salted Lemon",
+   "sellValue": 1110,
+   "currency": "coins"
+  },
+  "premium_salted_lemon": {
+   "name": "Premium Salted Lemon",
+   "sellValue": 1440,
+   "currency": "coins"
+  },
+  "candied_strawberries": {
+   "name": "Candied Strawberries",
+   "sellValue": 2090,
+   "currency": "coins"
+  },
+  "candied_orange_flower": {
+   "name": "Candied Orange Flower",
+   "sellValue": 6950,
+   "currency": "coins"
+  },
+  "growth_bud": {
+   "name": "Growth Bud",
+   "sellValue": 1000,
+   "currency": "aniimo_exp"
+  },
+  "growth_flower": {
+   "name": "Growth Flower",
+   "sellValue": 5000,
+   "currency": "aniimo_exp"
+  },
+  "growth_fruit": {
+   "name": "Growth Fruit",
+   "sellValue": 25000,
+   "currency": "aniimo_exp"
+  },
+  "aniipod": {
+   "name": "Aniipod",
+   "sellValue": 1,
+   "currency": "aniipods"
+  },
+  "aniipod_pro": {
+   "name": "Aniipod Pro",
+   "sellValue": 1,
+   "currency": "aniipods"
+  },
+  "aniipod_mega": {
+   "name": "Aniipod Mega",
+   "sellValue": 1,
+   "currency": "aniipods"
+  },
+  "rough_lumber": {
+   "name": "Rough Lumber",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "standard_planks": {
+   "name": "Standard Planks",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "laminated_beams": {
+   "name": "Laminated Beams",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "densified_timber_component": {
+   "name": "Densified Timber Component",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "coarse_sifted_ore": {
+   "name": "Coarse Sifted Ore",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "sintered_ore_brick": {
+   "name": "Sintered Ore Brick",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "refined_ore": {
+   "name": "Refined Ore",
+   "sellValue": 0,
+   "currency": "none"
+  },
+  "microcrystalline_ore_plate": {
+   "name": "Microcrystalline Ore Plate",
+   "sellValue": 0,
+   "currency": "none"
+  }
+ },
+ "levelUp": {
+  "2": {
+   "coins": 140,
+   "items": {
+    "wood_block": 3
+   }
+  },
+  "3": {
+   "coins": 800,
+   "items": {
+    "wood_block": 25
+   }
+  },
+  "4": {
+   "coins": 2900,
+   "items": {
+    "wood_block": 100,
+    "mineral_sand": 120
+   }
+  },
+  "5": {
+   "coins": 7300,
+   "items": {
+    "wood_block": 550,
+    "mineral_sand": 250
+   }
+  },
+  "6": {
+   "coins": 32000,
+   "items": {
+    "wood_block": 1300,
+    "mineral_sand": 700
+   }
+  },
+  "7": {
+   "coins": 69000,
+   "items": {
+    "rough_lumber": 290,
+    "coarse_sifted_ore": 360
+   }
+  },
+  "8": {
+   "coins": 180000,
+   "items": {
+    "rough_lumber": 1100,
+    "coarse_sifted_ore": 640
+   }
+  },
+  "9": {
+   "coins": 260000,
+   "items": {
+    "rough_lumber": 1520,
+    "coarse_sifted_ore": 800
+   }
+  },
+  "10": {
+   "coins": 510000,
+   "items": {
+    "rough_lumber": 2000,
+    "coarse_sifted_ore": 2400
+   }
+  },
+  "11": {
+   "coins": 680000,
+   "items": {
+    "standard_planks": 320,
+    "sintered_ore_brick": 350
+   }
+  },
+  "12": {
+   "coins": 1060000,
+   "items": {
+    "standard_planks": 910,
+    "sintered_ore_brick": 480
+   }
+  },
+  "13": {
+   "coins": 1930000,
+   "items": {
+    "standard_planks": 1230,
+    "sintered_ore_brick": 760
+   }
+  },
+  "14": {
+   "coins": 2620000,
+   "items": {
+    "standard_planks": 1590,
+    "sintered_ore_brick": 1060
+   }
+  },
+  "15": {
+   "coins": 3760000,
+   "items": {
+    "laminated_beams": 390,
+    "refined_ore": 150
+   }
+  },
+  "16": {
+   "coins": 4900000,
+   "items": {
+    "laminated_beams": 480,
+    "refined_ore": 310
+   }
+  },
+  "17": {
+   "coins": 8630000,
+   "items": {
+    "laminated_beams": 630,
+    "refined_ore": 380
+   }
+  },
+  "18": {
+   "coins": 11600000,
+   "items": {
+    "laminated_beams": 800,
+    "refined_ore": 520
+   }
+  },
+  "19": {
+   "coins": 17100000,
+   "items": {
+    "densified_timber_component": 400,
+    "microcrystalline_ore_plate": 220
+   }
+  },
+  "20": {
+   "coins": 20800000,
+   "items": {
+    "densified_timber_component": 490,
+    "microcrystalline_ore_plate": 270
+   }
+  }
+ },
+ "levelUpChains": [
+  [
+   "wood_block",
+   "rough_lumber",
+   "standard_planks",
+   "laminated_beams",
+   "densified_timber_component"
+  ],
+  [
+   "mineral_sand",
+   "coarse_sifted_ore",
+   "sintered_ore_brick",
+   "refined_ore",
+   "microcrystalline_ore_plate"
+  ]
+ ],
+ "moduleMaxLevels": {
+  "ecological_module": [
+   0,
+   0,
+   1,
+   1,
+   1,
+   1,
+   2,
+   3,
+   3,
+   3,
+   4,
+   5,
+   5,
+   6,
+   6,
+   6,
+   7,
+   8,
+   8,
+   8
+  ],
+  "kitchen_module": [
+   0,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   6,
+   6,
+   6,
+   7,
+   7
+  ],
+  "resource_detector": [
+   0,
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   3,
+   4,
+   5,
+   5,
+   6,
+   6,
+   7,
+   7,
+   8,
+   8
+  ],
+  "crafting_module": [
+   0,
+   0,
+   0,
+   0,
+   1,
+   1,
+   2,
+   2,
+   2,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   6,
+   7,
+   7
+  ]
+ },
+ "specialRecipes": [
+  "claw-game-cooker:rose_shortbread",
+  "bouncy-brew-keg:potato_kvass",
+  "simmering-pot:ginseng_porridge",
+  "blazing-stove:strawberry_candy",
+  "crafting-table:flowers_in_a_bottle",
+  "phonolfactory-table:lotion"
+ ]
+}

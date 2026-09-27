@@ -19,12 +19,14 @@ export interface Profile {
   workers: Worker[];
   /** Aniimo éclatants placés en zone de construction (produisent des Tickets bourgeon). */
   shinies: number;
+  /** Matériaux du prochain niveau de Camping-car déjà en stock (identifiant d'objet → quantité). */
+  stock: Record<string, number>;
   updatedAt: string;
 }
 
 const KEY = 'aniiguide.profile.v1';
 
-export const emptyProfile = (): Profile => ({ version: 1, rv: 1, coins: null, workers: [], shinies: 0, updatedAt: new Date().toISOString() });
+export const emptyProfile = (): Profile => ({ version: 1, rv: 1, coins: null, workers: [], shinies: 0, stock: {}, updatedAt: new Date().toISOString() });
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
@@ -34,6 +36,7 @@ export function exampleProfile(): Profile {
     rv: example.rv,
     coins: example.pieces,
     shinies: example.eclatants,
+    stock: { ...example.stock },
     workers: example.ouvriers.map((o) => ({ uid: uid(), aniimoId: o.aniimo, personality: o.personnalite })),
     updatedAt: new Date().toISOString(),
   };
@@ -48,6 +51,7 @@ export function sanitizeProfile(input: unknown): Profile {
     rv: Math.min(20, Math.max(1, Number(p.rv) || 1)),
     coins: p.coins == null ? null : Number(p.coins) || 0,
     shinies: Math.max(0, Number(p.shinies) || 0),
+    stock: Object.fromEntries(Object.entries(p.stock ?? {}).map(([k, v]) => [k, Math.max(0, Number(v) || 0)])),
     workers: p.workers
       .filter((w) => w && ANIIMO_BY_ID.has(String(w.aniimoId)))
       .map((w) => ({ uid: String(w.uid || uid()), aniimoId: String(w.aniimoId), personality: w.personality ? parsePersonality(String(w.personality)) : null })),
@@ -81,6 +85,8 @@ export function useProfile() {
     profile,
     replace: (p: Profile) => setProfile(p),
     setRv: (rv: number) => update((p) => ({ ...p, rv: Math.min(20, Math.max(1, rv)) })),
+    setCoins: (n: number) => update((p) => ({ ...p, coins: Math.max(0, n) })),
+    setStock: (item: string, n: number) => update((p) => ({ ...p, stock: { ...p.stock, [item]: Math.max(0, n) } })),
     setShinies: (n: number) => update((p) => ({ ...p, shinies: Math.max(0, n) })),
     addWorker: (aniimoId: string) => update((p) => ({ ...p, workers: [...p.workers, { uid: uid(), aniimoId, personality: null }] })),
     removeWorker: (id: string) => update((p) => ({ ...p, workers: p.workers.filter((w) => w.uid !== id) })),
