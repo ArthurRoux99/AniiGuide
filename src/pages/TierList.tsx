@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { ANIIMO_BY_ID, fullName, matches, type Aniimo } from '../data/aniimo';
 import rawSources from '../data/tierlists.gen.json';
 import { CONSENSUS_TIERS, consensus, type ConsensusEntry, type TierSource } from '../engine/tierlist';
-import type { Profile } from '../state/profile';
+import type { ProfileApi } from '../state/profile';
 import { AbilityList, Avatar } from '../components/ui';
 
 const SOURCES = rawSources as TierSource[];
@@ -32,7 +32,8 @@ function label(id: string): { aniimo: Aniimo | null; name: string; form: string 
   return { aniimo: null, name: m[1], form: m[2] ?? null };
 }
 
-export function TierList({ profile }: { profile: Profile }) {
+export function TierList({ api }: { api: ProfileApi }) {
+  const { profile } = api;
   const [role, setRole] = useState('');
   const [element, setElement] = useState('');
   const [query, setQuery] = useState('');

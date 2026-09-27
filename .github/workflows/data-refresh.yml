@@ -24,6 +24,8 @@ jobs:
       - run: node scripts/fetch-official-wiki.mjs --delay 300
       - run: node scripts/fetch-tierlists.mjs
       - run: node scripts/fetch-codes.mjs
+      # Nouveaux Aniimo sur le wiki : références pour l'import par capture.
+      - run: node scripts/build-portraits.mjs
       - run: npm test
       - name: Enregistrer si les données ont changé
         id: commit

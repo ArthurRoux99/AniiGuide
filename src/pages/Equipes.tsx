@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ANIIMO_BY_ID, fullName } from '../data/aniimo';
+import { ANIIMO, ANIIMO_BY_ID, fullName } from '../data/aniimo';
 import rawSources from '../data/tierlists.gen.json';
 import { bestOffense, bestTeams, effectiveness, ELEMENT_IDS, type Fighter, type Team } from '../engine/combat';
 import { consensus, tierOf, type TierSource } from '../engine/tierlist';
@@ -9,6 +9,15 @@ import { Avatar } from '../components/ui';
 import { ELEMENTS, ROLES } from './TierList';
 
 const CONSENSUS = consensus(rawSources as TierSource[], 1);
+const RANKED = new Map(CONSENSUS.map((e) => [e.id, e.score]));
+const TOTALS = ANIIMO.map((a) => a.statTotal ?? 0).filter(Boolean);
+const [MIN_TOTAL, MAX_TOTAL] = [Math.min(...TOTALS), Math.max(...TOTALS)];
+/**
+ * Note d'un Aniimo : celle de la tier list de consensus, sinon une note prudente tirée du total de
+ * ses stats (0,15 à 0,45 : en dessous de la plupart des Aniimo classés).
+ */
+const scoreOf = (a: (typeof ANIIMO)[number]) =>
+  RANKED.get(a.id) ?? (a.statTotal ? 0.15 + (0.3 * (a.statTotal - MIN_TOTAL)) / Math.max(1, MAX_TOTAL - MIN_TOTAL) : 0.15);
 
 /** Constructeur d'équipes de combat : 4 Aniimo, rôles couverts, ennemi visé. */
 export function Equipes({ api }: { api: ProfileApi }) {
@@ -21,12 +30,11 @@ export function Equipes({ api }: { api: ProfileApi }) {
 
   const pool = useMemo(() => {
     const owned = new Set([...profile.collection, ...profile.workers.map((w) => w.aniimoId)]);
-    return CONSENSUS.flatMap((e): Fighter[] => {
-      const a = ANIIMO_BY_ID.get(e.id);
-      if (!a || !a.roles.length) return [];
+    return ANIIMO.flatMap((a): Fighter[] => {
+      if (!a.roles.length) return [];
       if (!prismana && a.prismana && !locked.includes(a.id)) return [];
       if (mine && !owned.has(a.id) && !locked.includes(a.id)) return [];
-      return [{ id: a.id, species: a.number, elements: a.elements, roles: a.roles, score: e.score }];
+      return [{ id: a.id, species: a.number, elements: a.elements, roles: a.roles, score: scoreOf(a) }];
     });
   }, [profile.collection, profile.workers, mine, prismana, locked]);
 
@@ -141,7 +149,11 @@ function TeamCard({ team, rank, enemy }: { team: Team; rank: number; enemy: stri
                   {m.roles.map((r) => ROLES[r] ?? r).join(', ')} · {m.elements.map((e) => ELEMENTS[e]?.icon ?? e).join('')}
                 </div>
                 <div>
-                  <span className="tier-badge tier-badge--sm">{tierOf(m.score)}</span>
+                  {RANKED.has(m.id) ? (
+                    <span className="tier-badge tier-badge--sm">{tierOf(m.score)}</span>
+                  ) : (
+                    <span className="muted" title="Absent des tier lists : note estimée d'après ses stats">non classé</span>
+                  )}
                   {mult != null && Math.abs(mult - 1) > 0.01 && (
                     <span className={mult > 1 ? 'good' : 'bad'}> ×{mult.toFixed(2).replace('.', ',')} sur l'ennemi</span>
                   )}

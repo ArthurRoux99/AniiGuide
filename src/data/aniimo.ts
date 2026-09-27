@@ -14,6 +14,8 @@ export interface Aniimo {
   head: string | null;
   elements: string[];
   roles: string[];
+  /** Total des stats de combat (fiche officielle). */
+  statTotal: number | null;
   homeland: AbilityLevels;
   habitats: string[];
 }

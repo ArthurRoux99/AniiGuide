@@ -3,5 +3,8 @@ dist/
 .astro/
 .DS_Store
 src/data/*.gen.json
+src/data/*.gen.bin
 *.tsbuildinfo
 dist-single/
+test-results/
+playwright-report/

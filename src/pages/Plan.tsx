@@ -7,22 +7,12 @@ import { idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
+import { fmtDuration } from '../components/format';
 import { climateLayout } from '../engine/homeland/climate';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
 
-export function fmtDuration(hours: number | null): string {
-  if (hours == null || !isFinite(hours)) return '—';
-  if (hours < 1) return `${Math.max(1, Math.round(hours * 60))} min`;
-  if (hours < 48) {
-    const h = Math.floor(hours);
-    const m = Math.round((hours - h) * 60);
-    return m === 60 ? `${h + 1} h` : `${h} h ${String(m).padStart(2, '0')}`;
-  }
-  const total = Math.round(hours);
-  return `${Math.floor(total / 24)} j ${total % 24} h`;
-}
 
 function Name({ id, kind }: { id: string; kind: 'facility' | 'item' }) {
   const n = kind === 'facility' ? facilityName(id) : itemName(id);
@@ -141,9 +131,13 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <ul className="assumptions">
             <li>Données de production : projet Aniimax (MIT), vérifiées en jeu installation par installation ; formules de vitesse relevées en jeu.</li>
             <li>Production continue : tu récoltes assez souvent pour que rien ne déborde, et les graines sont achetées au besoin.</li>
-            <li>Chaque installation travaillée reçoit ton meilleur Aniimo dans la capacité demandée (avec le bonus de personnalité s'il en a un).</li>
-            <li>Le temps de semis/récolte des champs par les Aniimo n'est pas encore limité par ton nombre d'ouvriers.</li>
+            <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
+            <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
+            <li>Mode électrique (niveau 12 et plus) non pris en compte : pas encore de données fiables.</li>
             <li>Zone des bâtiments climatiques : environ 9×9 cases (❓ à confirmer). Coûts d'amélioration des installations et durée d'amélioration du Camping-car non inclus.</li>
+            <li>
+              Un écart avec le jeu ? <a href="#mesures">Vérifie une durée en jeu</a> et signale-le.
+            </li>
           </ul>
         </details>
       </section>

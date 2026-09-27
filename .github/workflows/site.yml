@@ -27,6 +27,9 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # Tests dans un vrai navigateur (toutes les pages, synchro, codes…).
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
       - run: npm run build:single
       # Le site en un seul fichier HTML, téléchargeable depuis l'onglet Actions.
       - uses: actions/upload-artifact@v4

@@ -2,7 +2,7 @@
 // Génère les données allégées utilisées par l'application (src/data/*.gen.json)
 // à partir des données brutes de data/. À relancer après chaque mise à jour des données.
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { copyFile, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,13 +48,36 @@ const aniimo = official.entries.map((e) => {
     head: e.headIcon,
     elements: e.elements,
     roles: e.roles,
+    statTotal: e.stats?.total ?? null,
     homeland: Object.fromEntries(e.homeland.map((h) => [h.ability, h.level])),
-    habitats: e.habitats.fr,
+    // Quelques zones ne sont pas encore traduites sur le wiki (texte chinois, même en anglais) : écartées.
+    habitats: e.habitats.fr.filter((h) => !/[\u3400-\u9fff]/.test(h)),
   };
 });
 
 await writeFile(join(ROOT, 'src/data/aniimo.gen.json'), JSON.stringify({ fetchedAt: official.fetchedAt, aniimo }) + '\n');
 console.log(`src/data/aniimo.gen.json : ${aniimo.length} fiches`);
+
+// Fiches détaillées (chargées à l'ouverture de l'Aniidex seulement).
+const skill = (t) => ({ name: t.fr.name, description: t.fr.description, icon: t.fr.icon });
+const tree = (n) => n && { name: n.name, icon: n.icon, stage: n.stage, variant: n.variant, children: n.children.map(tree) };
+const details = Object.fromEntries(
+  official.entries.map((e) => [
+    e.id,
+    {
+      description: e.description.fr,
+      stats: e.stats,
+      weight: e.weight,
+      genders: e.genders,
+      traits: e.traits.map(skill),
+      mobility: e.mobility.map(skill),
+      evolution: tree(e.evolution),
+      video: e.video,
+    },
+  ]),
+);
+await writeFile(join(ROOT, 'src/data/aniimo-details.gen.json'), JSON.stringify(details) + '\n');
+console.log(`src/data/aniimo-details.gen.json : ${Object.keys(details).length} fiches détaillées`);
 
 const homeland = await read('data/homeland/aniimax.json');
 const fr = await read('data/i18n/fr.json');
@@ -85,3 +108,8 @@ console.log(`src/data/codes.gen.json : ${codes.active.length} codes actifs`);
 const combos = await read('data/combos.json');
 await writeFile(join(ROOT, 'src/data/combos.gen.json'), JSON.stringify(combos) + '\n');
 console.log(`src/data/combos.gen.json : ${combos.combos.length} combos`);
+
+// Références de reconnaissance des portraits (générées par scripts/build-portraits.mjs).
+await copyFile(join(ROOT, 'data/portraits.bin'), join(ROOT, 'src/data/portraits.gen.bin'));
+await copyFile(join(ROOT, 'data/portraits.json'), join(ROOT, 'src/data/portraits.gen.json'));
+console.log('src/data/portraits.gen.bin');

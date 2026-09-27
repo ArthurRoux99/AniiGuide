@@ -7,7 +7,7 @@ import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityList, Avatar } from '../components/ui';
 import { facilityName } from '../data/homeland';
-import { fmtDuration } from './Plan';
+import { fmtDuration } from '../components/format';
 
 const BASE_OPTS = { watering: true, includeUnverified: false };
 

@@ -1,0 +1,40 @@
+name: Signaler une mesure en jeu
+description: Une durée, une quantité ou une zone relevée en jeu qui ne correspond pas au calcul d'AniiGuide.
+title: "Mesure : "
+labels: [mesure]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci ! Ces relevés servent à corriger les formules de l'optimiseur. Une capture d'écran aide beaucoup.
+  - type: input
+    id: recette
+    attributes:
+      label: Installation / recette
+      placeholder: "moulin-carrousel : riz décortiqué"
+    validations:
+      required: true
+  - type: input
+    id: conditions
+    attributes:
+      label: Conditions
+      description: Niveau de l'Aniimo, bonne personnalité ou non, arrosage, climat…
+  - type: input
+    id: observe
+    attributes:
+      label: Valeur observée en jeu
+      placeholder: "95 s"
+    validations:
+      required: true
+  - type: input
+    id: prevu
+    attributes:
+      label: Valeur prévue par AniiGuide
+  - type: input
+    id: rv
+    attributes:
+      label: Niveau de Camping-car
+  - type: textarea
+    id: details
+    attributes:
+      label: Détails et captures
