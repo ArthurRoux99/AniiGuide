@@ -700,3 +700,72 @@ select {
 summary {
   cursor: pointer;
 }
+
+/* Recrutement */
+.recruits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.recruit {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.recruit__rank {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.recruit__body {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.recruit__species {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.recruit__gain {
+  display: grid;
+  gap: 8px;
+  text-align: right;
+}
+
+.gain {
+  display: flex;
+  flex-direction: column;
+}
+
+.gain b {
+  font-size: 1.1rem;
+  color: var(--ok);
+}
+
+.gain b.muted {
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .recruit {
+    grid-template-columns: auto 1fr;
+  }
+  .recruit__gain {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
+  .tabs a {
+    padding: 8px 6px;
+    font-size: 0.8rem;
+  }
+}
