@@ -56,6 +56,14 @@ const aniimo = official.entries.map((e) => {
 await writeFile(join(ROOT, 'src/data/aniimo.gen.json'), JSON.stringify({ fetchedAt: official.fetchedAt, aniimo }) + '\n');
 console.log(`src/data/aniimo.gen.json : ${aniimo.length} fiches`);
 
+const homeland = await read('data/homeland/aniimax.json');
+const fr = await read('data/i18n/fr.json');
+await writeFile(
+  join(ROOT, 'src/data/homeland.gen.json'),
+  JSON.stringify({ ...homeland, names: { facilities: fr.installations, items: fr.objets } }) + '\n',
+);
+console.log(`src/data/homeland.gen.json : ${homeland.recipes.length} recettes`);
+
 const profile = await read('data/profils/exemple-rv8.json');
 await writeFile(join(ROOT, 'src/data/exemple-rv8.gen.json'), JSON.stringify(profile) + '\n');
 console.log('src/data/exemple-rv8.gen.json');

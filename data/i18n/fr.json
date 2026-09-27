@@ -68,7 +68,8 @@
     "aniipod-maker": "Machine à Aniipod"
   },
   "objets": {
-    "aniipod-pro": "Aniipod pro",
-    "milled-rice": "Riz décortiqué"
-  }
+    "aniipod_pro": "Aniipod pro",
+    "milled_rice": "Riz décortiqué"
+  },
+  "_cles": "installations : identifiants d'installation (ex. carousel-mill) ; objets : identifiants d'objet des données de production (ex. milled_rice)."
 }

@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { useProfile } from './state/profile';
 import { MonLogis } from './pages/MonLogis';
 import { Ouvriers } from './pages/Ouvriers';
+import { PlanPage } from './pages/Plan';
 
 const PAGES = [
   { id: 'logis', label: 'Mon logis', icon: '🏡' },
+  { id: 'plan', label: 'Optimiser', icon: '📈' },
   { id: 'ouvriers', label: 'Ouvriers', icon: '🐾' },
 ] as const;
 type PageId = (typeof PAGES)[number]['id'];
@@ -35,7 +37,11 @@ export function App() {
           ))}
         </nav>
       </header>
-      <main>{page === 'logis' ? <MonLogis api={api} /> : <Ouvriers profile={api.profile} />}</main>
+      <main>
+        {page === 'logis' && <MonLogis api={api} />}
+        {page === 'plan' && <PlanPage api={api} />}
+        {page === 'ouvriers' && <Ouvriers profile={api.profile} />}
+      </main>
       <footer className="footer">
         Projet de fans non officiel · Aniimo © Pawprint Studio / FunPlus · Images et noms : wiki officiel
       </footer>
