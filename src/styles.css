@@ -1078,7 +1078,7 @@ summary {
 /* Zones climatiques */
 .zones {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 0.8rem;
 }
 .zone {
@@ -1415,4 +1415,44 @@ label.btn {
 .mini {
   color: var(--ink);
   text-decoration: none;
+}
+.zone-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: color-mix(in srgb, #9ccc65 18%, var(--panel));
+  border-radius: 8px;
+}
+.zone-map__grid {
+  stroke: var(--line);
+  stroke-width: 0.04;
+}
+.zone-map__label,
+.zone-map__device {
+  fill: #fff;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: system-ui, sans-serif;
+}
+.zone-map__device {
+  fill: initial;
+}
+.zone-legend {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+.zone-legend__key {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 700;
+  margin-right: 6px;
 }

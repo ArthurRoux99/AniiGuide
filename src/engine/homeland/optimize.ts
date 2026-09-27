@@ -2,6 +2,7 @@ import { solveLP } from '../lp';
 import type { AbilityId } from '../abilities';
 import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Environment, type Recipe } from '../../data/homeland';
 import { uncoveredFactor, wateredSeconds, workSeconds } from './speed';
+import { layoutsFor, PLOT_KIND, type PlotKind } from './coverage';
 
 // Optimiseur de production du Logis.
 //
@@ -135,8 +136,8 @@ export interface Plan {
   facilityUse: { facility: string; used: number; count: number }[];
   workersUsed: Partial<Record<AbilityId, number>>;
   blockers: string[];
-  /** Appareils climatiques à régler : mode, zones utilisées, remplissage (en zones). */
-  climate: { device: string; env: Environment; zones: number; fill: number }[];
+  /** Appareils climatiques à régler : mode, nombre d'appareils ainsi réglés, parcelles couvertes. */
+  climate: { device: string; env: Environment; zones: number; plots: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
   /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
@@ -144,11 +145,6 @@ export interface Plan {
 }
 
 export const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
-/** Emplacements couverts par un bâtiment climatique (zone ≈ 9×9 cases, à confirmer en jeu). */
-export const COVER = (facility: string) => {
-  const side = { farmland: 2, woodland: 4 }[facility] ?? 5;
-  return Math.floor(9 / side) ** 2;
-};
 
 function recipeAllowed(r: Recipe, o: PlanOptions): boolean {
   const f = o.setup.facilities[r.facility];
@@ -246,7 +242,8 @@ export function plan(o: PlanOptions): Plan {
         col.coins = -r.seedCost * cycles;
         col.profit = -r.seedCost * cycles;
       }
-      if (v.covered && r.environment) col[`env:${r.environment}`] = 1 / COVER(r.facility);
+      // Parcelle couverte : elle prend une place du type voulu dans les zones de ce climat.
+      if (v.covered && r.environment) col[`env:${r.environment}:${PLOT_KIND[r.facility] ?? 'big'}`] = 1;
       for (const j of jobs) {
         const busy = j.workload / seconds; // Aniimo occupés en moyenne par exemplaire
         col[`ab:${j.ability}:1`] = (col[`ab:${j.ability}:1`] ?? 0) + busy;
@@ -281,14 +278,19 @@ export function plan(o: PlanOptions): Plan {
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
   const ints: Record<string, 1> = {};
   // Climat : chaque appareil est réglé sur un seul mode (un Radiateur fait Chaud OU Brûlant) ;
-  // mode:appareil:climat = appareils réglés ainsi (entier), chacun couvrant une zone.
+  // mode:appareil:climat = appareils réglés ainsi (entier). Autour de chacun, un mélange de
+  // parcelles parmi les placements optimaux précalculés (lay:climat:k, combinaison convexe).
   for (const [env, b] of Object.entries(ENV_BUILDING)) {
     const count = o.setup.facilities[b]?.count ?? 0;
-    constraints[`env:${env}`] = { max: 0 };
+    for (const kind of ['farmland', 'woodland', 'big'] as PlotKind[]) constraints[`env:${env}:${kind}`] = { max: 0 };
     if (count <= 0) continue;
     constraints[`dev:${b}`] = { max: count };
-    variables[`mode:${b}:${env}`] = { [`env:${env}`]: -1, [`dev:${b}`]: 1 };
+    constraints[`zones:${env}`] = { max: 0 };
+    variables[`mode:${b}:${env}`] = { [`zones:${env}`]: -1, [`dev:${b}`]: 1 };
     ints[`mode:${b}:${env}`] = 1;
+    layoutsFor(b).forEach((l, k) => {
+      variables[`lay:${env}:${k}`] = { [`zones:${env}`]: 1, [`env:${env}:farmland`]: -l.farmland, [`env:${env}:woodland`]: -l.woodland, [`env:${env}:big`]: -l.big };
+    });
   }
   // Aniimo postés (nombre entier par installation et par niveau) : ils occupent un ouvrier entier.
   for (const [st, t] of staffTiers) {
@@ -421,8 +423,9 @@ export function plan(o: PlanOptions): Plan {
   }
 
   const climate = Object.entries(ENV_BUILDING).flatMap(([env, device]) => {
-    const used = rows.filter((r) => r.covered && r.recipe.environment === env).reduce((n, r) => n + r.units / COVER(r.recipe.facility), 0);
-    return used > 1e-4 ? [{ device, env: env as Environment, zones: Math.ceil(used - 1e-6), fill: used }] : [];
+    const zones = Math.round(solution[`mode:${device}:${env}`] ?? 0);
+    const plots = rows.filter((r) => r.covered && r.recipe.environment === env).reduce((n, r) => n + r.units, 0);
+    return zones > 0 && plots > 1e-4 ? [{ device, env: env as Environment, zones, plots }] : [];
   });
 
   const teamOut = team

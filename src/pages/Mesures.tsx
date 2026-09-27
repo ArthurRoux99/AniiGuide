@@ -134,7 +134,7 @@ export function Mesures({ api }: { api: ProfileApi }) {
       <section className="card">
         <h2>Autres points à confirmer</h2>
         <ul className="plain">
-          <li>Taille de la zone d'un appareil climatique (9×9 cases supposées) : combien de Fermes tiennent dedans ?</li>
+          <li>Zones climatiques : une parcelle qui touche seulement le bord de la zone affiche-t-elle bien « Conditions remplies » ?</li>
           <li>Mode électrique (niveau 12 et plus) : vitesse d'une installation alimentée, sans ouvrier.</li>
           <li>Coût et durée d'amélioration des installations et du Camping-car.</li>
         </ul>

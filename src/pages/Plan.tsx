@@ -8,7 +8,7 @@ import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
 import { fmtDuration } from '../components/format';
-import { climateLayout } from '../engine/homeland/climate';
+import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -134,7 +134,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
             <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
             <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
             <li>Mode électrique (niveau 12 et plus) non pris en compte : pas encore de données fiables.</li>
-            <li>Zone des bâtiments climatiques : environ 9×9 cases (❓ à confirmer). Coûts d'amélioration des installations et durée d'amélioration du Camping-car non inclus.</li>
+            <li>Zone des appareils climatiques : 9×9 cases, une parcelle compte dès qu'elle la touche (jusqu'à 32 Fermes ou 12 Pépinières par appareil). Coûts d'amélioration des installations et durée d'amélioration du Camping-car non inclus.</li>
             <li>
               Un écart avec le jeu ? <a href="#mesures">Vérifie une durée en jeu</a> et signale-le.
             </li>
@@ -292,47 +292,25 @@ const ENV_ICON: Record<string, string> = { Warm: '🌤️', Scorching: '🔥', C
 /** Plan des zones climatiques : où poser les cultures couvertes autour de chaque appareil. */
 function ClimatePlan({ result, whole }: { result: PlanResult; whole: Map<PlanRow, number> }) {
   const layout = useMemo(() => climateLayout(result, result.rows, whole), [result, whole]);
+  const zones = layout.zones.filter((z) => z.plots.length);
+  if (!zones.length) return null;
   return (
     <section className="card">
-      <h2>Zones climatiques</h2>
+      <h2>Placement autour des appareils climatiques</h2>
       <p className="hint">
-        Règle chaque appareil sur le climat indiqué et pose ces parcelles dans sa zone (environ 9×9 cases autour de lui). Une zone accueille 4
-        Pépinières, ou 16 Fermes, ou un mélange : chaque carré ci-dessous vaut une Pépinière ou 4 Fermes. Une fois le tout posé, enregistre-le
-        en combo en jeu pour le retrouver ou le partager.
+        Règle chaque appareil sur le climat indiqué, puis pose les parcelles exactement comme sur le schéma (1 carreau = 1 case du mode
+        Construire). Une parcelle compte dès qu'elle <b>touche</b> la zone (pointillés) : c'est ce qui permet jusqu'à 32 Fermes ou 12
+        Pépinières par appareil. Le jeu confirme avec « Conditions remplies » sur chaque parcelle. Une fois posé, enregistre-le en combo.
       </p>
       <div className="zones">
-        {layout.zones.map((z, i) => (
-          <figure key={i} className={`zone zone--${z.env.toLowerCase()}`}>
-            <figcaption>
-              {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> · <b>{envFr(z.env)}</b>
-            </figcaption>
-            <div className="zone__grid">
-              {z.quarters.map((q, k) =>
-                !q ? (
-                  <div key={k} className="zone__q zone__q--free">
-                    libre
-                  </div>
-                ) : q.kind === 'woodland' ? (
-                  <div key={k} className="zone__q zone__q--wood" title="Pépinière">
-                    🌳 <Name id={q.crop} kind="item" />
-                  </div>
-                ) : (
-                  <div key={k} className="zone__q zone__q--farms">
-                    {q.crops.map((c, j) => (
-                      <span key={j} className={c ? 'zone__farm' : 'zone__farm zone__farm--free'} title={c ? 'Ferme' : 'libre'}>
-                        {c ? <Name id={c} kind="item" /> : ''}
-                      </span>
-                    ))}
-                  </div>
-                ),
-              )}
-            </div>
-          </figure>
+        {zones.map((z, i) => (
+          <ZoneMap key={i} zone={z} />
         ))}
       </div>
       {layout.overflow.length > 0 && (
         <p className="hint">
-          Arrondi des parcelles : {layout.overflow.map((o, i) => (
+          Arrondi des parcelles :{' '}
+          {layout.overflow.map((o, i) => (
             <span key={i}>
               {i > 0 && ', '}
               {o.count} × <Name id={o.crop} kind="item" />
@@ -341,7 +319,63 @@ function ClimatePlan({ result, whole }: { result: PlanResult; whole: Map<PlanRow
           ne tiennent pas dans les zones : pose-les juste au bord, elles pousseront un peu moins vite.
         </p>
       )}
+      <p className="hint">Règles de couverture : projet Aniimax (MIT), vérifiées sur une capture du jeu ; placements calculés par AniiGuide.</p>
     </section>
+  );
+}
+
+const PLOT_FILL: Record<string, string> = { farmland: '#b07a3a', woodland: '#3f8f4f', big: '#7c6cf0' };
+const ENV_STROKE: Record<string, string> = { Warm: '#f5a623', Scorching: '#e5484d', Cool: '#46a7a0', Freeze: '#3e8ed0', Adequate: '#d6b800' };
+
+/** Schéma à l'échelle d'une zone : appareil, carré couvert, parcelles numérotées par culture. */
+function ZoneMap({ zone: z }: { zone: ClimateZone }) {
+  const c = z.size / 2, R = 4.5;
+  const xs = [c - R, c + R, ...z.plots.flatMap((p) => [p.x, p.x + p.size])];
+  const ys = [c - R, c + R, ...z.plots.flatMap((p) => [p.y, p.y + p.size])];
+  const [x0, x1, y0, y1] = [Math.floor(Math.min(...xs)) - 1, Math.ceil(Math.max(...xs)) + 1, Math.floor(Math.min(...ys)) - 1, Math.ceil(Math.max(...ys)) + 1];
+  const crops = [...new Set(z.plots.map((p) => `${p.kind}|${p.crop}`))];
+  const letter = (p: { kind: string; crop: string }) => String.fromCharCode(65 + crops.indexOf(`${p.kind}|${p.crop}`));
+  return (
+    <figure className={`zone zone--${z.env.toLowerCase()}`}>
+      <figcaption>
+        {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> réglé sur <b>{envFr(z.env)}</b>
+      </figcaption>
+      <svg className="zone-map" viewBox={`${x0} ${y0} ${x1 - x0} ${y1 - y0}`} role="img" aria-label="Schéma de placement">
+        {Array.from({ length: x1 - x0 + 1 }, (_, k) => (
+          <line key={`v${k}`} x1={x0 + k} x2={x0 + k} y1={y0} y2={y1} className="zone-map__grid" />
+        ))}
+        {Array.from({ length: y1 - y0 + 1 }, (_, k) => (
+          <line key={`h${k}`} y1={y0 + k} y2={y0 + k} x1={x0} x2={x1} className="zone-map__grid" />
+        ))}
+        <rect x={c - R} y={c - R} width={2 * R} height={2 * R} fill={ENV_STROKE[z.env]} fillOpacity={0.12} stroke={ENV_STROKE[z.env]} strokeWidth={0.12} strokeDasharray="0.4 0.25" />
+        {z.plots.map((p, k) => (
+          <g key={k}>
+            <rect x={p.x + 0.06} y={p.y + 0.06} width={p.size - 0.12} height={p.size - 0.12} rx={0.25} fill={PLOT_FILL[p.kind]} fillOpacity={0.85} />
+            <text x={p.x + p.size / 2} y={p.y + p.size / 2} className="zone-map__label" fontSize={p.size >= 4 ? 1.6 : 0.95}>
+              {letter(p)}
+            </text>
+          </g>
+        ))}
+        <rect x={0} y={0} width={z.size} height={z.size} fill="#fff" stroke={ENV_STROKE[z.env]} strokeWidth={0.15} />
+        <text x={c} y={c} className="zone-map__device" fontSize={z.size > 1 ? 1.2 : 0.8}>
+          {ENV_ICON[z.env]}
+        </text>
+      </svg>
+      <ul className="zone-legend">
+        {crops.map((k) => {
+          const [kind, crop] = k.split('|');
+          const n = z.plots.filter((p) => `${p.kind}|${p.crop}` === k).length;
+          return (
+            <li key={k}>
+              <span className="zone-legend__key" style={{ background: PLOT_FILL[kind] }}>
+                {letter({ kind, crop })}
+              </span>
+              {n} × <Name id={crop} kind="item" /> <span className="muted">({kind === 'farmland' ? 'Ferme' : kind === 'woodland' ? 'Pépinière' : <Name id={z.plots.find((p) => p.crop === crop)!.facility} kind="facility" />})</span>
+            </li>
+          );
+        })}
+      </ul>
+    </figure>
   );
 }
 
