@@ -26,12 +26,14 @@ npm run build:single  # site en un seul fichier : dist-single/index.html
 
 ## Données
 
-Le wiki officiel et les tier lists sont relus chaque lundi par GitHub Actions (`data-refresh.yml`) : si quelque chose a changé, les données sont mises à jour et le site republié.
+Le wiki officiel, les tier lists et les codes cadeaux sont relus chaque jour par GitHub Actions (`data-refresh.yml`) : si quelque chose a changé, les données sont mises à jour et le site republié.
 
 
 - `data/official/aniimo.json` : wiki officiel (FR + EN), via `npm run data:official`.
 - `data/homeland/aniimax.json` : installations, recettes, coûts de niveau, importés du projet [Aniimax](https://github.com/ae-bii/aniimax) (MIT) via `node scripts/import-aniimax.mjs`.
 - `data/tierlists/*.json` : tier lists de combat publiées (rang seulement, source et date), via `node scripts/fetch-tierlists.mjs`.
+- `data/codes.json` : codes cadeaux actifs et expirés (AniimoTools + Beebom recoupés), via `node scripts/fetch-codes.mjs`.
+- `data/combos.json` : bibliothèque de codes combo proposés par les joueurs.
 - `data/i18n/fr.json` : noms français relevés en jeu. Quand un nom FR manque, le site affiche le nom anglais.
 - `data/verification.json` : faits vérifiés en jeu.
 - `data/profils/` : profils réels servant de cas de test.

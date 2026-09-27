@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useProfile } from './state/profile';
 import { MonLogis } from './pages/MonLogis';
 import { Ouvriers } from './pages/Ouvriers';
-import { PlanPage } from './pages/Plan';
-import { Recruter } from './pages/Recruter';
+import { SolverGate } from './components/SolverGate';
+
+// Les pages de calcul (et le solveur qu'elles utilisent) ne sont chargées qu'à l'ouverture.
+const PlanPage = lazy(() => import('./pages/Plan').then((m) => ({ default: m.PlanPage })));
+const Recruter = lazy(() => import('./pages/Recruter').then((m) => ({ default: m.Recruter })));
 import { TierList } from './pages/TierList';
+import { Equipes } from './pages/Equipes';
+import { Codes } from './pages/Codes';
+import { Combos } from './pages/Combos';
 
 const PAGES = [
   { id: 'logis', label: 'Mon logis', icon: '🏡' },
   { id: 'plan', label: 'Optimiser', icon: '📈' },
   { id: 'recruter', label: 'Recruter', icon: '🎯' },
+  { id: 'combos', label: 'Combos', icon: '🧩' },
   { id: 'tier', label: 'Tier list', icon: '🏆' },
+  { id: 'equipes', label: 'Équipes', icon: '⚔️' },
   { id: 'ouvriers', label: 'Ouvriers', icon: '🐾' },
+  { id: 'codes', label: 'Codes', icon: '🎁' },
 ] as const;
 type PageId = (typeof PAGES)[number]['id'];
 
@@ -43,10 +52,16 @@ export function App() {
       </header>
       <main>
         {page === 'logis' && <MonLogis api={api} />}
-        {page === 'plan' && <PlanPage api={api} />}
-        {page === 'recruter' && <Recruter api={api} />}
+        {(page === 'plan' || page === 'recruter') && (
+          <Suspense fallback={<p className="loading">Chargement…</p>}>
+            <SolverGate>{page === 'plan' ? <PlanPage api={api} /> : <Recruter api={api} />}</SolverGate>
+          </Suspense>
+        )}
         {page === 'tier' && <TierList profile={api.profile} />}
+        {page === 'equipes' && <Equipes api={api} />}
         {page === 'ouvriers' && <Ouvriers profile={api.profile} />}
+        {page === 'codes' && <Codes api={api} />}
+        {page === 'combos' && <Combos rv={api.profile.rv} />}
       </main>
       <footer className="footer">
         Projet de fans non officiel · Aniimo © Pawprint Studio / FunPlus · Images et noms : wiki officiel

@@ -307,7 +307,9 @@ Et deux infos : **ton RV actuel** et tes **Aniimo ouvriers** actuels (on s'en se
 - Un combo regroupe de 2 à 500 éléments sélectionnés en mode Construire ; son **code de 8 caractères** se copie depuis sa fiche et s'importe via « Importer ».
 - Le code **ne fonctionne que sur le serveur où il a été créé**, et un code inconnu répond « Ce code de combo n'existe pas ».
 - Conclusion : c'est un **identifiant stocké sur les serveurs du jeu**, pas une description du placement (8 caractères ne peuvent pas décrire 500 éléments). **AniiGuide ne peut donc pas générer de code** hors du jeu.
-- Piste réaliste : AniiGuide propose le placement optimal (plan visuel) ; le joueur le construit une fois, l'enregistre en combo et partage son code (bibliothèque de codes par serveur et par niveau).
+- Ce qu'AniiGuide fait à la place ✅ :
+  - **Plan des zones climatiques** (onglet Optimiser) : chaque appareil est réglé sur un seul mode (un Radiateur fait Chaud *ou* Brûlant, contrainte entière dans l'optimiseur) ; les cultures couvertes sont rangées par quarts de 4×4 (1 Pépinière ou 4 Fermes par quart, 4 quarts par zone).
+  - **Bibliothèque de codes combo** (onglet Combos, `data/combos.json`) : les joueurs proposent leurs codes (serveur, niveau, contenu) via le formulaire d'issue GitHub « Proposer un code combo ».
 
 Sources : [aniimo.guide (outils de construction)](https://aniimo.guide/en/guides/homeland-building-tools), [aniimo.pro](https://aniimo.pro/homeland-and-housing). ❓ À confirmer avec un vrai code (longueur, caractères).
 

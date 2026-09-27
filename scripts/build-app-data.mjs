@@ -77,3 +77,11 @@ console.log(`src/data/tierlists.gen.json : ${tierlists.length} sources`);
 const profile = await read('data/profils/exemple-rv8.json');
 await writeFile(join(ROOT, 'src/data/exemple-rv8.gen.json'), JSON.stringify(profile) + '\n');
 console.log('src/data/exemple-rv8.gen.json');
+
+const codes = await read('data/codes.json');
+await writeFile(join(ROOT, 'src/data/codes.gen.json'), JSON.stringify(codes) + '\n');
+console.log(`src/data/codes.gen.json : ${codes.active.length} codes actifs`);
+
+const combos = await read('data/combos.json');
+await writeFile(join(ROOT, 'src/data/combos.gen.json'), JSON.stringify(combos) + '\n');
+console.log(`src/data/combos.gen.json : ${combos.combos.length} combos`);
