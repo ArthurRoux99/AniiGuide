@@ -3,7 +3,7 @@
  "url": "https://aniidex.com/tier-list/",
  "note": null,
  "pageDate": "2026-09-25",
- "fetchedAt": "2026-09-27T12:04:01.892Z",
+ "fetchedAt": "2026-09-27T12:13:48.031Z",
  "scale": [
   "S",
   "A",
@@ -29,7 +29,7 @@
    "tier": "S"
   },
   {
-   "id": "en:Somniwing",
+   "id": "030-prismana-form",
    "tier": "S"
   },
   {
@@ -109,7 +109,7 @@
    "tier": "B"
   },
   {
-   "id": "en:Irisalis",
+   "id": "10001-prismana-form",
    "tier": "B"
   },
   {
@@ -366,11 +366,9 @@
   }
  ],
  "unmatched": [
-  "Somniwing (Basic Form) : S",
   "Sparkelf (Basic Form) : S",
   "Soleon (Basic Form) : S",
   "Fennelun (Basic Form) : A",
-  "Irisalis (Basic Form) : B",
   "Hexxin (Basic Form) : C"
  ]
 }

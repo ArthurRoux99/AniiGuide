@@ -24,6 +24,12 @@ const EXTRA_SPECIES = [
 const BASE_NAMES = new Set([...official.map((e) => e.name.en), ...EXTRA_SPECIES]);
 const FORMS = new Set(official.map((e) => e.form));
 const entryFor = new Map(official.map((e) => [`${e.name.en}|${e.form}`, e.id]));
+// Espèces dont le wiki n'a qu'une seule fiche (ex. Somniwing = Vitti, seulement en forme prismana) :
+// le nom seul désigne cette fiche.
+for (const name of new Set(official.map((e) => e.name.en))) {
+  const forms = official.filter((e) => e.name.en === name);
+  if (forms.length === 1 && !entryFor.has(`${name}|Basic Form`)) entryFor.set(`${name}|Basic Form`, forms[0].id);
+}
 
 const decode = (s) =>
   s.replace(/&amp;/g, '&').replace(/&#39;|&#x27;|&rsquo;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)));
@@ -168,6 +174,12 @@ for (const s of SOURCES) {
         if (!entries.some((e) => e.id === id)) entries.push({ id, tier: r.tier });
       }
       if (id.startsWith('en:')) unmatched.push(`${r.base} (${r.form}) : ${r.tier}`);
+    }
+    // Page bloquée ou changée (ex. Game8 refuse les serveurs de GitHub) : on garde l'ancien relevé.
+    const previous = await readFile(join(ROOT, `data/tierlists/${s.id}.json`), 'utf8').then(JSON.parse).catch(() => null);
+    if (previous && entries.length < previous.entries.length * 0.5) {
+      console.warn(`${s.name} : seulement ${entries.length} classés contre ${previous.entries.length} avant — relevé précédent conservé`);
+      continue;
     }
     const out = { source: s.name, url: s.url, note: s.note ?? null, pageDate: date, fetchedAt: new Date().toISOString(), scale: s.scale, entries, unmatched };
     await writeFile(join(ROOT, `data/tierlists/${s.id}.json`), JSON.stringify(out, null, 1) + '\n');

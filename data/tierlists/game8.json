@@ -3,7 +3,7 @@
  "url": "https://game8.co/games/Aniimo/archives/621098",
  "note": null,
  "pageDate": "2026-09-25",
- "fetchedAt": "2026-09-27T12:04:00.842Z",
+ "fetchedAt": "2026-09-27T12:13:46.768Z",
  "scale": [
   "S",
   "A",
@@ -53,7 +53,7 @@
    "tier": "S"
   },
   {
-   "id": "en:Somniwing",
+   "id": "030-prismana-form",
    "tier": "S"
   },
   {
@@ -743,7 +743,6 @@
  ],
  "unmatched": [
   "Helion (Basic Form) : S",
-  "Somniwing (Basic Form) : S",
   "Sparkelf (Basic Form) : S",
   "Hexxin (Basic Form) : A",
   "Hexxin (Mountain Form) : A",
