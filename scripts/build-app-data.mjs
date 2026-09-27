@@ -64,6 +64,16 @@ await writeFile(
 );
 console.log(`src/data/homeland.gen.json : ${homeland.recipes.length} recettes`);
 
+const { readdir } = await import('node:fs/promises');
+const tierFiles = (await readdir(join(ROOT, 'data/tierlists'))).filter((f) => f.endsWith('.json')).sort();
+const tierlists = [];
+for (const f of tierFiles) {
+  const t = await read(`data/tierlists/${f}`);
+  tierlists.push({ id: f.replace(/\.json$/, ''), source: t.source, url: t.url, note: t.note, pageDate: t.pageDate, fetchedAt: t.fetchedAt, scale: t.scale, entries: t.entries });
+}
+await writeFile(join(ROOT, 'src/data/tierlists.gen.json'), JSON.stringify(tierlists) + '\n');
+console.log(`src/data/tierlists.gen.json : ${tierlists.length} sources`);
+
 const profile = await read('data/profils/exemple-rv8.json');
 await writeFile(join(ROOT, 'src/data/exemple-rv8.gen.json'), JSON.stringify(profile) + '\n');
 console.log('src/data/exemple-rv8.gen.json');

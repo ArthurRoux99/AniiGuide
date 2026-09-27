@@ -1,0 +1,46 @@
+name: Mise à jour des données (hebdomadaire)
+
+# Relit le wiki officiel et les tier lists publiées ; si quelque chose a changé, valide les
+# données (tests), les enregistre sur main et relance la publication du site.
+on:
+  schedule:
+    - cron: '17 5 * * 1' # chaque lundi, 5 h 17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/fetch-official-wiki.mjs --delay 300
+      - run: node scripts/fetch-tierlists.mjs
+      - run: npm test
+      - name: Enregistrer si les données ont changé
+        id: commit
+        run: |
+          # Les dates de relevé changent à chaque exécution : on ne compare que le contenu.
+          if git diff --quiet -I '"(fetchedAt|pageDate)"' -- data; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            git checkout -- data
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data
+            git commit -m "Mise à jour hebdomadaire des données (wiki officiel, tier lists)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Republier le site
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run site.yml --ref main

@@ -90,6 +90,13 @@
       "valeur": "Chaque installation affiche la capacité recommandée au-dessus d'elle (ex. Vent, Glace, Feu 2)",
       "statut": "nouveau",
       "date": "2026-09-27"
+    },
+    {
+      "sujet": "Affectation des ouvriers",
+      "valeur": "Les Aniimo ne sont pas attitrés à une installation : ils se déplacent selon les besoins",
+      "statut": "nouveau",
+      "note": "Tranche entre les sources contradictoires",
+      "date": "2026-09-27"
     }
   ]
 }

@@ -1,0 +1,188 @@
+{
+ "source": "OSLink",
+ "url": "https://www.oslink.io/blog/guide/aniimo-tier-list.html",
+ "note": null,
+ "pageDate": null,
+ "fetchedAt": "2026-09-27T12:04:06.540Z",
+ "scale": [
+  "SS",
+  "S",
+  "A",
+  "B"
+ ],
+ "entries": [
+  {
+   "id": "en:Somniwing",
+   "tier": "SS"
+  },
+  {
+   "id": "en:Irisalis",
+   "tier": "SS"
+  },
+  {
+   "id": "063-basic-form",
+   "tier": "SS"
+  },
+  {
+   "id": "008-basic-form",
+   "tier": "SS"
+  },
+  {
+   "id": "046-basic-form",
+   "tier": "SS"
+  },
+  {
+   "id": "99996-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Helion",
+   "tier": "S"
+  },
+  {
+   "id": "015-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "004-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "039-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "10003-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "074-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "072-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "062-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "066-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "006-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "009-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "010-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "018-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "019-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "024-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "027-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "032-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "034-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "035-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "037-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "044-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "067-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "022-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "025-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "029-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "057-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "058-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "050-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Glameep",
+   "tier": "B"
+  },
+  {
+   "id": "en:Gachapus",
+   "tier": "B"
+  },
+  {
+   "id": "en:Malevsera",
+   "tier": "B"
+  },
+  {
+   "id": "069-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Coraliz",
+   "tier": "B"
+  }
+ ],
+ "unmatched": [
+  "Somniwing (Basic Form) : SS",
+  "Irisalis (Basic Form) : SS",
+  "Helion (Basic Form) : S",
+  "Glameep (Basic Form) : B",
+  "Gachapus (Basic Form) : B",
+  "Malevsera (Basic Form) : B",
+  "Coraliz (Basic Form) : B"
+ ]
+}

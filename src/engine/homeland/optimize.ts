@@ -102,8 +102,9 @@ export interface PlanOptions {
   watering: boolean;
   includeUnverified: boolean;
   /**
-   * Un Aniimo attitré par installation travaillée (par défaut) : une cuisine utilisée 5 % du temps
-   * occupe quand même un Aniimo entier. Sinon, les Aniimo passent d'une installation à l'autre.
+   * Un Aniimo attitré par installation travaillée : une cuisine utilisée 5 % du temps occupe alors
+   * un Aniimo entier. Désactivé par défaut : en jeu, les Aniimo passent d'une installation à
+   * l'autre selon les besoins (confirmé par un joueur).
    */
   dedicated?: boolean;
 }
@@ -191,7 +192,7 @@ export function plan(o: PlanOptions): Plan {
   const constraints: Record<string, { min?: number; max?: number; equal?: number }> = {};
   const meta = new Map<string, Omit<PlanRow, 'units' | 'outputPerHour'> & { perUnit: number }>();
   const blockers = new Set<string>();
-  const dedicated = o.dedicated ?? true;
+  const dedicated = o.dedicated ?? false;
   const staffTiers = new Map<string, { facility: string; ability: AbilityId; level: number; bonus: boolean; letter: string | null | undefined }>();
 
   for (const r of RECIPES) {

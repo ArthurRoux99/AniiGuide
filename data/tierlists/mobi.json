@@ -1,0 +1,681 @@
+{
+ "source": "Mobi.gg",
+ "url": "https://mobi.gg/en/tips/aniimo-tier-list/",
+ "note": null,
+ "pageDate": "2026-09-23",
+ "fetchedAt": "2026-09-27T12:04:01.276Z",
+ "scale": [
+  "S+",
+  "S",
+  "A",
+  "B"
+ ],
+ "entries": [
+  {
+   "id": "015-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "en:Coraliz",
+   "tier": "S+"
+  },
+  {
+   "id": "10003-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "en:Stellarys (Umbrabow Form)",
+   "tier": "S+"
+  },
+  {
+   "id": "044-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "99996-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "062-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "en:Scorchhowl (Umbrabow Form)",
+   "tier": "S+"
+  },
+  {
+   "id": "044-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "072-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "en:Thornblade (Umbrabow Form)",
+   "tier": "S+"
+  },
+  {
+   "id": "025-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "006-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "067-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "004-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "079-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "029-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "074-basic-form",
+   "tier": "S+"
+  },
+  {
+   "id": "en:Waleetle (Highland Form)",
+   "tier": "S+"
+  },
+  {
+   "id": "069-prismana-form",
+   "tier": "S+"
+  },
+  {
+   "id": "en:Magmarex (Umbrabow Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Glameep (alternative Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Helion",
+   "tier": "S"
+  },
+  {
+   "id": "10003-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "041-highland-form",
+   "tier": "S"
+  },
+  {
+   "id": "055-thunderstorm-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Glynsera (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Witchin (Umbrabow Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Coraliz (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "079-rainstorm-form",
+   "tier": "S"
+  },
+  {
+   "id": "055-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "062-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "021-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Pomawk (Thunderstorm Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Turbo (Umbrabow Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Irisalis",
+   "tier": "S"
+  },
+  {
+   "id": "046-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "060-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "072-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Pawney (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "003-thunderstorm-form",
+   "tier": "S"
+  },
+  {
+   "id": "035-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "051-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Gracewing (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "029-mountain-woods-form",
+   "tier": "S"
+  },
+  {
+   "id": "055-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Sherro (Umbrabow Form)",
+   "tier": "S"
+  },
+  {
+   "id": "049-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Thornblade (Rainstorm Form)",
+   "tier": "S"
+  },
+  {
+   "id": "006-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "060-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "052-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Pawney (Umbrabow Form)",
+   "tier": "S"
+  },
+  {
+   "id": "015-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "062-mountain-woods-form",
+   "tier": "S"
+  },
+  {
+   "id": "036-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "034-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "081-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "002-mountain-woods-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Thornblade (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "068-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Flutternym (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Turbo (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Turbo (Mountain Woods Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Turbo (Thunderstorm Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Blazen (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "002-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Gachapus",
+   "tier": "S"
+  },
+  {
+   "id": "en:Malevsera",
+   "tier": "S"
+  },
+  {
+   "id": "en:Glacy (Mountain Woods Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Gracewing (Thunderstorm Form)",
+   "tier": "S"
+  },
+  {
+   "id": "041-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "041-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "037-highland-form",
+   "tier": "S"
+  },
+  {
+   "id": "006-rainstorm-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Bouldus (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Ignitis (Mountain Woods Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Piopiota (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "10002-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "005-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "061-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Popapus",
+   "tier": "S"
+  },
+  {
+   "id": "082-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Ignitis (Umbrabow Form)",
+   "tier": "S"
+  },
+  {
+   "id": "en:Panpanta (Highland Form)",
+   "tier": "S"
+  },
+  {
+   "id": "040-highland-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Wavwal",
+   "tier": "S"
+  },
+  {
+   "id": "019-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "008-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Tromber (Mountain Woods Form)",
+   "tier": "A"
+  },
+  {
+   "id": "001-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "001-mountain-woods-form",
+   "tier": "A"
+  },
+  {
+   "id": "011-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Nimbi (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "043-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Fenrier (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "079-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "052-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "003-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "009-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "028-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Hummin (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "040-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Wisptis (Mountain Woods Form)",
+   "tier": "A"
+  },
+  {
+   "id": "en:Susuta (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "008-highland-form",
+   "tier": "A"
+  },
+  {
+   "id": "076-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "080-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "011-highland-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Iris (Thunderstorm Form)",
+   "tier": "A"
+  },
+  {
+   "id": "017-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "046-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "027-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "056-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "042-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Bonesky (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "009-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Cornet (Mountain Woods Form)",
+   "tier": "A"
+  },
+  {
+   "id": "en:Cornet (Umbrabow Form)",
+   "tier": "A"
+  },
+  {
+   "id": "028-mountain-woods-form",
+   "tier": "A"
+  },
+  {
+   "id": "053-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "057-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "045-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "002-highland-form",
+   "tier": "A"
+  },
+  {
+   "id": "011-mountain-woods-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Iris (Mudflat Form)",
+   "tier": "A"
+  },
+  {
+   "id": "en:Irisal (Rainstorm Form)",
+   "tier": "A"
+  },
+  {
+   "id": "037-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Popota (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "021-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Witchin (Highland Form)",
+   "tier": "A"
+  },
+  {
+   "id": "058-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "032-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Chirpi (Mountain Woods Form)",
+   "tier": "B"
+  },
+  {
+   "id": "en:Baleetle (Highland Form)",
+   "tier": "B"
+  },
+  {
+   "id": "007-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Tubster (Mountain Woods Form)",
+   "tier": "B"
+  },
+  {
+   "id": "003-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "003-mountain-woods-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Bolty (Highland Form)",
+   "tier": "B"
+  },
+  {
+   "id": "001-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Flutternym (Thunderstorm Form)",
+   "tier": "B"
+  },
+  {
+   "id": "en:Iris (Rainstorm Form)",
+   "tier": "B"
+  },
+  {
+   "id": "012-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "018-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "033-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "010-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "050-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "054-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "010-basic-form",
+   "tier": "B"
+  }
+ ],
+ "unmatched": [
+  "Coraliz (Basic Form) : S+",
+  "Stellarys (Umbrabow Form) : S+",
+  "Scorchhowl (Umbrabow Form) : S+",
+  "Thornblade (Umbrabow Form) : S+",
+  "Waleetle (Highland Form) : S+",
+  "Magmarex (Umbrabow Form) : S",
+  "Glameep (alternative Form) : S",
+  "Helion (Basic Form) : S",
+  "Glynsera (Highland Form) : S",
+  "Witchin (Umbrabow Form) : S",
+  "Coraliz (Highland Form) : S",
+  "Pomawk (Thunderstorm Form) : S",
+  "Turbo (Umbrabow Form) : S",
+  "Irisalis (Basic Form) : S",
+  "Pawney (Highland Form) : S",
+  "Gracewing (Highland Form) : S",
+  "Sherro (Umbrabow Form) : S",
+  "Thornblade (Rainstorm Form) : S",
+  "Pawney (Umbrabow Form) : S",
+  "Thornblade (Highland Form) : S",
+  "Flutternym (Highland Form) : S",
+  "Turbo (Highland Form) : S",
+  "Turbo (Mountain Woods Form) : S",
+  "Turbo (Thunderstorm Form) : S",
+  "Blazen (Highland Form) : S",
+  "Gachapus (Basic Form) : S",
+  "Malevsera (Basic Form) : S",
+  "Glacy (Mountain Woods Form) : S",
+  "Gracewing (Thunderstorm Form) : S",
+  "Bouldus (Highland Form) : S",
+  "Ignitis (Mountain Woods Form) : S",
+  "Piopiota (Highland Form) : S",
+  "Popapus (Basic Form) : S",
+  "Ignitis (Umbrabow Form) : S",
+  "Panpanta (Highland Form) : S",
+  "Wavwal (Basic Form) : S",
+  "Tromber (Mountain Woods Form) : A",
+  "Nimbi (Highland Form) : A",
+  "Fenrier (Highland Form) : A",
+  "Hummin (Highland Form) : A",
+  "Wisptis (Mountain Woods Form) : A",
+  "Susuta (Highland Form) : A",
+  "Iris (Thunderstorm Form) : A",
+  "Bonesky (Highland Form) : A",
+  "Cornet (Mountain Woods Form) : A",
+  "Cornet (Umbrabow Form) : A",
+  "Iris (Mudflat Form) : A",
+  "Irisal (Rainstorm Form) : A",
+  "Popota (Highland Form) : A",
+  "Witchin (Highland Form) : A",
+  "Chirpi (Mountain Woods Form) : B",
+  "Baleetle (Highland Form) : B",
+  "Tubster (Mountain Woods Form) : B",
+  "Bolty (Highland Form) : B",
+  "Flutternym (Thunderstorm Form) : B",
+  "Iris (Rainstorm Form) : B"
+ ]
+}

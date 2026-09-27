@@ -4,11 +4,13 @@ import { MonLogis } from './pages/MonLogis';
 import { Ouvriers } from './pages/Ouvriers';
 import { PlanPage } from './pages/Plan';
 import { Recruter } from './pages/Recruter';
+import { TierList } from './pages/TierList';
 
 const PAGES = [
   { id: 'logis', label: 'Mon logis', icon: '🏡' },
   { id: 'plan', label: 'Optimiser', icon: '📈' },
   { id: 'recruter', label: 'Recruter', icon: '🎯' },
+  { id: 'tier', label: 'Tier list', icon: '🏆' },
   { id: 'ouvriers', label: 'Ouvriers', icon: '🐾' },
 ] as const;
 type PageId = (typeof PAGES)[number]['id'];
@@ -29,7 +31,7 @@ export function App() {
     <>
       <header className="topbar">
         <span className="brand">
-          Anii<b>Guide</b> <small>Logis</small>
+          Anii<b>Guide</b> 
         </span>
         <nav className="tabs">
           {PAGES.map((p) => (
@@ -43,6 +45,7 @@ export function App() {
         {page === 'logis' && <MonLogis api={api} />}
         {page === 'plan' && <PlanPage api={api} />}
         {page === 'recruter' && <Recruter api={api} />}
+        {page === 'tier' && <TierList profile={api.profile} />}
         {page === 'ouvriers' && <Ouvriers profile={api.profile} />}
       </main>
       <footer className="footer">

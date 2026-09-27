@@ -1,0 +1,376 @@
+{
+ "source": "Aniidex",
+ "url": "https://aniidex.com/tier-list/",
+ "note": null,
+ "pageDate": "2026-09-25",
+ "fetchedAt": "2026-09-27T12:04:01.892Z",
+ "scale": [
+  "S",
+  "A",
+  "B",
+  "C",
+  "D"
+ ],
+ "entries": [
+  {
+   "id": "019-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "029-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "066-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "055-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Somniwing",
+   "tier": "S"
+  },
+  {
+   "id": "10003-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Sparkelf",
+   "tier": "S"
+  },
+  {
+   "id": "en:Soleon",
+   "tier": "S"
+  },
+  {
+   "id": "074-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "025-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "041-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "052-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "069-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "018-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "032-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "027-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Fennelun",
+   "tier": "A"
+  },
+  {
+   "id": "015-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "076-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "048-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "039-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "044-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Irisalis",
+   "tier": "B"
+  },
+  {
+   "id": "065-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "004-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "081-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "063-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "057-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "064-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "067-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "082-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "009-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "054-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "072-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "050-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "040-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "010-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "034-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "062-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "043-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "en:Hexxin",
+   "tier": "C"
+  },
+  {
+   "id": "037-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "056-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "049-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "053-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "033-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "006-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "036-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "022-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "046-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "042-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "071-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "005-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "002-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "079-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "047-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "011-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "024-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "008-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "001-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "10002-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "070-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "068-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "058-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "045-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "020-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "060-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "073-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "035-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "059-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "028-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "023-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "014-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "061-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "013-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "026-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "080-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "077-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "078-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "007-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "017-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "038-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "075-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "031-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "051-basic-form",
+   "tier": "D"
+  }
+ ],
+ "unmatched": [
+  "Somniwing (Basic Form) : S",
+  "Sparkelf (Basic Form) : S",
+  "Soleon (Basic Form) : S",
+  "Fennelun (Basic Form) : A",
+  "Irisalis (Basic Form) : B",
+  "Hexxin (Basic Form) : C"
+ ]
+}

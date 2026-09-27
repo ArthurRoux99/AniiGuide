@@ -1,0 +1,324 @@
+{
+ "source": "Hideout Guides (Lex)",
+ "url": "https://www.hideoutgacha.com/games/aniimo/tier-list",
+ "note": "Établie pendant la bêta, avant la sortie du 16/09.",
+ "pageDate": "2026-09-23",
+ "fetchedAt": "2026-09-27T12:04:02.267Z",
+ "scale": [
+  "S",
+  "A",
+  "B",
+  "C",
+  "D"
+ ],
+ "entries": [
+  {
+   "id": "035-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "063-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "082-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Malevsera",
+   "tier": "S"
+  },
+  {
+   "id": "en:Fennelun",
+   "tier": "S"
+  },
+  {
+   "id": "en:Helion",
+   "tier": "S"
+  },
+  {
+   "id": "en:Irisalis",
+   "tier": "S"
+  },
+  {
+   "id": "99996-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "en:Soleon",
+   "tier": "S"
+  },
+  {
+   "id": "003-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "004-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "006-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "008-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "009-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "015-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "021-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "028-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "029-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Somniwing",
+   "tier": "A"
+  },
+  {
+   "id": "034-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "10002-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "039-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "041-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "10003-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "046-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "060-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "062-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "067-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "069-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "074-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Coraliz",
+   "tier": "A"
+  },
+  {
+   "id": "en:Glameep",
+   "tier": "A"
+  },
+  {
+   "id": "002-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "018-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "022-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "025-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "027-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "032-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "043-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "044-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "050-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "051-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "052-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "057-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "066-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "080-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "081-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Cheekie",
+   "tier": "B"
+  },
+  {
+   "id": "en:Bubbeep",
+   "tier": "B"
+  },
+  {
+   "id": "en:Popapus",
+   "tier": "B"
+  },
+  {
+   "id": "en:Gachapus",
+   "tier": "B"
+  },
+  {
+   "id": "010-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "013-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "014-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "017-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "023-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "058-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "068-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "071-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "072-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "073-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "076-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "079-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "en:Reefish",
+   "tier": "C"
+  },
+  {
+   "id": "en:Wavwal",
+   "tier": "C"
+  },
+  {
+   "id": "011-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "024-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "026-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "040-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "070-basic-form",
+   "tier": "D"
+  }
+ ],
+ "unmatched": [
+  "Malevsera (Basic Form) : S",
+  "Fennelun (Basic Form) : S",
+  "Helion (Basic Form) : S",
+  "Irisalis (Basic Form) : S",
+  "Soleon (Basic Form) : S",
+  "Somniwing (Basic Form) : A",
+  "Coraliz (Basic Form) : A",
+  "Glameep (Basic Form) : A",
+  "Cheekie (Basic Form) : B",
+  "Bubbeep (Basic Form) : B",
+  "Popapus (Basic Form) : B",
+  "Gachapus (Basic Form) : B",
+  "Reefish (Basic Form) : C",
+  "Wavwal (Basic Form) : C"
+ ]
+}
