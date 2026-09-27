@@ -7,22 +7,12 @@ import { idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
+import { fmtDuration } from '../components/format';
 import { climateLayout } from '../engine/homeland/climate';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
 
-export function fmtDuration(hours: number | null): string {
-  if (hours == null || !isFinite(hours)) return '—';
-  if (hours < 1) return `${Math.max(1, Math.round(hours * 60))} min`;
-  if (hours < 48) {
-    const h = Math.floor(hours);
-    const m = Math.round((hours - h) * 60);
-    return m === 60 ? `${h + 1} h` : `${h} h ${String(m).padStart(2, '0')}`;
-  }
-  const total = Math.round(hours);
-  return `${Math.floor(total / 24)} j ${total % 24} h`;
-}
 
 function Name({ id, kind }: { id: string; kind: 'facility' | 'item' }) {
   const n = kind === 'facility' ? facilityName(id) : itemName(id);

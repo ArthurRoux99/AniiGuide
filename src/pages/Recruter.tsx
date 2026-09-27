@@ -4,7 +4,7 @@ import { candidateProfiles, type RecruitInput, type RecruitResult } from '../eng
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityList, Avatar } from '../components/ui';
-import { fmtDuration } from './Plan';
+import { fmtDuration } from '../components/format';
 import { EquipeOptimale } from './EquipeOptimale';
 import RecruitWorker from '../workers/recruit.worker?worker&inline';
 import wasmUrl from 'highs/runtime?url';

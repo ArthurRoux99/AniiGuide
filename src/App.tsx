@@ -1,67 +1,79 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { useProfile } from './state/profile';
+import { lazy, Suspense, useEffect, useRef, useState, type ComponentType } from 'react';
+import { useProfile, type ProfileApi } from './state/profile';
 import { MonLogis } from './pages/MonLogis';
-import { Ouvriers } from './pages/Ouvriers';
 import { SolverGate } from './components/SolverGate';
+import { ImportBanner } from './components/ImportBanner';
 
-// Les pages de calcul (et le solveur qu'elles utilisent) ne sont chargées qu'à l'ouverture.
-const PlanPage = lazy(() => import('./pages/Plan').then((m) => ({ default: m.PlanPage })));
-const Recruter = lazy(() => import('./pages/Recruter').then((m) => ({ default: m.Recruter })));
-import { TierList } from './pages/TierList';
-import { Equipes } from './pages/Equipes';
-import { Codes } from './pages/Codes';
-import { Combos } from './pages/Combos';
+// Seule la page « Mon logis » est dans le fichier principal : les autres (et leurs données) se
+// chargent à l'ouverture, puis restent en cache (hors ligne compris).
+const page = <K extends string>(load: () => Promise<Record<K, ComponentType<{ api: ProfileApi }>>>, name: K) =>
+  lazy(() => load().then((m) => ({ default: m[name] })));
+const Aujourdhui = page(() => import('./pages/Aujourdhui'), 'Aujourdhui');
+const PlanPage = page(() => import('./pages/Plan'), 'PlanPage');
+const Recruter = page(() => import('./pages/Recruter'), 'Recruter');
+const Combos = page(() => import('./pages/Combos'), 'Combos');
+const Ouvriers = page(() => import('./pages/Ouvriers'), 'Ouvriers');
+const Aniidex = page(() => import('./pages/Aniidex'), 'Aniidex');
+const TierList = page(() => import('./pages/TierList'), 'TierList');
+const Equipes = page(() => import('./pages/Equipes'), 'Equipes');
+const Codes = page(() => import('./pages/Codes'), 'Codes');
 
 const PAGES = [
-  { id: 'logis', label: 'Mon logis', icon: '🏡' },
-  { id: 'plan', label: 'Optimiser', icon: '📈' },
-  { id: 'recruter', label: 'Recruter', icon: '🎯' },
-  { id: 'combos', label: 'Combos', icon: '🧩' },
-  { id: 'tier', label: 'Tier list', icon: '🏆' },
-  { id: 'equipes', label: 'Équipes', icon: '⚔️' },
-  { id: 'ouvriers', label: 'Ouvriers', icon: '🐾' },
-  { id: 'codes', label: 'Codes', icon: '🎁' },
+  { id: 'jour', label: "Aujourd'hui", icon: '☀️', Page: Aujourdhui },
+  { id: 'logis', label: 'Mon logis', icon: '🏡', Page: MonLogis },
+  { id: 'plan', label: 'Optimiser', icon: '📈', Page: PlanPage, solver: true },
+  { id: 'recruter', label: 'Recruter', icon: '🎯', Page: Recruter, solver: true },
+  { id: 'combos', label: 'Combos', icon: '🧩', Page: Combos },
+  { id: 'ouvriers', label: 'Ouvriers', icon: '🐾', Page: Ouvriers },
+  { id: 'aniidex', label: 'Aniidex', icon: '📖', Page: Aniidex },
+  { id: 'tier', label: 'Tier list', icon: '🏆', Page: TierList },
+  { id: 'equipes', label: 'Équipes', icon: '⚔️', Page: Equipes },
+  { id: 'codes', label: 'Codes', icon: '🎁', Page: Codes },
 ] as const;
 type PageId = (typeof PAGES)[number]['id'];
 
-const fromHash = (): PageId => (PAGES.some((p) => `#${p.id}` === location.hash) ? (location.hash.slice(1) as PageId) : 'logis');
+/** « #aniidex/005-basic-form » → page « aniidex » ; page par défaut : Aujourd'hui. */
+const fromHash = (): PageId => {
+  const id = location.hash.slice(1).split('/')[0];
+  return PAGES.some((p) => p.id === id) ? (id as PageId) : 'jour';
+};
 
 export function App() {
   const api = useProfile();
-  const [page, setPage] = useState<PageId>(fromHash);
+  const [current, setCurrent] = useState<PageId>(fromHash);
+  const nav = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const onHash = () => setPage(fromHash());
+    const onHash = () => {
+      setCurrent(fromHash());
+      scrollTo({ top: 0 });
+    };
     addEventListener('hashchange', onHash);
     return () => removeEventListener('hashchange', onHash);
   }, []);
+  useEffect(() => {
+    nav.current?.querySelector('.is-active')?.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }, [current]);
 
+  const p = PAGES.find((x) => x.id === current)!;
+  const body = <p.Page api={api} />;
   return (
     <>
       <header className="topbar">
         <span className="brand">
-          Anii<b>Guide</b> 
+          Anii<b>Guide</b>
         </span>
-        <nav className="tabs">
-          {PAGES.map((p) => (
-            <a key={p.id} href={`#${p.id}`} className={page === p.id ? 'is-active' : ''} aria-current={page === p.id ? 'page' : undefined}>
-              <span aria-hidden>{p.icon}</span> {p.label}
+        <nav className="tabs" ref={nav}>
+          {PAGES.map((x) => (
+            <a key={x.id} href={`#${x.id}`} className={current === x.id ? 'is-active' : ''} aria-current={current === x.id ? 'page' : undefined}>
+              <span aria-hidden>{x.icon}</span> {x.label}
             </a>
           ))}
         </nav>
       </header>
       <main>
-        {page === 'logis' && <MonLogis api={api} />}
-        {(page === 'plan' || page === 'recruter') && (
-          <Suspense fallback={<p className="loading">Chargement…</p>}>
-            <SolverGate>{page === 'plan' ? <PlanPage api={api} /> : <Recruter api={api} />}</SolverGate>
-          </Suspense>
-        )}
-        {page === 'tier' && <TierList profile={api.profile} />}
-        {page === 'equipes' && <Equipes api={api} />}
-        {page === 'ouvriers' && <Ouvriers profile={api.profile} />}
-        {page === 'codes' && <Codes api={api} />}
-        {page === 'combos' && <Combos rv={api.profile.rv} />}
+        <ImportBanner api={api} />
+        <Suspense fallback={<p className="loading">Chargement…</p>}>{'solver' in p ? <SolverGate>{body}</SolverGate> : body}</Suspense>
       </main>
       <footer className="footer">
         Projet de fans non officiel · Aniimo © Pawprint Studio / FunPlus · Images et noms : wiki officiel

@@ -1,13 +1,14 @@
 import { useMemo, useState } from 'react';
 import { ANIIMO, OFFICIAL_FETCHED_AT, levelOf, matches } from '../data/aniimo';
 import { ABILITIES, type AbilityId } from '../engine/abilities';
-import type { Profile } from '../state/profile';
+import type { ProfileApi } from '../state/profile';
 import { AbilityList, Avatar } from '../components/ui';
 
 type Forms = 'toutes' | 'sans-prismana' | 'base';
 
 /** Encyclopédie des ouvriers : tous les Aniimo et leurs capacités de logis (wiki officiel). */
-export function Ouvriers({ profile }: { profile: Profile }) {
+export function Ouvriers({ api }: { api: ProfileApi }) {
+  const { profile } = api;
   const [query, setQuery] = useState('');
   const [ability, setAbility] = useState<AbilityId | ''>('');
   const [minLevel, setMinLevel] = useState(1);

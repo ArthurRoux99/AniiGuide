@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import raw from '../data/combos.gen.json';
+import type { ProfileApi } from '../state/profile';
 
 interface Combo {
   code: string;
@@ -14,7 +15,8 @@ const COMBOS = (raw as { combos: Combo[] }).combos;
 const SUBMIT = 'https://github.com/arthurroux99/AniiGuide/issues/new?template=combo.yml';
 
 /** Bibliothèque de codes combo partagés par les joueurs, par serveur et par niveau. */
-export function Combos({ rv }: { rv: number }) {
+export function Combos({ api }: { api: ProfileApi }) {
+  const rv = api.profile.rv;
   const servers = [...new Set(COMBOS.map((c) => c.server))].sort();
   const [server, setServer] = useState('');
   const [upTo, setUpTo] = useState(true);

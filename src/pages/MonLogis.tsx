@@ -7,6 +7,7 @@ import { maxAniimo } from '../engine/rv';
 import { exampleProfile, sanitizeProfile, type ProfileApi, type Worker } from '../state/profile';
 import { AniimoPicker } from '../components/AniimoPicker';
 import { AbilityList, Avatar, Badge, Distribution } from '../components/ui';
+import { SyncCard } from '../components/SyncCard';
 
 export function MonLogis({ api }: { api: ProfileApi }) {
   const { profile } = api;
@@ -149,7 +150,8 @@ export function MonLogis({ api }: { api: ProfileApi }) {
 
       <section className="card">
         <h2>Sauvegarde</h2>
-        <p className="hint">Ton logis est enregistré dans ce navigateur. Exporte-le pour le passer de l'iPhone au PC.</p>
+        <p className="hint">Ton logis est enregistré dans ce navigateur. Pour le passer de l'iPhone au PC (ou l'inverse), utilise la synchro par QR code ou un fichier.</p>
+        <SyncCard profile={profile} />
         <div className="row">
           <button type="button" className="btn" onClick={exportProfile}>
             Exporter

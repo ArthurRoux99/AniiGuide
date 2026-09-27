@@ -56,6 +56,27 @@ const aniimo = official.entries.map((e) => {
 await writeFile(join(ROOT, 'src/data/aniimo.gen.json'), JSON.stringify({ fetchedAt: official.fetchedAt, aniimo }) + '\n');
 console.log(`src/data/aniimo.gen.json : ${aniimo.length} fiches`);
 
+// Fiches détaillées (chargées à l'ouverture de l'Aniidex seulement).
+const skill = (t) => ({ name: t.fr.name, description: t.fr.description, icon: t.fr.icon });
+const tree = (n) => n && { name: n.name, icon: n.icon, stage: n.stage, variant: n.variant, children: n.children.map(tree) };
+const details = Object.fromEntries(
+  official.entries.map((e) => [
+    e.id,
+    {
+      description: e.description.fr,
+      stats: e.stats,
+      weight: e.weight,
+      genders: e.genders,
+      traits: e.traits.map(skill),
+      mobility: e.mobility.map(skill),
+      evolution: tree(e.evolution),
+      video: e.video,
+    },
+  ]),
+);
+await writeFile(join(ROOT, 'src/data/aniimo-details.gen.json'), JSON.stringify(details) + '\n');
+console.log(`src/data/aniimo-details.gen.json : ${Object.keys(details).length} fiches détaillées`);
+
 const homeland = await read('data/homeland/aniimax.json');
 const fr = await read('data/i18n/fr.json');
 await writeFile(
