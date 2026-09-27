@@ -178,3 +178,183 @@ export function unpackReference(key: string, b64: string): Reference {
   }
   return { key, rgb, mask };
 }
+
+/** Segments [début, fin] où `profile` dépasse `threshold`, les trous plus courts que `gap` étant comblés. */
+function runs(profile: Float32Array, threshold: number, gap: number): [number, number][] {
+  const out: [number, number][] = [];
+  let start = -1, last = -1;
+  profile.forEach((v, i) => {
+    if (v < threshold) return;
+    if (start >= 0 && i - last > gap) {
+      out.push([start, last]);
+      start = -1;
+    }
+    if (start < 0) start = i;
+    last = i;
+  });
+  if (start >= 0) out.push([start, last]);
+  return out;
+}
+
+/**
+ * Repère les cases de portrait d'une capture de la liste du logis. Le fond des cases est un
+ * gris-bleu foncé uni sur un panneau clair, rangé en grille : les colonnes de cases ressortent
+ * dans le profil vertical de ces pixels, puis, dans chaque colonne, les rangées dans le profil
+ * horizontal. On garde les colonnes de même largeur, régulièrement espacées.
+ */
+export function detectTiles(img: Rgba): { x: number; y: number; size: number }[] {
+  const step = Math.max(1, Math.round(img.width / 500));
+  const w = Math.floor(img.width / step), h = Math.floor(img.height / step);
+  const on = new Uint8Array(w * h);
+  for (let j = 0; j < h; j++)
+    for (let i = 0; i < w; i++) {
+      const k = (j * step * img.width + i * step) * 4;
+      const r = img.data[k], g = img.data[k + 1], b = img.data[k + 2];
+      on[j * w + i] = r >= 55 && r <= 125 && g >= 55 && g <= 125 && b >= 70 && b <= 145 && b - r >= 6 && b - r <= 40 && Math.abs(r - g) <= 14 ? 1 : 0;
+    }
+
+  // Colonnes : part de pixels « fond de case » par colonne de l'image.
+  const colProfile = new Float32Array(w);
+  for (let i = 0; i < w; i++) {
+    let n = 0;
+    for (let j = 0; j < h; j++) n += on[j * w + i];
+    colProfile[i] = n / h;
+  }
+  // Lissage : l'Aniimo dessiné dans la case creuse le profil par endroits.
+  const win = Math.max(1, Math.round(w * 0.008));
+  const smooth = colProfile.map((_, i) => {
+    let s = 0, n = 0;
+    for (let d = -win; d <= win; d++) if (i + d >= 0 && i + d < w) {
+      s += colProfile[i + d];
+      n++;
+    }
+    return s / n;
+  });
+  const colMax = Math.max(...smooth);
+  let cols = runs(smooth, colMax * 0.2, 1).filter(([a, b]) => b - a >= w * 0.03 && b - a <= w * 0.3);
+  if (cols.length < 2) return [];
+  // Colonnes de la grille : largeur proche de la médiane.
+  const widths = cols.map(([a, b]) => b - a + 1).sort((x, y) => x - y);
+  const size = widths[Math.floor(widths.length / 2)];
+  cols = cols.filter(([a, b]) => Math.abs(b - a + 1 - size) <= size * 0.2);
+  // Une colonne collée à un autre élément de l'écran se retrouve fusionnée avec lui : on la
+  // reconstitue d'après l'espacement régulier de la grille.
+  if (cols.length >= 2) {
+    const gaps = cols.slice(1).map(([a], k) => a - cols[k][0]).sort((x, y) => x - y);
+    const pitch = gaps[Math.floor(gaps.length / 2)];
+    const filled = (a: number) => {
+      let v = 0;
+      for (let i = a; i < a + size; i++) v += colProfile[i] ?? 0;
+      return v / size >= colMax * 0.2;
+    };
+    for (let a = cols[0][0] - pitch; a >= 0 && filled(a); a -= pitch) cols.unshift([a, a + size - 1]);
+    for (let a = cols[cols.length - 1][0] + pitch; a + size <= w && filled(a); a += pitch) cols.push([a, a + size - 1]);
+  }
+
+  // Rangées : communes à toutes les colonnes (profil horizontal sur l'ensemble des colonnes).
+  const inCols = (i: number) => cols.some(([a, b]) => i >= a && i <= b);
+  const colPx = cols.reduce((n, [a, b]) => n + b - a + 1, 0);
+  const rowProfile = new Float32Array(h);
+  for (let j = 0; j < h; j++) {
+    let n = 0;
+    for (let i = 0; i < w; i++) if (on[j * w + i] && inCols(i)) n++;
+    rowProfile[j] = n / colPx;
+  }
+  const bands = runs(rowProfile, 0.03, 2).filter(([t, b]) => b - t + 1 >= size * 0.4);
+  if (!bands.length) return [];
+  // Hauteur d'une rangée entière (portrait + pastilles) ; une rangée coupée par le bord de la
+  // liste est complétée vers le haut (les pastilles sont en bas).
+  const full = Math.max(...bands.map(([t, b]) => b - t + 1));
+  const tiles: { x: number; y: number; size: number }[] = [];
+  for (const [top, bottom] of bands) {
+    const cy = bottom - full + 1 + size * 0.5;
+    if (cy < size * 0.2) continue; // en-tête coupé, pas une rangée de la liste
+    const row: { x: number; y: number; size: number }[] = [];
+    for (const [a, b] of cols) {
+      // Case vide ou case sélectionnée (fond blanc) : pas de fond de case sous le portrait.
+      let n = 0, tot = 0;
+      for (let j = Math.max(top, Math.round(cy - size / 2)); j <= Math.min(bottom, Math.round(cy + size / 2)); j++)
+        for (let i = a; i <= b; i++) {
+          n += on[j * w + i];
+          tot++;
+        }
+      if (!tot || n / tot < 0.08) continue;
+      row.push({ x: ((a + b + 1) / 2) * step, y: cy * step, size: size * step });
+    }
+    // Une vraie rangée de la liste occupe plusieurs colonnes (sinon : un bouton, un en-tête…).
+    if (row.length >= Math.min(2, cols.length)) tiles.push(...row);
+  }
+  return tiles.sort((p, q) => p.y - q.y || p.x - q.x);
+}
+
+/**
+ * Couleur des pastilles de capacités sous chaque portrait (relevée sur l'en-tête « Distribution
+ * des capacités » du jeu).
+ */
+export const BADGE_COLORS: Record<string, [number, number, number]> = {
+  fire: [200, 106, 94],
+  grass: [92, 160, 101],
+  water: [68, 142, 237],
+  earth: [181, 163, 117],
+  lightning: [218, 193, 74],
+  ice: [120, 204, 230],
+  wind: [123, 196, 177],
+  dark: [132, 101, 168],
+  light: [215, 171, 98],
+  hauling: [109, 133, 197],
+  artisanship: [134, 177, 97],
+  leisure: [220, 126, 150],
+  perfumery: [167, 129, 206],
+};
+
+/**
+ * Capacités lues sur les pastilles sous un portrait (case centrée en x, y, de côté size) :
+ * chaque pixel coloré est rattaché à la couleur de pastille la plus proche ; on garde les
+ * couleurs assez présentes.
+ */
+export function readBadges(img: Rgba, x: number, y: number, size: number): string[] {
+  const entries = Object.entries(BADGE_COLORS);
+  const counts = new Map<string, number>();
+  const y0 = Math.round(y + size * 0.36), y1 = Math.round(y + size * 0.68);
+  const x0 = Math.round(x - size * 0.45), x1 = Math.round(x + size * 0.45);
+  const stride = Math.max(1, Math.round(size / 80));
+  for (let j = Math.max(0, y0); j < Math.min(img.height, y1); j += stride)
+    for (let i = Math.max(0, x0); i < Math.min(img.width, x1); i += stride) {
+      const k = (j * img.width + i) * 4;
+      const r = img.data[k], g = img.data[k + 1], b = img.data[k + 2];
+      if (Math.max(r, g, b) - Math.min(r, g, b) < 40) continue; // gris, blanc (chiffres), fond
+      let best = '', bd = Infinity;
+      for (const [id, [cr, cg, cb]] of entries) {
+        const d = (r - cr) ** 2 + (g - cg) ** 2 + (b - cb) ** 2;
+        if (d < bd) {
+          bd = d;
+          best = id;
+        }
+      }
+      if (bd < 38 ** 2) counts.set(best, (counts.get(best) ?? 0) + 1);
+    }
+  const max = Math.max(0, ...counts.values());
+  const minPx = ((x1 - x0) * (y1 - y0)) / stride ** 2 * 0.02;
+  return [...counts].filter(([, n]) => n >= max * 0.3 && n >= minPx).sort((a, b) => b[1] - a[1]).map(([id]) => id);
+}
+
+/**
+ * Reclasse les candidats avec les pastilles lues : chaque capacité en trop ou en moins par rapport
+ * à l'Aniimo candidat coûte `penalty` (les scores de portrait vont d'environ 0,1 à 1).
+ */
+export function rankWithBadges(
+  candidates: { key: string; score: number }[],
+  badges: readonly string[],
+  abilitiesOf: (key: string) => readonly string[],
+  penalty = 0.5,
+): { key: string; score: number }[] {
+  if (!badges.length) return candidates;
+  const seen = new Set(badges);
+  return candidates
+    .map((c) => {
+      const mine = abilitiesOf(c.key);
+      const diff = mine.filter((a) => !seen.has(a)).length + badges.filter((a) => !mine.includes(a)).length;
+      return { key: c.key, score: c.score + penalty * diff };
+    })
+    .sort((a, b) => a.score - b.score);
+}
