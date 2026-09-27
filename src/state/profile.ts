@@ -21,12 +21,16 @@ export interface Profile {
   shinies: number;
   /** Matériaux du prochain niveau de Camping-car déjà en stock (identifiant d'objet → quantité). */
   stock: Record<string, number>;
+  /** Aniimo possédés pour le combat (hors ouvriers du logis). */
+  collection: string[];
+  /** Codes cadeaux déjà utilisés (en minuscules). */
+  usedCodes: string[];
   updatedAt: string;
 }
 
 const KEY = 'aniiguide.profile.v1';
 
-export const emptyProfile = (): Profile => ({ version: 1, rv: 1, coins: null, workers: [], shinies: 0, stock: {}, updatedAt: new Date().toISOString() });
+export const emptyProfile = (): Profile => ({ version: 1, rv: 1, coins: null, workers: [], shinies: 0, stock: {}, collection: [], usedCodes: [], updatedAt: new Date().toISOString() });
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
@@ -37,6 +41,8 @@ export function exampleProfile(): Profile {
     coins: example.pieces,
     shinies: example.eclatants,
     stock: { ...example.stock },
+    collection: [],
+    usedCodes: [],
     workers: example.ouvriers.map((o) => ({ uid: uid(), aniimoId: o.aniimo, personality: o.personnalite })),
     updatedAt: new Date().toISOString(),
   };
@@ -52,6 +58,8 @@ export function sanitizeProfile(input: unknown): Profile {
     coins: p.coins == null ? null : Number(p.coins) || 0,
     shinies: Math.max(0, Number(p.shinies) || 0),
     stock: Object.fromEntries(Object.entries(p.stock ?? {}).map(([k, v]) => [k, Math.max(0, Number(v) || 0)])),
+    collection: Array.isArray(p.collection) ? [...new Set(p.collection.map(String).filter((id) => ANIIMO_BY_ID.has(id)))] : [],
+    usedCodes: Array.isArray(p.usedCodes) ? [...new Set(p.usedCodes.map((c) => String(c).toLowerCase()))] : [],
     workers: p.workers
       .filter((w) => w && ANIIMO_BY_ID.has(String(w.aniimoId)))
       .map((w) => ({ uid: String(w.uid || uid()), aniimoId: String(w.aniimoId), personality: w.personality ? parsePersonality(String(w.personality)) : null })),
@@ -87,6 +95,13 @@ export function useProfile() {
     setRv: (rv: number) => update((p) => ({ ...p, rv: Math.min(20, Math.max(1, rv)) })),
     setCoins: (n: number) => update((p) => ({ ...p, coins: Math.max(0, n) })),
     setStock: (item: string, n: number) => update((p) => ({ ...p, stock: { ...p.stock, [item]: Math.max(0, n) } })),
+    addToCollection: (id: string) => update((p) => ({ ...p, collection: p.collection.includes(id) ? p.collection : [...p.collection, id] })),
+    removeFromCollection: (id: string) => update((p) => ({ ...p, collection: p.collection.filter((x) => x !== id) })),
+    toggleCode: (code: string) =>
+      update((p) => {
+        const c = code.toLowerCase();
+        return { ...p, usedCodes: p.usedCodes.includes(c) ? p.usedCodes.filter((x) => x !== c) : [...p.usedCodes, c] };
+      }),
     setShinies: (n: number) => update((p) => ({ ...p, shinies: Math.max(0, n) })),
     addWorker: (aniimoId: string) => update((p) => ({ ...p, workers: [...p.workers, { uid: uid(), aniimoId, personality: null }] })),
     removeWorker: (id: string) => update((p) => ({ ...p, workers: p.workers.filter((w) => w.uid !== id) })),

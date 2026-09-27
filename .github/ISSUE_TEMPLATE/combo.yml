@@ -1,0 +1,51 @@
+name: Proposer un code combo
+description: Partager un placement du logis (code combo de 8 caractères) pour la bibliothèque d'AniiGuide.
+title: "Combo : "
+labels: [combo]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci ! En jeu : mode Construire, sélectionne les éléments, enregistre-les en combo, puis copie le code depuis sa fiche.
+        Le code ne marche que sur **ton serveur** : indique-le bien.
+  - type: input
+    id: code
+    attributes:
+      label: Code combo
+      description: 8 caractères, tel qu'affiché en jeu.
+      placeholder: AB12CD34
+    validations:
+      required: true
+  - type: dropdown
+    id: server
+    attributes:
+      label: Serveur
+      options:
+        - Europe
+        - Amérique
+        - Asie
+        - Autre (préciser dans la description)
+    validations:
+      required: true
+  - type: input
+    id: rv
+    attributes:
+      label: Niveau de Camping-car
+      description: Le niveau à partir duquel toutes les installations du combo sont disponibles.
+      placeholder: "9"
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Titre
+      placeholder: Champs de lavande sous Lampe solaire
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Ce que contient le combo
+      description: Installations, cultures, appareils climatiques, taille… Une capture est la bienvenue.
+    validations:
+      required: true

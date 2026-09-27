@@ -1,6 +1,6 @@
 import { solveLP } from '../lp';
 import type { AbilityId } from '../abilities';
-import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Recipe } from '../../data/homeland';
+import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Environment, type Recipe } from '../../data/homeland';
 import { uncoveredFactor, wateredSeconds, workSeconds } from './speed';
 
 // Optimiseur de production du Logis.
@@ -135,15 +135,17 @@ export interface Plan {
   facilityUse: { facility: string; used: number; count: number }[];
   workersUsed: Partial<Record<AbilityId, number>>;
   blockers: string[];
+  /** Appareils climatiques à régler : mode, zones utilisées, remplissage (en zones). */
+  climate: { device: string; env: Environment; zones: number; fill: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
   /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
   staffing?: { facility: string; ability: AbilityId; level: number; bonus: boolean; count: number }[];
 }
 
-const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
+export const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
 /** Emplacements couverts par un bâtiment climatique (zone ≈ 9×9 cases, à confirmer en jeu). */
-const COVER = (facility: string) => {
+export const COVER = (facility: string) => {
   const side = { farmland: 2, woodland: 4 }[facility] ?? 5;
   return Math.floor(9 / side) ** 2;
 };
@@ -244,7 +246,7 @@ export function plan(o: PlanOptions): Plan {
         col.coins = -r.seedCost * cycles;
         col.profit = -r.seedCost * cycles;
       }
-      if (v.covered && r.environment) col[`env:${ENV_BUILDING[r.environment]}`] = 1 / COVER(r.facility);
+      if (v.covered && r.environment) col[`env:${r.environment}`] = 1 / COVER(r.facility);
       for (const j of jobs) {
         const busy = j.workload / seconds; // Aniimo occupés en moyenne par exemplaire
         col[`ab:${j.ability}:1`] = (col[`ab:${j.ability}:1`] ?? 0) + busy;
@@ -277,8 +279,17 @@ export function plan(o: PlanOptions): Plan {
 
   // Contraintes : installations, climat, ouvriers, bilans.
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
-  for (const b of ['heat-furnace', 'cooling-unit', 'sunlamp']) constraints[`env:${b}`] = { max: o.setup.facilities[b]?.count ?? 0 };
   const ints: Record<string, 1> = {};
+  // Climat : chaque appareil est réglé sur un seul mode (un Radiateur fait Chaud OU Brûlant) ;
+  // mode:appareil:climat = appareils réglés ainsi (entier), chacun couvrant une zone.
+  for (const [env, b] of Object.entries(ENV_BUILDING)) {
+    const count = o.setup.facilities[b]?.count ?? 0;
+    constraints[`env:${env}`] = { max: 0 };
+    if (count <= 0) continue;
+    constraints[`dev:${b}`] = { max: count };
+    variables[`mode:${b}:${env}`] = { [`env:${env}`]: -1, [`dev:${b}`]: 1 };
+    ints[`mode:${b}:${env}`] = 1;
+  }
   // Aniimo postés (nombre entier par installation et par niveau) : ils occupent un ouvrier entier.
   for (const [st, t] of staffTiers) {
     const col: Record<string, number> = { [st]: -1, [`staff:${t.facility}`]: 1, workers: 1 };
@@ -409,18 +420,23 @@ export function plan(o: PlanOptions): Plan {
     for (const r of rows) if (r.recipe.ability && r.recipe.kind !== 'grower') workersUsed[r.recipe.ability] = (workersUsed[r.recipe.ability] ?? 0) + r.units;
   }
 
+  const climate = Object.entries(ENV_BUILDING).flatMap(([env, device]) => {
+    const used = rows.filter((r) => r.covered && r.recipe.environment === env).reduce((n, r) => n + r.units / COVER(r.recipe.facility), 0);
+    return used > 1e-4 ? [{ device, env: env as Environment, zones: Math.ceil(used - 1e-6), fill: used }] : [];
+  });
+
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], team: teamOut, staffing: dedicated ? staffing : undefined };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, team: teamOut, staffing: dedicated ? staffing : undefined };
 }
 
 function emptyPlan(target: Plan['target'], remaining: Plan['remaining'], blockers: string[], o: PlanOptions): Plan {
   return {
     feasible: false, hours: null, coinsPerHour: 0, rows: [], sales: [], stockPerHour: {}, target, remaining,
     facilityUse: Object.entries(o.setup.facilities).filter(([, f]) => f.count > 0).map(([id, f]) => ({ facility: id, count: f.count, used: 0 })),
-    workersUsed: {}, blockers,
+    workersUsed: {}, blockers, climate: [],
   };
 }
 

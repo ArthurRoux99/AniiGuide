@@ -1,10 +1,10 @@
-name: Mise à jour des données (hebdomadaire)
+name: Mise à jour des données (quotidienne)
 
-# Relit le wiki officiel et les tier lists publiées ; si quelque chose a changé, valide les
+# Relit le wiki officiel, les tier lists et les codes cadeaux publiés ; si quelque chose a changé, valide les
 # données (tests), les enregistre sur main et relance la publication du site.
 on:
   schedule:
-    - cron: '17 5 * * 1' # chaque lundi, 5 h 17 UTC
+    - cron: '17 5 * * *' # chaque jour, 5 h 17 UTC (les codes cadeaux vont et viennent vite)
   workflow_dispatch:
 
 permissions:
@@ -23,6 +23,7 @@ jobs:
       - run: npm ci
       - run: node scripts/fetch-official-wiki.mjs --delay 300
       - run: node scripts/fetch-tierlists.mjs
+      - run: node scripts/fetch-codes.mjs
       - run: npm test
       - name: Enregistrer si les données ont changé
         id: commit
@@ -35,7 +36,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data
-            git commit -m "Mise à jour hebdomadaire des données (wiki officiel, tier lists)"
+            git commit -m "Mise à jour des données (wiki officiel, tier lists, codes)"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi

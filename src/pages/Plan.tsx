@@ -7,6 +7,7 @@ import { idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
+import { climateLayout } from '../engine/homeland/climate';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -274,6 +275,8 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
         )}
       </section>
 
+      {result.climate.length > 0 && <ClimatePlan result={result} whole={whole} />}
+
       <section className="card">
         <h2>À vendre</h2>
         <ul className="sales">
@@ -287,6 +290,64 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
         </ul>
       </section>
     </>
+  );
+}
+
+const ENV_ICON: Record<string, string> = { Warm: '🌤️', Scorching: '🔥', Cool: '🍃', Freeze: '❄️', Adequate: '💡' };
+
+/** Plan des zones climatiques : où poser les cultures couvertes autour de chaque appareil. */
+function ClimatePlan({ result, whole }: { result: PlanResult; whole: Map<PlanRow, number> }) {
+  const layout = useMemo(() => climateLayout(result, result.rows, whole), [result, whole]);
+  return (
+    <section className="card">
+      <h2>Zones climatiques</h2>
+      <p className="hint">
+        Règle chaque appareil sur le climat indiqué et pose ces parcelles dans sa zone (environ 9×9 cases autour de lui). Une zone accueille 4
+        Pépinières, ou 16 Fermes, ou un mélange : chaque carré ci-dessous vaut une Pépinière ou 4 Fermes. Une fois le tout posé, enregistre-le
+        en combo en jeu pour le retrouver ou le partager.
+      </p>
+      <div className="zones">
+        {layout.zones.map((z, i) => (
+          <figure key={i} className={`zone zone--${z.env.toLowerCase()}`}>
+            <figcaption>
+              {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> · <b>{envFr(z.env)}</b>
+            </figcaption>
+            <div className="zone__grid">
+              {z.quarters.map((q, k) =>
+                !q ? (
+                  <div key={k} className="zone__q zone__q--free">
+                    libre
+                  </div>
+                ) : q.kind === 'woodland' ? (
+                  <div key={k} className="zone__q zone__q--wood" title="Pépinière">
+                    🌳 <Name id={q.crop} kind="item" />
+                  </div>
+                ) : (
+                  <div key={k} className="zone__q zone__q--farms">
+                    {q.crops.map((c, j) => (
+                      <span key={j} className={c ? 'zone__farm' : 'zone__farm zone__farm--free'} title={c ? 'Ferme' : 'libre'}>
+                        {c ? <Name id={c} kind="item" /> : ''}
+                      </span>
+                    ))}
+                  </div>
+                ),
+              )}
+            </div>
+          </figure>
+        ))}
+      </div>
+      {layout.overflow.length > 0 && (
+        <p className="hint">
+          Arrondi des parcelles : {layout.overflow.map((o, i) => (
+            <span key={i}>
+              {i > 0 && ', '}
+              {o.count} × <Name id={o.crop} kind="item" />
+            </span>
+          ))}{' '}
+          ne tiennent pas dans les zones : pose-les juste au bord, elles pousseront un peu moins vite.
+        </p>
+      )}
+    </section>
   );
 }
 
