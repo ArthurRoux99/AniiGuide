@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useMemo, useRef, useState } from 'react';
 import { ANIIMO, ANIIMO_BY_ID, fullName } from '../data/aniimo';
 import { ABILITY_BY_ID, abilityDistribution, type AbilityId } from '../engine/abilities';
 import { parsePersonality } from '../engine/personality';
@@ -9,9 +9,12 @@ import { AniimoPicker } from '../components/AniimoPicker';
 import { AbilityList, Avatar, Badge, Distribution } from '../components/ui';
 import { SyncCard } from '../components/SyncCard';
 
+const CaptureImport = lazy(() => import('../components/CaptureImport').then((m) => ({ default: m.CaptureImport })));
+
 export function MonLogis({ api }: { api: ProfileApi }) {
   const { profile } = api;
   const [picking, setPicking] = useState(false);
+  const [capture, setCapture] = useState(false);
   const [filter, setFilter] = useState<AbilityId | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -90,9 +93,14 @@ export function MonLogis({ api }: { api: ProfileApi }) {
           <h2>
             Mes ouvriers <small>({profile.workers.length})</small>
           </h2>
-          <button type="button" className="btn btn--primary" onClick={() => setPicking(true)}>
-            + Ajouter
-          </button>
+          <div className="row">
+            <button type="button" className="btn" onClick={() => setCapture(true)}>
+              📸 Depuis une capture
+            </button>
+            <button type="button" className="btn btn--primary" onClick={() => setPicking(true)}>
+              + Ajouter
+            </button>
+          </div>
         </div>
         {missingPersonality > 0 && profile.workers.length > 0 && (
           <p className="hint">
@@ -162,6 +170,12 @@ export function MonLogis({ api }: { api: ProfileApi }) {
           <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={(e) => e.target.files?.[0] && importProfile(e.target.files[0])} />
         </div>
       </section>
+
+      {capture && (
+        <Suspense fallback={null}>
+          <CaptureImport api={api} onClose={() => setCapture(false)} />
+        </Suspense>
+      )}
 
       {picking && (
         <AniimoPicker

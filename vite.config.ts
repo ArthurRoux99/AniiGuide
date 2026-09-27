@@ -23,6 +23,7 @@ function serviceWorker(): Plugin {
 // directement dans le navigateur, sans serveur.
 export default defineConfig(({ mode }) => ({
   base: './',
+  assetsInclude: ['**/*.bin'],
   plugins: mode === 'single' ? [react(), viteSingleFile()] : [react(), serviceWorker()],
   build: mode === 'single' ? { outDir: 'dist-single', copyPublicDir: false } : {},
 }));

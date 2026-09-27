@@ -1331,3 +1331,35 @@ summary {
   margin-top: 3px;
   flex: none;
 }
+
+/* Import par capture */
+.modal__panel--wide {
+  width: min(1000px, 100%);
+  overflow-y: auto;
+}
+.capture {
+  overflow: auto;
+  margin: 8px 0;
+}
+.capture--empty {
+  display: none;
+}
+.capture__img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+.capture__size input {
+  width: 100%;
+}
+.capture__pick {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+label.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

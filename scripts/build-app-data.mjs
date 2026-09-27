@@ -2,7 +2,7 @@
 // Génère les données allégées utilisées par l'application (src/data/*.gen.json)
 // à partir des données brutes de data/. À relancer après chaque mise à jour des données.
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { copyFile, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -106,3 +106,8 @@ console.log(`src/data/codes.gen.json : ${codes.active.length} codes actifs`);
 const combos = await read('data/combos.json');
 await writeFile(join(ROOT, 'src/data/combos.gen.json'), JSON.stringify(combos) + '\n');
 console.log(`src/data/combos.gen.json : ${combos.combos.length} combos`);
+
+// Références de reconnaissance des portraits (générées par scripts/build-portraits.mjs).
+await copyFile(join(ROOT, 'data/portraits.bin'), join(ROOT, 'src/data/portraits.gen.bin'));
+await copyFile(join(ROOT, 'data/portraits.json'), join(ROOT, 'src/data/portraits.gen.json'));
+console.log('src/data/portraits.gen.bin');
