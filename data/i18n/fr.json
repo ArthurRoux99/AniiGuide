@@ -1,7 +1,16 @@
 {
   "_doc": "Noms français relevés dans le jeu (captures d'écran). Clé = identifiant interne AniiGuide. Seuls les noms vus en jeu figurent ici ; les autres restent à relever.",
   "_releves": [
-    { "date": "2026-09-27", "plateforme": "iOS", "captures": "Dépôt, mode Modifier, Camping-car, liste des Aniimo du logis, Moulin-carrousel, Sélectionner un produit, menu de construction" }
+    {
+      "date": "2026-09-27",
+      "plateforme": "iOS",
+      "captures": "Dépôt, mode Modifier, Camping-car, liste des Aniimo du logis, Moulin-carrousel, Sélectionner un produit, menu de construction"
+    },
+    {
+      "date": "2026-09-27",
+      "plateforme": "iOS",
+      "captures": "mode Construire (décorations), zone de construction de logis"
+    }
   ],
   "termes": {
     "homeland": "Logis",
@@ -30,7 +39,14 @@
     "recommendationsFollowed": "Recommandations suivies",
     "unlocked": "Déverrouillé(es)",
     "lockedAccess": "Accès verrouillé",
-    "electricModule": "Module électrique"
+    "electricModule": "Module électrique",
+    "budTicket": "Ticket bourgeon",
+    "shinyAniimo": "Aniimo éclatant",
+    "appearanceDistribution": "Distribution des apparences",
+    "build": "Construire",
+    "simulationEnvironment": "Environnement de simulation",
+    "owned": "En possession",
+    "surface": "Surface"
   },
   "categoriesConstruction": {
     "functional": "Équipements fonctionnels",

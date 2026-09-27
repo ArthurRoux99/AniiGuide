@@ -1,16 +1,95 @@
 {
   "_doc": "Faits vérifiés en jeu. statut : confirme = conforme aux données communautaires ; corrige = la donnée communautaire était fausse ; nouveau = absent des sources.",
   "verifications": [
-    { "sujet": "Passage au Camping-car niv. 9", "valeur": "260 000 pièces + 1 520 Bois brut (?) + 800 Minerai tamisé (?), durée 3 h", "statut": "confirme", "note": "Durée d'amélioration (3 h) absente des sources communautaires", "date": "2026-09-27" },
-    { "sujet": "Conditions du Camping-car niv. 9", "valeur": "18 fermes, 9 pépinières, 2 puits placés", "statut": "confirme", "date": "2026-09-27" },
-    { "sujet": "Nombre max d'Aniimo au logis", "valeur": "RV 8 = 24, RV 9 = 26", "statut": "confirme", "note": "Tranche la contradiction : le guide annonçant 30 au RV 9 est faux", "date": "2026-09-27" },
-    { "sujet": "Ordre et icônes des 13 capacités de logis", "valeur": "Feu, Plante, Eau, Terre, Foudre, Glace, Vent, Ténèbres, Lumière, Transport, Artisanat (ciseaux), Loisir (moulinet), Parfumerie (flacon)", "statut": "confirme", "note": "Correspond exactement aux codes home-1000…1008 et home-1100…1103 du wiki officiel", "date": "2026-09-27" },
-    { "sujet": "Moulin-carrousel : Riz décortiqué", "valeur": "Recommandé : Vent niv. 1 + personnalité T", "statut": "confirme", "date": "2026-09-27" },
-    { "sujet": "Moulin-carrousel : paliers de recettes", "valeur": "niv. 3 au Camping-car 9, niv. 4 au Camping-car 13 ; niv. 1 : 1 recette, niv. 2 : 2, niv. 3 : 1, niv. 4 : 2", "statut": "confirme", "date": "2026-09-27" },
-    { "sujet": "Machine à Aniipod niv. 2 : Aniipod pro", "valeur": "10 matériaux → 1 Aniipod pro, charge de travail 2 250, taux de capture ×1,5", "statut": "confirme", "date": "2026-09-27" },
-    { "sujet": "Menu de construction", "valeur": "Production de matériaux : 9 (dont 3 verrouillées aux RV 10, 12, 18) ; Traitement : 12 ; Production d'objets : 2 ; Auxiliaires : 6 (dont Module électrique ×2 et une au RV 9) ; Équipements d'Aniimo : 1 (320 pièces)", "statut": "nouveau", "note": "Les sources ne listaient que 3 équipements auxiliaires", "date": "2026-09-27" },
-    { "sujet": "Mode électrique", "valeur": "Palier avec icône éclair au Camping-car niv. 12", "statut": "confirme", "date": "2026-09-27" },
-    { "sujet": "Stock", "valeur": "Chaque objet a un stock Inventaire et un stock Foyer, transférés via le Dépôt", "statut": "nouveau", "date": "2026-09-27" },
-    { "sujet": "Habitabilité", "valeur": "Valeur par Aniimo (100 observé)", "statut": "nouveau", "note": "Effet à comprendre", "date": "2026-09-27" }
+    {
+      "sujet": "Passage au Camping-car niv. 9",
+      "valeur": "260 000 pièces + 1 520 Bois brut (?) + 800 Minerai tamisé (?), durée 3 h",
+      "statut": "confirme",
+      "note": "Durée d'amélioration (3 h) absente des sources communautaires",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Conditions du Camping-car niv. 9",
+      "valeur": "18 fermes, 9 pépinières, 2 puits placés",
+      "statut": "confirme",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Nombre max d'Aniimo au logis",
+      "valeur": "RV 8 = 24, RV 9 = 26",
+      "statut": "confirme",
+      "note": "Tranche la contradiction : le guide annonçant 30 au RV 9 est faux",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Ordre et icônes des 13 capacités de logis",
+      "valeur": "Feu, Plante, Eau, Terre, Foudre, Glace, Vent, Ténèbres, Lumière, Transport, Artisanat (ciseaux), Loisir (moulinet), Parfumerie (flacon)",
+      "statut": "confirme",
+      "note": "Correspond exactement aux codes home-1000…1008 et home-1100…1103 du wiki officiel",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Moulin-carrousel : Riz décortiqué",
+      "valeur": "Recommandé : Vent niv. 1 + personnalité T",
+      "statut": "confirme",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Moulin-carrousel : paliers de recettes",
+      "valeur": "niv. 3 au Camping-car 9, niv. 4 au Camping-car 13 ; niv. 1 : 1 recette, niv. 2 : 2, niv. 3 : 1, niv. 4 : 2",
+      "statut": "confirme",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Machine à Aniipod niv. 2 : Aniipod pro",
+      "valeur": "10 matériaux → 1 Aniipod pro, charge de travail 2 250, taux de capture ×1,5",
+      "statut": "confirme",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Menu de construction",
+      "valeur": "Production de matériaux : 9 (dont 3 verrouillées aux RV 10, 12, 18) ; Traitement : 12 ; Production d'objets : 2 ; Auxiliaires : 6 (dont Module électrique ×2 et une au RV 9) ; Équipements d'Aniimo : 1 (320 pièces)",
+      "statut": "nouveau",
+      "note": "Les sources ne listaient que 3 équipements auxiliaires",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Mode électrique",
+      "valeur": "Palier avec icône éclair au Camping-car niv. 12",
+      "statut": "confirme",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Stock",
+      "valeur": "Chaque objet a un stock Inventaire et un stock Foyer, transférés via le Dépôt",
+      "statut": "nouveau",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Habitabilité",
+      "valeur": "Valeur par Aniimo (100 observé)",
+      "statut": "nouveau",
+      "note": "Effet à comprendre",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Zone de construction de logis",
+      "valeur": "Réservée aux Aniimo éclatants ; ils produisent des Tickets bourgeon (360/j avec 2 éclatants) servant à acheter des décorations cosmétiques, sans effet sur la production",
+      "statut": "nouveau",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Places d'Aniimo",
+      "valeur": "Les éclatants de la zone de construction comptent dans le plafond (22 production + 2 construction = 24/24)",
+      "statut": "nouveau",
+      "note": "Donc chaque éclatant placé coûte une place d'ouvrier",
+      "date": "2026-09-27"
+    },
+    {
+      "sujet": "Mode Construire",
+      "valeur": "Chaque installation affiche la capacité recommandée au-dessus d'elle (ex. Vent, Glace, Feu 2)",
+      "statut": "nouveau",
+      "date": "2026-09-27"
+    }
   ]
 }

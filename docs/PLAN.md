@@ -83,7 +83,7 @@ Relevé dans les outils existants — **chaque point doit être confirmé en jeu
 
 | Sujet | Choix | Pourquoi |
 |---|---|---|
-| Framework | **Astro + îlots React + TypeScript** | Guides en Markdown rapides et bien référencés (SEO), outils interactifs en React |
+| Framework | **Vite + React + TypeScript** (choisi au démarrage) | Application rapide et installable ; les guides pourront être ajoutés en Markdown |
 | Style | Tailwind CSS | Rapide, cohérent, mode sombre facile |
 | État local | Zustand + localStorage | Collection et plans de Foyer sans compte ni serveur |
 | Carte | Leaflet (tuiles maison) | Standard, léger |

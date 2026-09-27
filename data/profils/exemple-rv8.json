@@ -216,5 +216,7 @@
    "personnalite": null
   }
  ],
- "aIdentifier": 2
+ "eclatants": 2,
+ "ticketsBourgeonParJour": 360,
+ "ticketsBourgeon": 322
 }
