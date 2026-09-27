@@ -5,14 +5,16 @@ import { candidateProfiles } from '../engine/homeland/recruit';
 import { diffTeam, optimalTeam, type TeamMember, type TeamResult } from '../engine/homeland/team';
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
-import { AbilityList, Avatar } from '../components/ui';
+import { AbilityList, Avatar, DedicatedToggle } from '../components/ui';
+import { facilityName } from '../data/homeland';
 import { fmtDuration } from './Plan';
 
-const OPTS = { watering: true, includeUnverified: false };
+const BASE_OPTS = { watering: true, includeUnverified: false };
 
 /** L'équipe d'Aniimo optimale pour un niveau de Camping-car, et comment y arriver depuis la sienne. */
 export function EquipeOptimale({ api }: { api: ProfileApi }) {
   const { profile } = api;
+  const OPTS = useMemo(() => ({ ...BASE_OPTS, dedicated: profile.dedicated }), [profile.dedicated]);
   const [rv, setRv] = useState(Math.min(19, Math.max(2, profile.rv)));
   const [personality, setPersonality] = useState(false);
   const [prismana, setPrismana] = useState(false);
@@ -27,11 +29,11 @@ export function EquipeOptimale({ api }: { api: ProfileApi }) {
 
   const result = useMemo(
     () => optimalTeam({ rv, candidates: candidateProfiles(ANIIMO, prismana), cap, personality, stock, opts: OPTS, current: keep ? current : undefined }),
-    [rv, cap, personality, prismana, keep, current, useStock, profile.coins, profile.stock], // `stock` en découle
+    [rv, cap, personality, prismana, keep, current, useStock, profile.coins, profile.stock, OPTS], // `stock` en découle
   );
   const mine = useMemo(
     () => (current.length ? plan({ ...OPTS, setup: setupForRv(rv), workers: rosterPool(current), goal: { kind: 'levelUp', stock } }) : null),
-    [current, rv, useStock, profile.coins, profile.stock], // `stock` en découle
+    [current, rv, useStock, profile.coins, profile.stock, OPTS], // `stock` en découle
   );
   const diff = useMemo(() => (current.length ? diffTeam(current, result.members) : null), [current, result.members]);
 
@@ -64,6 +66,7 @@ export function EquipeOptimale({ api }: { api: ProfileApi }) {
           <label>
             <input type="checkbox" checked={prismana} onChange={(e) => setPrismana(e.target.checked)} /> Autoriser les formes prismana
           </label>
+          <DedicatedToggle value={profile.dedicated} onChange={api.setDedicated} />
           {current.length > 0 && (
             <label>
               <input type="checkbox" checked={keep} onChange={(e) => setKeep(e.target.checked)} /> Garder au maximum mon équipe (moins de recrues, même rythme)
@@ -74,8 +77,12 @@ export function EquipeOptimale({ api }: { api: ProfileApi }) {
 
       <TeamSummary result={result} mine={mine?.hours ?? null} cap={cap} rv={rv} useStock={useStock} />
       <TeamList members={result.members} owned={new Set(profile.workers.map((w) => w.aniimoId))} />
+      <WhyThisTeam result={result} dedicated={profile.dedicated} />
+      {rv < 19 && cap - result.size > 0 && (
+        <PrepareNext rv={rv} team={result} cap={cap} shinies={profile.shinies} personality={personality} prismana={prismana} opts={OPTS} />
+      )}
       {diff && (diff.recruit.length > 0 || diff.release.length > 0) && <TeamDiffView diff={diff} api={api} cap={cap} />}
-      <TeamRoadmap current={current} shinies={profile.shinies} personality={personality} prismana={prismana} />
+      <TeamRoadmap current={current} shinies={profile.shinies} personality={personality} prismana={prismana} opts={OPTS} />
     </>
   );
 }
@@ -196,7 +203,7 @@ function TeamDiffView({ diff, api, cap }: { diff: NonNullable<ReturnType<typeof 
 }
 
 /** Pour chaque niveau : durée avec l'équipe optimale et avec l'équipe actuelle, calculé niveau par niveau. */
-function TeamRoadmap({ current, shinies, personality, prismana }: { current: { homeland: Record<string, number>; personality: string | null }[]; shinies: number; personality: boolean; prismana: boolean }) {
+function TeamRoadmap({ current, shinies, personality, prismana, opts: OPTS }: { current: { homeland: Record<string, number>; personality: string | null }[]; shinies: number; personality: boolean; prismana: boolean; opts: typeof BASE_OPTS & { dedicated: boolean } }) {
   const [rows, setRows] = useState<{ rv: number; best: number | null; size: number; mine: number | null }[]>([]);
   const [run, setRun] = useState(false);
   useEffect(() => {
@@ -218,7 +225,7 @@ function TeamRoadmap({ current, shinies, personality, prismana }: { current: { h
     return () => {
       cancelled = true;
     };
-  }, [run, current, shinies, personality, prismana]);
+  }, [run, current, shinies, personality, prismana, OPTS]);
 
   return (
     <section className="card">
@@ -257,6 +264,78 @@ function TeamRoadmap({ current, shinies, personality, prismana }: { current: { h
           </table>
         </div>
       )}
+    </section>
+  );
+}
+
+/** Pourquoi cette taille d'équipe : ce qui tourne à plein (et fixe le rythme), ce qui tourne peu. */
+function WhyThisTeam({ result, dedicated }: { result: TeamResult; dedicated: boolean }) {
+  const use = result.plan.facilityUse.filter((f) => !['heat-furnace', 'cooling-unit', 'sunlamp'].includes(f.facility));
+  const processors = new Set(result.plan.rows.filter((r) => r.recipe.kind === 'processor').map((r) => r.recipe.facility));
+  const isProcessor = (id: string) => processors.has(id) || ['carousel-mill', 'crafting-table', 'claw-game-cooker', 'jukebox-dryer', 'simmering-pot', 'phonolfactory-table', 'bouncy-brew-keg', 'blazing-stove', 'pickling-jar', 'joy-wheel-loom', 'dance-pad-polisher', 'aniipod-maker', 'woodworking-bench', 'chimney-kiln'].includes(id);
+  const full = use.filter((f) => !isProcessor(f.facility) && f.used >= f.count - 0.01);
+  const partial = use.filter((f) => isProcessor(f.facility) && f.used > 0.001);
+  const idle = use.filter((f) => isProcessor(f.facility) && f.used <= 0.001);
+  const name = (id: string) => facilityName(id).name;
+  return (
+    <section className="card">
+      <details>
+        <summary>
+          <strong>Pourquoi cette équipe ?</strong>
+        </summary>
+        <p className="hint">
+          Ce qui fixe le rythme, ce sont les installations qui tournent à 100 % : ajouter des Aniimo ne les fait pas aller plus vite. Les ateliers
+          transforment en une ou deux minutes ce qu'un champ produit en 30 : ils attendent leurs ingrédients.
+        </p>
+        <ul className="plain">
+          <li>
+            <b>À 100 % :</b> {full.map((f) => `${name(f.facility)} ×${f.count}`).join(', ') || '—'}
+          </li>
+          <li>
+            <b>Utilisées en partie :</b>{' '}
+            {partial.map((f) => `${name(f.facility)} (${Math.max(1, Math.round((f.used / f.count) * 100))} % du temps)`).join(', ') || '—'}
+            {dedicated && partial.length > 0 && <span className="muted"> — chacune garde quand même son Aniimo attitré.</span>}
+          </li>
+          <li>
+            <b>Pas utilisées :</b> {idle.map((f) => name(f.facility)).join(', ') || '—'}
+            {idle.length > 0 && <span className="muted"> — leurs recettes rapportent moins que les autres chaînes pour les mêmes récoltes.</span>}
+          </li>
+        </ul>
+      </details>
+    </section>
+  );
+}
+
+/** Utiliser les places libres pour préparer le niveau suivant. */
+function PrepareNext({ rv, team, cap, shinies, personality, prismana, opts }: { rv: number; team: TeamResult; cap: number; shinies: number; personality: boolean; prismana: boolean; opts: typeof BASE_OPTS & { dedicated: boolean } }) {
+  const free = cap - team.size;
+  const next = useMemo(() => {
+    const current = team.members.flatMap((m) => Array.from({ length: m.count }, () => ({ homeland: m.candidate.homeland })));
+    const t = optimalTeam({ rv: rv + 1, candidates: candidateProfiles(ANIIMO, prismana), cap: MAX_ANIIMO_BY_RV[rv + 1] - shinies, personality, stock: { coins: 0, items: {} }, opts, current });
+    return diffTeam(current, t.members).recruit;
+  }, [rv, team, shinies, personality, prismana, opts]);
+  const picks: typeof next = [];
+  let left = free;
+  for (const k of next) {
+    if (left <= 0) break;
+    const count = Math.min(k.count, left);
+    picks.push({ ...k, count });
+    left -= count;
+  }
+  if (!picks.length) return null;
+  return (
+    <section className="card tip">
+      <h2>
+        💡 {free} place{free > 1 ? 's' : ''} libre{free > 1 ? 's' : ''} : prépare le niveau {rv + 1} → {rv + 2}
+      </h2>
+      <p className="hint">Ces Aniimo ne servent pas encore, mais l'équipe optimale du niveau suivant en aura besoin :</p>
+      <ul className="plain">
+        {picks.map((k) => (
+          <li key={k.candidate.ids.join()}>
+            {k.count}× {k.candidate.ids.slice(0, 3).map((id) => fullName(ANIIMO_BY_ID.get(id)!)).join(', ')} <AbilityList levels={k.candidate.homeland} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

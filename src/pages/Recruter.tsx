@@ -39,7 +39,7 @@ function MeilleureRecrue({ api }: { api: ProfileApi }) {
     () => profile.workers.map((w) => ({ homeland: ANIIMO_BY_ID.get(w.aniimoId)!.homeland, personality: w.personality })),
     [profile.workers],
   );
-  const key = JSON.stringify([rv, profile.workers, profile.coins, profile.stock, profile.shinies, withPrismana]);
+  const key = JSON.stringify([rv, profile.workers, profile.coins, profile.stock, profile.shinies, withPrismana, profile.dedicated]);
 
   useEffect(() => {
     if (!roster.length || rv >= 20) return;
@@ -52,7 +52,7 @@ function MeilleureRecrue({ api }: { api: ProfileApi }) {
       stock: { coins: profile.coins ?? 0, items: profile.stock },
       maxAniimo: MAX_ANIIMO_BY_RV[rv],
       shinies: profile.shinies,
-      opts: { watering: true, includeUnverified: false },
+      opts: { watering: true, includeUnverified: false, dedicated: profile.dedicated },
     };
     setState({ status: 'running', done: 0, total: input.candidates.length + roster.length });
     worker.onmessage = (e) => {

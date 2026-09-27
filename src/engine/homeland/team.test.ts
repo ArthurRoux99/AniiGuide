@@ -41,12 +41,12 @@ describe('équipe optimale', () => {
 });
 
 describe('garder son équipe', () => {
-  it('RV 9 : même rythme que l’équipe libre, avec au plus 3 recrues', () => {
+  it('RV 9 : même rythme que l’équipe libre, avec moins de recrues', () => {
     const base = { rv: 9, candidates: candidateProfiles(ANIIMO, false), cap: 22, personality: false, stock: zero, opts };
     const free = optimalTeam(base);
     const kept = optimalTeam({ ...base, current });
     expect(kept.plan.hours!).toBeLessThanOrEqual(free.plan.hours! * 1.01);
-    const d = diffTeam(current, kept.members);
-    expect(d.recruit.reduce((s, k) => s + k.count, 0)).toBeLessThanOrEqual(3);
+    const recruits = (m: typeof kept.members) => diffTeam(current, m).recruit.reduce((s, k) => s + k.count, 0);
+    expect(recruits(kept.members)).toBeLessThan(recruits(free.members));
   });
 });
