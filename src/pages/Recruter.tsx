@@ -5,12 +5,32 @@ import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityList, Avatar } from '../components/ui';
 import { fmtDuration } from './Plan';
+import { EquipeOptimale } from './EquipeOptimale';
 import RecruitWorker from '../workers/recruit.worker?worker&inline';
+import wasmUrl from 'highs/runtime?url';
 
 type State = { status: 'idle' } | { status: 'running'; done: number; total: number } | { status: 'done'; result: RecruitResult; key: string };
 
-/** « Qui recruter ? » : les Aniimo qui feraient le plus gagner de temps au logis du joueur. */
+/** Onglet Recruter : l'équipe optimale par niveau, et la meilleure recrue pour l'équipe actuelle. */
 export function Recruter({ api }: { api: ProfileApi }) {
+  const [tab, setTab] = useState<'team' | 'recruit'>('team');
+  return (
+    <div className="page">
+      <div className="segmented" role="tablist">
+        <button type="button" role="tab" aria-selected={tab === 'team'} className={tab === 'team' ? 'is-active' : ''} onClick={() => setTab('team')}>
+          Équipe optimale
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'recruit'} className={tab === 'recruit' ? 'is-active' : ''} onClick={() => setTab('recruit')}>
+          Meilleure recrue
+        </button>
+      </div>
+      {tab === 'team' ? <EquipeOptimale api={api} /> : <MeilleureRecrue api={api} />}
+    </div>
+  );
+}
+
+/** « Qui recruter ? » : les Aniimo qui feraient le plus gagner de temps à l'équipe actuelle. */
+function MeilleureRecrue({ api }: { api: ProfileApi }) {
   const { profile } = api;
   const [withPrismana, setWithPrismana] = useState(false);
   const [state, setState] = useState<State>({ status: 'idle' });
@@ -42,25 +62,25 @@ export function Recruter({ api }: { api: ProfileApi }) {
         worker.terminate();
       }
     };
-    worker.postMessage(input);
+    worker.postMessage({ wasmUrl: new URL(wasmUrl, location.href).href, input });
     return () => worker.terminate();
   }, [key]); // `key` résume toutes les entrées du calcul
 
   if (!roster.length) {
     return (
-      <div className="page">
+      <>
         <section className="card empty">
           <p>Ajoute d'abord tes ouvriers dans « Mon logis » : les conseils de recrutement partent de ton équipe réelle.</p>
           <a className="btn btn--primary" href="#logis">
             Aller à Mon logis
           </a>
         </section>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="page">
+    <>
       <section className="card">
         <h2>Qui recruter pour aller plus vite ?</h2>
         <p className="hint">
@@ -93,11 +113,11 @@ export function Recruter({ api }: { api: ProfileApi }) {
           <ul className="assumptions">
             <li>Chaque installation travaillée occupe son propre Aniimo, à son niveau : 5 mines demandent 5 Aniimo Terre.</li>
             <li>La personnalité d'un Aniimo attrapé est aléatoire : « jusqu'à » indique le gain s'il a la bonne lettre pour l'installation où il travaillera.</li>
-            <li>Le Transport et le travail aux champs (semer, récolter) ne sont pas encore limités dans le calcul : les Aniimo Plante, Ténèbres et Transport y paraissent moins utiles qu'en réalité.</li>
+            <li>Le travail aux champs (défricher, semer, arroser, récolter) demande quelques secondes par récolte : il faut au moins un Aniimo de chaque capacité, mais il en occupe peu. Le Transport n'est pas encore chiffré.</li>
           </ul>
         </details>
       </section>
-    </div>
+    </>
   );
 }
 

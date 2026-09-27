@@ -17,7 +17,7 @@
     "build:single": "node scripts/build-app-data.mjs && vite build --mode single"
   },
   "dependencies": {
-    "javascript-lp-solver": "^1.0.3",
+    "highs": "^1.15.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
