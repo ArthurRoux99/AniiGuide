@@ -134,13 +134,13 @@ function TeamList({ members, owned }: { members: TeamMember[]; owned: Set<string
                 <AbilityList levels={m.candidate.homeland} />
                 <div className="recruit__species">
                   {species.slice(0, 5).map((a) => (
-                    <span key={a.id} className="mini" title={a.habitats.length ? `Habitats : ${a.habitats.join(', ')}` : undefined}>
+                    <a key={a.id} className="mini" href={`#aniidex/${encodeURIComponent(a.id)}`} title={a.habitats.length ? `Habitats : ${a.habitats.join(', ')}` : undefined}>
                       <Avatar aniimo={a} size={36} />
                       <span>
                         {fullName(a)}
-                        {owned.has(a.id) && <small className="muted"> · au logis</small>}
+                        {owned.has(a.id) ? <small className="muted"> · au logis</small> : a.habitats[0] && <small className="muted"> · 📍 {a.habitats[0]}</small>}
                       </span>
-                    </span>
+                    </a>
                   ))}
                   {species.length > 5 && <span className="muted">+{species.length - 5} autres</span>}
                 </div>
@@ -149,7 +149,10 @@ function TeamList({ members, owned }: { members: TeamMember[]; owned: Set<string
           );
         })}
       </ul>
-      <p className="hint">Toutes les espèces d'une ligne ont exactement les mêmes capacités de logis : prends celle que tu as ou que tu trouves le plus facilement.</p>
+      <p className="hint">
+        Toutes les espèces d'une ligne ont exactement les mêmes capacités de logis : prends celle que tu as ou que tu trouves le plus facilement.
+        Touche un Aniimo pour sa fiche, ou vois <a href="#carte">Où trouver</a> pour les zones à visiter.
+      </p>
     </section>
   );
 }

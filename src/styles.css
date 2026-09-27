@@ -1381,3 +1381,38 @@ label.btn {
 .zone-all .tier-tile {
   text-decoration: none;
 }
+.capture-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 8px;
+}
+.capture-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.capture-list li.is-off {
+  opacity: 0.5;
+}
+.capture-list img {
+  border-radius: 8px;
+  flex: none;
+}
+.capture-list__body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.capture-list select {
+  max-width: 100%;
+}
+.mini {
+  color: var(--ink);
+  text-decoration: none;
+}
