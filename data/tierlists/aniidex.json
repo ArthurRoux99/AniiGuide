@@ -2,8 +2,8 @@
  "source": "Aniidex",
  "url": "https://aniidex.com/tier-list/",
  "note": null,
- "pageDate": "2026-09-25",
- "fetchedAt": "2026-09-27T12:13:48.031Z",
+ "pageDate": "2026-09-28",
+ "fetchedAt": "2026-09-29T11:23:48.148Z",
  "scale": [
   "S",
   "A",
@@ -181,6 +181,10 @@
    "tier": "C"
   },
   {
+   "id": "049-basic-form",
+   "tier": "C"
+  },
+  {
    "id": "043-basic-form",
    "tier": "C"
   },
@@ -194,10 +198,6 @@
   },
   {
    "id": "056-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "049-basic-form",
    "tier": "C"
   },
   {
