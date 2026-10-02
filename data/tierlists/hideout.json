@@ -2,8 +2,8 @@
  "source": "Hideout Guides (Lex)",
  "url": "https://www.hideoutgacha.com/games/aniimo/tier-list",
  "note": "Établie pendant la bêta, avant la sortie du 16/09.",
- "pageDate": "2026-09-16",
- "fetchedAt": "2026-09-29T11:23:48.399Z",
+ "pageDate": "2026-10-01",
+ "fetchedAt": "2026-10-02T11:07:59.616Z",
  "scale": [
   "S",
   "A",
@@ -13,15 +13,11 @@
  ],
  "entries": [
   {
-   "id": "035-basic-form",
+   "id": "006-basic-form",
    "tier": "S"
   },
   {
-   "id": "063-basic-form",
-   "tier": "S"
-  },
-  {
-   "id": "082-basic-form",
+   "id": "10003-basic-form",
    "tier": "S"
   },
   {
@@ -33,10 +29,6 @@
    "tier": "S"
   },
   {
-   "id": "en:Helion",
-   "tier": "S"
-  },
-  {
    "id": "10001-prismana-form",
    "tier": "S"
   },
@@ -45,7 +37,15 @@
    "tier": "S"
   },
   {
-   "id": "en:Soleon",
+   "id": "063-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "035-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "015-basic-form",
    "tier": "S"
   },
   {
@@ -53,15 +53,7 @@
    "tier": "A"
   },
   {
-   "id": "004-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "006-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "008-basic-form",
+   "id": "005-basic-form",
    "tier": "A"
   },
   {
@@ -69,35 +61,11 @@
    "tier": "A"
   },
   {
-   "id": "015-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "021-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "028-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "029-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "030-prismana-form",
-   "tier": "A"
-  },
-  {
    "id": "034-basic-form",
    "tier": "A"
   },
   {
-   "id": "10002-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "039-basic-form",
+   "id": "040-basic-form",
    "tier": "A"
   },
   {
@@ -105,11 +73,19 @@
    "tier": "A"
   },
   {
-   "id": "10003-basic-form",
+   "id": "042-basic-form",
    "tier": "A"
   },
   {
-   "id": "046-basic-form",
+   "id": "054-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "055-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "059-basic-form",
    "tier": "A"
   },
   {
@@ -125,7 +101,55 @@
    "tier": "A"
   },
   {
+   "id": "068-basic-form",
+   "tier": "A"
+  },
+  {
    "id": "069-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Malangel",
+   "tier": "A"
+  },
+  {
+   "id": "en:Helion",
+   "tier": "A"
+  },
+  {
+   "id": "en:Soleon",
+   "tier": "A"
+  },
+  {
+   "id": "047-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "048-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "004-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "010-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "024-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "046-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "071-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "072-basic-form",
    "tier": "A"
   },
   {
@@ -133,7 +157,43 @@
    "tier": "A"
   },
   {
-   "id": "en:Coraliz",
+   "id": "en:Sparkelf",
+   "tier": "A"
+  },
+  {
+   "id": "008-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "019-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "10002-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "039-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "079-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "013-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "014-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "028-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "029-basic-form",
    "tier": "A"
   },
   {
@@ -141,39 +201,35 @@
    "tier": "A"
   },
   {
+   "id": "021-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "030-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "082-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "en:Coraliz",
+   "tier": "A"
+  },
+  {
+   "id": "001-basic-form",
+   "tier": "B"
+  },
+  {
    "id": "002-basic-form",
    "tier": "B"
   },
   {
+   "id": "011-basic-form",
+   "tier": "B"
+  },
+  {
    "id": "012-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "016-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "018-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "022-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "025-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "027-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "032-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "037-basic-form",
    "tier": "B"
   },
   {
@@ -185,39 +241,15 @@
    "tier": "B"
   },
   {
-   "id": "050-basic-form",
+   "id": "053-basic-form",
    "tier": "B"
   },
   {
-   "id": "051-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "052-basic-form",
+   "id": "056-basic-form",
    "tier": "B"
   },
   {
    "id": "057-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "066-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "080-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "081-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "en:Cheekie",
-   "tier": "B"
-  },
-  {
-   "id": "en:Bubbeep",
    "tier": "B"
   },
   {
@@ -229,15 +261,143 @@
    "tier": "B"
   },
   {
-   "id": "010-basic-form",
+   "id": "022-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "023-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "025-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "036-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "045-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "049-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "050-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "052-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "061-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "064-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "066-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "070-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "073-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Cheekie",
+   "tier": "B"
+  },
+  {
+   "id": "en:Wavwal",
+   "tier": "B"
+  },
+  {
+   "id": "018-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "031-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "032-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "038-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "051-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "058-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "077-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "078-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Bubbeep",
+   "tier": "B"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "027-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "080-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "081-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Reefish",
+   "tier": "B"
+  },
+  {
+   "id": "en:Hexxin",
+   "tier": "B"
+  },
+  {
+   "id": "033-basic-form",
    "tier": "C"
   },
   {
-   "id": "013-basic-form",
+   "id": "020-basic-form",
    "tier": "C"
   },
   {
-   "id": "014-basic-form",
+   "id": "065-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "007-basic-form",
    "tier": "C"
   },
   {
@@ -245,27 +405,7 @@
    "tier": "C"
   },
   {
-   "id": "023-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "058-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "068-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "071-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "072-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "073-basic-form",
+   "id": "075-basic-form",
    "tier": "C"
   },
   {
@@ -273,50 +413,25 @@
    "tier": "C"
   },
   {
-   "id": "079-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "en:Reefish",
-   "tier": "C"
-  },
-  {
-   "id": "en:Wavwal",
-   "tier": "C"
-  },
-  {
-   "id": "011-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "024-basic-form",
-   "tier": "D"
-  },
-  {
    "id": "026-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "040-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "070-basic-form",
-   "tier": "D"
+   "tier": "C"
   }
  ],
  "unmatched": [
   "Malevsera (Basic Form) : S",
   "Fennelun (Basic Form) : S",
-  "Helion (Basic Form) : S",
-  "Soleon (Basic Form) : S",
-  "Coraliz (Basic Form) : A",
+  "Malangel (Basic Form) : A",
+  "Helion (Basic Form) : A",
+  "Soleon (Basic Form) : A",
+  "Sparkelf (Basic Form) : A",
   "Glameep (Basic Form) : A",
-  "Cheekie (Basic Form) : B",
-  "Bubbeep (Basic Form) : B",
+  "Coraliz (Basic Form) : A",
   "Popapus (Basic Form) : B",
   "Gachapus (Basic Form) : B",
-  "Reefish (Basic Form) : C",
-  "Wavwal (Basic Form) : C"
+  "Cheekie (Basic Form) : B",
+  "Wavwal (Basic Form) : B",
+  "Bubbeep (Basic Form) : B",
+  "Reefish (Basic Form) : B",
+  "Hexxin (Basic Form) : B"
  ]
 }
