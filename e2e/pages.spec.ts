@@ -48,6 +48,13 @@ test('Optimiser : plan des zones climatiques', async ({ page }) => {
   await expect(page.locator('.zones .zone').first()).toBeVisible({ timeout: 30_000 });
 });
 
+test('Optimiser : plan complet du logis', async ({ page }) => {
+  await page.goto('#plan');
+  await page.getByRole('button', { name: /Calculer le plan du logis/ }).click();
+  await expect(page.locator('.homeland-map svg')).toBeVisible({ timeout: 60_000 });
+  await expect(page.locator('.hm-legend li').first()).toContainText('Entrepôt');
+});
+
 test('Aniidex : fiche détaillée', async ({ page }) => {
   await page.goto('#aniidex');
   await page.locator('.dex-grid a').first().click();

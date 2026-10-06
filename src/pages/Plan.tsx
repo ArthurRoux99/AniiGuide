@@ -9,6 +9,7 @@ import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
 import { fmtDuration } from '../components/format';
 import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
+import { HomelandMap } from '../components/HomelandMap';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -270,6 +271,8 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
       </section>
 
       {result.climate.length > 0 && <ClimatePlan result={result} whole={whole} />}
+
+      <HomelandMap result={result} whole={whole} rv={rv} />
 
       <section className="card">
         <h2>À vendre</h2>

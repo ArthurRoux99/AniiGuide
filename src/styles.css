@@ -1456,3 +1456,60 @@ label.btn {
   font-weight: 700;
   margin-right: 6px;
 }
+
+/* Plan du logis */
+.homeland-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+.hm-plot {
+  fill: color-mix(in srgb, #9ccc65 22%, var(--panel));
+  stroke: var(--line);
+  stroke-width: 0.15;
+}
+.hm-plot--locked {
+  fill: color-mix(in srgb, var(--muted) 18%, var(--panel));
+}
+.hm-locked {
+  fill: var(--muted);
+  font-size: 2px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: system-ui, sans-serif;
+}
+.hm-label {
+  fill: #fff;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: system-ui, sans-serif;
+}
+.hm-storage {
+  fill: #2b2d42;
+}
+.hm-legend {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 4px 12px;
+  font-size: 0.85rem;
+}
+.hm-key {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6em;
+  height: 1.6em;
+  padding: 0 3px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 700;
+  margin-right: 6px;
+  font-size: 0.8rem;
+}
+.hm-key--storage {
+  background: #2b2d42;
+}
