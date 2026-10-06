@@ -64,6 +64,12 @@ test('Optimiser : mes installations et améliorations classées', async ({ page 
   await expect(page.locator('.upgrades li').first()).toContainText('Pépinière');
 });
 
+test('Optimiser : quand revenir', async ({ page }) => {
+  await page.goto('#plan');
+  await page.getByText('Quand revenir ?').click();
+  await expect(page.getByText('Pleine dans', { exact: true })).toBeVisible();
+});
+
 test('Aniidex : fiche détaillée', async ({ page }) => {
   await page.goto('#aniidex');
   await page.locator('.dex-grid a').first().click();

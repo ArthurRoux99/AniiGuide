@@ -11,6 +11,7 @@ import { fmtDuration } from '../components/format';
 import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
 import { HomelandMap } from '../components/HomelandMap';
 import { MyFacilities, Upgrades } from '../components/Upgrades';
+import { Comeback } from '../components/Comeback';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -134,6 +135,8 @@ export function PlanPage({ api }: { api: ProfileApi }) {
       <Result result={result} goal={goal} rv={rv} who={who} />
 
       {result.feasible && <Upgrades options={options} />}
+
+      {result.feasible && <Comeback result={result} setup={options.setup} />}
 
       <Roadmap rv={rv} pool={who === 'roster' && hasRoster ? roster : null} shinies={profile.shinies} watering={watering} unverified={unverified} />
 
