@@ -81,9 +81,11 @@ console.log(`src/data/aniimo-details.gen.json : ${Object.keys(details).length} f
 
 const homeland = await read('data/homeland/aniimax.json');
 const fr = await read('data/i18n/fr.json');
+// Noms officiels relevés sur Wikily (scripts/fetch-fr-names.mjs) ; ceux relevés en jeu priment.
+const wikily = await read('data/i18n/wikily-fr.json').catch(() => ({ facilities: {}, items: {} }));
 await writeFile(
   join(ROOT, 'src/data/homeland.gen.json'),
-  JSON.stringify({ ...homeland, names: { facilities: fr.installations, items: fr.objets } }) + '\n',
+  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...wikily.items, ...fr.objets } }, levels: (await read('data/homeland/facility-levels.json').catch(() => ({ levels: {} }))).levels }) + '\n',
 );
 console.log(`src/data/homeland.gen.json : ${homeland.recipes.length} recettes`);
 
@@ -116,3 +118,7 @@ await copyFile(join(ROOT, 'data/climate-layouts.json'), join(ROOT, 'src/data/cli
 await copyFile(join(ROOT, 'data/portraits.bin'), join(ROOT, 'src/data/portraits.gen.bin'));
 await copyFile(join(ROOT, 'data/portraits.json'), join(ROOT, 'src/data/portraits.gen.json'));
 console.log('src/data/portraits.gen.bin');
+
+const eggheist = await read('data/eggheist.json');
+await writeFile(join(ROOT, 'src/data/eggheist.gen.json'), JSON.stringify(eggheist) + '\n');
+console.log('src/data/eggheist.gen.json');

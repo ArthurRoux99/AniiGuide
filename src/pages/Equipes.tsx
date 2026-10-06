@@ -27,6 +27,8 @@ export function Equipes({ api }: { api: ProfileApi }) {
   const [prismana, setPrismana] = useState(false);
   const [locked, setLocked] = useState<string[]>([]);
   const [picking, setPicking] = useState<'collection' | 'lock' | null>(null);
+  // Opération Œufs : les piliers du Sanctuaire ne s'ouvrent qu'à leur élément → éléments variés.
+  const [heist, setHeist] = useState(() => location.hash.includes('oeufs'));
 
   const pool = useMemo(() => {
     const owned = new Set([...profile.collection, ...profile.workers.map((w) => w.aniimoId)]);
@@ -38,7 +40,7 @@ export function Equipes({ api }: { api: ProfileApi }) {
     });
   }, [profile.collection, profile.workers, mine, prismana, locked]);
 
-  const teams = useMemo(() => bestTeams(pool, { enemy, locked }), [pool, enemy, locked]);
+  const teams = useMemo(() => bestTeams(pool, { enemy, locked, diversity: heist ? 0.15 : 0 }), [pool, enemy, locked, heist]);
   const toggleEnemy = (e: string) => setEnemy((cur) => (cur.includes(e) ? cur.filter((x) => x !== e) : [...cur, e].slice(-2)));
 
   return (
@@ -71,6 +73,9 @@ export function Equipes({ api }: { api: ProfileApi }) {
           </label>
           <label>
             <input type="checkbox" checked={prismana} onChange={(e) => setPrismana(e.target.checked)} /> Formes prismana
+          </label>
+          <label title="Les piliers élémentaires du Sanctuaire ne s'ouvrent qu'à leur élément">
+            <input type="checkbox" checked={heist} onChange={(e) => setHeist(e.target.checked)} /> Opération Œufs (éléments variés)
           </label>
         </div>
         <div className="row">

@@ -22,6 +22,8 @@ function compact(p: Profile) {
     w: p.workers.map((w) => (w.personality ? [w.aniimoId, w.personality] : [w.aniimoId])),
     col: p.collection,
     u: p.usedCodes,
+    eh: p.eggHeist,
+    f: p.facilities,
   };
 }
 
@@ -44,6 +46,8 @@ export async function decodeProfile(code: string): Promise<Profile> {
     workers: (c.w ?? []).map(([aniimoId, personality]: [string, string?]) => ({ aniimoId, personality: personality ?? null })),
     collection: c.col,
     usedCodes: c.u,
+    eggHeist: c.eh,
+    facilities: c.f,
   });
 }
 

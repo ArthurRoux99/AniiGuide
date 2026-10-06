@@ -40,7 +40,7 @@ Relevé dans les outils existants — **chaque point doit être confirmé en jeu
 - **Progression RV** : niveaux 1 → 20, qui débloquent bâtiments, quotas de placement (champs, bois, mines) et parcelles (9 à 16 à partir de RV 9).
 - **Terrain** : 16 parcelles de 20×15 cases ; bâtiments de 2×2 à 5,5×5,5 cases ; obstacles (arbres, rochers).
 - **Bâtiments** (~26) : production de matériaux (Puits, Mine, Champs, Bois…), transformation (Établi, Moulin, Four…), production d'objets, bâtiments climatiques.
-- **Climat** : Radiateur (chaud/brûlant), Refroidisseur (frais/gel) dès RV 7, Lampe solaire (lumière) dès RV 9. Rendement d'une recette selon l'écart météo : **100 % / 80 % / 50 % / 20 %** (0 / 1 / 2 / 3+ crans). Les zones se combinent (chaud + gel = frais ; brûlant + gel s'annulent).
+- **Climat** : Fournaise thermique (chaud/brûlant), Climatisation (frais/gel) dès RV 7, Lampe d'incubation (lumière) dès RV 9. Rendement d'une recette selon l'écart météo : **100 % / 80 % / 50 % / 20 %** (0 / 1 / 2 / 3+ crans). Les zones se combinent (chaud + gel = frais ; brûlant + gel s'annulent).
 - **Ouvriers Aniimo** : compétences de travail (Plante, Terre, Ténèbres, Transport, Artisanat…) avec niveaux, énergie/faim, bonus de **personnalité** selon le bâtiment, efficacité (%) affichée en jeu.
 - **Production** : recettes (dont ~358 verrouillées par niveau de bâtiment), minuteries fixes pour certaines cultures, mode électrique (générateur « Crackle »), Home Coins, commandes, expéditions RV (chance d'œuf Prismana).
 

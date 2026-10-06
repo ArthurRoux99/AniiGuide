@@ -15,7 +15,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REPO = 'ae-bii/aniimax';
-const SHA = process.argv[2] || '26e6b6f0df756015317e4515bb67b4458a5d1636';
+const SHA = process.argv[2] || 'c1544149ec162fa7c7bc447c5415103b4eafc62c';
 const RAW = `https://raw.githubusercontent.com/${REPO}/${SHA}`;
 
 async function get(path) {

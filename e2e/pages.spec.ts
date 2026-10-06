@@ -27,6 +27,7 @@ const PAGES: [string, string][] = [
   ['equipes', 'Équipes de combat'],
   ['codes', 'Codes cadeaux'],
   ['mesures', 'Vérifier en jeu'],
+  ['oeufs', 'Opération Œufs'],
 ];
 
 for (const [id, text] of PAGES) {
@@ -46,6 +47,21 @@ test('Aujourd’hui : temps restant calculé', async ({ page }) => {
 test('Optimiser : plan des zones climatiques', async ({ page }) => {
   await page.goto('#plan');
   await expect(page.locator('.zones .zone').first()).toBeVisible({ timeout: 30_000 });
+});
+
+test('Optimiser : plan complet du logis', async ({ page }) => {
+  await page.goto('#plan');
+  await page.getByRole('button', { name: /Calculer le plan du logis/ }).click();
+  await expect(page.locator('.homeland-map svg')).toBeVisible({ timeout: 60_000 });
+  await expect(page.locator('.hm-legend li').first()).toContainText('Entrepôt');
+});
+
+test('Optimiser : mes installations et améliorations classées', async ({ page }) => {
+  await page.goto('#plan');
+  await page.locator('details.card summary').first().click();
+  await page.getByLabel('Niveau de Pépinière').selectOption('2');
+  await page.getByRole('button', { name: /Classer les améliorations/ }).click();
+  await expect(page.locator('.upgrades li').first()).toContainText('Pépinière');
 });
 
 test('Aniidex : fiche détaillée', async ({ page }) => {
@@ -80,4 +96,13 @@ test('synchro : le lien recrée le même logis dans un autre navigateur', async 
   await expect(other.locator('.banner')).toContainText('22 ouvriers');
   await other.getByRole('button', { name: 'Remplacer' }).click();
   await expect(other.locator('h2', { hasText: 'Mes ouvriers' })).toContainText('22');
+});
+
+test('Opération Œufs : calcul du nombre de parties et suivi gardé', async ({ page }) => {
+  await page.goto('#oeufs');
+  await expect(page.locator('.estimate')).toContainText(/parties/);
+  const coins = page.getByLabel('Pièces de coquille', { exact: true });
+  await coins.fill('400000');
+  await page.reload();
+  await expect(page.getByLabel('Pièces de coquille', { exact: true })).toHaveValue('400000');
 });

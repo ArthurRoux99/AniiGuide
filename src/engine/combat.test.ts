@@ -36,6 +36,13 @@ describe('bestTeams', () => {
     expect(t.members.map((m) => m.id)).not.toContain('feu-dps');
   });
 
+  it('option éléments variés : préfère une équipe qui couvre plus d’éléments', () => {
+    const plain = new Set(bestTeams(pool)[0].members.flatMap((m) => m.elements)).size;
+    const diverse = new Set(bestTeams(pool, { diversity: 0.3 })[0].members.flatMap((m) => m.elements)).size;
+    expect(diverse).toBeGreaterThanOrEqual(plain);
+    expect(diverse).toBe(4);
+  });
+
   it('garde les Aniimo imposés', () => {
     const [t] = bestTeams(pool, { locked: ['dps-faible'] });
     expect(t.members.map((m) => m.id)).toContain('dps-faible');
