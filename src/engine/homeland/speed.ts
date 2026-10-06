@@ -51,7 +51,7 @@ export function wateredSeconds(seconds: number, atFullSpeed = seconds): number {
 
 /**
  * Vitesse de pousse d'une culture climatique sans bâtiment au-dessus : l'échelle va de Gel (−2) à
- * Brûlant (+2) ; 80 % à un cran, 50 % à deux. « Adéquate » (Lampe solaire) ne pousse pas ailleurs.
+ * Brûlant (+2) ; 80 % à un cran, 50 % à deux. « Adéquate » (Lampe d'incubation) ne pousse pas ailleurs.
  */
 export function uncoveredFactor(env: string): number | null {
   if (env === 'Cool' || env === 'Warm') return 0.8;

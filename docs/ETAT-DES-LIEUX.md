@@ -21,7 +21,7 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 
 **Erreurs ou manques dans le Foyer** (du plus important au moins important) :
 
-1. **Appareils climatiques non occupés.** En jeu, chaque Radiateur, Refroidisseur ou Lampe solaire
+1. **Appareils climatiques non occupés.** En jeu, chaque Fournaise thermique, Climatisation ou Lampe d'incubation
    utilisé occupe un Aniimo à plein temps (Feu, Glace, Lumière). Notre plan l'ignore et compte
    donc un ouvrier de trop par appareil.
 2. **Données datées.** Aniimax a corrigé et vérifié des recettes depuis le 26/09 (second Trempo-
@@ -35,7 +35,7 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 5. **Placement des autres bâtiments.** Il compte : les transporteurs font l'aller-retour vers
    l'Entrepôt. On ne le planifie pas encore. Aniimax donne les tailles des 27 installations et le
    terrain (4×4 parcelles de 20×15 cases, la parcelle n s'ouvre au niveau n).
-6. **Paires d'appareils.** Un Radiateur et un Refroidisseur dont les zones se chevauchent créent un
+6. **Paires d'appareils.** Un Fournaise thermique et un Climatisation dont les zones se chevauchent créent un
    3ᵉ climat. C'est plus de parcelles couvertes avec peu d'appareils.
 7. **Absents du modèle** : électricité (niveau 12 et plus : générateurs de 600 à 1 500 W, travail
    ×1,2), nourriture (gamelle, travail ×0,2 quand elle est vide), commandes du jour, stock maximal
@@ -49,7 +49,7 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 
 | # | Chantier | Effet pour le joueur |
 | --- | --- | --- |
-| F1 ✅ | Appareils climatiques occupés + données Aniimax à jour (2ᵉ Refroidisseur, Lampe, Établi phonolfactif et Trempo-barils au niveau 13) | Plans justes (aujourd'hui trop optimistes) |
+| F1 ✅ | Appareils climatiques occupés + données Aniimax à jour (2ᵉ Climatisation, Lampe d'incubation, Établi phonolfactif et Trempo-barils au niveau 13) | Plans justes (aujourd'hui trop optimistes) |
 | F2 | **Plan complet du logis** : toutes les installations sur le vrai terrain, autour de l'Entrepôt, zones climatiques comprises, parcelles verrouillées selon le niveau | Ta demande de placement de tous les bâtiments |
 | F3 | Paires d'appareils (3ᵉ climat) | Plus de cultures couvertes avec moins d'appareils |
 | F4 | Plans en nombres entiers (une recette par machine, parcelles entières) | Plan applicable tel quel, sans arrondi |

@@ -1,6 +1,6 @@
 import raw from '../../data/climate-layouts.gen.json';
 
-// Couverture des appareils climatiques (Radiateur, Refroidisseur, Lampe solaire).
+// Couverture des appareils climatiques (Fournaise thermique, Climatisation, Lampe d'incubation).
 //
 // Règles (Aniimax, MIT, src/coverage.rs, confirmées sur une capture du jeu) : l'appareil couvre un
 // carré de 9×9 cases centré sur lui, et une parcelle compte dès qu'elle chevauche ce carré. Les

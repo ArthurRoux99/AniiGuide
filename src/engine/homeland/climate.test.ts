@@ -47,7 +47,7 @@ describe('climat dans le plan', () => {
     const setup = setupForRv(14);
     const full = plan({ watering: true, includeUnverified: false, setup, workers: idealPool(30), goal: levelUp });
     expect(full.climate.length).toBeGreaterThan(0);
-    // Sans aucun Aniimo Glace, le Refroidisseur reste éteint.
+    // Sans aucun Aniimo Glace, le Climatisation reste éteint.
     const pool = idealPool(30);
     delete pool.byAbility.ice;
     const noIce = plan({ watering: true, includeUnverified: false, setup, workers: pool, goal: levelUp });

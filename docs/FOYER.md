@@ -87,7 +87,7 @@ Chaque passage de niveau a aussi des **conditions de placement** (ex. RV 9 : 18 
 ### 2.2 Terrain
 
 - 🟡 16 parcelles de 20 × 15 cases. Les parcelles 9 à 16 se débloquent progressivement à partir du RV 9.
-- 🟡 Tailles des installations : de 1 × 1 (Radiateur, Lampe solaire) à 5,5 × 5,5 (Moulin-carrousel, Four à cheminée). Certaines peuvent pivoter.
+- 🟡 Tailles des installations : de 1 × 1 (Fournaise thermique, Lampe d'incubation) à 5,5 × 5,5 (Moulin-carrousel, Four à cheminée). Certaines peuvent pivoter.
 - 🟡 Nombre d'exemplaires plafonné par RV (ex. Champs : 4 au RV 1 → 40 au RV 19 ; Bois : 0 → 20 ; Mines : 0 → 10 ; Puits : 0 → 2).
 - Obstacles (arbres, rochers) à dégager.
 
@@ -127,7 +127,7 @@ Relevées sur le wiki officiel (section « Homeland Ability » de chaque fiche) 
 **Premières trouvailles dans les données officielles** (207 fiches, 87 espèces, 18 types de formes) ✅ :
 - **Le niveau 4 n'existe que sur les formes Prismana** (26 fiches). Les formes de base plafonnent au niveau 3.
 - **Les formes régionales changent les compétences** : ex. les formes « des neiges » donnent de la Glace (Casquillon, Pomœuf, Boulabée…), Trombec forme des plages gagne Eau 2. La forme compte autant que l'espèce.
-- **Lumière est très rare** : seule **Lunara** (forme de base) l'a hors Prismana → probablement nécessaire pour faire fonctionner la Lampe solaire ❓.
+- **Lumière est très rare** : seule **Lunara** (forme de base) l'a hors Prismana → probablement nécessaire pour faire fonctionner la Lampe d'incubation ❓.
 - **Parfumerie** : seulement **Plumiel** (1) et **Fragrancier** (3).
 - **Transport** est la compétence la plus répandue (37 formes de base, dont 20 au niveau 3).
 
@@ -165,7 +165,7 @@ La personnalité est **propre à chaque individu** (tirée à l'éclosion), pas 
 
 ### 2.8 Climat 🟡
 
-- **Radiateur** : zone Chaud ou Brûlant. **Refroidisseur** : Frais ou Gel. **Lampe solaire** : lumière Adéquate.
+- **Fournaise thermique** : zone Chaud ou Brûlant. **Climatisation** : Frais ou Gel. **Lampe d'incubation** : lumière Adéquate.
 - Zone d'effet ≈ **9 × 9 cases** autour de l'appareil (❓ à confirmer).
 - Superposition : Chaud + Gel → Frais ; Frais + Brûlant → Chaud ; Brûlant + Gel s'annulent.
 - Rendement d'une recette climatique selon l'écart : **100 % / 80 % / 50 % / 20 %** (0 / 1 / 2 / 3+ crans d'écart).
@@ -280,7 +280,7 @@ Par ordre de priorité. Une capture d'écran par point suffit (iOS ou PC, **jeu 
 3. **La fiche d'un de tes Aniimo** : compétences du Foyer et les 4 lettres de personnalité → confirme les noms FR des compétences et personnalités.
 4. **L'écran d'amélioration du RV** (coût du prochain niveau) → valide le tableau §2.1.
 5. **Nombre max d'Aniimo** au Foyer à ton RV actuel → tranche la contradiction §2.1.
-6. **Une zone climatique** (Radiateur/Refroidisseur) posée, vue du dessus → taille réelle de la zone.
+6. **Une zone climatique** (Fournaise thermique/Climatisation) posée, vue du dessus → taille réelle de la zone.
 7. L'inventaire / entrepôt (noms FR des matériaux et produits).
 
 Et deux infos : **ton RV actuel** et tes **Aniimo ouvriers** actuels (on s'en servira comme premier jeu de test).
@@ -308,7 +308,7 @@ Et deux infos : **ton RV actuel** et tes **Aniimo ouvriers** actuels (on s'en se
 - Le code **ne fonctionne que sur le serveur où il a été créé**, et un code inconnu répond « Ce code de combo n'existe pas ».
 - Conclusion : c'est un **identifiant stocké sur les serveurs du jeu**, pas une description du placement (8 caractères ne peuvent pas décrire 500 éléments). **AniiGuide ne peut donc pas générer de code** hors du jeu.
 - Ce qu'AniiGuide fait à la place ✅ :
-  - **Plan des zones climatiques** (onglet Optimiser) : chaque appareil est réglé sur un seul mode (un Radiateur fait Chaud *ou* Brûlant, contrainte entière dans l'optimiseur) ; les cultures couvertes sont rangées par quarts de 4×4 (1 Pépinière ou 4 Fermes par quart, 4 quarts par zone).
+  - **Plan des zones climatiques** (onglet Optimiser) : chaque appareil est réglé sur un seul mode (une Fournaise thermique fait Chaud *ou* Brûlant, contrainte entière dans l'optimiseur) ; les cultures couvertes sont rangées par quarts de 4×4 (1 Pépinière ou 4 Fermes par quart, 4 quarts par zone).
   - **Bibliothèque de codes combo** (onglet Combos, `data/combos.json`) : les joueurs proposent leurs codes (serveur, niveau, contenu) via le formulaire d'issue GitHub « Proposer un code combo ».
 
 Sources : [aniimo.guide (outils de construction)](https://aniimo.guide/en/guides/homeland-building-tools), [aniimo.pro](https://aniimo.pro/homeland-and-housing). ❓ À confirmer avec un vrai code (longueur, caractères).

@@ -279,7 +279,7 @@ export function plan(o: PlanOptions): Plan {
   // Contraintes : installations, climat, ouvriers, bilans.
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
   const ints: Record<string, 1> = {};
-  // Climat : chaque appareil est réglé sur un seul mode (un Radiateur fait Chaud OU Brûlant) ;
+  // Climat : chaque appareil est réglé sur un seul mode (une Fournaise thermique fait Chaud OU Brûlant) ;
   // mode:appareil:climat = appareils réglés ainsi (entier). Autour de chacun, un mélange de
   // parcelles parmi les placements optimaux précalculés (lay:climat:k, combinaison convexe).
   for (const [env, b] of Object.entries(ENV_BUILDING)) {
