@@ -145,6 +145,8 @@ export interface Plan {
 }
 
 export const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
+/** Chaque appareil climatique en service occupe un Aniimo toute la journée (confirmé en jeu, Aniimax). */
+export const ENV_STAFF: Record<string, AbilityId> = { 'heat-furnace': 'fire', 'cooling-unit': 'ice', sunlamp: 'light' };
 
 function recipeAllowed(r: Recipe, o: PlanOptions): boolean {
   const f = o.setup.facilities[r.facility];
@@ -286,7 +288,8 @@ export function plan(o: PlanOptions): Plan {
     if (count <= 0) continue;
     constraints[`dev:${b}`] = { max: count };
     constraints[`zones:${env}`] = { max: 0 };
-    variables[`mode:${b}:${env}`] = { [`zones:${env}`]: -1, [`dev:${b}`]: 1 };
+    // L'appareil occupe un Aniimo de la capacité voulue (niveau 1 suffit) à plein temps.
+    variables[`mode:${b}:${env}`] = { [`zones:${env}`]: -1, [`dev:${b}`]: 1, workers: 1, [`ab:${ENV_STAFF[b]}:1`]: 1 };
     ints[`mode:${b}:${env}`] = 1;
     layoutsFor(b).forEach((l, k) => {
       variables[`lay:${env}:${k}`] = { [`zones:${env}`]: 1, [`env:${env}:farmland`]: -l.farmland, [`env:${env}:woodland`]: -l.woodland, [`env:${env}:big`]: -l.big };
@@ -339,6 +342,8 @@ export function plan(o: PlanOptions): Plan {
       }
     }
   }
+  // Capacité absente de l'équipe : aucun poste de cette capacité (appareils climatiques compris).
+  for (const a of Object.values(ENV_STAFF)) constraints[`ab:${a}:1`] ??= { max: 0 };
   const itemKeys = new Set(Object.values(variables).flatMap((c) => Object.keys(c).filter((k) => k.startsWith('item:'))));
   for (const k of itemKeys) constraints[k] = { min: 0 };
   constraints.coins = { min: 0 };
@@ -427,6 +432,8 @@ export function plan(o: PlanOptions): Plan {
     const plots = rows.filter((r) => r.covered && r.recipe.environment === env).reduce((n, r) => n + r.units, 0);
     return zones > 0 && plots > 1e-4 ? [{ device, env: env as Environment, zones, plots }] : [];
   });
+
+  for (const c of climate) workersUsed[ENV_STAFF[c.device]] = (workersUsed[ENV_STAFF[c.device]] ?? 0) + c.zones;
 
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)

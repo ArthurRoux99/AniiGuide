@@ -43,6 +43,18 @@ describe('climat dans le plan', () => {
     }
   });
 
+  it('chaque appareil en service occupe un Aniimo de sa capacité (Feu, Glace, Lumière)', () => {
+    const setup = setupForRv(14);
+    const full = plan({ watering: true, includeUnverified: false, setup, workers: idealPool(30), goal: levelUp });
+    expect(full.climate.length).toBeGreaterThan(0);
+    // Sans aucun Aniimo Glace, le Refroidisseur reste éteint.
+    const pool = idealPool(30);
+    delete pool.byAbility.ice;
+    const noIce = plan({ watering: true, includeUnverified: false, setup, workers: pool, goal: levelUp });
+    expect(noIce.climate.filter((c) => c.device === 'cooling-unit')).toEqual([]);
+    for (const c of full.climate) expect(full.workersUsed[c.device === 'heat-furnace' ? 'fire' : c.device === 'cooling-unit' ? 'ice' : 'light']).toBeGreaterThanOrEqual(c.zones);
+  });
+
   it('le plan de placement range les parcelles couvertes à des positions valides', () => {
     for (const rv of [9, 12, 16]) {
       const p = plan({ watering: true, includeUnverified: false, setup: setupForRv(rv), workers: idealPool(30), goal: levelUp });

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { ANIIMO_BY_ID } from '../data/aniimo';
 import { FACILITY_BY_ID, HOMELAND, facilityName, itemName } from '../data/homeland';
-import type { AbilityId } from '../engine/abilities';
+import { ABILITY_BY_ID, type AbilityId } from '../engine/abilities';
 import { PERSONALITY_BONUS as LETTERS } from '../engine/personality';
-import { idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan as PlanResult, type PlanRow } from '../engine/homeland/optimize';
+import { ENV_STAFF, idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan as PlanResult, type PlanRow } from '../engine/homeland/optimize';
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
@@ -339,6 +339,7 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
     <figure className={`zone zone--${z.env.toLowerCase()}`}>
       <figcaption>
         {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> réglé sur <b>{envFr(z.env)}</b>
+        <small className="muted"> · occupe 1 Aniimo {ABILITY_BY_ID[ENV_STAFF[z.device]].name}</small>
       </figcaption>
       <svg className="zone-map" viewBox={`${x0} ${y0} ${x1 - x0} ${y1 - y0}`} role="img" aria-label="Schéma de placement">
         {Array.from({ length: x1 - x0 + 1 }, (_, k) => (
