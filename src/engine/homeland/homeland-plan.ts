@@ -82,7 +82,7 @@ export interface HomelandPlan {
  * Construit les pièces à poser depuis le plan de production (parcelles et machines entières) et
  * le placement climatique, puis les place.
  */
-export function homelandPlan(rows: PlanRow[], whole: Map<PlanRow, number>, climate: ClimateLayout, rv: number): HomelandPlan {
+export function homelandPlan(rows: PlanRow[], whole: Map<PlanRow, number>, climate: ClimateLayout, rv: number, machines?: Record<string, number>): HomelandPlan {
   const pieces: Piece[] = [];
   const meta: { facility: string; item: string | null; group?: number; covered?: boolean }[][] = [];
 
@@ -131,8 +131,28 @@ export function homelandPlan(rows: PlanRow[], whole: Map<PlanRow, number>, clima
       meta.push([{ facility: f, item: r.recipe.output.item }]);
     }
   }
-  // Machines de transformation : autant que le plan en occupe (arrondi au-dessus), le travail
-  // réparti entre elles.
+  // Machines de transformation. Calcul exact : chaque machine dédiée à sa recette.
+  if (machines) {
+    // Une recette peut avoir plusieurs lignes (niveaux d'Aniimo) : regroupées par recette.
+    const byRecipe = new Map<string, { row: PlanRow; trips: number }>();
+    for (const list of byFacility.values())
+      for (const x of list) {
+        const cur = byRecipe.get(x.row.recipe.id);
+        byRecipe.set(x.row.recipe.id, cur ? { row: cur.row, trips: cur.trips + x.trips } : x);
+      }
+    for (const { row, trips } of byRecipe.values()) {
+        const n = machines[row.recipe.id] ?? 0;
+        if (!n) continue;
+        const [w, h] = FOOTPRINT[row.recipe.facility];
+        for (let k = 0; k < n; k++) {
+          pieces.push({ members: [{ x: 0, y: 0, w, h, weight: trips / n }] });
+          meta.push([{ facility: row.recipe.facility, item: row.recipe.output.item }]);
+        }
+      }
+    // Établi de menuiserie et Four de cheminée alternent entre leurs paliers : traités ci-dessous.
+    for (const f of [...byFacility.keys()]) if (byFacility.get(f)!.some((x) => machines[x.row.recipe.id])) byFacility.delete(f);
+  }
+  // Sinon : autant de machines que le plan en occupe (arrondi au-dessus), le travail réparti.
   for (const [f, list] of byFacility) {
     const units = Math.max(1, Math.ceil(list.reduce((s, x) => s + x.row.units, 0) - 1e-6));
     const trips = list.reduce((s, x) => s + x.trips, 0) / units;

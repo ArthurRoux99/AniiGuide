@@ -41,7 +41,7 @@ export function HomelandMap({ result, whole, rv }: { result: Plan; whole: Map<Pl
       setBusy(false);
       worker.terminate();
     };
-    worker.postMessage({ rows: result.rows, whole: result.rows.map((r) => whole.get(r) ?? 0), climate: climateLayout(result, result.rows, whole), rv });
+    worker.postMessage({ rows: result.rows, whole: result.rows.map((r) => whole.get(r) ?? 0), climate: climateLayout(result, result.rows, whole), rv, machines: result.machines });
   };
 
   return (

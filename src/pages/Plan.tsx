@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ANIIMO_BY_ID } from '../data/aniimo';
 import { FACILITY_BY_ID, HOMELAND, facilityName, itemName } from '../data/homeland';
 import { ABILITY_BY_ID, type AbilityId } from '../engine/abilities';
@@ -48,11 +48,18 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : { kind: 'coins' },
         watering,
         includeUnverified: unverified,
-        pairs: true,
       }),
     [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock, profile.facilities],
   );
-  const result = useMemo(() => plan(options), [options]);
+  // Calcul rapide tout de suite, puis le calcul exact (machines dédiées, parcelles entières,
+  // paires d'appareils ; jusqu'à une seconde) quand la saisie s'arrête.
+  const quick = useMemo(() => plan(options), [options]);
+  const [exact, setExact] = useState<{ options: PlanOptions; result: PlanResult } | null>(null);
+  useEffect(() => {
+    const t = setTimeout(() => setExact({ options, result: plan({ ...options, exact: true, pairs: true }) }), 400);
+    return () => clearTimeout(t);
+  }, [options]);
+  const result = exact?.options === options && exact.result.feasible ? exact.result : quick;
 
   return (
     <div className="page">
@@ -138,6 +145,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <ul className="assumptions">
             <li>Données de production : projet Aniimax (MIT), vérifiées en jeu installation par installation ; formules de vitesse relevées en jeu.</li>
             <li>Production continue : tu récoltes assez souvent pour que rien ne déborde, et les graines sont achetées au besoin.</li>
+            <li>Parcelles entières, et chaque machine de transformation réglée sur une seule recette (l'Établi de menuiserie et le Four de cheminée alternent entre leurs paliers), comme en jeu.</li>
             <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
             <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
             <li>Mode électrique (niveau 12 et plus) non pris en compte : pas encore de données fiables.</li>
@@ -251,7 +259,13 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
                             <small className="muted"> · {r.covered ? `zone ${envFr(r.recipe.environment)}` : `hors zone (${envFr(r.recipe.environment)})`}</small>
                           )}
                         </td>
-                        <td className="num">{grower ? `× ${whole.get(r)}` : `${Math.max(1, Math.round((r.units / (use?.count ?? 1)) * 100))} %`}</td>
+                        <td className="num">
+                          {grower
+                            ? `× ${whole.get(r)}`
+                            : result.machines?.[r.recipe.id]
+                              ? `${result.machines[r.recipe.id]} machine${result.machines[r.recipe.id] > 1 ? 's' : ''} · ${Math.max(1, Math.round((r.units / result.machines[r.recipe.id]) * 100))} %`
+                              : `${Math.max(1, Math.round((r.units / (use?.count ?? 1)) * 100))} %`}
+                        </td>
                         <td className="num muted">{fmtDuration(r.cycleSeconds / 3600)}</td>
                         <td className="num muted">{nf1.format(r.outputPerHour)}/h</td>
                         <td className="muted">{r.workerLevel ? `niv. ${r.workerLevel}${r.personalityBonus ? ' +20 %' : ''}` : ''}</td>
