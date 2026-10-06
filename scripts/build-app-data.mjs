@@ -113,6 +113,7 @@ console.log(`src/data/combos.gen.json : ${combos.combos.length} combos`);
 
 // Placements optimaux autour des appareils climatiques (scripts/build-climate-layouts.mjs).
 await copyFile(join(ROOT, 'data/climate-layouts.json'), join(ROOT, 'src/data/climate-layouts.gen.json'));
+await copyFile(join(ROOT, 'data/pair-layouts.json'), join(ROOT, 'src/data/pair-layouts.gen.json'));
 
 // Références de reconnaissance des portraits (générées par scripts/build-portraits.mjs).
 await copyFile(join(ROOT, 'data/portraits.bin'), join(ROOT, 'src/data/portraits.gen.bin'));

@@ -89,23 +89,29 @@ export function homelandPlan(rows: PlanRow[], whole: Map<PlanRow, number>, clima
   // Appareils climatiques et leurs parcelles : un groupe chacun, gardé tel que prévu.
   climate.zones.forEach((z, g) => {
     if (!z.plots.length) return;
-    const rowOf = (crop: string) => rows.find((r) => r.covered && r.recipe.output.item === crop && r.recipe.environment === z.env);
+    const rowOf = (crop: string, env: string) => rows.find((r) => r.covered && r.recipe.output.item === crop && r.recipe.environment === env);
+    // Paire : Fournaise puis Climatisation, chaque parcelle gardée dans sa zone (0, 1 ou 2).
+    const buildings = [{ x: 0, y: 0, w: z.size, h: z.size }, ...(z.pair ? [{ x: z.pair.dx, y: z.pair.dy, w: 2, h: 2 }] : [])];
     pieces.push({
       cluster: true,
-      buildings: [{ x: 0, y: 0, w: z.size, h: z.size }],
+      buildings,
       plots: z.plots.map((p) => {
-        const r = rowOf(p.crop);
-        return { x: 0, y: 0, w: p.size, h: p.size, zone: 0, weight: r ? 3600 / r.cycleSeconds : 0 };
+        const r = rowOf(p.crop, p.env ?? z.env);
+        return { x: 0, y: 0, w: p.size, h: p.size, zone: p.zone ?? 0, weight: r ? 3600 / r.cycleSeconds : 0 };
       }),
       planned: z.plots.map((p) => ({ x: p.x, y: p.y })),
     });
-    meta.push([{ facility: z.device, item: null, group: g }, ...z.plots.map((p) => ({ facility: p.facility, item: p.crop, group: g, covered: true }))]);
+    meta.push([
+      { facility: z.device, item: null, group: g },
+      ...(z.pair ? [{ facility: 'cooling-unit', item: null, group: g }] : []),
+      ...z.plots.map((p) => ({ facility: p.facility, item: p.crop, group: g, covered: true })),
+    ]);
   });
 
   // Le reste : une pièce par parcelle ou par machine.
   const coveredLeft = new Map<PlanRow, number>();
   for (const z of climate.zones) for (const p of z.plots) {
-    const r = rows.find((x) => x.covered && x.recipe.output.item === p.crop && x.recipe.environment === z.env);
+    const r = rows.find((x) => x.covered && x.recipe.output.item === p.crop && x.recipe.environment === (p.env ?? z.env));
     if (r) coveredLeft.set(r, (coveredLeft.get(r) ?? 0) + 1);
   }
   const byFacility = new Map<string, { row: PlanRow; trips: number }[]>();

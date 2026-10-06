@@ -55,6 +55,22 @@ describe('climat dans le plan', () => {
     for (const c of full.climate) expect(full.workersUsed[c.device === 'heat-furnace' ? 'fire' : c.device === 'cooling-unit' ? 'ice' : 'light']).toBeGreaterThanOrEqual(c.zones);
   });
 
+  it('paires Fournaise + Climatisation : 3 climats, parcelles chacune dans sa zone', () => {
+    const p = plan({ watering: true, includeUnverified: false, setup: setupForRv(14), workers: idealPool(30), goal: levelUp, pairs: true });
+    expect(p.pairs.length).toBeGreaterThan(0);
+    for (const pr of p.pairs) expect([pr.heat, pr.cool, pr.both]).toEqual(pr.heat === 'Warm' ? ['Warm', 'Freeze', 'Cool'] : ['Scorching', 'Cool', 'Warm']);
+    const whole = wholeUnits(p.rows);
+    const layout = climateLayout(p, p.rows, whole);
+    const pairZones = layout.zones.filter((z) => z.pair);
+    expect(pairZones.length).toBe(p.pairs.reduce((s, x) => s + x.count, 0));
+    for (const z of layout.zones) expect(checkZone(z)).toEqual([]);
+    const covered = p.rows.filter((r) => r.covered && r.recipe.environment).reduce((s, r) => s + (whole.get(r) ?? 0), 0);
+    const placed = layout.zones.reduce((s, z) => s + z.plots.length, 0);
+    expect(placed + layout.overflow.reduce((s, o) => s + o.count, 0)).toBe(covered);
+    // Chaque parcelle de paire a le climat de sa zone.
+    for (const z of pairZones) for (const pl of z.plots) expect(pl.env).toBe([z.env, z.pair!.both, z.pair!.cool][pl.zone!]);
+  });
+
   it('le plan de placement range les parcelles couvertes à des positions valides', () => {
     for (const rv of [9, 12, 16]) {
       const p = plan({ watering: true, includeUnverified: false, setup: setupForRv(rv), workers: idealPool(30), goal: levelUp });

@@ -48,6 +48,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : { kind: 'coins' },
         watering,
         includeUnverified: unverified,
+        pairs: true,
       }),
     [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock, profile.facilities],
   );
@@ -275,7 +276,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
         )}
       </section>
 
-      {result.climate.length > 0 && <ClimatePlan result={result} whole={whole} />}
+      {(result.climate.length > 0 || result.pairs.length > 0) && <ClimatePlan result={result} whole={whole} />}
 
       <HomelandMap result={result} whole={whole} rv={rv} />
 
@@ -338,16 +339,28 @@ const ENV_STROKE: Record<string, string> = { Warm: '#f5a623', Scorching: '#e5484
 /** Schéma à l'échelle d'une zone : appareil, carré couvert, parcelles numérotées par culture. */
 function ZoneMap({ zone: z }: { zone: ClimateZone }) {
   const c = z.size / 2, R = 4.5;
-  const xs = [c - R, c + R, ...z.plots.flatMap((p) => [p.x, p.x + p.size])];
-  const ys = [c - R, c + R, ...z.plots.flatMap((p) => [p.y, p.y + p.size])];
+  // Paire : la Climatisation (2×2) à l'écart dx, dy, avec son propre carré.
+  const cool = z.pair ? { x: z.pair.dx, y: z.pair.dy, cx: z.pair.dx + 1, cy: z.pair.dy + 1 } : null;
+  const xs = [c - R, c + R, ...(cool ? [cool.cx - R, cool.cx + R] : []), ...z.plots.flatMap((p) => [p.x, p.x + p.size])];
+  const ys = [c - R, c + R, ...(cool ? [cool.cy - R, cool.cy + R] : []), ...z.plots.flatMap((p) => [p.y, p.y + p.size])];
   const [x0, x1, y0, y1] = [Math.floor(Math.min(...xs)) - 1, Math.ceil(Math.max(...xs)) + 1, Math.floor(Math.min(...ys)) - 1, Math.ceil(Math.max(...ys)) + 1];
   const crops = [...new Set(z.plots.map((p) => `${p.kind}|${p.crop}`))];
   const letter = (p: { kind: string; crop: string }) => String.fromCharCode(65 + crops.indexOf(`${p.kind}|${p.crop}`));
   return (
     <figure className={`zone zone--${z.env.toLowerCase()}`}>
       <figcaption>
-        {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> réglé sur <b>{envFr(z.env)}</b>
-        <small className="muted"> · occupe 1 Aniimo {ABILITY_BY_ID[ENV_STAFF[z.device]].name}</small>
+        {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> réglée sur <b>{envFr(z.env)}</b>
+        {z.pair && (
+          <>
+            {' + '}
+            {ENV_ICON[z.pair.cool]} <Name id="cooling-unit" kind="facility" /> réglée sur <b>{envFr(z.pair.cool)}</b> : la zone commune devient{' '}
+            <b>{envFr(z.pair.both)}</b>
+          </>
+        )}
+        <small className="muted">
+          {' '}
+          · occupe {z.pair ? '1 Aniimo Feu et 1 Aniimo Glace' : `1 Aniimo ${ABILITY_BY_ID[ENV_STAFF[z.device]].name}`}
+        </small>
       </figcaption>
       <svg className="zone-map" viewBox={`${x0} ${y0} ${x1 - x0} ${y1 - y0}`} role="img" aria-label="Schéma de placement">
         {Array.from({ length: x1 - x0 + 1 }, (_, k) => (
@@ -357,6 +370,9 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
           <line key={`h${k}`} y1={y0 + k} y2={y0 + k} x1={x0} x2={x1} className="zone-map__grid" />
         ))}
         <rect x={c - R} y={c - R} width={2 * R} height={2 * R} fill={ENV_STROKE[z.env]} fillOpacity={0.12} stroke={ENV_STROKE[z.env]} strokeWidth={0.12} strokeDasharray="0.4 0.25" />
+        {cool && z.pair && (
+          <rect x={cool.cx - R} y={cool.cy - R} width={2 * R} height={2 * R} fill={ENV_STROKE[z.pair.cool]} fillOpacity={0.12} stroke={ENV_STROKE[z.pair.cool]} strokeWidth={0.12} strokeDasharray="0.4 0.25" />
+        )}
         {z.plots.map((p, k) => (
           <g key={k}>
             <rect x={p.x + 0.06} y={p.y + 0.06} width={p.size - 0.12} height={p.size - 0.12} rx={0.25} fill={PLOT_FILL[p.kind]} fillOpacity={0.85} />
@@ -369,6 +385,14 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
         <text x={c} y={c} className="zone-map__device" fontSize={z.size > 1 ? 1.2 : 0.8}>
           {ENV_ICON[z.env]}
         </text>
+        {cool && z.pair && (
+          <>
+            <rect x={cool.x} y={cool.y} width={2} height={2} fill="#fff" stroke={ENV_STROKE[z.pair.cool]} strokeWidth={0.15} />
+            <text x={cool.cx} y={cool.cy} className="zone-map__device" fontSize={1.2}>
+              {ENV_ICON[z.pair.cool]}
+            </text>
+          </>
+        )}
       </svg>
       <ul className="zone-legend">
         {crops.map((k) => {
@@ -379,7 +403,8 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
               <span className="zone-legend__key" style={{ background: PLOT_FILL[kind] }}>
                 {letter({ kind, crop })}
               </span>
-              {n} × <Name id={crop} kind="item" /> <span className="muted">({kind === 'farmland' ? 'Ferme' : kind === 'woodland' ? 'Pépinière' : <Name id={z.plots.find((p) => p.crop === crop)!.facility} kind="facility" />})</span>
+              {n} × <Name id={crop} kind="item" />
+              {z.pair && <span className="muted"> · {envFr(z.plots.find((p) => p.crop === crop)?.env ?? z.env)}</span>} <span className="muted">({kind === 'farmland' ? 'Ferme' : kind === 'woodland' ? 'Pépinière' : <Name id={z.plots.find((p) => p.crop === crop)!.facility} kind="facility" />})</span>
             </li>
           );
         })}

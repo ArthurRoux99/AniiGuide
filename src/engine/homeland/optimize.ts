@@ -2,7 +2,7 @@ import { solveLP } from '../lp';
 import type { AbilityId } from '../abilities';
 import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Environment, type Recipe } from '../../data/homeland';
 import { uncoveredFactor, wateredSeconds, workSeconds } from './speed';
-import { layoutsFor, PLOT_KIND, type PlotKind } from './coverage';
+import { layoutsFor, PAIR_COMBOS, PAIR_KINDS, PAIR_LAYOUTS, PLOT_KIND, type PlotKind } from './coverage';
 
 // Optimiseur de production du Logis.
 //
@@ -123,6 +123,8 @@ export interface PlanOptions {
    * l'autre selon les besoins (confirmé par un joueur).
    */
   dedicated?: boolean;
+  /** Paires d'appareils aux zones chevauchantes (+1 à 4 % de pièces/h, calcul 4× plus lent : pour le plan principal seulement). */
+  pairs?: boolean;
 }
 
 export interface PlanRow {
@@ -153,6 +155,8 @@ export interface Plan {
   blockers: string[];
   /** Appareils climatiques à régler : mode, nombre d'appareils ainsi réglés, parcelles couvertes. */
   climate: { device: string; env: Environment; zones: number; plots: number }[];
+  /** Paires Fournaise + Climatisation aux zones chevauchantes, par réglage. */
+  pairs: { heat: Environment; cool: Environment; both: Environment; count: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
   /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
@@ -310,6 +314,24 @@ export function plan(o: PlanOptions): Plan {
       variables[`lay:${env}:${k}`] = { [`zones:${env}`]: 1, [`env:${env}:farmland`]: -l.farmland, [`env:${env}:woodland`]: -l.woodland, [`env:${env}:big`]: -l.big };
     });
   }
+  // Paires Fournaise + Climatisation aux zones chevauchantes (3 climats pour 2 appareils) :
+  // pair:c = paires ainsi réglées (entier, chacune prend une Fournaise et une Climatisation et
+  // leurs deux Aniimo) ; plays:c:k = placements précalculés, en combinaison convexe.
+  if (o.pairs === true && (o.setup.facilities['heat-furnace']?.count ?? 0) > 0 && (o.setup.facilities['cooling-unit']?.count ?? 0) > 0) {
+    PAIR_COMBOS.forEach((c, ci) => {
+      variables[`pair:${ci}`] = { [`pz:${ci}`]: -1, 'dev:heat-furnace': 1, 'dev:cooling-unit': 1, workers: 2, 'ab:fire:1': 1, 'ab:ice:1': 1 };
+      ints[`pair:${ci}`] = 1;
+      constraints[`pz:${ci}`] = { max: 0 };
+      const envs = [c.heat, c.both, c.cool];
+      PAIR_LAYOUTS.forEach((l, k) => {
+        const col: Record<string, number> = { [`pz:${ci}`]: 1 };
+        envs.forEach((env, z) => PAIR_KINDS.forEach((kind, t) => {
+          if (l.counts[z][t]) col[`env:${env}:${kind}`] = (col[`env:${env}:${kind}`] ?? 0) - l.counts[z][t];
+        }));
+        variables[`plays:${ci}:${k}`] = col;
+      });
+    });
+  }
   // Aniimo postés (nombre entier par installation et par niveau) : ils occupent un ouvrier entier.
   for (const [st, t] of staffTiers) {
     const col: Record<string, number> = { [st]: -1, [`staff:${t.facility}`]: 1, workers: 1 };
@@ -448,20 +470,25 @@ export function plan(o: PlanOptions): Plan {
     return zones > 0 && plots > 1e-4 ? [{ device, env: env as Environment, zones, plots }] : [];
   });
 
+  const pairs = PAIR_COMBOS.map((c, ci) => ({ ...c, count: Math.round(solution[`pair:${ci}`] ?? 0) })).filter((p) => p.count > 0);
   for (const c of climate) workersUsed[ENV_STAFF[c.device]] = (workersUsed[ENV_STAFF[c.device]] ?? 0) + c.zones;
+  for (const p of pairs) {
+    workersUsed.fire = (workersUsed.fire ?? 0) + p.count;
+    workersUsed.ice = (workersUsed.ice ?? 0) + p.count;
+  }
 
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, team: teamOut, staffing: dedicated ? staffing : undefined };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, team: teamOut, staffing: dedicated ? staffing : undefined };
 }
 
 function emptyPlan(target: Plan['target'], remaining: Plan['remaining'], blockers: string[], o: PlanOptions): Plan {
   return {
     feasible: false, hours: null, coinsPerHour: 0, rows: [], sales: [], stockPerHour: {}, target, remaining,
     facilityUse: Object.entries(o.setup.facilities).filter(([, f]) => f.count > 0).map(([id, f]) => ({ facility: id, count: f.count, used: 0 })),
-    workersUsed: {}, blockers, climate: [],
+    workersUsed: {}, blockers, climate: [], pairs: [],
   };
 }
 

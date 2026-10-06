@@ -1,5 +1,5 @@
 import type { Environment } from '../../data/homeland';
-import { COVERAGE, deviceSize, layoutsFor, PLOT_KIND, type Layout, type PlotKind } from './coverage';
+import { COVERAGE, deviceSize, layoutsFor, PAIR_LAYOUTS, PLOT_KIND, type Layout, type PlotKind } from './coverage';
 import type { Plan, PlanRow } from './optimize';
 
 // Plan des zones climatiques : pour chaque appareil, le placement exact des parcelles couvertes
@@ -13,6 +13,10 @@ export interface PlacedPlot {
   x: number;
   y: number;
   size: number;
+  /** Paire : zone de la parcelle (0 Fournaise seule, 1 les deux, 2 Climatisation seule). */
+  zone?: number;
+  /** Climat de la parcelle. */
+  env?: Environment;
 }
 
 export interface ClimateZone {
@@ -21,6 +25,8 @@ export interface ClimateZone {
   /** Côté de l'appareil en cases. */
   size: number;
   plots: PlacedPlot[];
+  /** Paire : la Climatisation (2×2) posée à l'écart dx, dy de la Fournaise, et le climat commun. */
+  pair?: { dx: number; dy: number; cool: Environment; both: Environment };
 }
 
 export interface ClimateLayout {
@@ -31,20 +37,46 @@ export interface ClimateLayout {
 
 const AREA: Record<PlotKind, number> = { farmland: 4, woodland: 16, big: 25 };
 
-export function climateLayout(plan: Pick<Plan, 'climate'>, rows: PlanRow[], whole: Map<PlanRow, number>): ClimateLayout {
+type Demand = Record<PlotKind, { facility: string; crop: string }[]>;
+const KINDS: PlotKind[] = ['big', 'woodland', 'farmland'];
+
+export function climateLayout(plan: Pick<Plan, 'climate'> & Partial<Pick<Plan, 'pairs'>>, rows: PlanRow[], whole: Map<PlanRow, number>): ClimateLayout {
   const zones: ClimateZone[] = [];
-  const overflow: ClimateLayout['overflow'] = [];
-  for (const c of plan.climate) {
-    // Parcelles voulues (nombres entiers), par type.
-    const demand: Record<PlotKind, { facility: string; crop: string }[]> = { farmland: [], woodland: [], big: [] };
-    for (const r of rows.filter((r) => r.covered && r.recipe.environment === c.env)) {
-      const kind = PLOT_KIND[r.recipe.facility] ?? 'big';
-      for (let i = 0; i < (whole.get(r) ?? 0); i++) demand[kind].push({ facility: r.recipe.facility, crop: r.recipe.output.item });
+  // Parcelles voulues (nombres entiers), par climat et par type.
+  const demand = new Map<Environment, Demand>();
+  const need = (env: Environment) => demand.get(env) ?? demand.set(env, { farmland: [], woodland: [], big: [] }).get(env)!;
+  for (const r of rows.filter((r) => r.covered && r.recipe.environment)) {
+    const kind = PLOT_KIND[r.recipe.facility] ?? 'big';
+    for (let i = 0; i < (whole.get(r) ?? 0); i++) need(r.recipe.environment!)[kind].push({ facility: r.recipe.facility, crop: r.recipe.output.item });
+  }
+
+  // Les paires d'abord : elles couvrent trois climats à la fois.
+  for (const pr of plan.pairs ?? []) {
+    const envs = [pr.heat, pr.both, pr.cool] as Environment[];
+    for (let n = 0; n < pr.count; n++) {
+      const left = envs.map((e) => need(e));
+      const scored = PAIR_LAYOUTS.map((l) => {
+        // Parcelles de chaque zone et type, au plus près des appareils.
+        const c = { x: (0.5 + l.dx + 1) / 2, y: (0.5 + l.dy + 1) / 2 };
+        const dist = (p: { kind: PlotKind; x: number; y: number }) => Math.hypot(p.x + COVERAGE.sizes[p.kind] / 2 - c.x, p.y + COVERAGE.sizes[p.kind] / 2 - c.y);
+        const used = [0, 1, 2].flatMap((z) =>
+          KINDS.flatMap((k) => l.plots.filter((p) => p.zone === z && p.kind === k).sort((a, b) => dist(a) - dist(b)).slice(0, left[z][k].length)),
+        );
+        return { l, used, area: used.reduce((s, p) => s + AREA[p.kind], 0), spread: used.reduce((s, p) => s + dist(p) * AREA[p.kind], 0) };
+      });
+      const best = scored.reduce((x, y) => (y.area > x.area || (y.area === x.area && y.spread < x.spread) ? y : x));
+      if (!best.used.length) break;
+      const plots: PlacedPlot[] = best.used.map((spot) => ({ ...spot, ...left[spot.zone][spot.kind].shift()!, size: COVERAGE.sizes[spot.kind], env: envs[spot.zone] }));
+      zones.push({ device: 'heat-furnace', env: pr.heat, size: 1, plots, pair: { dx: best.l.dx, dy: best.l.dy, cool: pr.cool, both: pr.both } });
     }
+  }
+
+  for (const c of plan.climate) {
+    const d = need(c.env);
     const size = deviceSize(c.device);
     const center = size / 2;
     for (let z = 0; z < c.zones; z++) {
-      const left = { farmland: demand.farmland.length, woodland: demand.woodland.length, big: demand.big.length };
+      const left = { farmland: d.farmland.length, woodland: d.woodland.length, big: d.big.length };
       if (!left.farmland && !left.woodland && !left.big) break;
       // Le mélange qui place le plus de surface demandée ; à égalité, le plus compact (parcelles
       // utilisées au plus près de l'appareil).
@@ -53,7 +85,7 @@ export function climateLayout(plan: Pick<Plan, 'climate'>, rows: PlanRow[], whol
         return Math.hypot(p.x + h - center, p.y + h - center);
       };
       const pick = (l: Layout) => {
-        const used = (['big', 'woodland', 'farmland'] as PlotKind[]).flatMap((k) =>
+        const used = KINDS.flatMap((k) =>
           l.plots
             .filter((p) => p.kind === k)
             .sort((x, y) => dist(x) - dist(y))
@@ -66,16 +98,19 @@ export function climateLayout(plan: Pick<Plan, 'climate'>, rows: PlanRow[], whol
       const best = [greedy(size, left), ...layoutsFor(c.device).map(pick)].reduce((x, y) =>
         y.area > x.area || (y.area === x.area && y.spread < x.spread) ? y : x,
       );
-      const plots: PlacedPlot[] = best.used.map((spot) => ({ ...spot, ...demand[spot.kind].shift()!, size: COVERAGE.sizes[spot.kind] }));
+      const plots: PlacedPlot[] = best.used.map((spot) => ({ ...spot, ...d[spot.kind].shift()!, size: COVERAGE.sizes[spot.kind], env: c.env }));
       zones.push({ device: c.device, env: c.env, size, plots });
     }
-    for (const kind of ['farmland', 'woodland', 'big'] as PlotKind[])
-      for (const d of demand[kind]) {
-        const hit = overflow.find((o) => o.facility === d.facility && o.crop === d.crop);
-        if (hit) hit.count++;
-        else overflow.push({ ...d, count: 1 });
-      }
   }
+
+  const overflow: ClimateLayout['overflow'] = [];
+  for (const d of demand.values())
+    for (const kind of KINDS)
+      for (const x of d[kind]) {
+        const hit = overflow.find((o) => o.facility === x.facility && o.crop === x.crop);
+        if (hit) hit.count++;
+        else overflow.push({ ...x, count: 1 });
+      }
   return { zones, overflow };
 }
 
@@ -116,8 +151,15 @@ export function checkZone(z: ClimateZone): string[] {
   const errors: string[] = [];
   const R = COVERAGE.radius, c = z.size / 2;
   const over = (a0: number, a1: number, b0: number, b1: number) => a0 < b1 - 1e-6 && a1 > b0 + 1e-6;
+  const inSquare = (p: PlacedPlot, cx: number, cy: number) => over(p.x, p.x + p.size, cx - R, cx + R) && over(p.y, p.y + p.size, cy - R, cy + R);
   z.plots.forEach((p, i) => {
-    if (!(over(p.x, p.x + p.size, c - R, c + R) && over(p.y, p.y + p.size, c - R, c + R))) errors.push(`parcelle ${i} hors zone`);
+    if (z.pair) {
+      // Paire : la parcelle doit être dans la zone annoncée (Fournaise seule, les deux, Climatisation seule).
+      const a = inSquare(p, c, c), b = inSquare(p, z.pair.dx + 1, z.pair.dy + 1);
+      const zone = a && b ? 1 : a ? 0 : b ? 2 : -1;
+      if (zone !== p.zone) errors.push(`parcelle ${i} hors de sa zone`);
+      if (over(p.x, p.x + p.size, z.pair.dx, z.pair.dx + 2) && over(p.y, p.y + p.size, z.pair.dy, z.pair.dy + 2)) errors.push(`parcelle ${i} sur la Climatisation`);
+    } else if (!inSquare(p, c, c)) errors.push(`parcelle ${i} hors zone`);
     if (over(p.x, p.x + p.size, 0, z.size) && over(p.y, p.y + p.size, 0, z.size)) errors.push(`parcelle ${i} sur l'appareil`);
     z.plots.slice(i + 1).forEach((q, j) => {
       if (over(p.x, p.x + p.size, q.x, q.x + q.size) && over(p.y, p.y + p.size, q.y, q.y + q.size)) errors.push(`parcelles ${i} et ${i + 1 + j} se chevauchent`);
