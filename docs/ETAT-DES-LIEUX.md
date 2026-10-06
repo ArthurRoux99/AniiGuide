@@ -50,10 +50,10 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 | # | Chantier | Effet pour le joueur |
 | --- | --- | --- |
 | F1 ✅ | Appareils climatiques occupés + données Aniimax à jour (2ᵉ Climatisation, Lampe d'incubation, Établi phonolfactif et Trempo-barils au niveau 13) | Plans justes (aujourd'hui trop optimistes) |
-| F2 | **Plan complet du logis** : toutes les installations sur le vrai terrain, autour de l'Entrepôt, zones climatiques comprises, parcelles verrouillées selon le niveau | Ta demande de placement de tous les bâtiments |
+| F2 ✅ | **Plan complet du logis** : toutes les installations sur le vrai terrain, autour de l'Entrepôt, zones climatiques comprises, parcelles verrouillées selon le niveau | Ta demande de placement de tous les bâtiments |
 | F3 | Paires d'appareils (3ᵉ climat) | Plus de cultures couvertes avec moins d'appareils |
 | F4 | Plans en nombres entiers (une recette par machine, parcelles entières) | Plan applicable tel quel, sans arrondi |
-| F5 | Noms français officiels de toutes les recettes et de tous les objets | Plus d'anglais dans l'interface |
+| F5 ✅ | Noms français officiels de toutes les recettes et de tous les objets | Plus d'anglais dans l'interface |
 | F6 | « Quand revenir ? » : stock maximal de chaque installation → heure où la production s'arrête | Planifier ses connexions dans la journée |
 | F7 | Opportunités : quelle amélioration (installation, module, Aniimo) fait gagner le plus | Savoir quoi faire en premier |
 | F8 | Nourriture, électricité, commandes du jour (dès que des données fiables et réutilisables existent) | Modèle complet |
@@ -62,10 +62,10 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 
 | # | Contenu |
 | --- | --- |
-| E1 | **Guide en français** : déroulé d'une partie, conditions de sortie par difficulté, règle de l'évanouissement et protection du débutant, rangs et barèmes de score, chaque chiffre sourcé et daté |
-| E2 | **Calculateur d'économie** : coût d'une sortie (clé, sac, équipement), revenu moyen saisi par le joueur → nombre de parties pour un Œuf prismana mystérieux (80 000 à 400 000 pièces de coquille + éclats) |
-| E3 | **Équipe Egg Heist** : 4 Aniimo, éléments variés (les piliers élémentaires du Sanctuaire n'ouvrent qu'à leur élément), soin et survie en priorité, à partir de la collection du joueur |
-| E4 | **Suivi** : rang, éclats de coquille prismana, œufs obtenus, objectif d'achat |
+| E1 ✅ | **Guide en français** : déroulé d'une partie, conditions de sortie par difficulté, règle de l'évanouissement et protection du débutant, rangs et barèmes de score, chaque chiffre sourcé et daté |
+| E2 ✅ | **Calculateur d'économie** : coût d'une sortie (clé, sac, équipement), revenu moyen saisi par le joueur → nombre de parties pour un Œuf prismana mystérieux (80 000 à 400 000 pièces de coquille + éclats) |
+| E3 ✅ | **Équipe Egg Heist** : 4 Aniimo, éléments variés (les piliers élémentaires du Sanctuaire n'ouvrent qu'à leur élément), soin et survie en priorité, à partir de la collection du joueur |
+| E4 ✅ | **Suivi** : rang, éclats de coquille prismana, œufs obtenus, objectif d'achat |
 
 ## 4. Sources
 

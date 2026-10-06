@@ -1513,3 +1513,17 @@ label.btn {
 .hm-key--storage {
   background: #2b2d42;
 }
+
+/* Opération Œufs */
+.table-scroll {
+  overflow-x: auto;
+}
+.table-scroll table {
+  min-width: 560px;
+}
+.sales li.is-off {
+  opacity: 0.55;
+}
+.page > * {
+  min-width: 0;
+}

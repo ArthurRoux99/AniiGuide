@@ -27,6 +27,7 @@ const PAGES: [string, string][] = [
   ['equipes', 'Équipes de combat'],
   ['codes', 'Codes cadeaux'],
   ['mesures', 'Vérifier en jeu'],
+  ['oeufs', 'Opération Œufs'],
 ];
 
 for (const [id, text] of PAGES) {
@@ -87,4 +88,13 @@ test('synchro : le lien recrée le même logis dans un autre navigateur', async 
   await expect(other.locator('.banner')).toContainText('22 ouvriers');
   await other.getByRole('button', { name: 'Remplacer' }).click();
   await expect(other.locator('h2', { hasText: 'Mes ouvriers' })).toContainText('22');
+});
+
+test('Opération Œufs : calcul du nombre de parties et suivi gardé', async ({ page }) => {
+  await page.goto('#oeufs');
+  await expect(page.locator('.estimate')).toContainText(/parties/);
+  const coins = page.getByLabel('Pièces de coquille', { exact: true });
+  await coins.fill('400000');
+  await page.reload();
+  await expect(page.getByLabel('Pièces de coquille', { exact: true })).toHaveValue('400000');
 });

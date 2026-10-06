@@ -118,3 +118,7 @@ await copyFile(join(ROOT, 'data/climate-layouts.json'), join(ROOT, 'src/data/cli
 await copyFile(join(ROOT, 'data/portraits.bin'), join(ROOT, 'src/data/portraits.gen.bin'));
 await copyFile(join(ROOT, 'data/portraits.json'), join(ROOT, 'src/data/portraits.gen.json'));
 console.log('src/data/portraits.gen.bin');
+
+const eggheist = await read('data/eggheist.json');
+await writeFile(join(ROOT, 'src/data/eggheist.gen.json'), JSON.stringify(eggheist) + '\n');
+console.log('src/data/eggheist.gen.json');

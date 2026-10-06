@@ -48,6 +48,8 @@ export interface TeamOptions {
   /** Aniimo à inclure d'office. */
   locked?: string[];
   size?: number;
+  /** Bonus par élément différent dans l'équipe (Opération Œufs : piliers élémentaires). */
+  diversity?: number;
 }
 
 export interface Team {
@@ -82,6 +84,8 @@ function evaluate(members: Fighter[], o: TeamOptions): Team {
   const dps = members.filter((m) => m.roles.includes('dps')).length;
   if (dps === 0) notes.push("Pas d'attaquant principal.");
   if (dps > 2) total -= 0.2 * (dps - 2);
+
+  if (o.diversity) total += o.diversity * new Set(members.flatMap((m) => m.elements)).size;
 
   const threats = ELEMENT_IDS.filter((e) => members.filter((m) => effectiveness(e, m.elements) > 1.01).length >= 2);
   total -= 0.05 * threats.length;

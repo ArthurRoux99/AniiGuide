@@ -29,6 +29,7 @@ npm run build:single  # site en un seul fichier : dist-single/index.html
 - **Aniidex** : fiches complètes (stats, talents, exploration, évolutions, faiblesses, habitats).
 - **Où trouver** : zones de chaque Aniimo, zones à visiter pour compléter ton logis, liens vers les cartes interactives.
 - **Équipes** : équipes de combat de 4 selon les rôles et l'élément ennemi.
+- **Opération Œufs** : guide en français (règles, difficultés, rangs, boutique, conseils, sources), suivi des pièces et éclats, calcul du nombre de parties pour un Œuf prismana mystérieux, équipe aux éléments variés.
 - **Codes** : codes cadeaux relevés chaque jour, copie en un geste.
 - **Vérifier en jeu** : compare une durée chronométrée au calcul et signale les écarts.
 

@@ -1,0 +1,336 @@
+{
+ "updated": "2026-10-06",
+ "note": "Faits recoupés entre plusieurs guides (textes réécrits). En cas de désaccord, le prix affiché en jeu fait foi. Les noms d'objets sans traduction officielle connue sont traduits par AniiGuide.",
+ "sources": [
+  {
+   "id": "aniimoverse",
+   "name": "AniimoVerse",
+   "url": "https://www.aniimoverse.com/guides/egg-heist"
+  },
+  {
+   "id": "aniimoverse-gear",
+   "name": "AniimoVerse (équipement)",
+   "url": "https://www.aniimoverse.com/guides/egg-heist-gear"
+  },
+  {
+   "id": "aniimogames",
+   "name": "aniimogames.wiki",
+   "url": "https://aniimogames.wiki/events/operation-egg-heist/"
+  },
+  {
+   "id": "game8",
+   "name": "Game8",
+   "url": "https://game8.co/games/Aniimo/archives/618276"
+  },
+  {
+   "id": "aniimotools",
+   "name": "AniimoTools",
+   "url": "https://aniimotools.dev/systems/egg-heist/"
+  }
+ ],
+ "unlock": {
+  "level": 50,
+  "pathfinderRank": "Wayfarer III",
+  "sources": [
+   "aniimogames",
+   "aniimoverse"
+  ]
+ },
+ "team": {
+  "players": "1 à 3",
+  "aniimo": 4,
+  "pathfinderLevel": 60,
+  "note": "Dans le mode, le Pathfinder passe au niveau 60 et les attributs des Aniimo sont égalisés : seuls l'équipement du mode, les compétences et les talents comptent.",
+  "sources": [
+   "aniimoverse"
+  ]
+ },
+ "duration": {
+  "minutes": 30,
+  "conflict": "AniimoTools indique 20 min en Débutant et 15 min au-delà.",
+  "sources": [
+   "aniimoverse"
+  ]
+ },
+ "difficulties": [
+  {
+   "id": "normal",
+   "name": "Normale (Débutant)",
+   "rank": null,
+   "gear": "Peu commun",
+   "escapeCoins": 20000,
+   "rewards": [
+    "Rose prismatique",
+    "Couronne prismana",
+    "Œuf d'Aniimo ombral",
+    "Œuf d'Aniimo des ruines"
+   ],
+   "sources": [
+    "aniimoverse",
+    "aniimotools"
+   ]
+  },
+  {
+   "id": "hard",
+   "name": "Difficile",
+   "rank": "Rising Egg Scout III",
+   "gear": "Rare (Épique conseillé, puces serties)",
+   "escapeCoins": 60000,
+   "rewards": [
+    "Œuf prismana mystérieux",
+    "Œuf d'Aniimo ombral",
+    "Lanterne fantôme de l'esprit-loup",
+    "Sommeil nuage-doux"
+   ],
+   "sources": [
+    "aniimoverse",
+    "aniimotools"
+   ]
+  },
+  {
+   "id": "nightmare",
+   "name": "Cauchemar",
+   "rank": "Pro Egg Snatcher IV",
+   "gear": "Épique (le meilleur de la boutique)",
+   "escapeCoins": 150000,
+   "rewards": [
+    "Œuf prismana mystérieux",
+    "Grand œuf d'Aniimo ombral",
+    "Œuf éternicristal",
+    "Lame épine-de-rose"
+   ],
+   "sources": [
+    "aniimoverse",
+    "aniimotools"
+   ]
+  },
+  {
+   "id": "chaos",
+   "name": "Chaos",
+   "rank": "Elite Egg Seeker IV",
+   "gear": "Épique",
+   "escapeCoins": 300000,
+   "ticket": "1 ticket Chaos par entrée (20 000 pièces le premier, jusqu'à 400 000 ensuite ; 20 par jour au plus)",
+   "rewards": [
+    "Œuf prismana mystérieux",
+    "Grand œuf d'Aniimo ombral",
+    "Édition collector : œuf éternicristal",
+    "Édition collector : lame épine-de-rose"
+   ],
+   "sources": [
+    "aniimoverse",
+    "aniimotools"
+   ]
+  }
+ ],
+ "escape": "Condition de sortie (à gauche de l'écran) : l'équipe dépose 1 œuf au bateau ET réunit un total de pièces de coquille (Chaos : pièces seulement). Seule une évacuation réussie rapporte des points de rang.",
+ "faint": "S'évanouir fait perdre tout le sac ET l'équipement porté ; le mode rend un sac de base à 4 places. Protection du débutant : les 3 premières parties de chaque difficulté gardent tout en cas d'échec. Le coffre-fort du bateau (talent) garde son contenu même en cas d'échec.",
+ "ranks": [
+  {
+   "name": "Rookie Egg Hunter",
+   "unlocks": "Normale",
+   "rewards": [],
+   "bands": [
+    15,
+    50,
+    80
+   ]
+  },
+  {
+   "name": "Rising Egg Scout",
+   "unlocks": "Difficile",
+   "rewards": [
+    "500 000 crédits",
+    "Œuf d'Aniimo ombral",
+    "Amplificateur et unité bleus",
+    "Sac léger (14 places)"
+   ],
+   "bands": [
+    30,
+    80,
+    120
+   ]
+  },
+  {
+   "name": "Pro Egg Snatcher",
+   "unlocks": "Cauchemar",
+   "rewards": [
+    "800 000 crédits",
+    "Œuf d'Aniimo ombral",
+    "Amplificateur et unité violets",
+    "Sac d'aventure (18 places)"
+   ],
+   "bands": [
+    30,
+    120,
+    150
+   ]
+  },
+  {
+   "name": "Elite Egg Seeker",
+   "unlocks": "Chaos",
+   "rewards": [
+    "1 000 000 crédits",
+    "Œuf d'Aniimo ombral parfumé",
+    "3 tickets Chaos",
+    "Amplificateur et unité violets"
+   ],
+   "bands": [
+    30,
+    120,
+    180
+   ]
+  },
+  {
+   "name": "Expert Egg Raider",
+   "unlocks": null,
+   "rewards": [
+    "1 300 000 crédits",
+    "Œuf d'Aniimo ombral parfumé",
+    "Badge"
+   ],
+   "bands": [
+    30,
+    120,
+    180
+   ]
+  },
+  {
+   "name": "Egg Heist Master",
+   "unlocks": null,
+   "rewards": [
+    "1 600 000 crédits",
+    "Grand œuf d'Aniimo ombral",
+    "Badge"
+   ],
+   "bands": [
+    30,
+    120,
+    180
+   ]
+  },
+  {
+   "name": "Egg Emperor",
+   "unlocks": null,
+   "rewards": [
+    "2 000 000 crédits",
+    "Œuf prismana mystérieux",
+    "Titre",
+    "Sac robuste (22 places)"
+   ],
+   "bands": [
+    30,
+    120,
+    180
+   ]
+  }
+ ],
+ "rankSources": [
+  "game8",
+  "aniimoverse"
+ ],
+ "shop": [
+  {
+   "item": "Sac simple (10 places)",
+   "coins": 1000,
+   "rank": null
+  },
+  {
+   "item": "Amplificateur d'attaque (peu commun)",
+   "coins": 10000,
+   "rank": null
+  },
+  {
+   "item": "Unité de protection (peu commune)",
+   "coins": 10000,
+   "rank": null
+  },
+  {
+   "item": "Clé en fer rouillé",
+   "coins": 10000,
+   "rank": null
+  },
+  {
+   "item": "Sac léger (14 places)",
+   "coins": 30000,
+   "rank": "Rising Egg Scout"
+  },
+  {
+   "item": "Clé plaquée argent",
+   "coins": 50000,
+   "rank": "Rising Egg Scout"
+  },
+  {
+   "item": "Amplificateur ou unité rare (1 emplacement de puce)",
+   "coins": 60000,
+   "rank": null
+  },
+  {
+   "item": "Sac d'aventure (18 places)",
+   "coins": 60000,
+   "rank": "Pro Egg Snatcher"
+  },
+  {
+   "item": "Clé dorée",
+   "coins": 100000,
+   "rank": "Pro Egg Snatcher"
+  },
+  {
+   "item": "Amplificateur ou unité épique (2 à 3 emplacements)",
+   "coins": 120000,
+   "rank": null
+  },
+  {
+   "item": "Sac robuste (22 places)",
+   "coins": 200000,
+   "rank": "Rangs supérieurs"
+  }
+ ],
+ "shopNote": "Prix du client de lancement (AniimoVerse, aniimogames.wiki, partie filmée du 20/09). Game8 cite encore des prix de la bêta (sac simple 2 500).",
+ "shopSources": [
+  "aniimoverse-gear",
+  "aniimogames"
+ ],
+ "prismanaEgg": {
+  "name": "Œuf prismana mystérieux",
+  "hatches": "Garanti : un Aniimo ombral ou un Aniimo en forme prismana",
+  "prices": [
+   {
+    "label": "Plein tarif",
+    "coins": 400000,
+    "shards": 200
+   },
+   {
+    "label": "−50 % (1 achat)",
+    "coins": 200000,
+    "shards": 100
+   },
+   {
+    "label": "−80 % (1 achat)",
+    "coins": 80000,
+    "shards": 40
+   }
+  ],
+  "shardsFrom": "Éclats de coquille prismana : 3 par œuf d'Aniimo ombral éclos, 1 par œuf d'Aniimo des ruines.",
+  "sources": [
+   "aniimoverse",
+   "aniimogames"
+  ]
+ },
+ "tips": [
+  "Frappe rapide : creuser le nid le plus proche, rouler l'œuf jusqu'au bateau, déposer, puis évacuer. Un dépôt rapide rapporte autant de points de rang qu'une partie complète, en risquant bien moins.",
+  "Prendre l'entrée latérale du Sanctuaire : elle mène directement aux profondeurs, là où sont les nids.",
+  "Vider la salle avant de creuser : le gardien du nid se réveille quand l'œuf sort. Épingler la sortie sur la carte avant de prendre l'œuf.",
+  "En forme d'œuf, on peut rouler, sauter et esquiver mais pas attaquer ; on peut redevenir soi-même instantanément si on est coincé.",
+  "Déposer l'œuf d'abord : il est envoyé au courrier et acquis. Le second nid est ce qui fait perdre les parties.",
+  "Privilégier les places du sac au poids : viser vite le rang Rising Egg Scout pour le sac léger (14 places). Garder un sac de rechange au stock.",
+  "Les piliers élémentaires du Sanctuaire ne s'ouvrent qu'à leur élément : une équipe aux éléments variés ouvre plus de salles.",
+  "Ne pas vendre les essences (colonnes de lumière bleue ou violette) : elles servent à l'arbre de talents.",
+  "Quitter une partie compte à part d'un échec : mieux vaut aller au bout du chrono que fermer le jeu."
+ ],
+ "tipSources": [
+  "aniimoverse",
+  "aniimogames",
+  "game8"
+ ]
+}
