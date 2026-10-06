@@ -47,13 +47,28 @@ for (const id of Object.keys(homeland.items)) {
   const name = lookup(id) ?? (id.startsWith('quick_') ? lookup(id.slice(6)) : undefined);
   if (name) out.items[id] = name;
 }
-for (const r of await all('homeland-facilities', 'fr')) out.facilities[r.key] = r.data.name;
+// Niveaux des installations (données du client du jeu, relevées par Wikily) : stock, puissance
+// électrique consommée, coût d'amélioration en Pièces de logis.
+const levels = {};
+const num = (s) => Number(String(s).replace(/[\s\u202f\u00a0]/g, ''));
+for (const r of await all('homeland-facilities', 'fr')) {
+  out.facilities[r.key] = r.data.name;
+  levels[r.key] = (r.data.levels ?? []).map((l) => ({
+    stock: num(l.note.match(/rendement ([\d\s\u202f\u00a0]+)/)?.[1] ?? NaN) || null,
+    power: num(l.note.match(/puissance électrique ([\d\s\u202f\u00a0]+)/)?.[1] ?? NaN) || null,
+    cost: num(l.note.match(/Pièce de logis ×([\d\s\u202f\u00a0]+)/)?.[1] ?? NaN) || null,
+  }));
+}
 
 const missing = Object.keys(homeland.items).filter((id) => !out.items[id]);
 if (Object.keys(out.items).length < Object.keys(homeland.items).length / 2) {
   console.warn('Relevé incomplet : fichier précédent conservé');
 } else {
   await writeFile(join(ROOT, 'data/i18n/wikily-fr.json'), JSON.stringify(out, null, 1) + '\n');
+  await writeFile(
+    join(ROOT, 'data/homeland/facility-levels.json'),
+    JSON.stringify({ source: 'Wikily (données du client du jeu)', url: 'https://wikily.gg/fr/aniimo/homeland-crafting', fetchedAt: out.fetchedAt, levels }, null, 1) + '\n',
+  );
   console.log(`data/i18n/wikily-fr.json : ${Object.keys(out.items).length}/${Object.keys(homeland.items).length} objets, ${Object.keys(out.facilities).length} installations`);
   if (missing.length) console.log(`sans nom FR : ${missing.join(', ')}`);
 }

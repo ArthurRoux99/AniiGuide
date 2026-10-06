@@ -23,6 +23,7 @@ function compact(p: Profile) {
     col: p.collection,
     u: p.usedCodes,
     eh: p.eggHeist,
+    f: p.facilities,
   };
 }
 
@@ -46,6 +47,7 @@ export async function decodeProfile(code: string): Promise<Profile> {
     collection: c.col,
     usedCodes: c.u,
     eggHeist: c.eh,
+    facilities: c.f,
   });
 }
 

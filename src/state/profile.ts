@@ -25,6 +25,8 @@ export interface Profile {
   collection: string[];
   /** Codes cadeaux déjà utilisés (en minuscules). */
   usedCodes: string[];
+  /** Installations réellement posées (nombre, niveau) quand elles diffèrent du maximum du niveau. */
+  facilities: Record<string, { count: number; level: number }>;
   /** Opération Œufs : pièces de coquille, éclats prismana, rang. */
   eggHeist: { coins: number; shards: number; rank: number };
   updatedAt: string;
@@ -32,7 +34,7 @@ export interface Profile {
 
 const KEY = 'aniiguide.profile.v1';
 
-export const emptyProfile = (): Profile => ({ version: 1, rv: 1, coins: null, workers: [], shinies: 0, stock: {}, collection: [], usedCodes: [], eggHeist: { coins: 0, shards: 0, rank: 0 }, updatedAt: new Date().toISOString() });
+export const emptyProfile = (): Profile => ({ version: 1, rv: 1, coins: null, workers: [], shinies: 0, stock: {}, collection: [], usedCodes: [], facilities: {}, eggHeist: { coins: 0, shards: 0, rank: 0 }, updatedAt: new Date().toISOString() });
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
@@ -45,6 +47,7 @@ export function exampleProfile(): Profile {
     stock: { ...example.stock },
     collection: [],
     usedCodes: [],
+    facilities: {},
     eggHeist: { coins: 0, shards: 0, rank: 0 },
     workers: example.ouvriers.map((o) => ({ uid: uid(), aniimoId: o.aniimo, personality: o.personnalite })),
     updatedAt: new Date().toISOString(),
@@ -62,6 +65,9 @@ export function sanitizeProfile(input: unknown): Profile {
     shinies: Math.max(0, Number(p.shinies) || 0),
     stock: Object.fromEntries(Object.entries(p.stock ?? {}).map(([k, v]) => [k, Math.max(0, Number(v) || 0)])),
     collection: Array.isArray(p.collection) ? [...new Set(p.collection.map(String).filter((id) => ANIIMO_BY_ID.has(id)))] : [],
+    facilities: Object.fromEntries(
+      Object.entries(p.facilities ?? {}).map(([id, f]) => [id, { count: Math.max(0, Number(f?.count) || 0), level: Math.max(1, Number(f?.level) || 1) }]),
+    ),
     eggHeist: {
       coins: Math.max(0, Number(p.eggHeist?.coins) || 0),
       shards: Math.max(0, Number(p.eggHeist?.shards) || 0),
@@ -109,6 +115,13 @@ export function useProfile() {
       update((p) => {
         const c = code.toLowerCase();
         return { ...p, usedCodes: p.usedCodes.includes(c) ? p.usedCodes.filter((x) => x !== c) : [...p.usedCodes, c] };
+      }),
+    setFacility: (id: string, f: { count: number; level: number } | null) =>
+      update((p) => {
+        const facilities = { ...p.facilities };
+        if (f) facilities[id] = f;
+        else delete facilities[id];
+        return { ...p, facilities };
       }),
     setEggHeist: (patch: Partial<Profile['eggHeist']>) => update((p) => ({ ...p, eggHeist: { ...p.eggHeist, ...patch } })),
     setShinies: (n: number) => update((p) => ({ ...p, shinies: Math.max(0, n) })),

@@ -55,7 +55,7 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 | F4 | Plans en nombres entiers (une recette par machine, parcelles entières) | Plan applicable tel quel, sans arrondi |
 | F5 ✅ | Noms français officiels de toutes les recettes et de tous les objets | Plus d'anglais dans l'interface |
 | F6 | « Quand revenir ? » : stock maximal de chaque installation → heure où la production s'arrête | Planifier ses connexions dans la journée |
-| F7 | Opportunités : quelle amélioration (installation, module, Aniimo) fait gagner le plus | Savoir quoi faire en premier |
+| F7 ✅ | Opportunités : quelle amélioration (installation, module, Aniimo) fait gagner le plus | Savoir quoi faire en premier |
 | F8 | Nourriture, électricité, commandes du jour (dès que des données fiables et réutilisables existent) | Modèle complet |
 
 ### Opération Œufs (nouvelle partie)

@@ -30,6 +30,21 @@ export function setupForRv(rv: number): Setup {
   return { rv, facilities, modules };
 }
 
+/**
+ * Installations du joueur : le maximum du niveau, corrigé par ce qu'il a réellement posé
+ * (nombre et niveau bornés par ce que le niveau de Camping-car permet).
+ */
+export function setupWithOverrides(rv: number, overrides: Record<string, { count: number; level: number }>): Setup {
+  const base = setupForRv(rv);
+  const facilities = { ...base.facilities };
+  for (const [id, o] of Object.entries(overrides)) {
+    const max = base.facilities[id];
+    if (!max) continue;
+    facilities[id] = { count: Math.min(o.count, max.count), level: Math.min(o.level, max.level) };
+  }
+  return { ...base, facilities };
+}
+
 export interface WorkerSlot {
   level: number;
   personality: string | null;

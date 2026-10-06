@@ -3,13 +3,14 @@ import { ANIIMO_BY_ID } from '../data/aniimo';
 import { FACILITY_BY_ID, HOMELAND, facilityName, itemName } from '../data/homeland';
 import { ABILITY_BY_ID, type AbilityId } from '../engine/abilities';
 import { PERSONALITY_BONUS as LETTERS } from '../engine/personality';
-import { ENV_STAFF, idealPool, plan, roadmap, rosterPool, setupForRv, wholeUnits, type Plan as PlanResult, type PlanRow } from '../engine/homeland/optimize';
+import { ENV_STAFF, idealPool, plan, roadmap, rosterPool, setupWithOverrides, wholeUnits, type Plan as PlanResult, type PlanOptions, type PlanRow } from '../engine/homeland/optimize';
 import { MAX_ANIIMO_BY_RV } from '../engine/rv';
 import type { ProfileApi } from '../state/profile';
 import { AbilityChip, Badge } from '../components/ui';
 import { fmtDuration } from '../components/format';
 import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
 import { HomelandMap } from '../components/HomelandMap';
+import { MyFacilities, Upgrades } from '../components/Upgrades';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -40,17 +41,17 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   );
   const target = HOMELAND.levelUp[String(rv + 1)];
 
-  const result = useMemo(
-    () =>
-      plan({
-        setup: setupForRv(rv),
+  const options = useMemo(
+    (): PlanOptions => ({
+        setup: setupWithOverrides(rv, profile.facilities),
         workers: pool,
         goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : { kind: 'coins' },
         watering,
         includeUnverified: unverified,
       }),
-    [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock],
+    [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock, profile.facilities],
   );
+  const result = useMemo(() => plan(options), [options]);
 
   return (
     <div className="page">
@@ -58,7 +59,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         <h2>Optimiser mon logis</h2>
         <p className="hint">
           Calcule quoi produire dans chaque installation pour atteindre le prochain niveau du Camping-car le plus vite possible, puis
-          gagner un maximum de pièces. Les installations sont supposées toutes posées et améliorées au maximum de ton niveau.
+          gagner un maximum de pièces. Par défaut, les installations sont supposées toutes posées et améliorées au maximum de ton niveau : corrige-les dans « Mes installations ».
         </p>
         <div className="form-grid">
           <label className="stat">
@@ -120,7 +121,11 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         </section>
       )}
 
+      <MyFacilities api={api} />
+
       <Result result={result} goal={goal} rv={rv} who={who} />
+
+      {result.feasible && <Upgrades options={options} />}
 
       <Roadmap rv={rv} pool={who === 'roster' && hasRoster ? roster : null} shinies={profile.shinies} watering={watering} unverified={unverified} />
 

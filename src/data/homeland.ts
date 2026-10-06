@@ -58,6 +58,8 @@ interface HomelandData {
   moduleMaxLevels: Record<string, number[]>;
   specialRecipes: string[];
   names: { facilities: Record<string, string>; items: Record<string, string> };
+  /** Par installation et par niveau (index 0 = niveau 1) : stock, puissance électrique, coût en Pièces de logis. */
+  levels: Record<string, { stock: number | null; power: number | null; cost: number | null }[]>;
 }
 
 export const HOMELAND = raw as unknown as HomelandData;

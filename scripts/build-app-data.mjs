@@ -85,7 +85,7 @@ const fr = await read('data/i18n/fr.json');
 const wikily = await read('data/i18n/wikily-fr.json').catch(() => ({ facilities: {}, items: {} }));
 await writeFile(
   join(ROOT, 'src/data/homeland.gen.json'),
-  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...wikily.items, ...fr.objets } } }) + '\n',
+  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...wikily.items, ...fr.objets } }, levels: (await read('data/homeland/facility-levels.json').catch(() => ({ levels: {} }))).levels }) + '\n',
 );
 console.log(`src/data/homeland.gen.json : ${homeland.recipes.length} recettes`);
 

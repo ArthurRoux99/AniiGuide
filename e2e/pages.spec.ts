@@ -56,6 +56,14 @@ test('Optimiser : plan complet du logis', async ({ page }) => {
   await expect(page.locator('.hm-legend li').first()).toContainText('Entrepôt');
 });
 
+test('Optimiser : mes installations et améliorations classées', async ({ page }) => {
+  await page.goto('#plan');
+  await page.locator('details.card summary').first().click();
+  await page.getByLabel('Niveau de Pépinière').selectOption('2');
+  await page.getByRole('button', { name: /Classer les améliorations/ }).click();
+  await expect(page.locator('.upgrades li').first()).toContainText('Pépinière');
+});
+
 test('Aniidex : fiche détaillée', async ({ page }) => {
   await page.goto('#aniidex');
   await page.locator('.dex-grid a').first().click();

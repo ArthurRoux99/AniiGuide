@@ -1,0 +1,650 @@
+{
+ "source": "Wikily (données du client du jeu)",
+ "url": "https://wikily.gg/fr/aniimo/homeland-crafting",
+ "fetchedAt": "2026-10-06T12:53:18.673Z",
+ "levels": {
+  "farmland": [
+   {
+    "stock": 5,
+    "power": null,
+    "cost": 10
+   },
+   {
+    "stock": 10,
+    "power": null,
+    "cost": 60
+   },
+   {
+    "stock": 15,
+    "power": null,
+    "cost": 700
+   },
+   {
+    "stock": 20,
+    "power": null,
+    "cost": 6200
+   },
+   {
+    "stock": 25,
+    "power": null,
+    "cost": 23500
+   },
+   {
+    "stock": 30,
+    "power": null,
+    "cost": 107000
+   },
+   {
+    "stock": 35,
+    "power": null,
+    "cost": 480000
+   }
+  ],
+  "woodland": [
+   {
+    "stock": 8,
+    "power": null,
+    "cost": 90
+   },
+   {
+    "stock": 12,
+    "power": null,
+    "cost": 400
+   },
+   {
+    "stock": 16,
+    "power": null,
+    "cost": 8200
+   },
+   {
+    "stock": 20,
+    "power": null,
+    "cost": 49000
+   },
+   {
+    "stock": 24,
+    "power": null,
+    "cost": 199000
+   },
+   {
+    "stock": 28,
+    "power": null,
+    "cost": 910000
+   }
+  ],
+  "mine": [
+   {
+    "stock": 120,
+    "power": 30,
+    "cost": 320
+   },
+   {
+    "stock": 200,
+    "power": 60,
+    "cost": 4200
+   },
+   {
+    "stock": 200,
+    "power": 90,
+    "cost": 31000
+   },
+   {
+    "stock": 200,
+    "power": 120,
+    "cost": 143000
+   },
+   {
+    "stock": 200,
+    "power": 150,
+    "cost": 340000
+   },
+   {
+    "stock": 200,
+    "power": 180,
+    "cost": 910000
+   }
+  ],
+  "nimbus-bed": [
+   {
+    "stock": 80,
+    "power": null,
+    "cost": 18100
+   },
+   {
+    "stock": 120,
+    "power": null,
+    "cost": 81000
+   },
+   {
+    "stock": 120,
+    "power": null,
+    "cost": 320000
+   }
+  ],
+  "dewy-house": [
+   {
+    "stock": 80,
+    "power": null,
+    "cost": 4200
+   },
+   {
+    "stock": 240,
+    "power": null,
+    "cost": 269000
+   }
+  ],
+  "starfall-hammock": [
+   {
+    "stock": 40,
+    "power": null,
+    "cost": 54000
+   }
+  ],
+  "tidewhisper-sandcastle": [
+   {
+    "stock": 200,
+    "power": null,
+    "cost": 1500
+   },
+   {
+    "stock": 460,
+    "power": null,
+    "cost": 9800
+   },
+   {
+    "stock": 460,
+    "power": null,
+    "cost": 81000
+   }
+  ],
+  "floral-windmill": [
+   {
+    "stock": 240,
+    "power": null,
+    "cost": 453000
+   }
+  ],
+  "well": [
+   {
+    "stock": 300,
+    "power": 30,
+    "cost": 1100
+   },
+   {
+    "stock": 300,
+    "power": 60,
+    "cost": 20000
+   },
+   {
+    "stock": 340,
+    "power": 90,
+    "cost": 98000
+   },
+   {
+    "stock": 340,
+    "power": 120,
+    "cost": 240000
+   },
+   {
+    "stock": 340,
+    "power": 150,
+    "cost": 720000
+   }
+  ],
+  "carousel-mill": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 170
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 1800
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 16000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 81000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 320000
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 910000
+   }
+  ],
+  "crafting-table": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 320
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 1800
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 8200
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 31000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 143000
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 340000
+   },
+   {
+    "stock": 20,
+    "power": 105,
+    "cost": 910000
+   },
+   {
+    "stock": 20,
+    "power": 120,
+    "cost": 1450000
+   }
+  ],
+  "jukebox-dryer": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 540
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 1800
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 8200
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 36000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 143000
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 300000
+   },
+   {
+    "stock": 20,
+    "power": 105,
+    "cost": 910000
+   }
+  ],
+  "claw-game-cooker": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 540
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 1800
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 8200
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 31000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 143000
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 480000
+   },
+   {
+    "stock": 20,
+    "power": 105,
+    "cost": 960000
+   }
+  ],
+  "joy-wheel-loom": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 8200
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 16300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 85000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 360000
+   }
+  ],
+  "phonolfactory-table": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 4200
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 12300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 27000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 149000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 400000
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 720000
+   }
+  ],
+  "bouncy-brew-keg": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 4200
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 14000
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 61000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 270000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 720000
+   }
+  ],
+  "simmering-pot": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 1200
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 12300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 16000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 72000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 230000
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 910000
+   }
+  ],
+  "blazing-stove": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 5900
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 16300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 61000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 240000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 680000
+   }
+  ],
+  "woodworking-bench": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 4200
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 16300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 75000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 340000
+   }
+  ],
+  "chimney-kiln": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 4200
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 16300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 75000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 340000
+   }
+  ],
+  "pickling-jar": [
+   {
+    "stock": 20,
+    "power": 15,
+    "cost": 5900
+   },
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 16300
+   },
+   {
+    "stock": 20,
+    "power": 45,
+    "cost": 61000
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 240000
+   },
+   {
+    "stock": 20,
+    "power": 75,
+    "cost": 720000
+   }
+  ],
+  "aniipod-maker": [
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 400
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 4200
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 24000
+   }
+  ],
+  "dance-pad-polisher": [
+   {
+    "stock": 20,
+    "power": 30,
+    "cost": 170
+   },
+   {
+    "stock": 20,
+    "power": 60,
+    "cost": 2900
+   },
+   {
+    "stock": 20,
+    "power": 90,
+    "cost": 12000
+   }
+  ],
+  "crackle-power-pole": [
+   {
+    "stock": null,
+    "power": null,
+    "cost": 3600
+   }
+  ],
+  "crackle-generator": [
+   {
+    "stock": null,
+    "power": null,
+    "cost": 21000
+   },
+   {
+    "stock": null,
+    "power": null,
+    "cost": 45000
+   },
+   {
+    "stock": null,
+    "power": null,
+    "cost": 120000
+   },
+   {
+    "stock": null,
+    "power": null,
+    "cost": 340000
+   },
+   {
+    "stock": null,
+    "power": null,
+    "cost": 720000
+   }
+  ],
+  "heat-furnace": [
+   {
+    "stock": null,
+    "power": null,
+    "cost": 8200
+   }
+  ],
+  "cooling-unit": [
+   {
+    "stock": null,
+    "power": null,
+    "cost": 8200
+   }
+  ],
+  "sunlamp": [
+   {
+    "stock": null,
+    "power": null,
+    "cost": 15700
+   }
+  ],
+  "hatchinator": [
+   {
+    "stock": null,
+    "power": null,
+    "cost": 320
+   }
+  ]
+ }
+}
