@@ -51,8 +51,8 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 | --- | --- | --- |
 | F1 ✅ | Appareils climatiques occupés + données Aniimax à jour (2ᵉ Climatisation, Lampe d'incubation, Établi phonolfactif et Trempo-barils au niveau 13) | Plans justes (aujourd'hui trop optimistes) |
 | F2 ✅ | **Plan complet du logis** : toutes les installations sur le vrai terrain, autour de l'Entrepôt, zones climatiques comprises, parcelles verrouillées selon le niveau | Ta demande de placement de tous les bâtiments |
-| F3 | Paires d'appareils (3ᵉ climat) | Plus de cultures couvertes avec moins d'appareils |
-| F4 | Plans en nombres entiers (une recette par machine, parcelles entières) | Plan applicable tel quel, sans arrondi |
+| F3 ✅ | Paires d'appareils (3ᵉ climat) — gain mesuré : +1 à 4 % de pièces/h, temps de montée inchangé | Plus de cultures couvertes avec moins d'appareils |
+| F4 ✅ | Plans en nombres entiers (une recette par machine, parcelles entières) | Plan applicable tel quel, sans arrondi |
 | F5 ✅ | Noms français officiels de toutes les recettes et de tous les objets | Plus d'anglais dans l'interface |
 | F6 | « Quand revenir ? » : stock maximal de chaque installation → heure où la production s'arrête | Planifier ses connexions dans la journée |
 | F7 ✅ | Opportunités : quelle amélioration (installation, module, Aniimo) fait gagner le plus | Savoir quoi faire en premier |

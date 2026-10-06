@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ANIIMO_BY_ID } from '../data/aniimo';
 import { FACILITY_BY_ID, HOMELAND, facilityName, itemName } from '../data/homeland';
 import { ABILITY_BY_ID, type AbilityId } from '../engine/abilities';
@@ -51,7 +51,15 @@ export function PlanPage({ api }: { api: ProfileApi }) {
       }),
     [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock, profile.facilities],
   );
-  const result = useMemo(() => plan(options), [options]);
+  // Calcul rapide tout de suite, puis le calcul exact (machines dédiées, parcelles entières,
+  // paires d'appareils ; jusqu'à une seconde) quand la saisie s'arrête.
+  const quick = useMemo(() => plan(options), [options]);
+  const [exact, setExact] = useState<{ options: PlanOptions; result: PlanResult } | null>(null);
+  useEffect(() => {
+    const t = setTimeout(() => setExact({ options, result: plan({ ...options, exact: true, pairs: true }) }), 400);
+    return () => clearTimeout(t);
+  }, [options]);
+  const result = exact?.options === options && exact.result.feasible ? exact.result : quick;
 
   return (
     <div className="page">
@@ -137,6 +145,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <ul className="assumptions">
             <li>Données de production : projet Aniimax (MIT), vérifiées en jeu installation par installation ; formules de vitesse relevées en jeu.</li>
             <li>Production continue : tu récoltes assez souvent pour que rien ne déborde, et les graines sont achetées au besoin.</li>
+            <li>Parcelles entières, et chaque machine de transformation réglée sur une seule recette (l'Établi de menuiserie et le Four de cheminée alternent entre leurs paliers), comme en jeu.</li>
             <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
             <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
             <li>Mode électrique (niveau 12 et plus) non pris en compte : pas encore de données fiables.</li>
@@ -250,7 +259,13 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
                             <small className="muted"> · {r.covered ? `zone ${envFr(r.recipe.environment)}` : `hors zone (${envFr(r.recipe.environment)})`}</small>
                           )}
                         </td>
-                        <td className="num">{grower ? `× ${whole.get(r)}` : `${Math.max(1, Math.round((r.units / (use?.count ?? 1)) * 100))} %`}</td>
+                        <td className="num">
+                          {grower
+                            ? `× ${whole.get(r)}`
+                            : result.machines?.[r.recipe.id]
+                              ? `${result.machines[r.recipe.id]} machine${result.machines[r.recipe.id] > 1 ? 's' : ''} · ${Math.max(1, Math.round((r.units / result.machines[r.recipe.id]) * 100))} %`
+                              : `${Math.max(1, Math.round((r.units / (use?.count ?? 1)) * 100))} %`}
+                        </td>
                         <td className="num muted">{fmtDuration(r.cycleSeconds / 3600)}</td>
                         <td className="num muted">{nf1.format(r.outputPerHour)}/h</td>
                         <td className="muted">{r.workerLevel ? `niv. ${r.workerLevel}${r.personalityBonus ? ' +20 %' : ''}` : ''}</td>
@@ -275,7 +290,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
         )}
       </section>
 
-      {result.climate.length > 0 && <ClimatePlan result={result} whole={whole} />}
+      {(result.climate.length > 0 || result.pairs.length > 0) && <ClimatePlan result={result} whole={whole} />}
 
       <HomelandMap result={result} whole={whole} rv={rv} />
 
@@ -338,16 +353,28 @@ const ENV_STROKE: Record<string, string> = { Warm: '#f5a623', Scorching: '#e5484
 /** Schéma à l'échelle d'une zone : appareil, carré couvert, parcelles numérotées par culture. */
 function ZoneMap({ zone: z }: { zone: ClimateZone }) {
   const c = z.size / 2, R = 4.5;
-  const xs = [c - R, c + R, ...z.plots.flatMap((p) => [p.x, p.x + p.size])];
-  const ys = [c - R, c + R, ...z.plots.flatMap((p) => [p.y, p.y + p.size])];
+  // Paire : la Climatisation (2×2) à l'écart dx, dy, avec son propre carré.
+  const cool = z.pair ? { x: z.pair.dx, y: z.pair.dy, cx: z.pair.dx + 1, cy: z.pair.dy + 1 } : null;
+  const xs = [c - R, c + R, ...(cool ? [cool.cx - R, cool.cx + R] : []), ...z.plots.flatMap((p) => [p.x, p.x + p.size])];
+  const ys = [c - R, c + R, ...(cool ? [cool.cy - R, cool.cy + R] : []), ...z.plots.flatMap((p) => [p.y, p.y + p.size])];
   const [x0, x1, y0, y1] = [Math.floor(Math.min(...xs)) - 1, Math.ceil(Math.max(...xs)) + 1, Math.floor(Math.min(...ys)) - 1, Math.ceil(Math.max(...ys)) + 1];
   const crops = [...new Set(z.plots.map((p) => `${p.kind}|${p.crop}`))];
   const letter = (p: { kind: string; crop: string }) => String.fromCharCode(65 + crops.indexOf(`${p.kind}|${p.crop}`));
   return (
     <figure className={`zone zone--${z.env.toLowerCase()}`}>
       <figcaption>
-        {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> réglé sur <b>{envFr(z.env)}</b>
-        <small className="muted"> · occupe 1 Aniimo {ABILITY_BY_ID[ENV_STAFF[z.device]].name}</small>
+        {ENV_ICON[z.env]} <Name id={z.device} kind="facility" /> réglée sur <b>{envFr(z.env)}</b>
+        {z.pair && (
+          <>
+            {' + '}
+            {ENV_ICON[z.pair.cool]} <Name id="cooling-unit" kind="facility" /> réglée sur <b>{envFr(z.pair.cool)}</b> : la zone commune devient{' '}
+            <b>{envFr(z.pair.both)}</b>
+          </>
+        )}
+        <small className="muted">
+          {' '}
+          · occupe {z.pair ? '1 Aniimo Feu et 1 Aniimo Glace' : `1 Aniimo ${ABILITY_BY_ID[ENV_STAFF[z.device]].name}`}
+        </small>
       </figcaption>
       <svg className="zone-map" viewBox={`${x0} ${y0} ${x1 - x0} ${y1 - y0}`} role="img" aria-label="Schéma de placement">
         {Array.from({ length: x1 - x0 + 1 }, (_, k) => (
@@ -357,6 +384,9 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
           <line key={`h${k}`} y1={y0 + k} y2={y0 + k} x1={x0} x2={x1} className="zone-map__grid" />
         ))}
         <rect x={c - R} y={c - R} width={2 * R} height={2 * R} fill={ENV_STROKE[z.env]} fillOpacity={0.12} stroke={ENV_STROKE[z.env]} strokeWidth={0.12} strokeDasharray="0.4 0.25" />
+        {cool && z.pair && (
+          <rect x={cool.cx - R} y={cool.cy - R} width={2 * R} height={2 * R} fill={ENV_STROKE[z.pair.cool]} fillOpacity={0.12} stroke={ENV_STROKE[z.pair.cool]} strokeWidth={0.12} strokeDasharray="0.4 0.25" />
+        )}
         {z.plots.map((p, k) => (
           <g key={k}>
             <rect x={p.x + 0.06} y={p.y + 0.06} width={p.size - 0.12} height={p.size - 0.12} rx={0.25} fill={PLOT_FILL[p.kind]} fillOpacity={0.85} />
@@ -369,6 +399,14 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
         <text x={c} y={c} className="zone-map__device" fontSize={z.size > 1 ? 1.2 : 0.8}>
           {ENV_ICON[z.env]}
         </text>
+        {cool && z.pair && (
+          <>
+            <rect x={cool.x} y={cool.y} width={2} height={2} fill="#fff" stroke={ENV_STROKE[z.pair.cool]} strokeWidth={0.15} />
+            <text x={cool.cx} y={cool.cy} className="zone-map__device" fontSize={1.2}>
+              {ENV_ICON[z.pair.cool]}
+            </text>
+          </>
+        )}
       </svg>
       <ul className="zone-legend">
         {crops.map((k) => {
@@ -379,7 +417,8 @@ function ZoneMap({ zone: z }: { zone: ClimateZone }) {
               <span className="zone-legend__key" style={{ background: PLOT_FILL[kind] }}>
                 {letter({ kind, crop })}
               </span>
-              {n} × <Name id={crop} kind="item" /> <span className="muted">({kind === 'farmland' ? 'Ferme' : kind === 'woodland' ? 'Pépinière' : <Name id={z.plots.find((p) => p.crop === crop)!.facility} kind="facility" />})</span>
+              {n} × <Name id={crop} kind="item" />
+              {z.pair && <span className="muted"> · {envFr(z.plots.find((p) => p.crop === crop)?.env ?? z.env)}</span>} <span className="muted">({kind === 'farmland' ? 'Ferme' : kind === 'woodland' ? 'Pépinière' : <Name id={z.plots.find((p) => p.crop === crop)!.facility} kind="facility" />})</span>
             </li>
           );
         })}

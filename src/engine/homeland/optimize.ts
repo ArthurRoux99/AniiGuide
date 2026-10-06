@@ -2,7 +2,7 @@ import { solveLP } from '../lp';
 import type { AbilityId } from '../abilities';
 import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Environment, type Recipe } from '../../data/homeland';
 import { uncoveredFactor, wateredSeconds, workSeconds } from './speed';
-import { layoutsFor, PLOT_KIND, type PlotKind } from './coverage';
+import { layoutsFor, PAIR_COMBOS, PAIR_KINDS, PAIR_LAYOUTS, PLOT_KIND, type PlotKind } from './coverage';
 
 // Optimiseur de production du Logis.
 //
@@ -123,6 +123,14 @@ export interface PlanOptions {
    * l'autre selon les besoins (confirmé par un joueur).
    */
   dedicated?: boolean;
+  /**
+   * Calcul exact (plus lent) : parcelles entières, et chaque machine de transformation dédiée à
+   * une seule recette (sauf l'Établi de menuiserie et le Four de cheminée, qui alternent entre
+   * leurs paliers), comme en jeu. Sinon : calcul continu, arrondi ensuite.
+   */
+  exact?: boolean;
+  /** Paires d'appareils aux zones chevauchantes (+1 à 4 % de pièces/h, calcul 4× plus lent : pour le plan principal seulement). */
+  pairs?: boolean;
 }
 
 export interface PlanRow {
@@ -153,6 +161,10 @@ export interface Plan {
   blockers: string[];
   /** Appareils climatiques à régler : mode, nombre d'appareils ainsi réglés, parcelles couvertes. */
   climate: { device: string; env: Environment; zones: number; plots: number }[];
+  /** Calcul exact : machines dédiées à chaque recette de transformation. */
+  machines?: Record<string, number>;
+  /** Paires Fournaise + Climatisation aux zones chevauchantes, par réglage. */
+  pairs: { heat: Environment; cool: Environment; both: Environment; count: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
   /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
@@ -161,6 +173,8 @@ export interface Plan {
 
 export const ENV_BUILDING: Record<string, string> = { Warm: 'heat-furnace', Scorching: 'heat-furnace', Cool: 'cooling-unit', Freeze: 'cooling-unit', Adequate: 'sunlamp' };
 /** Chaque appareil climatique en service occupe un Aniimo toute la journée (confirmé en jeu, Aniimax). */
+/** Installations qui alternent entre leurs paliers (chaque palier est fait du précédent). */
+const TURN_TAKING = new Set(['woodworking-bench', 'chimney-kiln']);
 export const ENV_STAFF: Record<string, AbilityId> = { 'heat-furnace': 'fire', 'cooling-unit': 'ice', sunlamp: 'light' };
 
 function recipeAllowed(r: Recipe, o: PlanOptions): boolean {
@@ -204,6 +218,8 @@ export function plan(o: PlanOptions): Plan {
     : null;
 
   const variables: Record<string, Record<string, number>> = {};
+  const ints: Record<string, 1> = {};
+  const dedRecipes = new Map<string, string>();
   const constraints: Record<string, { min?: number; max?: number; equal?: number }> = {};
   const meta = new Map<string, Omit<PlanRow, 'units' | 'outputPerHour'> & { perUnit: number }>();
   const blockers = new Set<string>();
@@ -251,7 +267,11 @@ export function plan(o: PlanOptions): Plan {
         });
       }
       const cycles = 3600 / seconds; // lots par heure et par exemplaire
-      const col: Record<string, number> = { [`fac:${r.facility}`]: 1 };
+      // Calcul exact : une machine compte pour sa recette (ded:…), pas pour chaque variante.
+      const oneRecipe = o.exact && r.kind === 'processor' && !TURN_TAKING.has(r.facility);
+      const col: Record<string, number> = oneRecipe ? { [`dedc:${r.id}`]: 1 } : { [`fac:${r.facility}`]: 1 };
+      if (oneRecipe) dedRecipes.set(r.id, r.facility);
+      if (o.exact && r.kind === 'grower') ints[key] = 1; // parcelles entières
       col[`item:${r.output.item}`] = (col[`item:${r.output.item}`] ?? 0) + r.output.qty * cycles;
       if (r.byproduct) col[`item:${r.byproduct.item}`] = (col[`item:${r.byproduct.item}`] ?? 0) + r.byproduct.qty * cycles;
       for (const i of r.inputs) col[`item:${i.item}`] = (col[`item:${i.item}`] ?? 0) - i.qty * cycles;
@@ -293,7 +313,13 @@ export function plan(o: PlanOptions): Plan {
 
   // Contraintes : installations, climat, ouvriers, bilans.
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
-  const ints: Record<string, 1> = {};
+  // Machines dédiées : ded:recette (entier) machines pour cette recette, qui couvrent le temps de
+  // toutes ses variantes.
+  for (const [id, facility] of dedRecipes) {
+    variables[`ded:${id}`] = { [`dedc:${id}`]: -1, [`fac:${facility}`]: 1 };
+    ints[`ded:${id}`] = 1;
+    constraints[`dedc:${id}`] = { max: 0 };
+  }
   // Climat : chaque appareil est réglé sur un seul mode (une Fournaise thermique fait Chaud OU Brûlant) ;
   // mode:appareil:climat = appareils réglés ainsi (entier). Autour de chacun, un mélange de
   // parcelles parmi les placements optimaux précalculés (lay:climat:k, combinaison convexe).
@@ -308,6 +334,24 @@ export function plan(o: PlanOptions): Plan {
     ints[`mode:${b}:${env}`] = 1;
     layoutsFor(b).forEach((l, k) => {
       variables[`lay:${env}:${k}`] = { [`zones:${env}`]: 1, [`env:${env}:farmland`]: -l.farmland, [`env:${env}:woodland`]: -l.woodland, [`env:${env}:big`]: -l.big };
+    });
+  }
+  // Paires Fournaise + Climatisation aux zones chevauchantes (3 climats pour 2 appareils) :
+  // pair:c = paires ainsi réglées (entier, chacune prend une Fournaise et une Climatisation et
+  // leurs deux Aniimo) ; plays:c:k = placements précalculés, en combinaison convexe.
+  if (o.pairs === true && (o.setup.facilities['heat-furnace']?.count ?? 0) > 0 && (o.setup.facilities['cooling-unit']?.count ?? 0) > 0) {
+    PAIR_COMBOS.forEach((c, ci) => {
+      variables[`pair:${ci}`] = { [`pz:${ci}`]: -1, 'dev:heat-furnace': 1, 'dev:cooling-unit': 1, workers: 2, 'ab:fire:1': 1, 'ab:ice:1': 1 };
+      ints[`pair:${ci}`] = 1;
+      constraints[`pz:${ci}`] = { max: 0 };
+      const envs = [c.heat, c.both, c.cool];
+      PAIR_LAYOUTS.forEach((l, k) => {
+        const col: Record<string, number> = { [`pz:${ci}`]: 1 };
+        envs.forEach((env, z) => PAIR_KINDS.forEach((kind, t) => {
+          if (l.counts[z][t]) col[`env:${env}:${kind}`] = (col[`env:${env}:${kind}`] ?? 0) - l.counts[z][t];
+        }));
+        variables[`plays:${ci}:${k}`] = col;
+      });
     });
   }
   // Aniimo postés (nombre entier par installation et par niveau) : ils occupent un ouvrier entier.
@@ -448,20 +492,35 @@ export function plan(o: PlanOptions): Plan {
     return zones > 0 && plots > 1e-4 ? [{ device, env: env as Environment, zones, plots }] : [];
   });
 
+  const pairs = PAIR_COMBOS.map((c, ci) => ({ ...c, count: Math.round(solution[`pair:${ci}`] ?? 0) })).filter((p) => p.count > 0);
   for (const c of climate) workersUsed[ENV_STAFF[c.device]] = (workersUsed[ENV_STAFF[c.device]] ?? 0) + c.zones;
+  for (const p of pairs) {
+    workersUsed.fire = (workersUsed.fire ?? 0) + p.count;
+    workersUsed.ice = (workersUsed.ice ?? 0) + p.count;
+  }
 
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, team: teamOut, staffing: dedicated ? staffing : undefined };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined };
+}
+
+/**
+ * Machines dédiées par recette : le temps occupé par la recette (toutes variantes), arrondi au-dessus.
+ * Le calcul exact garantit qu'il en faut au plus autant que le solveur en a réservé.
+ */
+function machinesOf(rows: PlanRow[], dedicated: Map<string, string>): Record<string, number> {
+  const busy: Record<string, number> = {};
+  for (const r of rows) if (dedicated.has(r.recipe.id)) busy[r.recipe.id] = (busy[r.recipe.id] ?? 0) + r.units;
+  return Object.fromEntries(Object.entries(busy).map(([id, u]) => [id, Math.max(1, Math.ceil(u - 1e-6))]));
 }
 
 function emptyPlan(target: Plan['target'], remaining: Plan['remaining'], blockers: string[], o: PlanOptions): Plan {
   return {
     feasible: false, hours: null, coinsPerHour: 0, rows: [], sales: [], stockPerHour: {}, target, remaining,
     facilityUse: Object.entries(o.setup.facilities).filter(([, f]) => f.count > 0).map(([id, f]) => ({ facility: id, count: f.count, used: 0 })),
-    workersUsed: {}, blockers, climate: [],
+    workersUsed: {}, blockers, climate: [], pairs: [],
   };
 }
 

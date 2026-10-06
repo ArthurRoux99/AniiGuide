@@ -14,12 +14,14 @@ describe('plan complet du logis', () => {
     expect(openCells(16)).toHaveLength(16);
   });
 
-  for (const rv of [8, 12]) {
-    it(`niveau ${rv} : tout est posé, sans chevauchement, dans le terrain ouvert`, () => {
-      const p = plan({ watering: true, includeUnverified: false, setup: setupForRv(rv), workers: idealPool(30), goal: levelUp });
+  for (const [rv, pairs] of [[8, false], [12, false], [14, true]] as const) {
+    const exact = pairs;
+    it(`niveau ${rv}${pairs ? ' avec paires' : ''} : tout est posé, sans chevauchement, dans le terrain ouvert`, () => {
+      const p = plan({ watering: true, includeUnverified: false, setup: setupForRv(rv), workers: idealPool(30), goal: levelUp, pairs, exact });
       const whole = wholeUnits(p.rows);
       const t0 = performance.now();
-      const h = homelandPlan(p.rows, whole, climateLayout(p, p.rows, whole), rv);
+      const h = homelandPlan(p.rows, whole, climateLayout(p, p.rows, whole), rv, p.machines);
+      if (exact) expect(h.pieces.filter((x) => x.item && p.machines![`${x.facility}:${x.item}`]).length).toBe(Object.values(p.machines!).reduce((s, n) => s + n, 0));
       const ms = performance.now() - t0;
       expect(h.unplaced).toEqual([]);
       const rects = [h.storage, ...h.pieces.map((x) => x.rect)];

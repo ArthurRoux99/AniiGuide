@@ -89,7 +89,7 @@ export function Upgrades({ options }: { options: PlanOptions }) {
   const compute = () => {
     setBusy(true);
     setTimeout(() => {
-      setList(opportunities(options));
+      setList(opportunities({ ...options, pairs: false }));
       setBusy(false);
     }, 20);
   };
