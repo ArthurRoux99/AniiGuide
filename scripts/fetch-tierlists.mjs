@@ -122,11 +122,18 @@ const SOURCES = [
     id: 'hideout',
     name: 'Hideout Guides (Lex)',
     url: 'https://www.hideoutgacha.com/games/aniimo/tier-list',
-    note: 'Établie pendant la bêta, avant la sortie du 16/09.',
     scale: ['S', 'A', 'B', 'C', 'D'],
-    read(toks) {
-      const start = toks.findIndex((t, i) => t === 'S' && toks[i - 1] === 'Reset');
-      return readTiers(toks, { start, isTier: (t) => /^[SABCD]$/.test(t), stop: (t) => t === 'Not rated' });
+    // La page embarque sa liste en JSON ({ name, form, …, tier }) : plus fiable que le texte affiché.
+    // « tier: null » = Aniimo pas (encore) classé par l'auteur : ignoré.
+    read(_toks, html) {
+      const json = html.replace(/\\"/g, '"');
+      const out = [];
+      for (const m of json.matchAll(/"slug":"[^"]*","name":"([^"]+)"(?:,"form":"([^"]*)")?[^{}]*?"tier":"([SABCD])"/g)) {
+        const form = !m[2] || m[2] === '$undefined' || m[2] === 'Basic' ? 'Basic Form' : `${m[2]} Form`;
+        if (!BASE_NAMES.has(m[1]) || !FORMS.has(form)) continue;
+        if (!out.some((x) => x.base === m[1] && x.form === form)) out.push({ base: m[1], form, tier: m[3] });
+      }
+      return out;
     },
   },
   {
@@ -164,7 +171,7 @@ for (const s of SOURCES) {
   try {
     const html = await fetchText(s.url);
     const date = html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/)?.[1] ?? null;
-    const rows = s.read(tokens(html));
+    const rows = s.read(tokens(html), html);
     const entries = [];
     const unmatched = [];
     for (const r of rows) {
