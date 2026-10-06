@@ -1,9 +1,9 @@
 {
  "source": "Hideout Guides (Lex)",
  "url": "https://www.hideoutgacha.com/games/aniimo/tier-list",
- "note": "Établie pendant la bêta, avant la sortie du 16/09.",
- "pageDate": "2026-10-01",
- "fetchedAt": "2026-10-02T11:07:59.616Z",
+ "note": null,
+ "pageDate": "2026-10-04",
+ "fetchedAt": "2026-10-06T12:34:09.086Z",
  "scale": [
   "S",
   "A",
@@ -13,12 +13,460 @@
  ],
  "entries": [
   {
+   "id": "003-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-highland-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-thunderstorm-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-mountain-woods-form",
+   "tier": "S"
+  },
+  {
+   "id": "004-basic-form",
+   "tier": "B"
+  },
+  {
    "id": "006-basic-form",
    "tier": "S"
   },
   {
+   "id": "006-rainstorm-form",
+   "tier": "S"
+  },
+  {
+   "id": "006-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "008-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "008-beach-form",
+   "tier": "A"
+  },
+  {
+   "id": "008-highland-form",
+   "tier": "A"
+  },
+  {
+   "id": "009-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "009-beach-form",
+   "tier": "D"
+  },
+  {
+   "id": "009-prismana-form",
+   "tier": "D"
+  },
+  {
+   "id": "009-highland-form",
+   "tier": "D"
+  },
+  {
+   "id": "010-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "010-beach-form",
+   "tier": "C"
+  },
+  {
+   "id": "010-highland-form",
+   "tier": "C"
+  },
+  {
+   "id": "012-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-forest-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-grassland-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-prismana-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-plateau-form",
+   "tier": "B"
+  },
+  {
+   "id": "012-mountain-woods-form",
+   "tier": "B"
+  },
+  {
+   "id": "015-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "015-sea-of-flowers-form",
+   "tier": "B"
+  },
+  {
+   "id": "015-snowfield-form",
+   "tier": "B"
+  },
+  {
+   "id": "015-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "018-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "018-rainstorm-form",
+   "tier": "B"
+  },
+  {
+   "id": "018-cloudmist-form",
+   "tier": "B"
+  },
+  {
+   "id": "018-plateau-form",
+   "tier": "B"
+  },
+  {
+   "id": "019-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "021-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "021-mountain-form",
+   "tier": "B"
+  },
+  {
+   "id": "021-prismana-form",
+   "tier": "B"
+  },
+  {
+   "id": "en:Hexxin",
+   "tier": "B"
+  },
+  {
+   "id": "022-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "022-mountain-form",
+   "tier": "D"
+  },
+  {
+   "id": "024-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "024-mudflat-form",
+   "tier": "C"
+  },
+  {
+   "id": "024-beach-form",
+   "tier": "C"
+  },
+  {
+   "id": "024-bay-form",
+   "tier": "C"
+  },
+  {
+   "id": "025-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "027-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "027-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "027-forest-form",
+   "tier": "B"
+  },
+  {
+   "id": "027-sea-of-flowers-form",
+   "tier": "B"
+  },
+  {
+   "id": "029-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "029-sea-of-flowers-form",
+   "tier": "C"
+  },
+  {
+   "id": "029-nighttime-form",
+   "tier": "C"
+  },
+  {
+   "id": "029-mountain-woods-form",
+   "tier": "C"
+  },
+  {
+   "id": "030-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "032-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "034-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "en:Thornblade (Rainstorm Form)",
+   "tier": "D"
+  },
+  {
+   "id": "034-prismana-form",
+   "tier": "D"
+  },
+  {
+   "id": "035-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "10002-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "037-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-snowfield-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-sea-of-flowers-form",
+   "tier": "B"
+  },
+  {
+   "id": "039-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "041-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "041-forest-form",
+   "tier": "A"
+  },
+  {
+   "id": "041-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "041-highland-form",
+   "tier": "A"
+  },
+  {
    "id": "10003-basic-form",
    "tier": "S"
+  },
+  {
+   "id": "10003-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "044-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "044-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "044-nighttime-form",
+   "tier": "S"
+  },
+  {
+   "id": "046-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "046-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "046-mountain-woods-form",
+   "tier": "A"
+  },
+  {
+   "id": "051-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "051-nighttime-form",
+   "tier": "A"
+  },
+  {
+   "id": "052-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "052-nighttime-form",
+   "tier": "C"
+  },
+  {
+   "id": "055-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "055-thunderstorm-form",
+   "tier": "A"
+  },
+  {
+   "id": "055-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "057-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "057-snowfield-form",
+   "tier": "D"
+  },
+  {
+   "id": "058-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "058-snowfield-form",
+   "tier": "D"
+  },
+  {
+   "id": "060-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "060-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "062-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "062-snowfield-form",
+   "tier": "A"
+  },
+  {
+   "id": "062-mountain-woods-form",
+   "tier": "A"
+  },
+  {
+   "id": "062-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "063-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "063-snowfield-form",
+   "tier": "A"
+  },
+  {
+   "id": "063-mountain-woods-form",
+   "tier": "A"
+  },
+  {
+   "id": "066-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "066-mountain-form",
+   "tier": "C"
+  },
+  {
+   "id": "067-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "069-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "069-prismana-form",
+   "tier": "C"
+  },
+  {
+   "id": "071-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "072-prismana-form",
+   "tier": "A"
+  },
+  {
+   "id": "074-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "076-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "079-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "079-rainstorm-form",
+   "tier": "B"
+  },
+  {
+   "id": "079-prismana-form",
+   "tier": "B"
+  },
+  {
+   "id": "080-basic-form",
+   "tier": "B"
+  },
+  {
+   "id": "081-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "082-basic-form",
+   "tier": "A"
   },
   {
    "id": "en:Malevsera",
@@ -29,409 +477,28 @@
    "tier": "S"
   },
   {
+   "id": "en:Helion",
+   "tier": "B"
+  },
+  {
    "id": "10001-prismana-form",
    "tier": "S"
   },
   {
-   "id": "99996-basic-form",
-   "tier": "S"
-  },
-  {
-   "id": "063-basic-form",
-   "tier": "S"
-  },
-  {
-   "id": "035-basic-form",
-   "tier": "S"
-  },
-  {
-   "id": "015-basic-form",
-   "tier": "S"
-  },
-  {
-   "id": "003-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "005-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "009-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "034-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "040-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "041-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "042-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "054-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "055-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "059-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "060-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "062-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "067-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "068-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "069-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "en:Malangel",
-   "tier": "A"
-  },
-  {
-   "id": "en:Helion",
-   "tier": "A"
-  },
-  {
-   "id": "en:Soleon",
-   "tier": "A"
-  },
-  {
-   "id": "047-basic-form",
-   "tier": "A"
-  },
-  {
    "id": "048-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "004-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "010-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "024-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "046-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "071-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "072-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "074-basic-form",
-   "tier": "A"
+   "tier": "B"
   },
   {
    "id": "en:Sparkelf",
-   "tier": "A"
-  },
-  {
-   "id": "008-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "019-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "10002-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "039-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "079-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "013-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "014-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "028-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "029-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "en:Glameep",
-   "tier": "A"
-  },
-  {
-   "id": "021-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "030-prismana-form",
-   "tier": "A"
-  },
-  {
-   "id": "082-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "en:Coraliz",
-   "tier": "A"
-  },
-  {
-   "id": "001-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "002-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "011-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "012-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "043-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "044-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "053-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "056-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "057-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "en:Popapus",
-   "tier": "B"
-  },
-  {
-   "id": "en:Gachapus",
-   "tier": "B"
-  },
-  {
-   "id": "022-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "023-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "025-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "036-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "037-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "045-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "049-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "050-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "052-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "061-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "064-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "066-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "070-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "073-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "en:Cheekie",
-   "tier": "B"
-  },
-  {
-   "id": "en:Wavwal",
-   "tier": "B"
-  },
-  {
-   "id": "018-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "031-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "032-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "038-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "051-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "058-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "077-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "078-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "en:Bubbeep",
-   "tier": "B"
-  },
-  {
-   "id": "016-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "027-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "080-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "081-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "en:Reefish",
-   "tier": "B"
-  },
-  {
-   "id": "en:Hexxin",
-   "tier": "B"
-  },
-  {
-   "id": "033-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "020-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "065-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "007-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "017-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "075-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "076-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "026-basic-form",
-   "tier": "C"
+   "tier": "S"
   }
  ],
  "unmatched": [
+  "Hexxin (Basic Form) : B",
+  "Thornblade (Rainstorm Form) : D",
   "Malevsera (Basic Form) : S",
   "Fennelun (Basic Form) : S",
-  "Malangel (Basic Form) : A",
-  "Helion (Basic Form) : A",
-  "Soleon (Basic Form) : A",
-  "Sparkelf (Basic Form) : A",
-  "Glameep (Basic Form) : A",
-  "Coraliz (Basic Form) : A",
-  "Popapus (Basic Form) : B",
-  "Gachapus (Basic Form) : B",
-  "Cheekie (Basic Form) : B",
-  "Wavwal (Basic Form) : B",
-  "Bubbeep (Basic Form) : B",
-  "Reefish (Basic Form) : B",
-  "Hexxin (Basic Form) : B"
+  "Helion (Basic Form) : B",
+  "Sparkelf (Basic Form) : S"
  ]
 }

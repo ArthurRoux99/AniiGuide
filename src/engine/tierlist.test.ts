@@ -25,11 +25,13 @@ describe('consensus', () => {
     expect(tierOf(0.5)).toBe('B');
   });
 
-  it('données réelles : Lunara (starter) est classé haut par toutes les sources', () => {
+  // Les sources classent ce qu'elles veulent (Hideout et Aniidex ont retiré Lunara début octobre) :
+  // on vérifie seulement qu'un Aniimo phare reste bien classé par la majorité d'entre elles.
+  it('données réelles : Lunara (starter) est classé haut par plusieurs sources', () => {
     const c = consensus(sources as TierSource[]);
     const lunara = c.find((e) => e.id === '99996-basic-form' || e.id.endsWith('Lunara'));
     expect(lunara).toBeDefined();
     expect(['S', 'A']).toContain(lunara!.tier);
-    expect(lunara!.votes.length).toBeGreaterThanOrEqual(4);
+    expect(lunara!.votes.length).toBeGreaterThanOrEqual(3);
   });
 });

@@ -2,8 +2,8 @@
  "source": "Game8",
  "url": "https://game8.co/games/Aniimo/archives/621098",
  "note": null,
- "pageDate": "2026-09-25",
- "fetchedAt": "2026-09-27T12:13:46.768Z",
+ "pageDate": "2026-10-06",
+ "fetchedAt": "2026-10-06T12:34:07.638Z",
  "scale": [
   "S",
   "A",
@@ -33,6 +33,10 @@
    "tier": "S"
   },
   {
+   "id": "10001-prismana-form",
+   "tier": "S"
+  },
+  {
    "id": "99996-basic-form",
    "tier": "S"
   },
@@ -50,6 +54,26 @@
   },
   {
    "id": "063-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-highland-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-mountain-woods-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-prismana-form",
+   "tier": "S"
+  },
+  {
+   "id": "003-thunderstorm-form",
    "tier": "S"
   },
   {
@@ -89,15 +113,7 @@
    "tier": "A"
   },
   {
-   "id": "019-basic-form",
-   "tier": "A"
-  },
-  {
    "id": "032-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "031-basic-form",
    "tier": "A"
   },
   {
@@ -125,10 +141,6 @@
    "tier": "A"
   },
   {
-   "id": "025-basic-form",
-   "tier": "A"
-  },
-  {
    "id": "029-basic-form",
    "tier": "A"
   },
@@ -146,6 +158,14 @@
   },
   {
    "id": "067-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "016-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "012-basic-form",
    "tier": "A"
   },
   {
@@ -174,6 +194,10 @@
   },
   {
    "id": "029-nighttime-form",
+   "tier": "A"
+  },
+  {
+   "id": "051-basic-form",
    "tier": "A"
   },
   {
@@ -221,6 +245,10 @@
    "tier": "A"
   },
   {
+   "id": "034-prismana-form",
+   "tier": "A"
+  },
+  {
    "id": "079-rainstorm-form",
    "tier": "A"
   },
@@ -261,6 +289,10 @@
    "tier": "B"
   },
   {
+   "id": "019-basic-form",
+   "tier": "B"
+  },
+  {
    "id": "081-basic-form",
    "tier": "B"
   },
@@ -270,6 +302,10 @@
   },
   {
    "id": "041-forest-form",
+   "tier": "B"
+  },
+  {
+   "id": "025-basic-form",
    "tier": "B"
   },
   {
@@ -289,23 +325,11 @@
    "tier": "B"
   },
   {
-   "id": "003-highland-form",
-   "tier": "B"
-  },
-  {
    "id": "008-highland-form",
    "tier": "B"
   },
   {
    "id": "010-highland-form",
-   "tier": "B"
-  },
-  {
-   "id": "012-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "016-basic-form",
    "tier": "B"
   },
   {
@@ -334,10 +358,6 @@
   },
   {
    "id": "028-mountain-woods-form",
-   "tier": "B"
-  },
-  {
-   "id": "003-mountain-woods-form",
    "tier": "B"
   },
   {
@@ -373,27 +393,27 @@
    "tier": "B"
   },
   {
-   "id": "003-prismana-form",
-   "tier": "B"
-  },
-  {
-   "id": "034-prismana-form",
-   "tier": "B"
-  },
-  {
-   "id": "034-thunderstorm-form",
-   "tier": "B"
-  },
-  {
    "id": "057-prismana-form",
    "tier": "B"
   },
   {
-   "id": "006-rainstorm-form",
+   "id": "037-basic-form",
    "tier": "B"
   },
   {
-   "id": "003-basic-form",
+   "id": "037-highland-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-sea-of-flowers-form",
+   "tier": "B"
+  },
+  {
+   "id": "037-snowfield-form",
+   "tier": "B"
+  },
+  {
+   "id": "006-rainstorm-form",
    "tier": "B"
   },
   {
@@ -417,7 +437,7 @@
    "tier": "B"
   },
   {
-   "id": "003-thunderstorm-form",
+   "id": "034-thunderstorm-form",
    "tier": "B"
   },
   {
@@ -461,6 +481,10 @@
    "tier": "C"
   },
   {
+   "id": "031-basic-form",
+   "tier": "C"
+  },
+  {
    "id": "080-basic-form",
    "tier": "C"
   },
@@ -497,10 +521,6 @@
    "tier": "C"
   },
   {
-   "id": "037-highland-form",
-   "tier": "C"
-  },
-  {
    "id": "020-basic-form",
    "tier": "C"
   },
@@ -525,15 +545,7 @@
    "tier": "C"
   },
   {
-   "id": "051-basic-form",
-   "tier": "C"
-  },
-  {
    "id": "011-plateau-form",
-   "tier": "C"
-  },
-  {
-   "id": "037-basic-form",
    "tier": "C"
   },
   {
@@ -546,10 +558,6 @@
   },
   {
    "id": "017-rainstorm-form",
-   "tier": "C"
-  },
-  {
-   "id": "037-sea-of-flowers-form",
    "tier": "C"
   },
   {
@@ -566,10 +574,6 @@
   },
   {
    "id": "058-snowfield-form",
-   "tier": "C"
-  },
-  {
-   "id": "037-snowfield-form",
    "tier": "C"
   },
   {
