@@ -343,8 +343,9 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
         <p className="hint">
           ⚡ Réseau électrique : le Générateur crépitant et {plan.power.poles.length} Poteau
           {plan.power.poles.length > 1 ? 'x' : ''} électrique
-          {plan.power.poles.length > 1 ? 's' : ''} ; en pointillés jaunes, la zone alimentée (11 cases autour du Générateur, 7 autour d'un Poteau,
-          valeurs relevées par aniimofrance). Les installations électriques (bord jaune) doivent toucher une zone.
+          {plan.power.poles.length > 1 ? 's' : ''} ; en pointillés jaunes, la zone alimentée (carré de 11 cases autour du Générateur, de 7 autour
+          d'un Poteau). Un Poteau est relié au réseau quand sa zone chevauche celle du Générateur ou d'un Poteau déjà relié. Les installations
+          électriques (bord jaune) doivent toucher une zone.
           {plan.pieces.some((p) => p.unpowered) && <b className="bad"> Bord rouge : hors réseau, plus de Poteaux autorisés à ce niveau.</b>}
         </p>
       )}

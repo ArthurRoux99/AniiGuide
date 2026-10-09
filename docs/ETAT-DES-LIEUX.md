@@ -131,3 +131,6 @@ Captures ou mesures utiles :
   120 %, sans Aniimo ; Séchoir jukebox, Aniimo niv. 3 avec la bonne lettre sur une recette niv. 1 →
   480 % ; Cuisinière flamboyante, Aniimo niv. 3 sans la lettre sur une recette niv. 3 → 100 %. Tout
   correspond au modèle de vitesse (figé dans `speed.test.ts`).
+- **Réseau électrique** (captures en mode Construire) : zone d'un Poteau ≈ 7 cases de côté (confirme
+  aniimofrance) ; deux Poteaux à ~6,5 cases l'un de l'autre sont reliés, donc un Poteau est relié dès
+  que sa zone chevauche celle du Générateur ou d'un Poteau relié. Le plan du logis applique cette règle.
