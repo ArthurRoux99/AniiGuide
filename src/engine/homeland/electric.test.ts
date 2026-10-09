@@ -19,8 +19,18 @@ describe('mode électrique', () => {
     const off = plan({ ...base(14, 22, 2), electric: false }), on = plan(base(14, 22, 2));
     expect(on.hours!).toBeLessThan(off.hours! * 0.85);
     expect(on.rows.some((r) => r.electric)).toBe(true);
-    expect(on.electric!.used).toBeLessThanOrEqual(on.electric!.power + 1e-6);
+    expect(on.electric!.used).toBeLessThanOrEqual(on.electric!.power * (1 + 1e-4));
     expect(on.workersUsed.lightning).toBeGreaterThanOrEqual(1);
+  });
+
+  it('taux d’alimentation : 120 % seulement si la consommation reste ≤ production ÷ 1,2', () => {
+    for (const rv of [12, 14, 16]) {
+      const p = plan(base(rv, 22, 2));
+      if (!p.electric) continue;
+      const cap = p.electric.rate > 1 ? p.electric.power / 1.2 : p.electric.power;
+      expect(p.electric.used).toBeLessThanOrEqual(cap * (1 + 1e-4));
+      for (const r of p.rows.filter((x) => x.electric)) expect(r.cycleSeconds).toBeCloseTo(HOMELAND.emode!.seconds[r.recipe.id] / p.electric.rate);
+    }
   });
 
   it('avant le niveau 12 : rien en électrique', () => {

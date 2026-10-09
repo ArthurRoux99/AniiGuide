@@ -146,11 +146,14 @@ export interface PlanOptions {
   /**
    * Mode électrique (par défaut dès le niveau 12) : une installation peut tourner sur le réseau,
    * sans Aniimo, à la durée de lot du jeu ; le Générateur crépitant (un Aniimo Foudre à plein
-   * temps) fournit la puissance que consomment ces installations. Le bonus de vitesse quand la
-   * production dépasse la demande (jusqu'à +20 %) n'est pas compté.
+   * temps) fournit la puissance que consomment ces installations. Taux d'alimentation = production
+   * ÷ consommation, plafonné à 120 % (relevé en jeu) : le plan peut garder de la marge pour +20 %.
    */
   electric?: boolean;
 }
+
+/** Taux d'alimentation maximal : quand la production dépasse la consommation, tout va 20 % plus vite. */
+export const ELECTRIC_BONUS = 1.2;
 
 /** Puissance d'un générateur de niveau `level` tenu par un Aniimo Foudre de niveau `lightning`. */
 export function generatorPower(level: number, lightning: number): number {
@@ -207,7 +210,7 @@ export interface Plan {
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
   /** Mode électrique : Générateurs en service, puissance produite et consommée. */
-  electric?: { generators: number; level: number; lightning: number; power: number; used: number };
+  electric?: { generators: number; level: number; lightning: number; rate: number; power: number; used: number };
   /** Saison : points de l'événement et Blé de lune dépensé en graines, par heure. */
   season?: { pointsPerHour: number; wheatPerHour: number };
   /** Gamelle : Aniimo nourris, nourriture par heure et plats prélevés sur la production. */
@@ -281,18 +284,21 @@ export function plan(o: PlanOptions): Plan {
     // Mode électrique : la machine tourne sur le réseau, sans Aniimo (même si personne n'a la capacité).
     const eSeconds = generator && r.kind !== 'grower' && !r.environment ? HOMELAND.emode?.seconds[r.id] : undefined;
     const ePower = HOMELAND.levels[r.facility]?.[(o.setup.facilities[r.facility]?.level ?? 0) - 1]?.power;
-    if (eSeconds && ePower) {
-      const key = `${r.id}~elec`;
-      const cycles = 3600 / eSeconds;
+    // Deux régimes (voir le générateur plus bas) : réseau chargé (taux d'alimentation 100 %) ou
+    // consommation ≤ production ÷ 1,2 (taux plafonné à 120 % : tout va 20 % plus vite).
+    if (eSeconds && ePower) for (const rate of [1, ELECTRIC_BONUS]) {
+      const key = rate > 1 ? `${r.id}~elec+` : `${r.id}~elec`;
+      const seconds = eSeconds / rate;
+      const cycles = 3600 / seconds;
       const oneRecipe = o.exact && r.kind === 'processor' && !TURN_TAKING.has(r.facility);
       const col: Record<string, number> = oneRecipe ? { [`dedc:${r.id}`]: 1 } : { [`fac:${r.facility}`]: 1 };
       if (oneRecipe) dedRecipes.set(r.id, r.facility);
       col[`item:${r.output.item}`] = r.output.qty * cycles;
       if (r.byproduct) col[`item:${r.byproduct.item}`] = (col[`item:${r.byproduct.item}`] ?? 0) + r.byproduct.qty * cycles;
       for (const i of r.inputs) col[`item:${i.item}`] = (col[`item:${i.item}`] ?? 0) - i.qty * cycles;
-      col.power = ePower;
+      col[rate > 1 ? 'pfast' : 'pslow'] = ePower * rate;
       variables[key] = col;
-      meta.set(key, { recipe: r, covered: false, cycleSeconds: eSeconds, workerLevel: null, personalityBonus: false, perUnit: r.output.qty * cycles, electric: true });
+      meta.set(key, { recipe: r, covered: false, cycleSeconds: seconds, workerLevel: null, personalityBonus: false, perUnit: r.output.qty * cycles, electric: true });
     }
     const tiers = workerTiers(r, o.workers);
     if (!tiers) {
@@ -487,18 +493,25 @@ export function plan(o: PlanOptions): Plan {
   // Générateur crépitant : gen = générateurs en service (entier, 1 au plus), chacun tenu par un Aniimo Foudre du niveau voulu.
   // Un Aniimo Foudre de niveau inférieur au niveau demandé fait tourner le générateur à puissance
   // réduite (estimation : la puissance du niveau de générateur qu'il suffirait à tenir).
-  if (generator && Object.values(variables).some((v) => 'power' in v)) {
+  // Taux d'alimentation = production ÷ consommation, plafonné à 120 % (relevé en jeu : 600 W pour
+  // 210 W consommés → 120 %). Le générateur sert l'un des deux régimes : gen:l (réseau chargé,
+  // vitesse normale) ou gen:l+ (consommation ≤ production ÷ 1,2, installations 20 % plus rapides).
+  if (generator && Object.values(variables).some((v) => 'pslow' in v)) {
     for (let l = 1; l <= generator.lightning; l++) {
       const power = generatorPower(generator.level, l);
       if (!power) continue;
-      const col: Record<string, number> = { power: -power, gens: 1, workers: 1 };
-      for (let k = 1; k <= l; k++) col[`ab:lightning:${k}`] = 1;
-      variables[`gen:${l}`] = col;
-      ints[`gen:${l}`] = 1;
+      for (const fast of [false, true]) {
+        const key = `gen:${l}${fast ? '+' : ''}`;
+        const col: Record<string, number> = { [fast ? 'pfast' : 'pslow']: -power, gens: 1, workers: 1 };
+        for (let k = 1; k <= l; k++) col[`ab:lightning:${k}`] = 1;
+        variables[key] = col;
+        ints[key] = 1;
+      }
       constraints[`ab:lightning:${l}`] ??= { max: 0 };
     }
     constraints.gens = { max: 1 };
-    constraints.power = { max: 0 };
+    constraints.pslow = { max: 0 };
+    constraints.pfast = { max: 0 };
   }
   const itemKeys = new Set(Object.values(variables).flatMap((c) => Object.keys(c).filter((k) => k.startsWith('item:'))));
   for (const k of itemKeys) constraints[k] = { min: 0 };
@@ -613,11 +626,13 @@ export function plan(o: PlanOptions): Plan {
   const eaters = team ? team.profiles.reduce((n, p) => n + (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0), 0) : o.workers.total;
   const food = feeding ? { eaters, perHour: FOOD_PER_HOUR * eaters, dishes } : undefined;
 
-  const genLevel = generator ? [...Array(generator.lightning).keys()].map((i) => i + 1).find((l) => Math.round(solution[`gen:${l}`] ?? 0) > 0) : undefined;
+  const genOn = (l: number) => Math.round((solution[`gen:${l}`] ?? 0) + (solution[`gen:${l}+`] ?? 0)) > 0;
+  const genLevel = generator ? [...Array(generator.lightning).keys()].map((i) => i + 1).find(genOn) : undefined;
+  const genFast = genLevel != null && Math.round(solution[`gen:${genLevel}+`] ?? 0) > 0;
   const generators = genLevel ? 1 : 0;
   if (generators > 0) workersUsed.lightning = (workersUsed.lightning ?? 0) + generators;
   const electric = generator && genLevel
-    ? { generators, level: generator.level, lightning: genLevel, power: generatorPower(generator.level, genLevel), used: rows.filter((r) => r.electric).reduce((s, r) => s + r.units * (HOMELAND.levels[r.recipe.facility]?.[(o.setup.facilities[r.recipe.facility]?.level ?? 0) - 1]?.power ?? 0), 0) }
+    ? { generators, level: generator.level, lightning: genLevel, rate: genFast ? ELECTRIC_BONUS : 1, power: generatorPower(generator.level, genLevel), used: rows.filter((r) => r.electric).reduce((s, r) => s + r.units * (HOMELAND.levels[r.recipe.facility]?.[(o.setup.facilities[r.recipe.facility]?.level ?? 0) - 1]?.power ?? 0), 0) }
     : undefined;
   const season = o.season
     ? {

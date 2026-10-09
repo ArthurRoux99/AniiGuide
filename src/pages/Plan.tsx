@@ -203,7 +203,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
             <li>Parcelles entières, et chaque machine de transformation réglée sur une seule recette (l'Établi de menuiserie et le Four de cheminée alternent entre leurs paliers), comme en jeu.</li>
             <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
             <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
-            <li>Mode électrique (niveau 12 et plus) : durée des lots et consommation par niveau d'installation tirées des données du jeu (Wikily). Le Générateur crépitant occupe un Aniimo Foudre ; tenu par un Aniimo Foudre de niveau trop bas, il est compté à la puissance du niveau de générateur que cet Aniimo suffit à tenir (estimation). Le bonus jusqu'à +20 % quand la production dépasse la consommation n'est pas compté. Installations à poser dans la portée du Générateur (11 cases) ou d'un Poteau électrique crépitant (7 cases).</li>
+            <li>Mode électrique (niveau 12 et plus) : durée des lots et consommation par niveau d'installation tirées des données du jeu (Wikily). Le Générateur crépitant occupe un Aniimo Foudre ; tenu par un Aniimo Foudre de niveau trop bas, il est compté à la puissance du niveau de générateur que cet Aniimo suffit à tenir (estimation). Taux d'alimentation = production ÷ consommation, plafonné à 120 % (relevé en jeu) : avec une consommation sous 83 % de la production, toutes les installations électriques vont 20 % plus vite, et le plan en tient compte. Installations à poser dans la portée du Générateur (11 cases) ou d'un Poteau électrique crépitant (7 cases).</li>
             <li>Zone des appareils climatiques : 9×9 cases, une parcelle compte dès qu'elle la touche (jusqu'à 32 Fermes ou 12 Pépinières par appareil). Coûts d'amélioration des installations et durée d'amélioration du Camping-car non inclus.</li>
             <li>
               Un écart avec le jeu ? <a href="#mesures">Vérifie une durée en jeu</a> et signale-le.
@@ -270,8 +270,9 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv:
         )}
         {result.electric && (
           <p className="hint">
-            ⚡ Mode électrique : un Générateur crépitant niv. {result.electric.level} tenu par un Aniimo Foudre niv. {result.electric.lightning}, {nf.format(result.electric.used)} /{' '}
-            {nf.format(result.electric.power)} de puissance utilisée. Les productions marquées ⚡ tournent sur le réseau, sans Aniimo.
+            ⚡ Mode électrique : un Générateur crépitant niv. {result.electric.level} tenu par un Aniimo Foudre niv. {result.electric.lightning}, {nf.format(result.electric.used)} W
+            consommés sur {nf.format(result.electric.power)} W, taux d'alimentation{' '}
+            {result.electric.rate > 1 ? '120 % (marge gardée exprès : +20 % de vitesse)' : '100 %'}. Les productions marquées ⚡ tournent sur le réseau, sans Aniimo.
           </p>
         )}
         {result.season && (
