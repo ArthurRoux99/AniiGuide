@@ -17,7 +17,7 @@ export interface TeamInput {
   /** Suppose que chaque Aniimo a la bonne personnalité pour son poste. */
   personality: boolean;
   stock: { coins: number; items: Record<string, number> };
-  opts: Pick<PlanOptions, 'watering' | 'includeUnverified' | 'dedicated'>;
+  opts: Pick<PlanOptions, 'watering' | 'includeUnverified' | 'dedicated' | 'electric'>;
   /** Équipe actuelle : à rythme égal, l'optimiseur la garde au maximum. */
   current?: { homeland: AbilityLevels }[];
 }

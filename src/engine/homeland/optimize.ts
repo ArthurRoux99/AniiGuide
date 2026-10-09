@@ -143,6 +143,28 @@ export interface PlanOptions {
    * Note de recette. `wheatPerDay` : Blé de lune dépensable par jour en graines (null : sans limite).
    */
   season?: { notes: boolean; wheatPerDay: number | null };
+  /**
+   * Mode électrique (par défaut dès le niveau 12) : une installation peut tourner sur le réseau,
+   * sans Aniimo, à la durée de lot du jeu ; le Générateur crépitant (un Aniimo Foudre à plein
+   * temps) fournit la puissance que consomment ces installations. Le bonus de vitesse quand la
+   * production dépasse la demande (jusqu'à +20 %) n'est pas compté.
+   */
+  electric?: boolean;
+}
+
+/** Puissance d'un générateur de niveau `level` tenu par un Aniimo Foudre de niveau `lightning`. */
+export function generatorPower(level: number, lightning: number): number {
+  const g = HOMELAND.emode!.generator;
+  let best = 0;
+  for (let i = 0; i < level; i++) if (g.lightning[i] <= lightning) best = g.power[i];
+  return best;
+}
+
+/** Générateur crépitant au niveau `rv` du Camping-car : niveau, puissance, niveau Foudre demandé (null avant le 12). */
+export function generatorAt(rv: number): { level: number; power: number; lightning: number } | null {
+  const g = HOMELAND.emode?.generator;
+  const level = g ? g.rv.filter((r) => rv >= r).length : 0;
+  return g && level > 0 ? { level, power: g.power[level - 1], lightning: g.lightning[level - 1] } : null;
 }
 
 /** Ce que mange un Aniimo du logis, par heure (10 par minute). */
@@ -157,6 +179,8 @@ export interface PlanRow {
   workerLevel: number | null;
   personalityBonus: boolean;
   outputPerHour: number;
+  /** Installation en mode électrique : sur le réseau, sans Aniimo. */
+  electric?: boolean;
 }
 
 export interface Plan {
@@ -182,6 +206,8 @@ export interface Plan {
   pairs: { heat: Environment; cool: Environment; both: Environment; count: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
+  /** Mode électrique : Générateurs en service, puissance produite et consommée. */
+  electric?: { generators: number; level: number; lightning: number; power: number; used: number };
   /** Saison : points de l'événement et Blé de lune dépensé en graines, par heure. */
   season?: { pointsPerHour: number; wheatPerHour: number };
   /** Gamelle : Aniimo nourris, nourriture par heure et plats prélevés sur la production. */
@@ -249,11 +275,28 @@ export function plan(o: PlanOptions): Plan {
   const dedicated = o.dedicated ?? false;
   const staffTiers = new Map<string, { facility: string; ability: AbilityId; level: number; bonus: boolean; letter: string | null | undefined }>();
 
+  const generator = o.electric !== false ? generatorAt(o.setup.rv) : null;
   for (const r of RECIPES) {
     if (!recipeAllowed(r, o)) continue;
+    // Mode électrique : la machine tourne sur le réseau, sans Aniimo (même si personne n'a la capacité).
+    const eSeconds = generator && r.kind !== 'grower' && !r.environment ? HOMELAND.emode?.seconds[r.id] : undefined;
+    const ePower = HOMELAND.levels[r.facility]?.[(o.setup.facilities[r.facility]?.level ?? 0) - 1]?.power;
+    if (eSeconds && ePower) {
+      const key = `${r.id}~elec`;
+      const cycles = 3600 / eSeconds;
+      const oneRecipe = o.exact && r.kind === 'processor' && !TURN_TAKING.has(r.facility);
+      const col: Record<string, number> = oneRecipe ? { [`dedc:${r.id}`]: 1 } : { [`fac:${r.facility}`]: 1 };
+      if (oneRecipe) dedRecipes.set(r.id, r.facility);
+      col[`item:${r.output.item}`] = r.output.qty * cycles;
+      if (r.byproduct) col[`item:${r.byproduct.item}`] = (col[`item:${r.byproduct.item}`] ?? 0) + r.byproduct.qty * cycles;
+      for (const i of r.inputs) col[`item:${i.item}`] = (col[`item:${i.item}`] ?? 0) - i.qty * cycles;
+      col.power = ePower;
+      variables[key] = col;
+      meta.set(key, { recipe: r, covered: false, cycleSeconds: eSeconds, workerLevel: null, personalityBonus: false, perUnit: r.output.qty * cycles, electric: true });
+    }
     const tiers = workerTiers(r, o.workers);
     if (!tiers) {
-      blockers.add(`${r.ability}:${r.abilityLevel}`);
+      if (!eSeconds) blockers.add(`${r.ability}:${r.abilityLevel}`);
       continue;
     }
     // Travail aux champs : chaque récolte demande des tâches (défricher, semer, arroser, récolter)
@@ -441,6 +484,22 @@ export function plan(o: PlanOptions): Plan {
   }
   // Capacité absente de l'équipe : aucun poste de cette capacité (appareils climatiques compris).
   for (const a of Object.values(ENV_STAFF)) constraints[`ab:${a}:1`] ??= { max: 0 };
+  // Générateur crépitant : gen = générateurs en service (entier, 1 au plus), chacun tenu par un Aniimo Foudre du niveau voulu.
+  // Un Aniimo Foudre de niveau inférieur au niveau demandé fait tourner le générateur à puissance
+  // réduite (estimation : la puissance du niveau de générateur qu'il suffirait à tenir).
+  if (generator && Object.values(variables).some((v) => 'power' in v)) {
+    for (let l = 1; l <= generator.lightning; l++) {
+      const power = generatorPower(generator.level, l);
+      if (!power) continue;
+      const col: Record<string, number> = { power: -power, gens: 1, workers: 1 };
+      for (let k = 1; k <= l; k++) col[`ab:lightning:${k}`] = 1;
+      variables[`gen:${l}`] = col;
+      ints[`gen:${l}`] = 1;
+      constraints[`ab:lightning:${l}`] ??= { max: 0 };
+    }
+    constraints.gens = { max: 1 };
+    constraints.power = { max: 0 };
+  }
   const itemKeys = new Set(Object.values(variables).flatMap((c) => Object.keys(c).filter((k) => k.startsWith('item:'))));
   for (const k of itemKeys) constraints[k] = { min: 0 };
   constraints.coins = { min: 0 };
@@ -531,7 +590,7 @@ export function plan(o: PlanOptions): Plan {
       workersUsed[t.ability] = (workersUsed[t.ability] ?? 0) + count;
     }
   } else {
-    for (const r of rows) if (r.recipe.ability && r.recipe.kind !== 'grower') workersUsed[r.recipe.ability] = (workersUsed[r.recipe.ability] ?? 0) + r.units;
+    for (const r of rows) if (r.recipe.ability && r.recipe.kind !== 'grower' && !r.electric) workersUsed[r.recipe.ability] = (workersUsed[r.recipe.ability] ?? 0) + r.units;
   }
 
   const climate = Object.entries(ENV_BUILDING).flatMap(([env, device]) => {
@@ -554,6 +613,12 @@ export function plan(o: PlanOptions): Plan {
   const eaters = team ? team.profiles.reduce((n, p) => n + (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0), 0) : o.workers.total;
   const food = feeding ? { eaters, perHour: FOOD_PER_HOUR * eaters, dishes } : undefined;
 
+  const genLevel = generator ? [...Array(generator.lightning).keys()].map((i) => i + 1).find((l) => Math.round(solution[`gen:${l}`] ?? 0) > 0) : undefined;
+  const generators = genLevel ? 1 : 0;
+  if (generators > 0) workersUsed.lightning = (workersUsed.lightning ?? 0) + generators;
+  const electric = generator && genLevel
+    ? { generators, level: generator.level, lightning: genLevel, power: generatorPower(generator.level, genLevel), used: rows.filter((r) => r.electric).reduce((s, r) => s + r.units * (HOMELAND.levels[r.recipe.facility]?.[(o.setup.facilities[r.recipe.facility]?.level ?? 0) - 1]?.power ?? 0), 0) }
+    : undefined;
   const season = o.season
     ? {
         pointsPerHour: sales.reduce((s, x) => s + x.perHour * (HOMELAND.items[x.item].points ?? 0), 0),
@@ -565,7 +630,7 @@ export function plan(o: PlanOptions): Plan {
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined, food, season };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined, food, season, electric };
 }
 
 /**

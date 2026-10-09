@@ -25,10 +25,18 @@ describe('équipe optimale', () => {
     });
   }
 
-  it('au RV 16, l’équipe actuelle est bien plus lente que l’équipe optimale', () => {
-    const t = optimalTeam({ rv: 16, candidates: candidateProfiles(ANIIMO, false), cap: MAX_ANIIMO_BY_RV[16] - 2, personality: false, stock: zero, opts });
-    const mine = plan({ ...opts, setup: setupForRv(16), workers: rosterPool(current), goal: { kind: 'levelUp', stock: zero } });
+  it('au RV 16 sans mode électrique, l’équipe actuelle est bien plus lente que l’équipe optimale', () => {
+    const noElec = { ...opts, electric: false };
+    const t = optimalTeam({ rv: 16, candidates: candidateProfiles(ANIIMO, false), cap: MAX_ANIIMO_BY_RV[16] - 2, personality: false, stock: zero, opts: noElec });
+    const mine = plan({ ...noElec, setup: setupForRv(16), workers: rosterPool(current), goal: { kind: 'levelUp', stock: zero } });
     expect(mine.hours! / t.plan.hours!).toBeGreaterThan(1.3);
+  });
+
+  it('au RV 16, le mode électrique rattrape l’écart : les machines tournent sans Aniimo', () => {
+    const off = plan({ ...opts, electric: false, setup: setupForRv(16), workers: rosterPool(current), goal: { kind: 'levelUp', stock: zero } });
+    const on = plan({ ...opts, setup: setupForRv(16), workers: rosterPool(current), goal: { kind: 'levelUp', stock: zero } });
+    expect(on.hours!).toBeLessThan(off.hours! * 0.8);
+    expect(on.electric!.used).toBeLessThanOrEqual(on.electric!.power + 1e-6);
   });
 
   it('diffTeam : garder + libérer = équipe actuelle, garder + recruter = équipe cible', () => {

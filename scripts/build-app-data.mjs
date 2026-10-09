@@ -85,7 +85,7 @@ const fr = await read('data/i18n/fr.json');
 const wikily = await read('data/i18n/wikily-fr.json').catch(() => ({ facilities: {}, items: {} }));
 await writeFile(
   join(ROOT, 'src/data/homeland.gen.json'),
-  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...wikily.items, ...fr.objets } }, levels: (await read('data/homeland/facility-levels.json').catch(() => ({ levels: {} }))).levels, food: Object.fromEntries(Object.entries((await read('data/homeland/food.json').catch(() => ({ food: {} }))).food).map(([id, f]) => [id, f.value])) }) + '\n',
+  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...wikily.items, ...fr.objets } }, levels: (await read('data/homeland/facility-levels.json').catch(() => ({ levels: {} }))).levels, food: Object.fromEntries(Object.entries((await read('data/homeland/food.json').catch(() => ({ food: {} }))).food).map(([id, f]) => [id, f.value])), emode: await read('data/homeland/emode.json').then(({ generator, seconds }) => ({ generator, seconds })).catch(() => null) }) + '\n',
 );
 console.log(`src/data/homeland.gen.json : ${homeland.recipes.length} recettes`);
 

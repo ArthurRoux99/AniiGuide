@@ -34,6 +34,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   const [watering, setWatering] = useState(true);
   const [unverified, setUnverified] = useState(false);
   const [feeding, setFeeding] = useState(true);
+  const [electric, setElectric] = useState(true);
   const rv = profile.rv;
   const maxed = rv >= 20;
   const seasonOpen = rv >= HOMELAND.season.minHomeLevel;
@@ -61,9 +62,10 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         includeUnverified: unverified,
         feeding,
         season,
+        electric,
       };
     },
-    [rv, goal, maxed, pool, watering, unverified, feeding, seasonActive, notes, wheatPerDay, profile.coins, profile.stock, profile.facilities],
+    [rv, goal, maxed, pool, watering, unverified, feeding, electric, seasonActive, notes, wheatPerDay, profile.coins, profile.stock, profile.facilities],
   );
   // Calcul rapide tout de suite, puis le calcul exact (machines dédiées, parcelles entières,
   // paires d'appareils ; jusqu'à une seconde) quand la saisie s'arrête.
@@ -126,6 +128,11 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <label>
             <input type="checkbox" checked={feeding} onChange={(e) => setFeeding(e.target.checked)} /> Nourrir les Aniimo avec la production
           </label>
+          {rv >= 12 && (
+            <label>
+              <input type="checkbox" checked={electric} onChange={(e) => setElectric(e.target.checked)} /> Mode électrique
+            </label>
+          )}
           {seasonOpen && (
             <label>
               <input type="checkbox" checked={seasonActive} disabled={goal === 'points'} onChange={(e) => setSeasonOn(e.target.checked)} /> Lune des moissons (saison)
@@ -196,7 +203,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
             <li>Parcelles entières, et chaque machine de transformation réglée sur une seule recette (l'Établi de menuiserie et le Four de cheminée alternent entre leurs paliers), comme en jeu.</li>
             <li>Les Aniimo passent d'une installation à l'autre selon les besoins : un Aniimo n'est compté qu'une fois, au niveau et avec la personnalité qu'il a vraiment.</li>
             <li>Le semis, l'arrosage et la récolte occupent des Aniimo quelques secondes par récolte : ce temps est décompté de tes ouvriers.</li>
-            <li>Mode électrique (niveau 12 et plus) non pris en compte : pas encore de données fiables.</li>
+            <li>Mode électrique (niveau 12 et plus) : durée des lots et consommation par niveau d'installation tirées des données du jeu (Wikily). Le Générateur crépitant occupe un Aniimo Foudre ; tenu par un Aniimo Foudre de niveau trop bas, il est compté à la puissance du niveau de générateur que cet Aniimo suffit à tenir (estimation). Le bonus jusqu'à +20 % quand la production dépasse la consommation n'est pas compté. Installations à poser dans la portée du Générateur (11 cases) ou d'un Poteau électrique crépitant (7 cases).</li>
             <li>Zone des appareils climatiques : 9×9 cases, une parcelle compte dès qu'elle la touche (jusqu'à 32 Fermes ou 12 Pépinières par appareil). Coûts d'amélioration des installations et durée d'amélioration du Camping-car non inclus.</li>
             <li>
               Un écart avec le jeu ? <a href="#mesures">Vérifie une durée en jeu</a> et signale-le.
@@ -229,7 +236,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv:
   const byFacility = new Map<string, PlanRow[]>();
   for (const r of result.rows) byFacility.set(r.recipe.facility, [...(byFacility.get(r.recipe.facility) ?? []), r]);
   const missingBonus = [...byFacility.entries()]
-    .map(([f, rows]) => ({ f, letter: FACILITY_BY_ID.get(f)?.personality, rows: rows.filter((r) => r.recipe.kind !== 'grower' && !r.personalityBonus) }))
+    .map(([f, rows]) => ({ f, letter: FACILITY_BY_ID.get(f)?.personality, rows: rows.filter((r) => r.recipe.kind !== 'grower' && !r.personalityBonus && !r.electric) }))
     .filter((x) => x.letter && x.rows.length);
   const idle = result.facilityUse.filter((f) => {
     if (['heat-furnace', 'cooling-unit', 'sunlamp'].includes(f.facility)) return false;
@@ -260,6 +267,12 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv:
             <strong>{nf.format(result.coinsPerHour)} pièces/h</strong>
             <span className="muted">{nf.format(result.coinsPerHour * 24)} par jour</span>
           </div>
+        )}
+        {result.electric && (
+          <p className="hint">
+            ⚡ Mode électrique : un Générateur crépitant niv. {result.electric.level} tenu par un Aniimo Foudre niv. {result.electric.lightning}, {nf.format(result.electric.used)} /{' '}
+            {nf.format(result.electric.power)} de puissance utilisée. Les productions marquées ⚡ tournent sur le réseau, sans Aniimo.
+          </p>
         )}
         {result.season && (
           <p className="hint">
@@ -316,7 +329,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv:
                 <table>
                   <tbody>
                     {rows.filter((r) => !grower || whole.get(r)! > 0).map((r) => (
-                      <tr key={`${r.recipe.id}${r.covered}${r.workerLevel}${r.personalityBonus}`}>
+                      <tr key={`${r.recipe.id}${r.covered}${r.workerLevel}${r.personalityBonus}${r.electric ?? ''}`}>
                         <td>
                           <Name id={r.recipe.output.item} kind="item" />
                           {r.recipe.environment && (
@@ -332,7 +345,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv:
                         </td>
                         <td className="num muted">{fmtDuration(r.cycleSeconds / 3600)}</td>
                         <td className="num muted">{nf1.format(r.outputPerHour)}/h</td>
-                        <td className="muted">{r.workerLevel ? `niv. ${r.workerLevel}${r.personalityBonus ? ' +20 %' : ''}` : ''}</td>
+                        <td className="muted">{r.electric ? <span title="Mode électrique : sans Aniimo">⚡</span> : r.workerLevel ? `niv. ${r.workerLevel}${r.personalityBonus ? ' +20 %' : ''}` : ''}</td>
                       </tr>
                     ))}
                   </tbody>

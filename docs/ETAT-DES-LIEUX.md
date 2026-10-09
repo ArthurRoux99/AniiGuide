@@ -103,12 +103,27 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 | 1 | E5 | **Noms officiels** de la Chasse aux œufs : nom du mode, 7 rangs, avantages par rang (emplacements de Coffre Vénard, qualité max du butin) | Plus d'anglais dans la partie Œufs | Données prêtes |
 | 2 | E6 | **Planificateur de talents** : les 2 arbres, coût total restant, ordre conseillé (coffre du bateau et « objets à moitié prix » d'abord), relié au calculateur de parties | Savoir combien de parties pour finir un arbre avant la fin de saison | Données prêtes |
 | 3 | F8a ✅ | **Nourriture** : le plan compte ce que mangent les Aniimo (10/min chacun) et choisit le plat le moins coûteux (vente perdue) ; carte « Remplir la gamelle » : combien de plats pour tenir X heures hors ligne | Plans justes sur la durée ; ne plus jamais trouver ses Aniimo à l'arrêt | Données prêtes |
-| 4 | F8b | **Mode électrique** : Générateur crépitant (Aniimo Foudre), consommation de chaque installation par niveau (déjà relevée), installations qui tournent sans Aniimo ; le plan choisit lesquelles passer en électrique ; Générateur et Poteaux posés sur le plan du logis (portées 11 et 7) | Des Aniimo libérés pour d'autres postes dès le niveau 12 | Il manque **une mesure en jeu** : durée d'un lot en mode électrique |
+| 4 | F8b ✅ | **Mode électrique** : Générateur crépitant (Aniimo Foudre), consommation de chaque installation par niveau (déjà relevée), installations qui tournent sans Aniimo ; le plan choisit lesquelles passer en électrique ; Générateur et Poteaux posés sur le plan du logis (portées 11 et 7) | Des Aniimo libérés pour d'autres postes dès le niveau 12 | Il manque **une mesure en jeu** : durée d'un lot en mode électrique |
 | 5 | F9 ✅ | **Lune des moissons** (événement de saison, données Aniimax) : objectif « points de l'événement » | Optimiser l'événement en cours | Données prêtes ; à faire seulement si l'événement dure encore |
 | 6 | F10 | **Modules du camping-car** : coût de chaque niveau dans la feuille de route ; mutations et Envoi d'Aniimo expliqués ; rappel d'excursion (6 h) sur la page Aujourd'hui | Rien d'oublié à chaque niveau | Données prêtes |
-| 7 | F11 | **Tailles à confirmer** (Fournaise, Lampe, Grande roue) | Plan du logis exact | Il manque une capture en mode Construire |
+| 7 | F11 ✅ | **Tailles à confirmer** (Fournaise, Lampe, Grande roue) | Plan du logis exact | Il manque une capture en mode Construire |
 
 Captures ou mesures utiles :
 1. Une installation en mode électrique : la durée d'un lot et la puissance du réseau.
 2. La gamelle vide : est-ce que les Aniimo s'arrêtent ou ralentissent ?
 3. Une Fournaise thermique et une Grande roue à tisser en mode Construire, avec la grille.
+
+### Recherche du 9 octobre (suite) : mode électrique, gamelle, tailles
+
+- **Mode électrique** : Wikily publie, pour chacune des 168 recettes qui le permettent, la durée d'un
+  lot sur le réseau (données du client du jeu, `scripts/fetch-emode.mjs`). C'est la durée d'un Aniimo
+  du niveau requis à 100 % (charge ÷ 1, 1,25 ou 1,5), sans Aniimo. Consommation : 15 par niveau
+  d'installation (30 pour Mine, Puits, Machine à Aniipods, Polisseuse). Générateur crépitant : 600,
+  800, 1 000, 1 200, 1 500 de puissance (Foudre niv. 1, 2, 3, 3, 3), niveaux débloqués aux RV 12 à 20.
+  Gain mesuré : nul avec des Aniimo idéaux (les machines limitent), mais −25 à −44 % de temps de montée
+  et +33 à +48 % de pièces/h avec une équipe de niveau 1 ou 2.
+- **Gamelle vide** : toujours contradictoire (×0,2 pour Hideout et AniimoTools, arrêt complet pour
+  aniimoeggs) ; le plan ne laisse jamais la gamelle vide, donc la question n'influe pas sur le calcul.
+- **Tailles** : Fournaise thermique 1×1 (Wikily, Aniimax), Grande roue à tisser 4×4 (Hideout, Aniimax) :
+  nos données sont justes, aniimofrance se trompe.
+

@@ -84,6 +84,17 @@ test('Optimiser : points de la Lune des moissons', async ({ page }) => {
   await expect(page.getByText(/Blé de rayon de lune/).first()).toBeVisible();
 });
 
+test('Optimiser : mode électrique dès le niveau 12', async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto('#plan');
+  await expect(page.getByLabel('Mode électrique')).toHaveCount(0);
+  await page.getByLabel('Camping-car').selectOption('14');
+  await expect(page.getByLabel('Mode électrique')).toBeChecked();
+  await page.getByLabel('Mode électrique').uncheck();
+  await expect(page.getByTitle('Mode électrique : sans Aniimo')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
 test('Aniidex : fiche détaillée', async ({ page }) => {
   await page.goto('#aniidex');
   await page.locator('.dex-grid a').first().click();

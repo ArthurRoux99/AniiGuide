@@ -68,6 +68,11 @@ interface HomelandData {
   levels: Record<string, { stock: number | null; power: number | null; cost: number | null }[]>;
   /** Valeur nourrissante de chaque plat (un Aniimo au travail en mange 10 par minute). */
   food: Record<string, number>;
+  /**
+   * Mode électrique (dès le niveau 12) : durée d'un lot sur le réseau, sans Aniimo, par recette ;
+   * Générateur crépitant par niveau (puissance, niveau Foudre demandé, niveau du Camping-car).
+   */
+  emode: { generator: { power: number[]; lightning: number[]; rv: number[] }; seconds: Record<string, number> } | null;
 }
 
 export const HOMELAND = raw as unknown as HomelandData;
