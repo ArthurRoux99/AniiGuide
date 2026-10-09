@@ -1,0 +1,322 @@
+{
+ "source": "https://wikily.gg/fr/aniimo/homeland-food",
+ "fetchedAt": "2026-10-09T08:31:30.889Z",
+ "perWorkerPerMinute": 10,
+ "food": {
+  "apple_candy": {
+   "name": "Bonbon à la pomme",
+   "value": 45360,
+   "madeAt": "Attrape-popote"
+  },
+  "apple_tart": {
+   "name": "Tarte aux pommes",
+   "value": 30800,
+   "madeAt": "Attrape-popote"
+  },
+  "berry_chocolate_coconut_pudding": {
+   "name": "Pudding chococo à la fraise",
+   "value": 126360,
+   "madeAt": "Attrape-popote"
+  },
+  "bread": {
+   "name": "Pain",
+   "value": 26740,
+   "madeAt": "Attrape-popote"
+  },
+  "captain_spud": {
+   "name": "Capitaine Patate",
+   "value": 600,
+   "madeAt": "Ferme"
+  },
+  "caramel_nut_chips": {
+   "name": "Chips de noix au caramel",
+   "value": 45570,
+   "madeAt": "Attrape-popote"
+  },
+  "cherry_blossom_rice_ball": {
+   "name": "Boule de riz à la fleur de cerisier",
+   "value": 45650,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "cocoa_powder": {
+   "name": "Poudre de cacao",
+   "value": 12060,
+   "madeAt": "Moulin-carrousel"
+  },
+  "coconut_milk": {
+   "name": "Lait de coco",
+   "value": 24110,
+   "madeAt": "Moulin-carrousel"
+  },
+  "coconut_oil": {
+   "name": "Huile de coco",
+   "value": 10980,
+   "madeAt": "Moulin-carrousel"
+  },
+  "cranberry": {
+   "name": "Canneberge",
+   "value": 1450,
+   "madeAt": "Ferme"
+  },
+  "cranberry_chocolate": {
+   "name": "Chocolat à la canneberge",
+   "value": 90420,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "creamy_potato_soup": {
+   "name": "Soupe onctueuse de pomme de terre",
+   "value": 23470,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "dried_bean_curd": {
+   "name": "Tofu séché",
+   "value": 15400,
+   "madeAt": "Séchoir jukebox"
+  },
+  "dried_cranberries": {
+   "name": "Canneberges séchées",
+   "value": 12060,
+   "madeAt": "Séchoir jukebox"
+  },
+  "dried_ginseng": {
+   "name": "Ginseng séché",
+   "value": 13020,
+   "madeAt": "Séchoir jukebox"
+  },
+  "dried_grapes": {
+   "name": "Raisins secs",
+   "value": 12500,
+   "madeAt": "Séchoir jukebox"
+  },
+  "dried_lemon_slices": {
+   "name": "Tranches de citron séché",
+   "value": 6560,
+   "madeAt": "Séchoir jukebox"
+  },
+  "dried_strawberries": {
+   "name": "Fraises séchées",
+   "value": 9060,
+   "madeAt": "Séchoir jukebox"
+  },
+  "energy_bites": {
+   "name": "Bouchées d'énergie",
+   "value": 1000,
+   "madeAt": "Aucune recette de production"
+  },
+  "flower_bread": {
+   "name": "Pain aux fleurs",
+   "value": 28080,
+   "madeAt": "Attrape-popote"
+  },
+  "ginseng": {
+   "name": "Ginseng",
+   "value": 3620,
+   "madeAt": "Ferme"
+  },
+  "ginseng_chestnut_cake": {
+   "name": "Gâteau au ginseng et à la châtaigne",
+   "value": 29700,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "ginseng_powder": {
+   "name": "Poudre de ginseng",
+   "value": 12730,
+   "madeAt": "Moulin-carrousel"
+  },
+  "grape_candy": {
+   "name": "Bonbon au raisin",
+   "value": 45570,
+   "madeAt": "Attrape-popote"
+  },
+  "grapes": {
+   "name": "Raisins",
+   "value": 1210,
+   "madeAt": "Ferme"
+  },
+  "jello": {
+   "name": "Gelée",
+   "value": 42690,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "lavender_cookies": {
+   "name": "Biscuits à la lavande",
+   "value": 30240,
+   "madeAt": "Attrape-popote"
+  },
+  "maple_candy_roasted_potatoes": {
+   "name": "Pommes de terre rôties au bonbon à l'érable",
+   "value": 39600,
+   "madeAt": "Attrape-popote"
+  },
+  "maple_candy_star": {
+   "name": "Bonbon en étoile à l'érable",
+   "value": 28460,
+   "madeAt": "Attrape-popote"
+  },
+  "milled_rice": {
+   "name": "Riz décortiqué",
+   "value": 7870,
+   "madeAt": "Moulin-carrousel"
+  },
+  "moondew_radish": {
+   "name": "Radis de rosée lunaire",
+   "value": 1350,
+   "madeAt": "Ferme"
+  },
+  "moondew_radish_slices": {
+   "name": "Tranches de radis de rosée lunaire",
+   "value": 45280,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "potato": {
+   "name": "Pomme de terre",
+   "value": 220,
+   "madeAt": "Ferme"
+  },
+  "potato_chips": {
+   "name": "Chips de pomme de terre",
+   "value": 6370,
+   "madeAt": "Séchoir jukebox"
+  },
+  "premium_berry_chocolate_coconut_pudding": {
+   "name": "Pudding chococo à la fraise premium",
+   "value": 142560,
+   "madeAt": "Attrape-popote"
+  },
+  "premium_bread": {
+   "name": "Pain premium",
+   "value": 26740,
+   "madeAt": "Attrape-popote"
+  },
+  "premium_jello": {
+   "name": "Gelée premium",
+   "value": 47440,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "premium_potato_soup": {
+   "name": "Soupe de pommes de terre premium",
+   "value": 23470,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "refined_flour": {
+   "name": "Farine raffinée",
+   "value": 12200,
+   "madeAt": "Moulin-carrousel"
+  },
+  "rice": {
+   "name": "Riz",
+   "value": 360,
+   "madeAt": "Ferme"
+  },
+  "rice_drink": {
+   "name": "Boisson au riz",
+   "value": 23760,
+   "madeAt": "Moulin-carrousel"
+  },
+  "rich_grape_compote": {
+   "name": "Compote de raisin gourmande",
+   "value": 42690,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "roasted_soybeans": {
+   "name": "Graines de soja grillées",
+   "value": 26230,
+   "madeAt": "Attrape-popote"
+  },
+  "roasted_waxing_moon_pepper": {
+   "name": "Piment de lune croissante rôti",
+   "value": 26040,
+   "madeAt": "Attrape-popote"
+  },
+  "rose_shortbread": {
+   "name": "Sablé à la rose",
+   "value": 46200,
+   "madeAt": "Attrape-popote"
+  },
+  "shredded_coconut": {
+   "name": "Noix de coco râpée",
+   "value": 10000,
+   "madeAt": "Séchoir jukebox"
+  },
+  "soy_sauce_fried_rice": {
+   "name": "Riz frit à la sauce soja",
+   "value": 45650,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "soy_sauce_tofu": {
+   "name": "Tofu à la sauce soja",
+   "value": 45280,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "soybean": {
+   "name": "Germe de soja",
+   "value": 680,
+   "madeAt": "Ferme"
+  },
+  "steamed_vermicelli_roll": {
+   "name": "Rouleau de vermicelles à la vapeur",
+   "value": 33940,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "strawberry": {
+   "name": "Fraise",
+   "value": 950,
+   "madeAt": "Ferme"
+  },
+  "strawberry_candy": {
+   "name": "Bonbon à la fraise",
+   "value": 65050,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "strawberry_cream_puff": {
+   "name": "Chou à la crème à la fraise",
+   "value": 42200,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "sugar_roasted_chestnuts": {
+   "name": "Châtaignes grillées au sucre",
+   "value": 45280,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "sugarcane": {
+   "name": "Canne à sucre",
+   "value": 1800,
+   "madeAt": "Ferme"
+  },
+  "tanghulu": {
+   "name": "Tanghulu",
+   "value": 45280,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "tofu": {
+   "name": "Tofu",
+   "value": 13110,
+   "madeAt": "Moulin-carrousel"
+  },
+  "umbral_hot_pot": {
+   "name": "Ragoût ombral",
+   "value": 38810,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "walnut_cake": {
+   "name": "Gâteau aux noix",
+   "value": 50910,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "waxing_moon_pepper": {
+   "name": "Piment de lune croissante",
+   "value": 1350,
+   "madeAt": "Ferme"
+  },
+  "wheat": {
+   "name": "Blé",
+   "value": 140,
+   "madeAt": "Ferme"
+  },
+  "wheatmeal": {
+   "name": "Farine complète",
+   "value": 9370,
+   "madeAt": "Moulin-carrousel"
+  }
+ }
+}

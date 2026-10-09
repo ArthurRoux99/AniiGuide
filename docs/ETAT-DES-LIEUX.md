@@ -1,4 +1,4 @@
-# État des lieux d'AniiGuide (6 octobre 2026)
+# État des lieux d'AniiGuide (mis à jour le 9 octobre 2026)
 
 Comparaison avec les outils existants, ce qu'il faut corriger, et la feuille de route : Foyer
 d'abord, puis la nouvelle partie Opération Œufs (Egg Heist).
@@ -56,7 +56,7 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 | F5 ✅ | Noms français officiels de toutes les recettes et de tous les objets | Plus d'anglais dans l'interface |
 | F6 ✅ | « Quand revenir ? » : stock maximal de chaque installation → heure où la production s'arrête faute de transporteur | Planifier ses connexions dans la journée |
 | F7 ✅ | Opportunités : quelle amélioration (installation, module, Aniimo) fait gagner le plus | Savoir quoi faire en premier |
-| F8 | Nourriture, électricité, commandes du jour (dès que des données fiables et réutilisables existent) | Modèle complet |
+| F8 | Nourriture, électricité, commandes du jour : voir la suite ci-dessous (§ 5) | Modèle complet |
 
 ### Opération Œufs (nouvelle partie)
 
@@ -74,3 +74,41 @@ relevés chaque jour ; Aniidex, tier list de consensus, équipes de combat.
 - Wikily : https://wikily.gg/fr/aniimo/homeland-crafting
 - Egg Heist : https://www.aniimoverse.com/guides/egg-heist, https://aniimogames.wiki/events/operation-egg-heist/,
   https://game8.co/games/Aniimo/archives/618276, https://aniimoeggs.com/guides/egg-heist-ranks-shops-and-rewards/
+- Wikily (nourriture) : https://wikily.gg/fr/aniimo/homeland-food
+- aniimofrance : https://aniimofrance.com/homeland.html, https://aniimofrance.com/guide-metiers.html
+- Mode électrique : https://aniimo.guide/en/guides/homeland-production-power, https://steamcommunity.com/sharedfiles/filedetails/?id=3806795108
+- Nourriture : https://aniimoeggs.com/guides/feeding-homeland-workers-food-energy-and-petting/
+
+## 5. Recherche du 9 octobre et suite
+
+### Ce qui a été récupéré
+
+| Source | Ce qu'on en tire | Où |
+| --- | --- | --- |
+| **Wikily** (API publique `homeland-food`) | Valeur nourrissante des 63 plats (ex. Blé 140, Pudding chococo à la fraise premium 142 560) ; un Aniimo au travail mange **10 par minute** | `data/homeland/food.json`, relevé chaque jour (`scripts/fetch-food.mjs`) |
+| **aniimofrance.com** (textes du jeu en français) | Nom officiel du mode : « Opération : Chasse aux œufs en équipe » ; les 7 rangs officiels (Chasseur d'œufs néophyte → Monarque des œufs) et leurs avantages ; les 2 arbres de talents (13 talents chacun, 5,59 M et 9,31 M pièces coquille d'œuf + essences), remis à zéro à chaque saison | `data/eggheist-official.json` (relevé à la main : pas de licence, site protégé) |
+| **aniimofrance.com** | Modules du camping-car : électrique (RV 12 à 20, 8 700 → 30 000 pièces), recherche végétale (mutations Coloré, Brillant, Géant, Cristallin ; RV 6 à 15), incubation (RV 9), Émetteur (Envoi d'Aniimo à la Mer florale, 1 à 3 Aniimo, 6 h ; RV 6, 11, 16) ; Générateur crépitant 600 à 1 500 de puissance, portée 11 ; Poteau électrique portée 7 | Faits à reprendre dans l'interface |
+| **aniimofrance.com** | Mesure en jeu : Roche niv. 3 sur le Coquillage (charge 2 250) → 105/min, 126/min avec la personnalité | **Confirme notre modèle de vitesse** (même résultat au chiffre près) |
+| Guides (aniimo.guide, Steam, aniimoeggs) | Mode électrique : l'installation travaille **sans Aniimo**, à la vitesse du réseau (production ÷ demande, jusqu'à 120 %) ; la puissance est partagée entre les installations ; déconseillé pour Puits et Mines | À vérifier par une mesure en jeu (vitesse de base à 100 %) |
+| **Aniimax** | À jour : depuis notre import (5/10), seulement des traductions | — |
+
+**Désaccords à trancher en jeu** :
+- Gamelle vide : travail ×0,2 (AniimoTools) ou arrêt complet (aniimoeggs).
+- Taille de la Fournaise thermique et de la Lampe d'incubation : 1×1 (Aniimax, « mesuré en jeu ») ou 2×2 (aniimofrance) ; Grande roue à tisser : 4×4 ou 3×3.
+
+### Plan
+
+| Ordre | # | Chantier | Ce que ça apporte | Prêt ? |
+| --- | --- | --- | --- | --- |
+| 1 | E5 | **Noms officiels** de la Chasse aux œufs : nom du mode, 7 rangs, avantages par rang (emplacements de Coffre Vénard, qualité max du butin) | Plus d'anglais dans la partie Œufs | Données prêtes |
+| 2 | E6 | **Planificateur de talents** : les 2 arbres, coût total restant, ordre conseillé (coffre du bateau et « objets à moitié prix » d'abord), relié au calculateur de parties | Savoir combien de parties pour finir un arbre avant la fin de saison | Données prêtes |
+| 3 | F8a | **Nourriture** : le plan compte ce que mangent les Aniimo (10/min chacun) et choisit le plat le moins coûteux (vente perdue) ; carte « Remplir la gamelle » : combien de plats pour tenir X heures hors ligne | Plans justes sur la durée ; ne plus jamais trouver ses Aniimo à l'arrêt | Données prêtes |
+| 4 | F8b | **Mode électrique** : Générateur crépitant (Aniimo Foudre), consommation de chaque installation par niveau (déjà relevée), installations qui tournent sans Aniimo ; le plan choisit lesquelles passer en électrique ; Générateur et Poteaux posés sur le plan du logis (portées 11 et 7) | Des Aniimo libérés pour d'autres postes dès le niveau 12 | Il manque **une mesure en jeu** : durée d'un lot en mode électrique |
+| 5 | F9 | **Lune des moissons** (événement de saison, données Aniimax) : objectif « points de l'événement » | Optimiser l'événement en cours | Données prêtes ; à faire seulement si l'événement dure encore |
+| 6 | F10 | **Modules du camping-car** : coût de chaque niveau dans la feuille de route ; mutations et Envoi d'Aniimo expliqués ; rappel d'excursion (6 h) sur la page Aujourd'hui | Rien d'oublié à chaque niveau | Données prêtes |
+| 7 | F11 | **Tailles à confirmer** (Fournaise, Lampe, Grande roue) | Plan du logis exact | Il manque une capture en mode Construire |
+
+Captures ou mesures utiles :
+1. Une installation en mode électrique : la durée d'un lot et la puissance du réseau.
+2. La gamelle vide : est-ce que les Aniimo s'arrêtent ou ralentissent ?
+3. Une Fournaise thermique et une Grande roue à tisser en mode Construire, avec la grille.
