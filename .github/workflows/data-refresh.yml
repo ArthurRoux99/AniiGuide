@@ -25,6 +25,7 @@ jobs:
       - run: node scripts/fetch-tierlists.mjs
       - run: node scripts/fetch-codes.mjs
       - run: node scripts/fetch-fr-names.mjs
+      - run: node scripts/fetch-food.mjs
       # Nouveaux Aniimo sur le wiki : références pour l'import par capture.
       - run: node scripts/build-portraits.mjs
       - run: npm test
