@@ -12,6 +12,7 @@ import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
 import { HomelandMap } from '../components/HomelandMap';
 import { MyFacilities, Upgrades } from '../components/Upgrades';
 import { Comeback } from '../components/Comeback';
+import { FoodBowl } from '../components/FoodBowl';
 
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -29,6 +30,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   const [who, setWho] = useState<'roster' | 'ideal'>(hasRoster ? 'roster' : 'ideal');
   const [watering, setWatering] = useState(true);
   const [unverified, setUnverified] = useState(false);
+  const [feeding, setFeeding] = useState(true);
   const rv = profile.rv;
   const maxed = rv >= 20;
 
@@ -49,8 +51,9 @@ export function PlanPage({ api }: { api: ProfileApi }) {
         goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : { kind: 'coins' },
         watering,
         includeUnverified: unverified,
+        feeding,
       }),
-    [rv, goal, maxed, pool, watering, unverified, profile.coins, profile.stock, profile.facilities],
+    [rv, goal, maxed, pool, watering, unverified, feeding, profile.coins, profile.stock, profile.facilities],
   );
   // Calcul rapide tout de suite, puis le calcul exact (machines dédiées, parcelles entières,
   // paires d'appareils ; jusqu'à une seconde) quand la saisie s'arrête.
@@ -107,6 +110,9 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <label>
             <input type="checkbox" checked={unverified} onChange={(e) => setUnverified(e.target.checked)} /> Inclure les recettes non vérifiées
           </label>
+          <label>
+            <input type="checkbox" checked={feeding} onChange={(e) => setFeeding(e.target.checked)} /> Nourrir les Aniimo avec la production
+          </label>
         </div>
       </section>
 
@@ -135,6 +141,8 @@ export function PlanPage({ api }: { api: ProfileApi }) {
       <Result result={result} goal={goal} rv={rv} who={who} />
 
       {result.feasible && <Upgrades options={options} />}
+
+      {result.feasible && result.food && <FoodBowl food={result.food} />}
 
       {result.feasible && <Comeback result={result} setup={options.setup} />}
 

@@ -60,6 +60,8 @@ interface HomelandData {
   names: { facilities: Record<string, string>; items: Record<string, string> };
   /** Par installation et par niveau (index 0 = niveau 1) : stock, puissance électrique, coût en Pièces de logis. */
   levels: Record<string, { stock: number | null; power: number | null; cost: number | null }[]>;
+  /** Valeur nourrissante de chaque plat (un Aniimo au travail en mange 10 par minute). */
+  food: Record<string, number>;
 }
 
 export const HOMELAND = raw as unknown as HomelandData;

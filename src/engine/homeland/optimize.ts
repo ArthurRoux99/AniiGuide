@@ -131,7 +131,16 @@ export interface PlanOptions {
   exact?: boolean;
   /** Paires d'appareils aux zones chevauchantes (+1 à 4 % de pièces/h, calcul 4× plus lent : pour le plan principal seulement). */
   pairs?: boolean;
+  /**
+   * Nourrir les Aniimo du logis avec la production (par défaut) : chacun mange 10 par minute, et
+   * le plan choisit les plats qui coûtent le moins en ventes perdues. Gamelle vide : le travail
+   * ralentit fortement ou s'arrête (les sources divergent), donc le plan ne la laisse jamais vide.
+   */
+  feeding?: boolean;
 }
+
+/** Ce que mange un Aniimo du logis, par heure (10 par minute). */
+export const FOOD_PER_HOUR = 600;
 
 export interface PlanRow {
   recipe: Recipe;
@@ -167,6 +176,8 @@ export interface Plan {
   pairs: { heat: Environment; cool: Environment; both: Environment; count: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
+  /** Gamelle : Aniimo nourris, nourriture par heure et plats prélevés sur la production. */
+  food?: { eaters: number; perHour: number; dishes: { item: string; perHour: number }[] };
   /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
   staffing?: { facility: string; ability: AbilityId; level: number; bonus: boolean; count: number }[];
 }
@@ -311,6 +322,14 @@ export function plan(o: PlanOptions): Plan {
     if (it.currency === 'coins' && it.sellValue > 0) variables[`sell:${id}`] = { [`item:${id}`]: -1, coins: it.sellValue, profit: it.sellValue };
   }
 
+  // Gamelle : feed:plat = plats donnés par heure, pris sur la production (donc plus vendus).
+  const feeding = o.feeding !== false;
+  if (feeding) {
+    for (const [id, value] of Object.entries(HOMELAND.food ?? {})) {
+      if (HOMELAND.items[id] && value > 0) variables[`feed:${id}`] = { [`item:${id}`]: -1, food: value };
+    }
+  }
+
   // Contraintes : installations, climat, ouvriers, bilans.
   for (const [id, f] of Object.entries(o.setup.facilities)) if (f.count > 0) constraints[`fac:${id}`] = { max: f.count };
   // Machines dédiées : ded:recette (entier) machines pour cette recette, qui couvrent le temps de
@@ -367,6 +386,8 @@ export function plan(o: PlanOptions): Plan {
     constraints[`staff:${t.facility}`] = { max: o.setup.facilities[t.facility]?.count ?? 0 };
   }
   const team = o.workers.team;
+  // Tous les Aniimo installés au logis mangent, qu'ils travaillent ou non.
+  if (feeding) constraints.food = { min: team ? 0 : FOOD_PER_HOUR * o.workers.total };
   if (!team) {
     constraints.workers = { max: o.workers.total };
     for (const [a, list] of Object.entries(o.workers.byAbility)) {
@@ -386,6 +407,7 @@ export function plan(o: PlanOptions): Plan {
       // y:p = recrues, k:p = Aniimo déjà au logis gardés (au plus `owned`).
       // Coût symbolique d'1 pièce/h par Aniimo : à rythme égal, la plus petite équipe l'emporte.
       const base: Record<string, number> = { team: 1, [`asg:${p.key}`]: -1, profit: -1 };
+      if (feeding) base.food = -FOOD_PER_HOUR;
       for (const a of Object.keys(p.homeland)) base[`need:${a}`] = 1;
       variables[`y:${p.key}`] = { ...base, recruits: 1 };
       if (p.owned) {
@@ -499,11 +521,18 @@ export function plan(o: PlanOptions): Plan {
     workersUsed.ice = (workersUsed.ice ?? 0) + p.count;
   }
 
+  const dishes = Object.entries(solution)
+    .filter(([k, v]) => k.startsWith('feed:') && v > 1e-6)
+    .map(([k, v]) => ({ item: k.slice(5), perHour: v }))
+    .sort((a, b) => b.perHour - a.perHour);
+  const eaters = team ? team.profiles.reduce((n, p) => n + (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0), 0) : o.workers.total;
+  const food = feeding ? { eaters, perHour: FOOD_PER_HOUR * eaters, dishes } : undefined;
+
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined, food };
 }
 
 /**
