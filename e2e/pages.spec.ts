@@ -53,7 +53,13 @@ test('Optimiser : plan complet du logis', async ({ page }) => {
   await page.goto('#plan');
   await page.getByRole('button', { name: /Calculer le plan du logis/ }).click();
   await expect(page.locator('.homeland-map svg')).toBeVisible({ timeout: 60_000 });
-  await expect(page.locator('.hm-legend li').first()).toContainText('Entrepôt');
+  await expect(page.locator('.hm-steps li').first()).toContainText('Entrepôt');
+  // Parcelle par parcelle : grille case par case, positions, et cases à cocher.
+  await page.locator('.chips button', { hasText: /^Parcelle/ }).first().click();
+  await expect(page.locator('.hm-grid')).toBeVisible();
+  await expect(page.locator('.hm-steps li').first()).toContainText('colonne');
+  await page.locator('.hm-steps input[type=checkbox]').first().check();
+  await expect(page.locator('.hm-steps li.is-done')).toHaveCount(1);
 });
 
 test('Optimiser : mes installations et améliorations classées', async ({ page }) => {

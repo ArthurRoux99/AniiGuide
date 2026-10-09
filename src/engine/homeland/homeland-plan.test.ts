@@ -34,4 +34,22 @@ describe('plan complet du logis', () => {
       console.info(`RV${rv}: ${h.pieces.length} pièces, ${Math.round(ms)} ms, marche ${Math.round(h.walk)} cases/h`);
     });
   }
+
+  it('niveau 14, équipe de niveau 2 : Générateur et Poteaux posés, chaque installation électrique alimentée', () => {
+    const rv = 14;
+    const p = plan({ watering: true, includeUnverified: false, setup: setupForRv(rv), workers: idealPool(22, 2), goal: levelUp, exact: true });
+    const whole = wholeUnits(p.rows);
+    const t0 = performance.now();
+    const h = homelandPlan(p.rows, whole, climateLayout(p, p.rows, whole), rv, p.machines);
+    const ms = performance.now() - t0;
+    const elec = h.pieces.filter((x) => x.electric);
+    expect(elec.length).toBeGreaterThan(0);
+    expect(h.power?.generator).toBeTruthy();
+    expect(elec.filter((x) => x.unpowered)).toEqual([]);
+    const rects = [h.storage, ...h.pieces.map((x) => x.rect), h.power!.generator!, ...h.power!.poles];
+    for (let i = 0; i < rects.length; i++) for (let j = i + 1; j < rects.length; j++) expect(over(rects[i], rects[j])).toBe(false);
+    expect(h.power!.poles.length).toBeLessThanOrEqual(12);
+    expect(ms).toBeLessThan(20000);
+    console.info(`RV${rv} électrique : ${elec.length} installations, ${h.power!.poles.length} poteaux, ${Math.round(ms)} ms`);
+  });
 });
