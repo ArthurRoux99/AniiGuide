@@ -3,9 +3,9 @@ import type { Rect } from './layout.js';
 // Réseau électrique du plan du logis : un Générateur crépitant et des Poteaux électriques
 // crépitants posés pour que chaque installation en mode électrique touche une zone alimentée.
 // Portées (carré centré sur l'objet) et tailles relevées par aniimofrance.com ; une installation
-// est alimentée dès qu'elle touche le carré du Générateur ou celui d'un Poteau relié, un Poteau
-// est relié s'il touche le carré du Générateur ou d'un Poteau déjà relié (règle du jeu décrite par
-// les guides, à confirmer en jeu).
+// est alimentée dès qu'elle touche le carré du Générateur ou celui d'un Poteau relié. Un Poteau
+// est relié quand son carré chevauche celui du Générateur ou d'un Poteau déjà relié : captures en
+// jeu du 9 octobre, où deux Poteaux à ~6,5 cases l'un de l'autre sont reliés (ligne jaune).
 
 export const GENERATOR: { size: number; range: number } = {
   size: 2,
@@ -138,7 +138,7 @@ export function powerLayout(cells: Rect[], taken: Rect[], targets: Rect[], rv: n
     if (!left.length) break;
     // Un Poteau relié qui alimente le plus d'installations encore hors réseau ; sinon, celui qui
     // rapproche le réseau de la plus proche d'entre elles.
-    const linked = spots(POLE.size, cells, occupied).filter((r) => zones.some((z) => overlap(r, z)));
+    const linked = spots(POLE.size, cells, occupied).filter((r) => zones.some((z) => overlap(zone(r, POLE.range), z)));
     if (!linked.length) break;
     const gap = (r: Rect) => Math.min(...left.map((t) => Math.hypot(centre(t).x - centre(r).x, centre(t).y - centre(r).y)));
     let pick = linked[0];
