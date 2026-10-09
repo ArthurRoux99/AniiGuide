@@ -27,6 +27,9 @@ export interface Recipe {
   workload?: number;
   ability?: AbilityId | null;
   abilityLevel?: number;
+  /** Recette de la saison (Lune des moissons) ; graines payées en Blé de lune. */
+  season?: boolean;
+  seedWheat?: number;
 }
 
 export interface Facility {
@@ -46,6 +49,8 @@ export interface Item {
   name: string;
   sellValue: number;
   currency: string;
+  /** Saison : points de l'événement par objet vendu. */
+  points?: number;
 }
 
 interface HomelandData {
@@ -57,9 +62,12 @@ interface HomelandData {
   levelUpChains: string[][];
   moduleMaxLevels: Record<string, number[]>;
   specialRecipes: string[];
+  season: { name: string; minHomeLevel: number; recipeNotes: string[] };
   names: { facilities: Record<string, string>; items: Record<string, string> };
   /** Par installation et par niveau (index 0 = niveau 1) : stock, puissance électrique, coût en Pièces de logis. */
   levels: Record<string, { stock: number | null; power: number | null; cost: number | null }[]>;
+  /** Valeur nourrissante de chaque plat (un Aniimo au travail en mange 10 par minute). */
+  food: Record<string, number>;
 }
 
 export const HOMELAND = raw as unknown as HomelandData;

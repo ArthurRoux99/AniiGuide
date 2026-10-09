@@ -40,7 +40,7 @@ const norm = (s) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCas
 const bySlug = new Map([...fr].map(([k, v]) => [k.replace(/-\d+$/, '').replace(/-/g, '_'), v]));
 const byEnglish = new Map([...en].map(([k, v]) => [norm(v), fr.get(k)]));
 // Même objet, nom anglais différent chez Aniimax et dans le jeu.
-const ALIASES = { fresh_water: 'plain_fresh_water', natural_mineral_spring_water: 'natural_mineral_spring' };
+const ALIASES = { fresh_water: 'plain_fresh_water', natural_mineral_spring_water: 'natural_mineral_spring', umbral_sweet_and_spicy_sauce: 'umbral_sweet_spicy_sauce' };
 const lookup = (id) => bySlug.get(ALIASES[id] ?? id) ?? byEnglish.get(norm(homeland.items[id]?.name ?? ''));
 for (const id of Object.keys(homeland.items)) {
   // Les recettes « rapides » produisent le même objet que la recette normale.

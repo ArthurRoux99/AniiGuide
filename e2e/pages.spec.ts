@@ -70,6 +70,20 @@ test('Optimiser : quand revenir', async ({ page }) => {
   await expect(page.getByText('Pleine dans', { exact: true })).toBeVisible();
 });
 
+test('Optimiser : gamelle', async ({ page }) => {
+  await page.goto('#plan');
+  await expect(page.getByRole('heading', { name: 'Gamelle' })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText(/pour 24 h/).first()).toBeVisible();
+});
+
+test('Optimiser : points de la Lune des moissons', async ({ page }) => {
+  await page.goto('#plan');
+  await page.getByLabel('Camping-car').selectOption('12');
+  await page.getByLabel('Objectif').selectOption('points');
+  await expect(page.getByText('points/h').first()).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText(/Blé de rayon de lune/).first()).toBeVisible();
+});
+
 test('Aniidex : fiche détaillée', async ({ page }) => {
   await page.goto('#aniidex');
   await page.locator('.dex-grid a').first().click();
