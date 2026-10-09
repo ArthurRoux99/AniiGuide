@@ -108,7 +108,7 @@ export function rosterPool(workers: { homeland: Partial<Record<AbilityId, number
   return { kind: 'roster', byAbility, total: workers.length };
 }
 
-export type Goal = { kind: 'levelUp'; stock: { coins: number; items: Record<string, number> } } | { kind: 'coins' };
+export type Goal = { kind: 'levelUp'; stock: { coins: number; items: Record<string, number> } } | { kind: 'coins' } | { kind: 'points' };
 
 export interface PlanOptions {
   setup: Setup;
@@ -137,6 +137,12 @@ export interface PlanOptions {
    * ralentit fortement ou s'arrête (les sources divergent), donc le plan ne la laisse jamais vide.
    */
   feeding?: boolean;
+  /**
+   * Saison en cours (Lune des moissons, dès le niveau 10) : ses cultures et recettes, et les points
+   * de l'événement gagnés sur chaque objet de saison vendu. `notes` : recettes débloquées par une
+   * Note de recette. `wheatPerDay` : Blé de lune dépensable par jour en graines (null : sans limite).
+   */
+  season?: { notes: boolean; wheatPerDay: number | null };
 }
 
 /** Ce que mange un Aniimo du logis, par heure (10 par minute). */
@@ -176,6 +182,8 @@ export interface Plan {
   pairs: { heat: Environment; cool: Environment; both: Environment; count: number }[];
   /** Mode équipe : combien d'Aniimo de chaque profil recruter. */
   team?: { key: string; count: number }[];
+  /** Saison : points de l'événement et Blé de lune dépensé en graines, par heure. */
+  season?: { pointsPerHour: number; wheatPerHour: number };
   /** Gamelle : Aniimo nourris, nourriture par heure et plats prélevés sur la production. */
   food?: { eaters: number; perHour: number; dishes: { item: string; perHour: number }[] };
   /** Mode attitré : Aniimo postés par installation (niveau, bonus de personnalité). */
@@ -193,6 +201,10 @@ function recipeAllowed(r: Recipe, o: PlanOptions): boolean {
   if (!f || f.count <= 0 || f.level < r.level) return false;
   if (r.module && (o.setup.modules[r.module.id] ?? 0) < r.module.level) return false;
   if (HOMELAND.specialRecipes.includes(r.id)) return false;
+  if (r.season) {
+    if (!o.season || o.setup.rv < HOMELAND.season.minHomeLevel) return false;
+    if (!o.season.notes && HOMELAND.season.recipeNotes.includes(r.id)) return false;
+  }
   if (!r.verified && !o.includeUnverified) return false;
   if (r.environment && !ENV_BUILDING[r.environment]) return false;
   // Les objets hors pièces (Aniipods, EXP) ne comptent pas pour monter de niveau.
@@ -290,6 +302,7 @@ export function plan(o: PlanOptions): Plan {
         col.coins = -r.seedCost * cycles;
         col.profit = -r.seedCost * cycles;
       }
+      if (r.seedWheat) col.wheat = r.seedWheat * cycles;
       // Parcelle couverte : elle prend une place du type voulu dans les zones de ce climat.
       if (v.covered && r.environment) col[`env:${r.environment}:${PLOT_KIND[r.facility] ?? 'big'}`] = 1;
       for (const j of jobs) {
@@ -319,7 +332,10 @@ export function plan(o: PlanOptions): Plan {
 
   // Ventes.
   for (const [id, it] of Object.entries(HOMELAND.items)) {
-    if (it.currency === 'coins' && it.sellValue > 0) variables[`sell:${id}`] = { [`item:${id}`]: -1, coins: it.sellValue, profit: it.sellValue };
+    if (it.currency === 'coins' && it.sellValue > 0) {
+      variables[`sell:${id}`] = { [`item:${id}`]: -1, coins: it.sellValue, profit: it.sellValue };
+      if (o.season && it.points) variables[`sell:${id}`].points = it.points;
+    }
   }
 
   // Gamelle : feed:plat = plats donnés par heure, pris sur la production (donc plus vendus).
@@ -428,6 +444,7 @@ export function plan(o: PlanOptions): Plan {
   const itemKeys = new Set(Object.values(variables).flatMap((c) => Object.keys(c).filter((k) => k.startsWith('item:'))));
   for (const k of itemKeys) constraints[k] = { min: 0 };
   constraints.coins = { min: 0 };
+  if (o.season?.wheatPerDay != null) constraints.wheat = { max: o.season.wheatPerDay / 24 };
 
   const round = (x: number) => Math.round(x * 1e6) / 1e6;
   let hours: number | null = null;
@@ -452,6 +469,15 @@ export function plan(o: PlanOptions): Plan {
       // Passe 2 : à 99,9 % de cette vitesse, un maximum de pièces en plus.
       constraints.tmin = { min: best * 0.999 };
       variables.t = { ...t, tmin: 1 };
+    }
+  }
+  if (o.goal.kind === 'points' && o.season) {
+    // Passe 1 bis : un maximum de points de l'événement, puis (passe 2) un maximum de pièces à 99,9 %.
+    const r1 = solveLP({ optimize: 'points', opType: 'max', constraints, variables, ints });
+    const best = r1.feasible ? r1.result : 0;
+    if (best > 1e-9) {
+      constraints.pointsmin = { min: best * 0.999 };
+      for (const v of Object.values(variables)) if ('points' in v) v.pointsmin = v.points;
     }
   }
   const r2 = solveLP({ optimize: 'profit', opType: 'max', constraints, variables, ints });
@@ -528,11 +554,18 @@ export function plan(o: PlanOptions): Plan {
   const eaters = team ? team.profiles.reduce((n, p) => n + (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0), 0) : o.workers.total;
   const food = feeding ? { eaters, perHour: FOOD_PER_HOUR * eaters, dishes } : undefined;
 
+  const season = o.season
+    ? {
+        pointsPerHour: sales.reduce((s, x) => s + x.perHour * (HOMELAND.items[x.item].points ?? 0), 0),
+        wheatPerHour: rows.reduce((s, r) => s + (r.recipe.seedWheat ?? 0) * (3600 / r.cycleSeconds) * r.units, 0),
+      }
+    : undefined;
+
   const teamOut = team
     ? team.profiles.map((p) => ({ key: p.key, count: (solution[`y:${p.key}`] ?? 0) + (solution[`k:${p.key}`] ?? 0) })).filter((x) => x.count > 1e-6)
     : undefined;
 
-  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined, food };
+  return { feasible: true, hours, coinsPerHour, rows, sales, stockPerHour, target, remaining, facilityUse, workersUsed, blockers: [...blockers], climate, pairs, machines: o.exact ? machinesOf(rows, dedRecipes) : undefined, team: teamOut, staffing: dedicated ? staffing : undefined, food, season };
 }
 
 /**

@@ -134,6 +134,45 @@ for (const [file, [facility, kind]] of Object.entries(FILES)) {
   }
 }
 
+// Saison : la Lune des moissons (dès le niveau 10). Graines payées en Blé de lune (pas en pièces),
+// et chaque objet de saison vendu rapporte des points en plus de ses pièces. Quelques recettes
+// demandent une Note de recette (SEASON.recipeNotes).
+const seasonRows = parseCsv(await get('data/harvest_moon_festival.csv'));
+for (const r of seasonRows) {
+  const facility = r.facility;
+  const kind = facility === 'Farmland' ? 'grower' : 'processor';
+  const req = requirements.get(`${facility}|${r.name}`) ?? null;
+  addItem(r.name, num(r.sell_value), 'coins');
+  items[r.name].points = num(r.points) ?? 0;
+  const recipe = {
+    id: `${slug(facility)}:${r.name}`,
+    facility: slug(facility),
+    kind,
+    level: Number(r.facility_level),
+    output: { item: r.name, qty: num(r.yield) ?? 1 },
+    inputs: [],
+    module: null,
+    environment: null,
+    verified: !unverified.has(r.name),
+    season: true,
+  };
+  if (kind === 'grower') {
+    recipe.seconds = Number(r.production_time);
+    recipe.seedCost = 0;
+    recipe.seedWheat = num(r.seed_cost) ?? 0;
+    recipe.steps = growerSteps[r.name] ?? [];
+  } else {
+    recipe.workload = Number(r.workload);
+    recipe.ability = req?.ability ?? null;
+    recipe.abilityLevel = req?.level ?? 1;
+    const mats = r.raw_materials.split(';');
+    const qtys = r.required_amount.split(';').map(Number);
+    recipe.inputs = mats.map((m, i) => ({ item: m, qty: qtys[i] }));
+    for (const m of mats) addItem(m);
+  }
+  recipes.push(recipe);
+}
+
 // Configuration des installations et du Camping-car (module ES importé tel quel).
 const dir = await mkdtemp(join(tmpdir(), 'aniimax-'));
 const cfgPath = join(dir, 'facility-config.mjs');
@@ -165,6 +204,11 @@ const out = {
   levelUpChains: cfg.LEVEL_UP_CHAINS,
   moduleMaxLevels: cfg.MODULE_MAX_LEVELS,
   specialRecipes: cfg.SPECIAL_RECIPES.map((s) => `${slug(s.facility)}:${s.name}`),
+  season: {
+    name: cfg.SEASON.name,
+    minHomeLevel: cfg.SEASON.minHomeLevel,
+    recipeNotes: cfg.SEASON.recipeNotes.map((n) => recipes.find((r) => r.season && r.output.item === n.name)?.id).filter(Boolean),
+  },
 };
 
 await mkdir(join(ROOT, 'data/homeland'), { recursive: true });

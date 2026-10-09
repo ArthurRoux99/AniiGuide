@@ -3,7 +3,7 @@
   "repo": "https://github.com/ae-bii/aniimax",
   "sha": "c1544149ec162fa7c7bc447c5415103b4eafc62c",
   "license": "MIT",
-  "importedAt": "2026-10-06T12:39:29.802Z"
+  "importedAt": "2026-10-09T08:51:01.239Z"
  },
  "facilities": [
   {
@@ -6362,6 +6362,256 @@
    "workload": 41,
    "ability": "fire",
    "abilityLevel": 2
+  },
+  {
+   "id": "farmland:moondew_radish",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 1,
+   "output": {
+    "item": "moondew_radish",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "seconds": 2400,
+   "seedCost": 0,
+   "seedWheat": 4,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:waxing_moon_pepper",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 1,
+   "output": {
+    "item": "waxing_moon_pepper",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "seconds": 2400,
+   "seedCost": 0,
+   "seedWheat": 4,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "claw-game-cooker:roasted_waxing_moon_pepper",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "roasted_waxing_moon_pepper",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "waxing_moon_pepper",
+     "qty": 8
+    },
+    {
+     "item": "sea_salt",
+     "qty": 23
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 162,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:moondew_radish_slices",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "moondew_radish_slices",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "moondew_radish",
+     "qty": 8
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "blazing-stove:umbral_hot_pot",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "umbral_hot_pot",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "moondew_radish",
+     "qty": 8
+    },
+    {
+     "item": "waxing_moon_pepper",
+     "qty": 8
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "simmering-pot:umbral_sweet_and_spicy_sauce",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "umbral_sweet_and_spicy_sauce",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "moondew_radish",
+     "qty": 8
+    },
+    {
+     "item": "waxing_moon_pepper",
+     "qty": 8
+    },
+    {
+     "item": "sea_salt",
+     "qty": 23
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 243,
+   "ability": "fire",
+   "abilityLevel": 3
+  },
+  {
+   "id": "pickling-jar:umbral_pickle",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "umbral_pickle",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "moondew_radish",
+     "qty": 8
+    },
+    {
+     "item": "waxing_moon_pepper",
+     "qty": 8
+    },
+    {
+     "item": "cider_vinegar",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 203,
+   "ability": "dark",
+   "abilityLevel": 3
+  },
+  {
+   "id": "crafting-table:harvest_platter",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 1,
+   "output": {
+    "item": "harvest_platter",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "roasted_waxing_moon_pepper",
+     "qty": 1
+    },
+    {
+     "item": "moondew_radish_slices",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 405,
+   "ability": "artisanship",
+   "abilityLevel": 3
   }
  ],
  "items": {
@@ -7414,6 +7664,54 @@
    "name": "Microcrystalline Ore Plate",
    "sellValue": 0,
    "currency": "none"
+  },
+  "moondew_radish": {
+   "name": "Moondew Radish",
+   "sellValue": 74,
+   "currency": "coins",
+   "points": 1
+  },
+  "waxing_moon_pepper": {
+   "name": "Waxing Moon Pepper",
+   "sellValue": 74,
+   "currency": "coins",
+   "points": 1
+  },
+  "roasted_waxing_moon_pepper": {
+   "name": "Roasted Waxing Moon Pepper",
+   "sellValue": 1520,
+   "currency": "coins",
+   "points": 4
+  },
+  "moondew_radish_slices": {
+   "name": "Moondew Radish Slices",
+   "sellValue": 2370,
+   "currency": "coins",
+   "points": 4
+  },
+  "umbral_hot_pot": {
+   "name": "Umbral Hot Pot",
+   "sellValue": 2150,
+   "currency": "coins",
+   "points": 8
+  },
+  "umbral_sweet_and_spicy_sauce": {
+   "name": "Umbral Sweet And Spicy Sauce",
+   "sellValue": 2390,
+   "currency": "coins",
+   "points": 8
+  },
+  "umbral_pickle": {
+   "name": "Umbral Pickle",
+   "sellValue": 2290,
+   "currency": "coins",
+   "points": 8
+  },
+  "harvest_platter": {
+   "name": "Harvest Platter",
+   "sellValue": 5290,
+   "currency": "coins",
+   "points": 8
   }
  },
  "levelUp": {
@@ -7662,5 +7960,15 @@
   "blazing-stove:strawberry_candy",
   "crafting-table:flowers_in_a_bottle",
   "phonolfactory-table:lotion"
- ]
+ ],
+ "season": {
+  "name": "Harvest Moon Festival",
+  "minHomeLevel": 10,
+  "recipeNotes": [
+   "crafting-table:harvest_platter",
+   "pickling-jar:umbral_pickle",
+   "blazing-stove:umbral_hot_pot",
+   "simmering-pot:umbral_sweet_and_spicy_sauce"
+  ]
+ }
 }

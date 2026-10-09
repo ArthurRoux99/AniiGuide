@@ -26,13 +26,19 @@ function Name({ id, kind }: { id: string; kind: 'facility' | 'item' }) {
 export function PlanPage({ api }: { api: ProfileApi }) {
   const { profile } = api;
   const hasRoster = profile.workers.length > 0;
-  const [goal, setGoal] = useState<'levelUp' | 'coins'>('levelUp');
+  const [goal, setGoal] = useState<Goal>('levelUp');
+  const [seasonOn, setSeasonOn] = useState(false);
+  const [notes, setNotes] = useState(false);
+  const [wheatPerDay, setWheatPerDay] = useState<number | null>(null);
   const [who, setWho] = useState<'roster' | 'ideal'>(hasRoster ? 'roster' : 'ideal');
   const [watering, setWatering] = useState(true);
   const [unverified, setUnverified] = useState(false);
   const [feeding, setFeeding] = useState(true);
   const rv = profile.rv;
   const maxed = rv >= 20;
+  const seasonOpen = rv >= HOMELAND.season.minHomeLevel;
+  // L'objectif « points » suppose la saison active.
+  const seasonActive = seasonOpen && (seasonOn || goal === 'points');
 
   const roster = useMemo(
     () => rosterPool(profile.workers.map((w) => ({ homeland: ANIIMO_BY_ID.get(w.aniimoId)!.homeland, personality: w.personality }))),
@@ -45,15 +51,19 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   const target = HOMELAND.levelUp[String(rv + 1)];
 
   const options = useMemo(
-    (): PlanOptions => ({
+    (): PlanOptions => {
+      const season = seasonActive ? { notes, wheatPerDay } : undefined;
+      return {
         setup: setupWithOverrides(rv, profile.facilities),
         workers: pool,
-        goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : { kind: 'coins' },
+        goal: goal === 'levelUp' && !maxed ? { kind: 'levelUp', stock: { coins: profile.coins ?? 0, items: profile.stock } } : goal === 'points' && season ? { kind: 'points' } : { kind: 'coins' },
         watering,
         includeUnverified: unverified,
         feeding,
-      }),
-    [rv, goal, maxed, pool, watering, unverified, feeding, profile.coins, profile.stock, profile.facilities],
+        season,
+      };
+    },
+    [rv, goal, maxed, pool, watering, unverified, feeding, seasonActive, notes, wheatPerDay, profile.coins, profile.stock, profile.facilities],
   );
   // Calcul rapide tout de suite, puis le calcul exact (machines dédiées, parcelles entières,
   // paires d'appareils ; jusqu'à une seconde) quand la saisie s'arrête.
@@ -86,11 +96,14 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           </label>
           <label className="stat">
             <span>Objectif</span>
-            <select value={goal} onChange={(e) => setGoal(e.target.value as 'levelUp' | 'coins')}>
+            <select value={goal} onChange={(e) => setGoal(e.target.value as Goal)}>
               <option value="levelUp" disabled={maxed}>
                 Monter au niv. {Math.min(20, rv + 1)} au plus vite
               </option>
               <option value="coins">Un maximum de pièces</option>
+              <option value="points" disabled={!seasonOpen}>
+                Points de la Lune des moissons{seasonOpen ? '' : ` (dès le niv. ${HOMELAND.season.minHomeLevel})`}
+              </option>
             </select>
           </label>
           <label className="stat">
@@ -113,7 +126,31 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           <label>
             <input type="checkbox" checked={feeding} onChange={(e) => setFeeding(e.target.checked)} /> Nourrir les Aniimo avec la production
           </label>
+          {seasonOpen && (
+            <label>
+              <input type="checkbox" checked={seasonActive} disabled={goal === 'points'} onChange={(e) => setSeasonOn(e.target.checked)} /> Lune des moissons (saison)
+            </label>
+          )}
         </div>
+        {seasonActive && (
+          <div className="form-grid">
+            <label className="stat">
+              <span>Blé de rayon de lune par jour pour les graines</span>
+              <input
+                type="number"
+                min={0}
+                step={10}
+                inputMode="numeric"
+                placeholder="sans limite"
+                value={wheatPerDay ?? ''}
+                onChange={(e) => setWheatPerDay(e.target.value === '' ? null : Math.max(0, Number(e.target.value)))}
+              />
+            </label>
+            <label className="toggles">
+              <input type="checkbox" checked={notes} onChange={(e) => setNotes(e.target.checked)} /> J'ai les Notes de recette de saison
+            </label>
+          </div>
+        )}
       </section>
 
       {goal === 'levelUp' && target && (
@@ -171,7 +208,9 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   );
 }
 
-function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp' | 'coins'; rv: number; who: 'roster' | 'ideal' }) {
+type Goal = 'levelUp' | 'coins' | 'points';
+
+function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv: number; who: 'roster' | 'ideal' }) {
   const whole = useMemo(() => wholeUnits(result.rows), [result.rows]);
   if (!result.feasible) {
     return (
@@ -207,12 +246,26 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: 'levelUp'
             <strong>{fmtDuration(result.hours)}</strong>
             <span className="muted">de production · {nf.format(result.coinsPerHour)} pièces/h</span>
           </div>
+        ) : goal === 'points' && result.season ? (
+          <div className="headline">
+            <span>Lune des moissons</span>
+            <strong>{nf.format(result.season.pointsPerHour)} points/h</strong>
+            <span className="muted">
+              {nf.format(result.season.pointsPerHour * 24)} par jour · {nf.format(result.coinsPerHour)} pièces/h
+            </span>
+          </div>
         ) : (
           <div className="headline">
             <span>Revenu maximal</span>
             <strong>{nf.format(result.coinsPerHour)} pièces/h</strong>
             <span className="muted">{nf.format(result.coinsPerHour * 24)} par jour</span>
           </div>
+        )}
+        {result.season && (
+          <p className="hint">
+            Lune des moissons : {nf.format(result.season.pointsPerHour * 24)} points et{' '}
+            <b>{nf.format(result.season.wheatPerHour * 24)} Blé de rayon de lune</b> en graines par jour.
+          </p>
         )}
         {result.target && result.remaining && goal === 'levelUp' && (
           <ul className="needs">
