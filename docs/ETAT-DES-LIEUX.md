@@ -126,4 +126,8 @@ Captures ou mesures utiles :
   aniimoeggs) ; le plan ne laisse jamais la gamelle vide, donc la question n'influe pas sur le calcul.
 - **Tailles** : Fournaise thermique 1×1 (Wikily, Aniimax), Grande roue à tisser 4×4 (Hideout, Aniimax) :
   nos données sont justes, aniimofrance se trompe.
-
+- **Captures en jeu** (9 octobre) : Générateur niv. 1, 600 W pour 210 W consommés → taux
+  d'alimentation 120 % (production ÷ consommation, plafonné) ; Établi de menuiserie en électrique à
+  120 %, sans Aniimo ; Séchoir jukebox, Aniimo niv. 3 avec la bonne lettre sur une recette niv. 1 →
+  480 % ; Cuisinière flamboyante, Aniimo niv. 3 sans la lettre sur une recette niv. 3 → 100 %. Tout
+  correspond au modèle de vitesse (figé dans `speed.test.ts`).
