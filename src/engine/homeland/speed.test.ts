@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { efficiency, wateredSeconds, workSeconds } from './speed';
+import { efficiency, PERSONALITY_BONUS, wateredSeconds, workSeconds } from './speed';
+import { ELECTRIC_BONUS } from './optimize';
+import { HOMELAND } from '../../data/homeland';
 
 // Valeurs relevées en jeu (documentées par Aniimax).
 describe('vitesse de travail', () => {
@@ -33,5 +35,21 @@ describe('vitesse de travail', () => {
   it('arrosage : 40 min → 30 min, 4 min → 3 min', () => {
     expect(wateredSeconds(2400)).toBe(1800);
     expect(wateredSeconds(240)).toBe(180);
+  });
+});
+
+// Captures en jeu du 9 octobre (efficacité affichée par l'installation).
+describe('relevés en jeu', () => {
+  it('Séchoir jukebox, recette niv. 1, Aniimo niv. 3 avec la lettre N : 480 %', () => {
+    expect(efficiency(3, 1, false) * PERSONALITY_BONUS).toBeCloseTo(4.8);
+    expect(workSeconds({ facility: 'jukebox-dryer', workload: 54, required: 1, level: 3, personality: true, gathering: false })).toBeCloseTo(54 / 4.8);
+  });
+
+  it('Cuisinière flamboyante, Gâteau aux noix (niv. 3), Aniimo niv. 3 sans la lettre : 100 %', () => {
+    expect(workSeconds({ facility: 'blazing-stove', workload: 243, required: 3, level: 3, personality: false, gathering: false })).toBe(243);
+  });
+
+  it('mode électrique : taux d’alimentation 120 % → durée du jeu ÷ 1,2 (Bois brut 27 s → 22,5 s)', () => {
+    expect(HOMELAND.emode!.seconds['woodworking-bench:rough_lumber'] / ELECTRIC_BONUS).toBeCloseTo(22.5);
   });
 });
