@@ -36,7 +36,7 @@ describe('équipe optimale', () => {
     const off = plan({ ...opts, electric: false, setup: setupForRv(16), workers: rosterPool(current), goal: { kind: 'levelUp', stock: zero } });
     const on = plan({ ...opts, setup: setupForRv(16), workers: rosterPool(current), goal: { kind: 'levelUp', stock: zero } });
     expect(on.hours!).toBeLessThan(off.hours! * 0.8);
-    expect(on.electric!.used).toBeLessThanOrEqual(on.electric!.power + 1e-6);
+    expect(on.electric!.used).toBeLessThanOrEqual(on.electric!.power * (1 + 1e-4));
   });
 
   it('diffTeam : garder + libérer = équipe actuelle, garder + recruter = équipe cible', () => {

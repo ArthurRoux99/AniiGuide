@@ -135,7 +135,7 @@ export function Mesures({ api }: { api: ProfileApi }) {
         <h2>Autres points à confirmer</h2>
         <ul className="plain">
           <li>Zones climatiques : une parcelle qui touche seulement le bord de la zone affiche-t-elle bien « Conditions remplies » ?</li>
-          <li>Mode électrique : vitesse d'un Générateur crépitant tenu par un Aniimo Foudre de niveau trop bas, et bonus de vitesse quand la production dépasse la consommation.</li>
+          <li>Mode électrique : production d'un Générateur crépitant tenu par un Aniimo Foudre de niveau inférieur au niveau recommandé.</li>
           <li>Gamelle vide : les Aniimo ralentissent-ils (×0,2) ou s'arrêtent-ils ?</li>
           <li>Durée d'amélioration du Camping-car.</li>
         </ul>
