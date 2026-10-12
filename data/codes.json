@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-10-02T11:08:04.001Z",
+ "fetchedAt": "2026-10-12T13:10:28.542Z",
  "sources": [
   {
    "name": "AniimoTools",
@@ -11,21 +11,6 @@
   }
  ],
  "active": [
-  {
-   "code": "aniimazingfroyo",
-   "rewards": [
-    {
-     "qty": 20,
-     "item": "Glimmer"
-    }
-   ],
-   "note": "US only",
-   "added": "2026-09-25",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
   {
    "code": "aniimonow",
    "rewards": [
@@ -310,6 +295,29 @@
    "sources": [
     "AniimoTools",
     "Beebom"
+   ]
+  },
+  {
+   "code": "aniimazingfroyo",
+   "rewards": [],
+   "note": null,
+   "added": null,
+   "sources": [
+    "Beebom"
+   ]
+  },
+  {
+   "code": "Tumbler",
+   "rewards": [
+    {
+     "qty": 1,
+     "item": "Incredible Egg"
+    }
+   ],
+   "note": null,
+   "added": null,
+   "sources": [
+    "AniimoTools"
    ]
   }
  ],
