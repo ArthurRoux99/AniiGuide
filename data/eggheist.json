@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-06",
+ "updated": "2026-10-12",
  "note": "Faits recoupés entre plusieurs guides (textes réécrits). En cas de désaccord, le prix affiché en jeu fait foi. Les noms d'objets sans traduction officielle connue sont traduits par AniiGuide.",
  "sources": [
   {
@@ -26,6 +26,11 @@
    "id": "aniimotools",
    "name": "AniimoTools",
    "url": "https://aniimotools.dev/systems/egg-heist/"
+  },
+  {
+   "id": "aniimofrance",
+   "name": "aniimofrance.com",
+   "url": "https://aniimofrance.com/"
   }
  ],
  "unlock": {
@@ -73,7 +78,7 @@
   {
    "id": "hard",
    "name": "Difficile",
-   "rank": "Rising Egg Scout III",
+   "rank": "Dénicheur d'œufs en herbe III",
    "gear": "Rare (Épique conseillé, puces serties)",
    "escapeCoins": 60000,
    "rewards": [
@@ -90,7 +95,7 @@
   {
    "id": "nightmare",
    "name": "Cauchemar",
-   "rank": "Pro Egg Snatcher IV",
+   "rank": "Pro du vol d'œufs IV",
    "gear": "Épique (le meilleur de la boutique)",
    "escapeCoins": 150000,
    "rewards": [
@@ -107,7 +112,7 @@
   {
    "id": "chaos",
    "name": "Chaos",
-   "rank": "Elite Egg Seeker IV",
+   "rank": "Chercheur d'œufs d'élite IV",
    "gear": "Épique",
    "escapeCoins": 300000,
    "ticket": "1 ticket Chaos par entrée (20 000 pièces le premier, jusqu'à 400 000 ensuite ; 20 par jour au plus)",
@@ -123,21 +128,26 @@
    ]
   }
  ],
- "escape": "Condition de sortie (à gauche de l'écran) : l'équipe dépose 1 œuf au bateau ET réunit un total de pièces de coquille (Chaos : pièces seulement). Seule une évacuation réussie rapporte des points de rang.",
+ "escape": "Condition de sortie (à gauche de l'écran) : l'équipe dépose 1 œuf au bateau ET réunit un total de pièces coquille d'œuf (Chaos : pièces seulement). Seule une évacuation réussie rapporte des points de rang.",
  "faint": "S'évanouir fait perdre tout le sac ET l'équipement porté ; le mode rend un sac de base à 4 places. Protection du débutant : les 3 premières parties de chaque difficulté gardent tout en cas d'échec. Le coffre-fort du bateau (talent) garde son contenu même en cas d'échec.",
  "ranks": [
   {
-   "name": "Rookie Egg Hunter",
+   "name": "Chasseur d'œufs néophyte",
    "unlocks": "Normale",
    "rewards": [],
    "bands": [
     15,
     50,
     80
+   ],
+   "divisions": "3 DIVISIONS",
+   "perks": [
+    "Vous disposez d'1 emplacement de Coffre Vénard et pouvez gagner jusqu'à 4 Coffres par Sol",
+    "Coffre Vénard avec un butin d'extraction réussi maximal de qualité Rare"
    ]
   },
   {
-   "name": "Rising Egg Scout",
+   "name": "Dénicheur d'œufs en herbe",
    "unlocks": "Difficile",
    "rewards": [
     "500 000 crédits",
@@ -149,10 +159,15 @@
     30,
     80,
     120
+   ],
+   "divisions": "3 DIVISIONS",
+   "perks": [
+    "Débloquez la difficulté Difficile pour Opération : Chasse aux œufs en équipe",
+    "Vous disposez de 2 emplacements de Coffre Vénard et pouvez obtenir jusqu'à 5 Coffres par Sol"
    ]
   },
   {
-   "name": "Pro Egg Snatcher",
+   "name": "Pro du vol d'œufs",
    "unlocks": "Cauchemar",
    "rewards": [
     "800 000 crédits",
@@ -164,10 +179,15 @@
     30,
     120,
     150
+   ],
+   "divisions": "4 DIVISIONS",
+   "perks": [
+    "Débloquez Cauchemar pour Opération : Chasse aux œufs en équipe",
+    "Possédez 2 emplacements de Coffre de chance. Maximum de 5 Coffres par jour."
    ]
   },
   {
-   "name": "Elite Egg Seeker",
+   "name": "Chercheur d'œufs d'élite",
    "unlocks": "Chaos",
    "rewards": [
     "1 000 000 crédits",
@@ -179,10 +199,15 @@
     30,
     120,
     180
+   ],
+   "divisions": "4 DIVISIONS",
+   "perks": [
+    "Débloque la difficulté Chaos du mode Opération : Chasse aux œufs en équipe",
+    "Possédez 3 emplacements de coffre de chance. Maximum de 5 coffres par jour."
    ]
   },
   {
-   "name": "Expert Egg Raider",
+   "name": "Spécialiste du pillage d'œufs",
    "unlocks": null,
    "rewards": [
     "1 300 000 crédits",
@@ -193,10 +218,15 @@
     30,
     120,
     180
+   ],
+   "divisions": "5 DIVISIONS",
+   "perks": [
+    "Vous disposez de 3 emplacements de Coffre Vénard et pouvez gagner jusqu'à 6 Coffres par Sol",
+    "Coffre Vénard avec un butin d'extraction réussi maximal de Légendaire"
    ]
   },
   {
-   "name": "Egg Heist Master",
+   "name": "Virtuose de la chasse aux œufs",
    "unlocks": null,
    "rewards": [
     "1 600 000 crédits",
@@ -207,10 +237,15 @@
     30,
     120,
     180
+   ],
+   "divisions": "5 DIVISIONS",
+   "perks": [
+    "Vous disposez de 4 emplacements de Coffre Vénard et pouvez gagner jusqu'à 6 Coffres par Sol",
+    "Coffre Vénard avec un butin d'extraction réussi maximal de Légendaire"
    ]
   },
   {
-   "name": "Egg Emperor",
+   "name": "Monarque des œufs",
    "unlocks": null,
    "rewards": [
     "2 000 000 crédits",
@@ -222,12 +257,18 @@
     30,
     120,
     180
+   ],
+   "divisions": "RANG APEX",
+   "perks": [
+    "Vous disposez de 4 emplacements de Coffre Vénard et pouvez gagner jusqu'à 6 Coffres par Sol",
+    "Coffre Vénard avec un butin d'extraction réussi maximal de Légendaire"
    ]
   }
  ],
  "rankSources": [
-  "game8",
-  "aniimoverse"
+  "aniimofrance",
+  "aniimoverse",
+  "game8"
  ],
  "shop": [
   {
@@ -253,12 +294,12 @@
   {
    "item": "Sac léger (14 places)",
    "coins": 30000,
-   "rank": "Rising Egg Scout"
+   "rank": "Dénicheur d'œufs en herbe"
   },
   {
    "item": "Clé plaquée argent",
    "coins": 50000,
-   "rank": "Rising Egg Scout"
+   "rank": "Dénicheur d'œufs en herbe"
   },
   {
    "item": "Amplificateur ou unité rare (1 emplacement de puce)",
@@ -268,12 +309,12 @@
   {
    "item": "Sac d'aventure (18 places)",
    "coins": 60000,
-   "rank": "Pro Egg Snatcher"
+   "rank": "Pro du vol d'œufs"
   },
   {
    "item": "Clé dorée",
    "coins": 100000,
-   "rank": "Pro Egg Snatcher"
+   "rank": "Pro du vol d'œufs"
   },
   {
    "item": "Amplificateur ou unité épique (2 à 3 emplacements)",
@@ -323,7 +364,7 @@
   "Vider la salle avant de creuser : le gardien du nid se réveille quand l'œuf sort. Épingler la sortie sur la carte avant de prendre l'œuf.",
   "En forme d'œuf, on peut rouler, sauter et esquiver mais pas attaquer ; on peut redevenir soi-même instantanément si on est coincé.",
   "Déposer l'œuf d'abord : il est envoyé au courrier et acquis. Le second nid est ce qui fait perdre les parties.",
-  "Privilégier les places du sac au poids : viser vite le rang Rising Egg Scout pour le sac léger (14 places). Garder un sac de rechange au stock.",
+  "Privilégier les places du sac au poids : viser vite le rang Dénicheur d'œufs en herbe pour le sac léger (14 places). Garder un sac de rechange au stock.",
   "Les piliers élémentaires du Sanctuaire ne s'ouvrent qu'à leur élément : une équipe aux éléments variés ouvre plus de salles.",
   "Ne pas vendre les essences (colonnes de lumière bleue ou violette) : elles servent à l'arbre de talents.",
   "Quitter une partie compte à part d'un échec : mieux vaut aller au bout du chrono que fermer le jeu."
@@ -332,5 +373,279 @@
   "aniimoverse",
   "aniimogames",
   "game8"
- ]
+ ],
+ "mode": "Opération : Chasse aux œufs en équipe",
+ "talents": [
+  {
+   "id": "croissance",
+   "name": "Croissance personnelle",
+   "nodes": [
+    {
+     "name": "Résilience I",
+     "effect": "Endurance max +10",
+     "tier": 1,
+     "cost": {
+      "coins": 20000
+     }
+    },
+    {
+     "name": "Tampon de dégâts I",
+     "effect": "Réduction des dégâts +5 %",
+     "tier": 1,
+     "cost": {
+      "coins": 40000
+     }
+    },
+    {
+     "name": "Récupération rapide I",
+     "effect": "Vitesse de récupération d'endurance +5 %",
+     "tier": 1,
+     "cost": {
+      "coins": 80000,
+      "purple": 1,
+      "blue": 2
+     }
+    },
+    {
+     "name": "Charge max I",
+     "effect": "Charge +4",
+     "tier": 1,
+     "cost": {
+      "coins": 100000,
+      "purple": 2,
+      "blue": 1
+     }
+    },
+    {
+     "name": "Tampon de dégâts II",
+     "effect": "Réduction des dégâts +5 %",
+     "tier": 2,
+     "cost": {
+      "coins": 150000,
+      "purple": 3,
+      "blue": 2
+     }
+    },
+    {
+     "name": "Résilience II",
+     "effect": "Endurance max +10",
+     "tier": 2,
+     "cost": {
+      "coins": 200000,
+      "purple": 6,
+      "blue": 3
+     }
+    },
+    {
+     "name": "Charge max II",
+     "effect": "Charge +4",
+     "tier": 2,
+     "cost": {
+      "coins": 250000,
+      "gold": 1,
+      "purple": 10
+     }
+    },
+    {
+     "name": "Esquive d'urgence",
+     "effect": "Vitesse de déplacement augmentée à terre",
+     "tier": 0,
+     "cost": {
+      "coins": 250000,
+      "gold": 1,
+      "purple": 10
+     }
+    },
+    {
+     "name": "Frappe critique II",
+     "effect": "Amplification de dégâts +5 %",
+     "tier": 2,
+     "cost": {
+      "coins": 350000,
+      "gold": 4,
+      "purple": 3
+     }
+    },
+    {
+     "name": "Volonté tenace",
+     "effect": "Perte de PV plus lente à terre",
+     "tier": 0,
+     "cost": {
+      "coins": 450000,
+      "gold": 5,
+      "purple": 4
+     }
+    },
+    {
+     "name": "Récupération rapide II",
+     "effect": "Vitesse de récupération d'endurance +5 %",
+     "tier": 2,
+     "cost": {
+      "coins": 550000,
+      "gold": 6,
+      "purple": 5
+     }
+    },
+    {
+     "name": "Charge max III",
+     "effect": "Charge +6",
+     "tier": 3,
+     "cost": {
+      "coins": 650000,
+      "gold": 7,
+      "purple": 6
+     }
+    },
+    {
+     "name": "Auto-ranimation",
+     "effect": "Vous pouvez vous ranimer en étant à terre si un coéquipier est encore en vie. Une fois par match.",
+     "tier": 0,
+     "cost": {
+      "coins": 2500000,
+      "red": 8,
+      "gold": 10
+     }
+    }
+   ]
+  },
+  {
+   "id": "bateau",
+   "name": "Améliorer le bateau à œufs",
+   "nodes": [
+    {
+     "name": "Coffre du bateau à œufs",
+     "effect": "Déverrouille la fonctionnalité coffre du bateau à œufs.",
+     "tier": 1,
+     "cost": {
+      "coins": 10000
+     }
+    },
+    {
+     "name": "Récupération I",
+     "effect": "Recherche d'objet plus rapide",
+     "tier": 1,
+     "cost": {
+      "coins": 40000
+     }
+    },
+    {
+     "name": "Objets à moitié prix I",
+     "effect": "La boutique Chasse aux œufs propose 1 objet supplémentaire à moitié prix.",
+     "tier": 1,
+     "cost": {
+      "coins": 60000,
+      "blue": 2
+     }
+    },
+    {
+     "name": "Objets à moitié prix II",
+     "effect": "La boutique Chasse aux œufs propose 2 objets supplémentaires à moitié prix.",
+     "tier": 2,
+     "cost": {
+      "coins": 100000,
+      "purple": 2,
+      "blue": 1
+     }
+    },
+    {
+     "name": "Œuf dur I",
+     "effect": "Réduction des dégâts +10 % lors d'une fusion avec un œuf",
+     "tier": 1,
+     "cost": {
+      "coins": 150000,
+      "purple": 3,
+      "blue": 2
+     }
+    },
+    {
+     "name": "Œuf rapide I",
+     "effect": "Vitesse de déplacement +10 % lors d'une fusion avec un œuf",
+     "tier": 1,
+     "cost": {
+      "coins": 200000,
+      "purple": 6,
+      "blue": 3
+     }
+    },
+    {
+     "name": "Extension du coffre I",
+     "effect": "Capacité du coffre du bateau à œufs +1",
+     "tier": 1,
+     "cost": {
+      "coins": 250000,
+      "gold": 1,
+      "purple": 10
+     }
+    },
+    {
+     "name": "Récupération III",
+     "effect": "Recherche d'objet plus rapide",
+     "tier": 3,
+     "cost": {
+      "coins": 350000,
+      "gold": 4,
+      "purple": 3
+     }
+    },
+    {
+     "name": "Œuf rapide II",
+     "effect": "Vitesse de déplacement +10 % lors d'une fusion avec un œuf",
+     "tier": 2,
+     "cost": {
+      "coins": 450000,
+      "gold": 5,
+      "purple": 4
+     }
+    },
+    {
+     "name": "Œuf dur II",
+     "effect": "Réduction des dégâts +10 % lors d'une fusion avec un œuf",
+     "tier": 2,
+     "cost": {
+      "coins": 550000,
+      "gold": 6,
+      "purple": 5
+     }
+    },
+    {
+     "name": "Extension du coffre II",
+     "effect": "Capacité du coffre du bateau à œufs +1",
+     "tier": 2,
+     "cost": {
+      "coins": 650000,
+      "gold": 7,
+      "purple": 6
+     }
+    },
+    {
+     "name": "Objets à moitié prix III",
+     "effect": "La boutique Chasse aux œufs propose 1 article supplémentaire à moitié prix.",
+     "tier": 3,
+     "cost": {
+      "coins": 2500000,
+      "red": 8,
+      "gold": 10
+     }
+    },
+    {
+     "name": "Renforcement du coffre",
+     "effect": "Limite de charge du coffre du bateau à œufs +10 kg",
+     "tier": 0,
+     "cost": {
+      "coins": 4000000,
+      "red": 12,
+      "gold": 15
+     }
+    }
+   ]
+  }
+ ],
+ "essences": {
+  "blue": "Essence bleue",
+  "purple": "Essence violette",
+  "gold": "Essence d'or",
+  "red": "objet à étoile rouge (nom à confirmer)"
+ },
+ "essencesNote": "Coûts des talents relevés par icône (flamme bleue, violette, jaune, étoile rouge) ; correspondance avec les essences à confirmer en jeu.",
+ "talentNote": "Les talents sont réinitialisés à chaque nouvelle saison."
 }

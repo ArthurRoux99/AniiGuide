@@ -1,4 +1,4 @@
-// Opération Œufs : combien de parties pour s'offrir un objet de la boutique.
+// Chasse aux œufs : combien de parties pour s'offrir un objet de la boutique.
 //
 // Espérance d'une partie : on gagne `coins` pièces de coquille et `shards` éclats si l'évacuation
 // réussit (probabilité `success`) ; en cas d'échec on perd le sac et l'équipement porté

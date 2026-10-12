@@ -27,7 +27,7 @@ const PAGES: [string, string][] = [
   ['equipes', 'Équipes de combat'],
   ['codes', 'Codes cadeaux'],
   ['mesures', 'Vérifier en jeu'],
-  ['oeufs', 'Opération Œufs'],
+  ['oeufs', 'Chasse aux œufs'],
 ];
 
 for (const [id, text] of PAGES) {
@@ -135,11 +135,15 @@ test('synchro : le lien recrée le même logis dans un autre navigateur', async 
   await expect(other.locator('h2', { hasText: 'Mes ouvriers' })).toContainText('22');
 });
 
-test('Opération Œufs : calcul du nombre de parties et suivi gardé', async ({ page }) => {
+test('Chasse aux œufs : calcul du nombre de parties et suivi gardé', async ({ page }) => {
   await page.goto('#oeufs');
   await expect(page.locator('.estimate')).toContainText(/parties/);
-  const coins = page.getByLabel('Pièces de coquille', { exact: true });
+  const coins = page.getByLabel("Pièces coquille d'œuf", { exact: true });
   await coins.fill('400000');
+  // Talents : un talent coché reste appris après rechargement.
+  await page.getByLabel(/Coffre du bateau à œufs/).check();
   await page.reload();
-  await expect(page.getByLabel('Pièces de coquille', { exact: true })).toHaveValue('400000');
+  await expect(page.getByLabel("Pièces coquille d'œuf", { exact: true })).toHaveValue('400000');
+  await expect(page.getByLabel(/Coffre du bateau à œufs/)).toBeChecked();
+  await expect(page.getByRole('cell', { name: /Dénicheur d'œufs en herbe/ }).first()).toBeVisible();
 });

@@ -27,8 +27,8 @@ export interface Profile {
   usedCodes: string[];
   /** Installations réellement posées (nombre, niveau) quand elles diffèrent du maximum du niveau. */
   facilities: Record<string, { count: number; level: number }>;
-  /** Opération Œufs : pièces de coquille, éclats prismana, rang. */
-  eggHeist: { coins: number; shards: number; rank: number };
+  /** Chasse aux œufs : pièces coquille d'œuf, éclats prismana, rang. */
+  eggHeist: { coins: number; shards: number; rank: number; talents?: string[] };
   updatedAt: string;
 }
 
@@ -72,6 +72,7 @@ export function sanitizeProfile(input: unknown): Profile {
       coins: Math.max(0, Number(p.eggHeist?.coins) || 0),
       shards: Math.max(0, Number(p.eggHeist?.shards) || 0),
       rank: Math.min(6, Math.max(0, Number(p.eggHeist?.rank) || 0)),
+      talents: Array.isArray(p.eggHeist?.talents) ? p.eggHeist.talents.filter((t: unknown): t is string => typeof t === 'string') : [],
     },
     usedCodes: Array.isArray(p.usedCodes) ? [...new Set(p.usedCodes.map((c) => String(c).toLowerCase()))] : [],
     workers: p.workers
