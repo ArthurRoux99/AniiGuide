@@ -48,7 +48,7 @@ export interface TeamOptions {
   /** Aniimo à inclure d'office. */
   locked?: string[];
   size?: number;
-  /** Bonus par élément différent dans l'équipe (Opération Œufs : piliers élémentaires). */
+  /** Bonus par élément différent dans l'équipe (Chasse aux œufs : piliers élémentaires). */
   diversity?: number;
 }
 

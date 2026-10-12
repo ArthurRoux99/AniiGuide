@@ -32,7 +32,7 @@ const PAGES = [
   { id: 'carte', label: 'Où trouver', icon: '🗺️', Page: OuTrouver },
   { id: 'tier', label: 'Tier list', icon: '🏆', Page: TierList },
   { id: 'equipes', label: 'Équipes', icon: '⚔️', Page: Equipes },
-  { id: 'oeufs', label: 'Opération Œufs', icon: '🥚', Page: Oeufs },
+  { id: 'oeufs', label: 'Chasse aux œufs', icon: '🥚', Page: Oeufs },
   { id: 'codes', label: 'Codes', icon: '🎁', Page: Codes },
   { id: 'mesures', label: 'Vérifier', icon: '⏱️', Page: Mesures, hidden: true },
 ] as const;

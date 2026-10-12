@@ -3,7 +3,7 @@ import { heistPlan } from './eggheist';
 
 const base = { price: { coins: 400000, shards: 200 }, have: { coins: 0, shards: 0 }, perRun: { coins: 50000, shards: 3 }, success: 1, lossOnFail: 0, minutes: 10 };
 
-describe('Opération Œufs : nombre de parties', () => {
+describe('Chasse aux œufs : nombre de parties', () => {
   it('compte les pièces et les éclats, garde le plus contraignant', () => {
     const r = heistPlan(base);
     expect(r.runs).toBe(67); // 200 éclats / 3 par partie

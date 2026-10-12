@@ -24,7 +24,7 @@ function Sources({ ids }: { ids: string[] }) {
   );
 }
 
-/** Opération Œufs (Egg Heist) : guide, suivi, calculateur, rangs et boutique. */
+/** Chasse aux œufs (Egg Heist) : guide, suivi, calculateur, talents, rangs et boutique. */
 export function Oeufs({ api }: { api: ProfileApi }) {
   const eh = api.profile.eggHeist;
   const rank = EH.ranks[eh.rank];
@@ -46,9 +46,9 @@ export function Oeufs({ api }: { api: ProfileApi }) {
   return (
     <div className="page">
       <section className="card">
-        <h2>Opération Œufs</h2>
+        <h2>Chasse aux œufs</h2>
         <p className="hint">
-          Le mode « extraction » : 1 à 3 joueurs débarquent sur les Îles perdues, entrent dans le Sanctuaire perdu, déterrent un œuf d'Aniimo et le
+          {EH.mode} : le mode « extraction » : 1 à 3 joueurs débarquent sur les Îles perdues, entrent dans le Sanctuaire perdu, déterrent un œuf d'Aniimo et le
           ramènent au bateau. Accessible au niveau {EH.unlock.level} et au rang de Pathfinder {EH.unlock.pathfinderRank}. {EH.team.note}
         </p>
         <ul className="plain">
@@ -68,7 +68,7 @@ export function Oeufs({ api }: { api: ProfileApi }) {
         <h2>Mon suivi</h2>
         <div className="form-grid">
           <label className="stat">
-            <span>Rang Egg Heist</span>
+            <span>Rang</span>
             <select value={eh.rank} onChange={(e) => api.setEggHeist({ rank: Number(e.target.value) })}>
               {EH.ranks.map((r, i) => (
                 <option key={r.name} value={i}>
@@ -77,7 +77,7 @@ export function Oeufs({ api }: { api: ProfileApi }) {
               ))}
             </select>
           </label>
-          {num(eh.coins, (n) => api.setEggHeist({ coins: n }), 'Pièces de coquille')}
+          {num(eh.coins, (n) => api.setEggHeist({ coins: n }), "Pièces coquille d'œuf")}
           {num(eh.shards, (n) => api.setEggHeist({ shards: n }), 'Éclats de coquille prismana', 1)}
         </div>
         <p className="hint">
@@ -98,7 +98,7 @@ export function Oeufs({ api }: { api: ProfileApi }) {
           ))}
         </div>
         <ul className="progress-list">
-          <Bar label="Pièces de coquille" have={eh.coins} need={price.coins} />
+          <Bar label="Pièces coquille d'œuf" have={eh.coins} need={price.coins} />
           <Bar label="Éclats prismana" have={eh.shards} need={price.shards} />
         </ul>
         <h3>Combien de parties ?</h3>
@@ -123,12 +123,14 @@ export function Oeufs({ api }: { api: ProfileApi }) {
         ) : (
           <p className="estimate">
             Encore <strong>{res.runs} parties</strong> (≈ {fmtDuration(res.hours)} de jeu), limité par les{' '}
-            {res.limit === 'shards' ? 'éclats prismana' : 'pièces de coquille'}. Gain moyen par partie : {nf.format(res.netCoins)} pièces,{' '}
+            {res.limit === 'shards' ? 'éclats prismana' : "pièces coquille d'œuf"}. Gain moyen par partie : {nf.format(res.netCoins)} pièces,{' '}
             {res.netShards.toFixed(1).replace('.', ',')} éclats.
           </p>
         )}
         <Sources ids={EH.prismanaEgg.sources} />
       </section>
+
+      <Talents api={api} netCoins={res.netCoins} />
 
       <section className="card">
         <h2>Équipe</h2>
@@ -137,7 +139,7 @@ export function Oeufs({ api }: { api: ProfileApi }) {
           Sanctuaire ne s'ouvrent qu'à leur élément).
         </p>
         <a className="btn btn--primary" href="#equipes/oeufs">
-          ⚔️ Composer mon équipe Opération Œufs
+          ⚔️ Composer mon équipe Chasse aux œufs
         </a>
       </section>
 
@@ -182,6 +184,7 @@ export function Oeufs({ api }: { api: ProfileApi }) {
                 <th>Rang</th>
                 <th>Débloque</th>
                 <th>Paliers de score</th>
+                <th>Avantages</th>
                 <th>Récompenses de passage</th>
               </tr>
             </thead>
@@ -190,9 +193,11 @@ export function Oeufs({ api }: { api: ProfileApi }) {
                 <tr key={r.name} className={i === eh.rank ? 'is-current' : undefined}>
                   <td>
                     <b>{r.name}</b>
+                    <div className="muted">{r.divisions.toLowerCase()}</div>
                   </td>
                   <td>{r.unlocks ?? '—'}</td>
                   <td>{r.bands.join(' / ')}</td>
+                  <td>{r.perks.join(' ')}</td>
                   <td>{r.rewards.join(', ') || '—'}</td>
                 </tr>
               ))}
@@ -253,3 +258,71 @@ function Bar({ label, have, need }: { label: string; have: number; need: number 
     </li>
   );
 }
+
+type Cost = { coins: number; blue?: number; purple?: number; gold?: number; red?: number };
+const ESSENCE_KEYS = ['blue', 'purple', 'gold', 'red'] as const;
+const add = (a: Cost, b: Cost): Cost => ({
+  coins: a.coins + b.coins,
+  ...Object.fromEntries(ESSENCE_KEYS.map((k) => [k, (a[k] ?? 0) + (b[k] ?? 0)])),
+});
+const fmtCost = (c: Cost) =>
+  [`${nf.format(c.coins)} pièces`, ...ESSENCE_KEYS.filter((k) => c[k]).map((k) => `${c[k]} ${EH.essences[k].toLowerCase()}`)].join(' + ');
+
+/** Les deux arbres de talents : ce qui est appris, ce qu'il reste à payer, et en combien de parties. */
+function Talents({ api, netCoins }: { api: ProfileApi; netCoins: number }) {
+  const learned = new Set(api.profile.eggHeist.talents ?? []);
+  const toggle = (name: string) => {
+    const next = new Set(learned);
+    if (next.has(name)) next.delete(name);
+    else next.add(name);
+    api.setEggHeist({ talents: [...next] });
+  };
+  const id = (tree: string, name: string) => `${tree}:${name}`;
+  return (
+    <section className="card">
+      <h2>Talents</h2>
+      <p className="hint">
+        Coche les talents déjà appris : le reste à payer et le nombre de parties pour finir chaque arbre se calculent avec ton gain moyen par
+        partie ci-dessus. {EH.talentNote} Ordre conseillé : de haut en bas (chaque talent ouvre les suivants), le coffre du bateau à œufs en
+        premier, puis les objets à moitié prix.
+      </p>
+      {EH.talents.map((tree) => {
+        const left = tree.nodes.filter((n) => !learned.has(id(tree.id, n.name))).reduce<Cost>((s, n) => add(s, n.cost), { coins: 0 });
+        const runs = netCoins > 0 ? Math.ceil(left.coins / netCoins) : null;
+        const next = tree.nodes.find((n) => !learned.has(id(tree.id, n.name)));
+        return (
+          <details key={tree.id} className="talent-tree" open>
+            <summary>
+              <b>{tree.name}</b>{' '}
+              <span className="muted">
+                {left.coins ? `reste ${fmtCost(left)}${runs != null ? ` · ≈ ${runs} parties` : ''}` : '✓ terminé'}
+              </span>
+            </summary>
+            <ul className="hm-steps">
+              {tree.nodes.map((n) => {
+                const k = id(tree.id, n.name);
+                return (
+                  <li key={k} className={learned.has(k) ? 'is-done' : undefined}>
+                    <label>
+                      <input type="checkbox" checked={learned.has(k)} onChange={() => toggle(k)} />
+                      <span>
+                        <b>{n.name}</b> {n === next && <span className="chip">prochain</span>}
+                        <br />
+                        <small className="muted">
+                          {n.effect} · {fmtCost(n.cost)}
+                        </small>
+                      </span>
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          </details>
+        );
+      })}
+      <p className="hint">{EH.essencesNote}</p>
+      <Sources ids={['aniimofrance']} />
+    </section>
+  );
+}
+

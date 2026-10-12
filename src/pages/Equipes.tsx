@@ -27,7 +27,7 @@ export function Equipes({ api }: { api: ProfileApi }) {
   const [prismana, setPrismana] = useState(false);
   const [locked, setLocked] = useState<string[]>([]);
   const [picking, setPicking] = useState<'collection' | 'lock' | null>(null);
-  // Opération Œufs : les piliers du Sanctuaire ne s'ouvrent qu'à leur élément → éléments variés.
+  // Chasse aux œufs : les piliers du Sanctuaire ne s'ouvrent qu'à leur élément → éléments variés.
   const [heist, setHeist] = useState(() => location.hash.includes('oeufs'));
 
   const pool = useMemo(() => {
@@ -75,7 +75,7 @@ export function Equipes({ api }: { api: ProfileApi }) {
             <input type="checkbox" checked={prismana} onChange={(e) => setPrismana(e.target.checked)} /> Formes prismana
           </label>
           <label title="Les piliers élémentaires du Sanctuaire ne s'ouvrent qu'à leur élément">
-            <input type="checkbox" checked={heist} onChange={(e) => setHeist(e.target.checked)} /> Opération Œufs (éléments variés)
+            <input type="checkbox" checked={heist} onChange={(e) => setHeist(e.target.checked)} /> Chasse aux œufs (éléments variés)
           </label>
         </div>
         <div className="row">
