@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ANIIMO_BY_ID } from '../data/aniimo';
 import { FACILITY_BY_ID, HOMELAND, facilityName, itemName } from '../data/homeland';
 import { ABILITY_BY_ID, type AbilityId } from '../engine/abilities';
@@ -10,6 +10,8 @@ import { AbilityChip, Badge } from '../components/ui';
 import { fmtDuration } from '../components/format';
 import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
 import { HomelandMap } from '../components/HomelandMap';
+import PlanWorker from '../workers/plan.worker?worker&inline';
+import wasmUrl from 'highs/runtime?url';
 import { MyFacilities, Upgrades } from '../components/Upgrades';
 import { Comeback } from '../components/Comeback';
 import { FoodBowl } from '../components/FoodBowl';
@@ -71,8 +73,19 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   // paires d'appareils ; jusqu'à une seconde) quand la saisie s'arrête.
   const quick = useMemo(() => plan(options), [options]);
   const [exact, setExact] = useState<{ options: PlanOptions; result: PlanResult } | null>(null);
+  // Le calcul exact tourne dans un worker gardé le temps de la page (solveur chargé une fois) ;
+  // seul le résultat de la dernière demande est retenu.
+  const worker = useRef<{ w: Worker; id: number } | null>(null);
+  useEffect(() => () => worker.current?.w.terminate(), []);
   useEffect(() => {
-    const t = setTimeout(() => setExact({ options, result: plan({ ...options, exact: true, pairs: true }) }), 400);
+    const t = setTimeout(() => {
+      worker.current ??= { w: new PlanWorker(), id: 0 };
+      const job = ++worker.current.id;
+      worker.current.w.onmessage = (e: MessageEvent<{ id: number; result: PlanResult }>) => {
+        if (e.data.id === job) setExact({ options, result: e.data.result });
+      };
+      worker.current.w.postMessage({ id: job, wasmUrl: new URL(wasmUrl, location.href).href, options });
+    }, 400);
     return () => clearTimeout(t);
   }, [options]);
   const result = exact?.options === options && exact.result.feasible ? exact.result : quick;
