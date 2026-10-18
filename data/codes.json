@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-10-17T09:21:56.975Z",
+ "fetchedAt": "2026-10-18T09:36:33.741Z",
  "sources": [
   {
    "name": "AniimoTools",
@@ -324,20 +324,6 @@
    ],
    "note": null,
    "added": "2026-09-18",
-   "sources": [
-    "AniimoTools"
-   ]
-  },
-  {
-   "code": "Tumbler",
-   "rewards": [
-    {
-     "qty": 1,
-     "item": "Incredible Egg"
-    }
-   ],
-   "note": null,
-   "added": null,
    "sources": [
     "AniimoTools"
    ]
