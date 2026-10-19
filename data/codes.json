@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-10-18T09:36:33.741Z",
+ "fetchedAt": "2026-10-19T10:46:11.606Z",
  "sources": [
   {
    "name": "AniimoTools",
@@ -210,29 +210,6 @@
    ]
   },
   {
-   "code": "aniimowelcome",
-   "rewards": [
-    {
-     "qty": 50,
-     "item": "Glimmer"
-    },
-    {
-     "qty": 5,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod Pro"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
    "code": "anyoneaniimo",
    "rewards": [
     {
@@ -320,6 +297,28 @@
     {
      "qty": 50,
      "item": "Glimmer"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimowelcome",
+   "rewards": [
+    {
+     "qty": 50,
+     "item": "Glimmer"
+    },
+    {
+     "qty": 5,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod Pro"
     }
    ],
    "note": null,

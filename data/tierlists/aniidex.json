@@ -2,8 +2,8 @@
  "source": "Aniidex",
  "url": "https://aniidex.com/tier-list/",
  "note": null,
- "pageDate": "2026-09-28",
- "fetchedAt": "2026-10-18T09:36:30.171Z",
+ "pageDate": "2026-10-18",
+ "fetchedAt": "2026-10-19T10:46:06.456Z",
  "scale": [
   "S",
   "A",
@@ -25,7 +25,7 @@
    "tier": "S"
   },
   {
-   "id": "055-basic-form",
+   "id": "en:Soleon",
    "tier": "S"
   },
   {
@@ -33,15 +33,11 @@
    "tier": "S"
   },
   {
-   "id": "10003-basic-form",
-   "tier": "S"
-  },
-  {
    "id": "en:Sparkelf",
    "tier": "S"
   },
   {
-   "id": "en:Soleon",
+   "id": "055-basic-form",
    "tier": "S"
   },
   {
@@ -49,7 +45,11 @@
    "tier": "S"
   },
   {
-   "id": "003-basic-form",
+   "id": "10003-basic-form",
+   "tier": "S"
+  },
+  {
+   "id": "10001-prismana-form",
    "tier": "A"
   },
   {
@@ -57,7 +57,7 @@
    "tier": "A"
   },
   {
-   "id": "041-basic-form",
+   "id": "en:Fennelun",
    "tier": "A"
   },
   {
@@ -65,11 +65,7 @@
    "tier": "A"
   },
   {
-   "id": "069-basic-form",
-   "tier": "A"
-  },
-  {
-   "id": "018-basic-form",
+   "id": "003-basic-form",
    "tier": "A"
   },
   {
@@ -77,15 +73,23 @@
    "tier": "A"
   },
   {
+   "id": "018-basic-form",
+   "tier": "A"
+  },
+  {
    "id": "027-basic-form",
    "tier": "A"
   },
   {
-   "id": "en:Fennelun",
+   "id": "041-basic-form",
    "tier": "A"
   },
   {
    "id": "015-basic-form",
+   "tier": "A"
+  },
+  {
+   "id": "069-basic-form",
    "tier": "A"
   },
   {
@@ -101,15 +105,7 @@
    "tier": "B"
   },
   {
-   "id": "044-basic-form",
-   "tier": "B"
-  },
-  {
    "id": "012-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "10001-prismana-form",
    "tier": "B"
   },
   {
@@ -129,7 +125,7 @@
    "tier": "B"
   },
   {
-   "id": "057-basic-form",
+   "id": "044-basic-form",
    "tier": "B"
   },
   {
@@ -137,20 +133,16 @@
    "tier": "B"
   },
   {
-   "id": "067-basic-form",
-   "tier": "B"
-  },
-  {
    "id": "082-basic-form",
    "tier": "B"
   },
   {
-   "id": "009-basic-form",
+   "id": "057-basic-form",
    "tier": "B"
   },
   {
-   "id": "054-basic-form",
-   "tier": "B"
+   "id": "067-basic-form",
+   "tier": "C"
   },
   {
    "id": "072-basic-form",
@@ -161,19 +153,23 @@
    "tier": "C"
   },
   {
-   "id": "040-basic-form",
-   "tier": "C"
-  },
-  {
    "id": "010-basic-form",
    "tier": "C"
   },
   {
-   "id": "034-basic-form",
+   "id": "009-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "054-basic-form",
    "tier": "C"
   },
   {
    "id": "062-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "040-basic-form",
    "tier": "C"
   },
   {
@@ -185,7 +181,7 @@
    "tier": "C"
   },
   {
-   "id": "043-basic-form",
+   "id": "006-basic-form",
    "tier": "C"
   },
   {
@@ -193,7 +189,15 @@
    "tier": "C"
   },
   {
+   "id": "034-basic-form",
+   "tier": "C"
+  },
+  {
    "id": "037-basic-form",
+   "tier": "C"
+  },
+  {
+   "id": "043-basic-form",
    "tier": "C"
   },
   {
@@ -205,15 +209,11 @@
    "tier": "C"
   },
   {
-   "id": "033-basic-form",
-   "tier": "C"
-  },
-  {
-   "id": "006-basic-form",
+   "id": "036-basic-form",
    "tier": "D"
   },
   {
-   "id": "036-basic-form",
+   "id": "033-basic-form",
    "tier": "D"
   },
   {
@@ -225,11 +225,23 @@
    "tier": "D"
   },
   {
+   "id": "071-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "011-basic-form",
+   "tier": "D"
+  },
+  {
+   "id": "079-basic-form",
+   "tier": "D"
+  },
+  {
    "id": "042-basic-form",
    "tier": "D"
   },
   {
-   "id": "071-basic-form",
+   "id": "047-basic-form",
    "tier": "D"
   },
   {
@@ -241,27 +253,11 @@
    "tier": "D"
   },
   {
-   "id": "079-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "047-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "011-basic-form",
-   "tier": "D"
-  },
-  {
    "id": "024-basic-form",
    "tier": "D"
   },
   {
    "id": "008-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "001-basic-form",
    "tier": "D"
   },
   {
@@ -273,7 +269,7 @@
    "tier": "D"
   },
   {
-   "id": "068-basic-form",
+   "id": "001-basic-form",
    "tier": "D"
   },
   {
@@ -285,11 +281,15 @@
    "tier": "D"
   },
   {
+   "id": "068-basic-form",
+   "tier": "D"
+  },
+  {
    "id": "020-basic-form",
    "tier": "D"
   },
   {
-   "id": "060-basic-form",
+   "id": "035-basic-form",
    "tier": "D"
   },
   {
@@ -297,7 +297,7 @@
    "tier": "D"
   },
   {
-   "id": "035-basic-form",
+   "id": "060-basic-form",
    "tier": "D"
   },
   {
@@ -366,8 +366,8 @@
   }
  ],
  "unmatched": [
-  "Sparkelf (Basic Form) : S",
   "Soleon (Basic Form) : S",
+  "Sparkelf (Basic Form) : S",
   "Fennelun (Basic Form) : A",
   "Hexxin (Basic Form) : C"
  ]
