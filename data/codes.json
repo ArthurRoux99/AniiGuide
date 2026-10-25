@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-10-19T10:46:11.606Z",
+ "fetchedAt": "2026-10-25T09:49:45.802Z",
  "sources": [
   {
    "name": "AniimoTools",
@@ -11,242 +11,6 @@
   }
  ],
  "active": [
-  {
-   "code": "aniimazingfroyo",
-   "rewards": [
-    {
-     "qty": 20,
-     "item": "Glimmer"
-    }
-   ],
-   "note": "US only",
-   "added": "2026-09-25",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimonow",
-   "rewards": [
-    {
-     "qty": 3,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 10000,
-     "item": "Credits"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-25",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "anythinganiimo",
-   "rewards": [
-    {
-     "qty": 3,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 10000,
-     "item": "Credits"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-25",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "anywhereaniimo",
-   "rewards": [
-    {
-     "qty": 3,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 10000,
-     "item": "Credits"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-25",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimofreetoplay",
-   "rewards": [
-    {
-     "qty": 50,
-     "item": "Glimmer"
-    },
-    {
-     "qty": 5,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod Pro"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-20",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimobonus",
-   "rewards": [
-    {
-     "qty": 50,
-     "item": "Glimmer"
-    },
-    {
-     "qty": 5,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod Pro"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimoidyll",
-   "rewards": [
-    {
-     "qty": 10000,
-     "item": "Credits"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimolaunch2026",
-   "rewards": [
-    {
-     "qty": 50,
-     "item": "Glimmer"
-    },
-    {
-     "qty": 5,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod Pro"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimoopenworld",
-   "rewards": [
-    {
-     "qty": 10000,
-     "item": "Credits"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "aniimotogether",
-   "rewards": [
-    {
-     "qty": 3,
-     "item": "Growth Flower"
-    },
-    {
-     "qty": 10000,
-     "item": "Credits"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "anyoneaniimo",
-   "rewards": [
-    {
-     "qty": 10000,
-     "item": "Credits"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
-  {
-   "code": "twinewithaniimo",
-   "rewards": [
-    {
-     "qty": 10000,
-     "item": "Credits"
-    },
-    {
-     "qty": 5,
-     "item": "Aniipod"
-    }
-   ],
-   "note": null,
-   "added": "2026-09-18",
-   "sources": [
-    "AniimoTools",
-    "Beebom"
-   ]
-  },
   {
    "code": "ANIIMOGIFT",
    "rewards": [
@@ -288,15 +52,198 @@
     "AniimoTools",
     "Beebom"
    ]
+  },
+  {
+   "code": "aniimazingfroyo",
+   "rewards": [],
+   "note": null,
+   "added": null,
+   "sources": [
+    "Beebom"
+   ]
   }
  ],
  "expired": [
+  {
+   "code": "aniimonow",
+   "rewards": [
+    {
+     "qty": 3,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 10000,
+     "item": "Credits"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-25",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "anythinganiimo",
+   "rewards": [
+    {
+     "qty": 3,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 10000,
+     "item": "Credits"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-25",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "anywhereaniimo",
+   "rewards": [
+    {
+     "qty": 3,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 10000,
+     "item": "Credits"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-25",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimofreetoplay",
+   "rewards": [
+    {
+     "qty": 50,
+     "item": "Glimmer"
+    },
+    {
+     "qty": 5,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod Pro"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-20",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimobonus",
+   "rewards": [
+    {
+     "qty": 50,
+     "item": "Glimmer"
+    },
+    {
+     "qty": 5,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod Pro"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimoidyll",
+   "rewards": [
+    {
+     "qty": 10000,
+     "item": "Credits"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimolaunch2026",
+   "rewards": [
+    {
+     "qty": 50,
+     "item": "Glimmer"
+    },
+    {
+     "qty": 5,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod Pro"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimoopenworld",
+   "rewards": [
+    {
+     "qty": 10000,
+     "item": "Credits"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
   {
    "code": "aniimoparty",
    "rewards": [
     {
      "qty": 50,
      "item": "Glimmer"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "aniimotogether",
+   "rewards": [
+    {
+     "qty": 3,
+     "item": "Growth Flower"
+    },
+    {
+     "qty": 10000,
+     "item": "Credits"
     }
    ],
    "note": null,
@@ -319,6 +266,42 @@
     {
      "qty": 5,
      "item": "Aniipod Pro"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "anyoneaniimo",
+   "rewards": [
+    {
+     "qty": 10000,
+     "item": "Credits"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod"
+    }
+   ],
+   "note": null,
+   "added": "2026-09-18",
+   "sources": [
+    "AniimoTools"
+   ]
+  },
+  {
+   "code": "twinewithaniimo",
+   "rewards": [
+    {
+     "qty": 10000,
+     "item": "Credits"
+    },
+    {
+     "qty": 5,
+     "item": "Aniipod"
     }
    ],
    "note": null,
