@@ -62,7 +62,7 @@ interface HomelandData {
   levelUpChains: string[][];
   moduleMaxLevels: Record<string, number[]>;
   specialRecipes: string[];
-  season: { name: string; minHomeLevel: number; recipeNotes: string[] };
+  season: { name: string; minHomeLevel: number; recipeNotes: string[]; /** Saison terminée : plus proposée. */ over?: boolean };
   names: { facilities: Record<string, string>; items: Record<string, string> };
   /** Par installation et par niveau (index 0 = niveau 1) : stock, puissance électrique, coût en Pièces de logis. */
   levels: Record<string, { stock: number | null; power: number | null; cost: number | null }[]>;

@@ -30,6 +30,12 @@ const FORMS_FR = {
   'Sea of Flowers Form': 'Forme de la mer florale',
   'Forest Form': 'Forme des forêts',
   'Highland Form': 'Forme des hautes-plaines',
+  // Renommées sur le wiki fin octobre 2026 (noms FR officiels de ses étiquettes de formes ;
+  // « Flowerfield » y est traduit par erreur en espagnol, on garde le nom français d'avant).
+  'Timberline Form': 'Forme des montagnes boisées',
+  'Flowerfield Form': 'Forme de la mer florale',
+  'Rainfall Form': 'Forme des averses',
+  'Waterfall Form': 'Forme des cascades',
 };
 
 const official = await read('data/official/aniimo.json');

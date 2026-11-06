@@ -39,7 +39,8 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   const [electric, setElectric] = useState(true);
   const rv = profile.rv;
   const maxed = rv >= 20;
-  const seasonOpen = rv >= HOMELAND.season.minHomeLevel;
+  // Saison en cours seulement (la Lune des moissons s'est terminée le 2 novembre 2026).
+  const seasonOpen = !HOMELAND.season.over && rv >= HOMELAND.season.minHomeLevel;
   // L'objectif « points » suppose la saison active.
   const seasonActive = seasonOpen && (seasonOn || goal === 'points');
 
@@ -116,9 +117,11 @@ export function PlanPage({ api }: { api: ProfileApi }) {
                 Monter au niv. {Math.min(20, rv + 1)} au plus vite
               </option>
               <option value="coins">Un maximum de pièces</option>
-              <option value="points" disabled={!seasonOpen}>
-                Points de la Lune des moissons{seasonOpen ? '' : ` (dès le niv. ${HOMELAND.season.minHomeLevel})`}
-              </option>
+              {!HOMELAND.season.over && (
+                <option value="points" disabled={!seasonOpen}>
+                  Points de la Lune des moissons{seasonOpen ? '' : ` (dès le niv. ${HOMELAND.season.minHomeLevel})`}
+                </option>
+              )}
             </select>
           </label>
           <label className="stat">

@@ -134,3 +134,70 @@ Captures ou mesures utiles :
 - **Réseau électrique** (captures en mode Construire) : zone d'un Poteau ≈ 7 cases de côté (confirme
   aniimofrance) ; deux Poteaux à ~6,5 cases l'un de l'autre sont reliés, donc un Poteau est relié dès
   que sa zone chevauche celle du Générateur ou d'un Poteau relié. Le plan du logis applique cette règle.
+
+## 6. Rapport du 6 novembre 2026 : mise à jour du jeu et autres sites
+
+### Ce qui était cassé (réparé)
+
+- **Relevé quotidien en échec depuis le 29 octobre.** Le wiki officiel a changé de structure avec la
+  mise à jour : titres de sections renommés puis traduits (« Capacités des logis », « Nomadisme »,
+  « Traits d'Aniimo »), formes renommées (Mountain Woods → Timberline, Sea of Flowers → Flowerfield,
+  Rainstorm → Rainfall), formes Prismana à une nouvelle adresse (`/item/004/prismana-form/1000`),
+  chaîne « fiche suivante » interrompue. Le test bloquait la publication : le site gardait les
+  données du 28 octobre. Réparé : sections reconnues dans les deux langues, liste complète du wiki
+  plutôt que la chaîne, garde-fou si plus de 20 % des fiches n'ont pas de compétences du Foyer.
+  **216 fiches** (207 avant), dont Voltibond (Hoptail), Hypnotou (Hypnyto, + Prismana), Jagaura
+  (Jaguaraun) et les formes Prismana de Farfabourse, Algoglam, Royabeye, Jeyser, Eklepto.
+- **Renommages anglais** : Witchin → Hexxin, Little Fire Spirit → Sparkelf (FR : Elfe solidaire).
+  Les profils enregistrés avec un ancien identifiant de forme sont convertis automatiquement ; les
+  tier lists reconnaissent les anciens noms.
+- **Aniimax** (887b54c) : nombre d'installations corrigé du niveau 14 au 20 (vérifié en jeu jusqu'au
+  19 : jusqu'à 4 Puits, 2 Maisons de Plumiel, 3 Fournaises…) ; Lune des moissons terminée le
+  2 novembre, retirée du Plan.
+- Équilibrage du 28 octobre (Sorcelonde/Hexxin, Voltignasse, Coléobée) : statistiques mises à jour.
+
+### Nouveautés du jeu (Saison 1, partie 2 : 29 octobre → 9 décembre)
+
+- **Îles Murmurantes** (4 zones, niv. 54 à 64) ; 32 nouvelles espèces et 19 formes d'après
+  AniimoTools. Le wiki officiel n'en publie encore qu'une dizaine : l'Aniidex est incomplet tant
+  qu'il ne les ajoute pas.
+- **Foyer** : nouvelle saison « Nuit des Merveilles » (Magical Wonder Night) jusqu'au 10 décembre,
+  dès le niveau 10 (cultures Citrouille magique et Fruit-lanterne de mémoire) ; niveaux du
+  Camping-car **21 et 22** (AniimoTools) ; combos avec des installations de niveaux différents ;
+  codes de plans à partager ; météo au Foyer.
+- **Chasse aux œufs** : mode JcJ en test (18 h-24 h), nouvelles cartes Cauchemar et Chaos, Alpha
+  Bouldus ombral, boutique (Puce Berserker de base), objets de collection de saison ; rangs et
+  talents inchangés.
+- **Prismana** : un Lucky / Super Lucky chez un ami ajoute aussi de l'énergie à ton monde ;
+  « Abondance de la Veine » (fruits de veine : +50 % d'énergie) ; Prismana de la semaine :
+  Farfabourse (2-8/11), Royabeye (9-16/11), Jeyser (16-23/11), Algoglam (23-30/11), les quatre
+  (30/11-7/12) ; l'Orbe de Prismana marche sur tout Aniimo dont la forme est débloquée.
+- Niveaux max 65 puis 70, Ascension après 60 (hors Foyer).
+
+### Ce que proposent les autres sites et pas AniiGuide
+
+| Fonction | Où | Intérêt |
+| --- | --- | --- |
+| Import du logis depuis le jeu par identifiant de joueur | Hideout, Aniidex | Très fort : plus aucune saisie |
+| Saison en cours (Nuit des Merveilles) dans le calcul | Hideout | Fort, jusqu'au 10/12 |
+| Camping-car niveaux 21-22 | AniimoTools | Fort pour les joueurs avancés |
+| Calendrier des événements, remises à zéro, compte à rebours | AniimoTools, aniimofrance | Fort |
+| Liste des 37 Prismana et planning hebdomadaire | AniimoTools | Fort |
+| Calcul des chances de capture (Aniipods, Lucky) | AniimoTools, Hideout | Moyen |
+| Suivi de collection, liste de tâches quotidiennes | AniimoTools | Moyen |
+| Cartes de la Chasse aux œufs par plan de Sanctuaire | AniimoTools, aniimofrance | Moyen |
+| Codes de plans du logis | Aniidex, aniimofrance | Moyen (nouvelle fonction du jeu) |
+
+AniimoTools interdit toute reprise de son contenu : consultation seulement.
+
+### Suite proposée
+
+1. **Nuit des Merveilles** dans le calcul (dès que ses recettes sont relevées : Aniimax ou Wikily) et
+   **niveaux 21-22** (coûts à relever).
+2. **Prismana** : liste des espèces, où et quand (planning de la semaine), Orbe de Prismana ;
+   compteur de chance (Lucky / Super Lucky, garantie, remise à zéro du lundi).
+3. **Calendrier** des événements et rappels à ajouter au téléphone (.ics).
+4. **Import du logis par identifiant** : étudier comment Hideout et Aniidex lisent le profil du
+   joueur, et si c'est autorisé.
+5. Compléter l'Aniidex avec les nouvelles espèces dès que le wiki officiel les publie (le relevé
+   quotidien le fera seul).

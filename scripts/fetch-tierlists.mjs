@@ -45,9 +45,18 @@ function tokens(html) {
   return out;
 }
 
+// Noms anglais changés par la mise à jour du 29/10/2026 : les sites qui gardent l'ancien nom
+// restent reconnus.
+const RENAMED = { Witchin: 'Hexxin', 'Little Fire Spirit': 'Sparkelf' };
+const FORM_RENAMED = { 'Mountain Woods': 'Timberline', 'Sea of Flowers': 'Flowerfield', Rainstorm: 'Rainfall' };
+const renamed = (t) => {
+  for (const [a, b] of Object.entries({ ...RENAMED, ...FORM_RENAMED })) t = t.replace(new RegExp(`\\b${a}\\b`), b);
+  return t;
+};
+
 /** « Glacy (Prismana Form) », « Prismana Glacy », « Budclaw. » → { base, form } ou null. */
 function parseName(raw) {
-  const t = raw.replace(/\.$/, '').replace(/^Aniimo /, '').trim();
+  const t = renamed(raw.replace(/\.$/, '').replace(/^Aniimo /, '').trim());
   const paren = t.match(/^(.+?)\s*\((.+?)\)$/);
   if (paren && BASE_NAMES.has(paren[1])) {
     const f = paren[2].replace(/\bform\b/i, 'Form').trim();

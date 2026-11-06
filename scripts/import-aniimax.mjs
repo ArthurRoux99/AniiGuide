@@ -15,7 +15,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REPO = 'ae-bii/aniimax';
-const SHA = process.argv[2] || 'c1544149ec162fa7c7bc447c5415103b4eafc62c';
+const SHA = process.argv[2] || '887b54c6687a953a86ab3d7b00fba1a44fe4a4f9';
 const RAW = `https://raw.githubusercontent.com/${REPO}/${SHA}`;
 
 async function get(path) {
@@ -207,6 +207,8 @@ const out = {
   season: {
     name: cfg.SEASON.name,
     minHomeLevel: cfg.SEASON.minHomeLevel,
+    // Saison terminée (drapeau `over` d'Aniimax) : ses recettes ne se font plus.
+    over: !!cfg.SEASON.over,
     recipeNotes: cfg.SEASON.recipeNotes.map((n) => recipes.find((r) => r.season && r.output.item === n.name)?.id).filter(Boolean),
   },
 };

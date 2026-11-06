@@ -82,12 +82,11 @@ test('Optimiser : gamelle', async ({ page }) => {
   await expect(page.getByText(/pour 24 h/).first()).toBeVisible();
 });
 
-test('Optimiser : points de la Lune des moissons', async ({ page }) => {
+test('Optimiser : saison terminée, plus de Lune des moissons', async ({ page }) => {
   await page.goto('#plan');
   await page.getByLabel('Camping-car').selectOption('12');
-  await page.getByLabel('Objectif').selectOption('points');
-  await expect(page.getByText('points/h').first()).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByText(/Blé de rayon de lune/).first()).toBeVisible();
+  await expect(page.getByLabel('Objectif').locator('option[value=points]')).toHaveCount(0);
+  await expect(page.getByLabel('Lune des moissons (saison)')).toHaveCount(0);
 });
 
 test('Optimiser : mode électrique dès le niveau 12', async ({ page }) => {
