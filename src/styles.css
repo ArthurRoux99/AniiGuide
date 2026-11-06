@@ -1594,3 +1594,22 @@ details.card > summary {
   margin-right: 0;
   flex: none;
 }
+.homeland-map:fullscreen {
+  background: var(--bg, #fff);
+  overflow: auto;
+  padding: 8px;
+}
+.homeland-map:fullscreen svg {
+  max-height: calc(100vh - 16px);
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.hm-plotlist {
+  margin: 4px 0;
+}
+.hm-plotlist > summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 0;
+}

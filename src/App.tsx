@@ -19,6 +19,7 @@ const TierList = page(() => import('./pages/TierList'), 'TierList');
 const Equipes = page(() => import('./pages/Equipes'), 'Equipes');
 const Codes = page(() => import('./pages/Codes'), 'Codes');
 const Oeufs = page(() => import('./pages/Oeufs'), 'Oeufs');
+const Prismana = page(() => import('./pages/Prismana'), 'Prismana');
 const Mesures = page(() => import('./pages/Mesures'), 'Mesures');
 
 const PAGES = [
@@ -32,6 +33,7 @@ const PAGES = [
   { id: 'carte', label: 'Où trouver', icon: '🗺️', Page: OuTrouver },
   { id: 'tier', label: 'Tier list', icon: '🏆', Page: TierList },
   { id: 'equipes', label: 'Équipes', icon: '⚔️', Page: Equipes },
+  { id: 'prismana', label: 'Prismana', icon: '🌈', Page: Prismana },
   { id: 'oeufs', label: 'Chasse aux œufs', icon: '🥚', Page: Oeufs },
   { id: 'codes', label: 'Codes', icon: '🎁', Page: Codes },
   { id: 'mesures', label: 'Vérifier', icon: '⏱️', Page: Mesures, hidden: true },

@@ -47,9 +47,21 @@ export function Combos({ api }: { api: ProfileApi }) {
           serveur où il a été créé.
         </p>
         <p className="hint">
-          À la place : la page <a href="#plan">Optimiser</a> donne le plan des zones climatiques (quelles cultures autour de quel appareil).
-          Pose-le une fois, enregistre-le en combo et partage son code ici pour les joueurs de ton serveur.
+          Depuis la mise à jour du 27 octobre, le jeu a deux codes de 8 caractères (lettres et chiffres 2 à 9) : le <b>code de combo</b> (un groupe
+          d'éléments, « Importer un combo ») et le <b>code du schéma</b> (tout le logis, « Importer un schéma » puis « Entrez un code de partage »).
+          Jusqu'à 15 envoyés et 15 enregistrés depuis d'autres joueurs, pour chacun.
         </p>
+        <p className="hint">
+          <b>Du plan AniiGuide à un code :</b>
+        </p>
+        <ol className="hint">
+          <li>
+            Dans <a href="#plan">Optimiser</a>, calcule le <b>Plan du logis</b> et pose les bâtiments parcelle par parcelle (colonne, ligne, case à
+            cocher).
+          </li>
+          <li>En mode Construire, enregistre le résultat : « Sauvegarder le combo » pour une zone, ou envoie le schéma pour tout le logis.</li>
+          <li>Le jeu te donne le code : partage-le ici, il servira aux joueurs de ton serveur.</li>
+        </ol>
         <a className="btn btn--primary" href={SUBMIT} target="_blank" rel="noreferrer">
           Proposer un combo
         </a>

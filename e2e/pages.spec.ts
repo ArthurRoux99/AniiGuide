@@ -28,6 +28,7 @@ const PAGES: [string, string][] = [
   ['codes', 'Codes cadeaux'],
   ['mesures', 'Vérifier en jeu'],
   ['oeufs', 'Chasse aux œufs'],
+  ['prismana', 'Compteur Lucky'],
 ];
 
 for (const [id, text] of PAGES) {
@@ -145,4 +146,15 @@ test('Chasse aux œufs : calcul du nombre de parties et suivi gardé', async ({ 
   await expect(page.getByLabel("Pièces coquille d'œuf", { exact: true })).toHaveValue('400000');
   await expect(page.getByLabel(/Coffre du bateau à œufs/)).toBeChecked();
   await expect(page.getByRole('cell', { name: /Dénicheur d'œufs en herbe/ }).first()).toBeVisible();
+});
+
+test('Prismana : compteur Lucky gardé après rechargement', async ({ page }) => {
+  await page.goto('#prismana');
+  await page.getByRole('button', { name: '+10' }).click();
+  await page.getByRole('button', { name: '+1 capture' }).click();
+  await expect(page.getByText('garanti dans 189 captures')).toBeVisible();
+  await page.getByRole('button', { name: /J'ai eu un Lucky/ }).click();
+  await page.reload();
+  await expect(page.getByText('Lucky : 1 cette semaine')).toBeVisible();
+  await expect(page.getByText('garanti dans 200 captures')).toBeVisible();
 });
