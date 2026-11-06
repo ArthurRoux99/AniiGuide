@@ -42,21 +42,27 @@ export const HOMELAND_ABILITIES = {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-async function fetchPayload(lang, entryId, morphology) {
-  const url = `${ORIGIN}/${lang}/item/${entryId}/${slugify(morphology)}`;
-  for (let attempt = 1; ; attempt++) {
-    try {
-      const res = await fetch(url, { headers: { 'user-agent': 'AniiGuide data sync (fan project)' } });
-      if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
-      const html = await res.text();
-      const m = html.match(/<script[^>]*id="__NUXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
-      if (!m) throw new Error(`Pas de __NUXT_DATA__ sur ${url}`);
-      return reviveNuxt(JSON.parse(m[1]));
-    } catch (err) {
-      if (attempt >= 4) throw err;
-      await sleep(1000 * 2 ** attempt);
+async function fetchPayload(lang, entryId, morphology, countryId) {
+  // Les formes d'une autre région (Prismana, etc.) ont l'identifiant de région en fin d'adresse.
+  const base = `${ORIGIN}/${lang}/item/${entryId}/${slugify(morphology)}`;
+  const urls = countryId != null ? [base, `${base}/${countryId}`] : [base];
+  for (const url of urls) {
+    for (let attempt = 1; ; attempt++) {
+      try {
+        const res = await fetch(url, { headers: { 'user-agent': 'AniiGuide data sync (fan project)' } });
+        if (res.status === 404 && url !== urls.at(-1)) break;
+        if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
+        const html = await res.text();
+        const m = html.match(/<script[^>]*id="__NUXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+        if (!m) throw new Error(`Pas de __NUXT_DATA__ sur ${url}`);
+        return reviveNuxt(JSON.parse(m[1]));
+      } catch (err) {
+        if (attempt >= 4) throw err;
+        await sleep(1000 * 2 ** attempt);
+      }
     }
   }
+  throw new Error(`Introuvable : ${base}`);
 }
 
 // Reconstruit l'objet racine d'un payload Nuxt « devalue ».
@@ -91,6 +97,13 @@ function detailOf(root) {
   return key ? data[key] : null;
 }
 
+// Liste de toutes les espèces et formes Prismana affichée dans l'en-tête de chaque page.
+function headerList(root) {
+  const data = root.data || {};
+  const key = Object.keys(data).find((k) => k.startsWith('header-aniimo-list-'));
+  return key && Array.isArray(data[key]) ? data[key] : [];
+}
+
 function* walk(components) {
   for (const c of components || []) {
     yield c;
@@ -99,38 +112,50 @@ function* walk(components) {
   }
 }
 
+// Titres des sections, anciens et nouveaux, en anglais et en français (le wiki les a renommés
+// puis traduits fin octobre 2026).
+const TITLES = {
+  homeland: ['Homeland Ability', 'Home Abilities', 'Capacités des logis', 'Capacités du logis'],
+  habitats: ['Habitats'],
+  evolution: ['Evolution', 'Évolution'],
+  mobility: ['Mobility', 'Pathfinding', 'Nomadisme'],
+  traits: ['Trait', 'Aniimo Traits', "Traits d'Aniimo"],
+};
+
 // Extrait les composants placés sous un titre de section (crumbTitle).
-function section(detail, title) {
+function section(detail, kind) {
+  const titles = TITLES[kind];
   for (const dir of detail.directories || []) {
     for (const c of walk(dir.components)) {
-      if (c.type === 'crumbTitle' && c.props?.title === title) return c;
+      if (c.type === 'crumbTitle' && titles.includes(c.props?.title)) return c;
     }
   }
   return null;
 }
 
-function circles(detail, title) {
-  const s = section(detail, title);
+function circles(detail, kind) {
+  const s = section(detail, kind);
   if (!s) return [];
   return [...walk(s.children)]
-    .filter((c) => c.type === 'circle' && c.props?.descTitle)
-    .map((c) => ({ name: c.props.descTitle, description: c.props.descContent, icon: c.props.icon || null }));
+    // Traits : titre et description ; mobilité : « Grimper niv. 1 » dans le titre de l'icône.
+    .filter((c) => c.type === 'circle' && (c.props?.descTitle || c.props?.iconTitle))
+    .map((c) => ({ name: c.props.descTitle || c.props.iconTitle, description: c.props.descContent, icon: c.props.icon || null }));
 }
 
 function parse(detail) {
   const info = [...walk(detail.directories?.[0]?.components)].find((c) => c.type === 'aniimoInfo')?.props?.formData || {};
   const homeland = [];
-  for (const c of walk(section(detail, 'Homeland Ability')?.children)) {
+  for (const c of walk(section(detail, 'homeland')?.children)) {
     const key = c.props?.customKey;
     if (!key) continue;
     const ability = HOMELAND_ABILITIES[key];
     if (!ability) console.warn(`Compétence du Foyer inconnue : ${key}`);
     homeland.push({ ability: ability?.id ?? key, level: Number(c.props.title) || null });
   }
-  const habitats = [...walk(section(detail, 'Habitats')?.children)]
+  const habitats = [...walk(section(detail, 'habitats')?.children)]
     .filter((c) => c.type === 'capsule' && c.props?.title)
     .map((c) => c.props.title.replace(/\.$/, '').trim());
-  const evo = [...walk(section(detail, 'Evolution')?.children)].find((c) => c.type === 'evolution')?.props?.data;
+  const evo = [...walk(section(detail, 'evolution')?.children)].find((c) => c.type === 'evolution')?.props?.data;
   return {
     name: info.name,
     description: info.desc,
@@ -151,8 +176,8 @@ function parse(detail) {
     genders: info.gender || [],
     habitats,
     homeland,
-    mobility: circles(detail, 'Mobility'),
-    traits: circles(detail, 'Trait'),
+    mobility: circles(detail, 'mobility'),
+    traits: circles(detail, 'traits'),
     evolution: evo ? simplifyEvolution(evo) : null,
   };
 }
@@ -169,22 +194,32 @@ function simplifyEvolution(node) {
 }
 
 async function main() {
-  // On part de la première fiche et on suit la chaîne « suivante » :
-  // elle passe par toutes les espèces et toutes leurs formes.
-  let anchor = { entryId: '001', currentMorphology: 'Basic Form' };
+  // Toutes les fiches : la liste de l'en-tête (espèces et formes Prismana), plus les formes
+  // listées sur chaque fiche et la chaîne « précédente / suivante », jusqu'à ne plus rien trouver.
+  const queue = [{ entryId: '001', currentMorphology: 'Basic Form' }];
   const seen = new Set();
+  const push = (a) => {
+    if (a?.entryId && a.currentMorphology && !seen.has(`${a.entryId}|${a.currentMorphology}`)) queue.push(a);
+  };
   const entries = [];
-  while (anchor && !seen.has(`${anchor.entryId}|${anchor.currentMorphology}`)) {
+  while (queue.length) {
+    const anchor = queue.shift();
     const key = `${anchor.entryId}|${anchor.currentMorphology}`;
+    if (seen.has(key)) continue;
     seen.add(key);
-    const fr = detailOf(await fetchPayload('fr', anchor.entryId, anchor.currentMorphology));
+    const rootFr = await fetchPayload('fr', anchor.entryId, anchor.currentMorphology, anchor.countryId);
+    const fr = detailOf(rootFr);
     await sleep(DELAY_MS);
-    const en = detailOf(await fetchPayload('en', anchor.entryId, anchor.currentMorphology));
+    const en = detailOf(await fetchPayload('en', anchor.entryId, anchor.currentMorphology, anchor.countryId));
     await sleep(DELAY_MS);
+    for (const x of headerList(rootFr)) push(x.searchKey);
     if (!fr || !en) {
       console.warn(`Fiche vide : ${key}`);
-      break;
+      continue;
     }
+    for (const m of fr.morphologyList || []) push(m);
+    push(fr.nextAnchor);
+    push(fr.previousAnchor);
     const pfr = parse(fr);
     const pen = parse(en);
     if (anchor.entryId !== '99998') {
@@ -212,7 +247,12 @@ async function main() {
       });
       console.log(`${String(entries.length).padStart(3)}  ${anchor.entryId} ${anchor.currentMorphology.padEnd(20)} ${pfr.name} / ${pen.name}  ${pfr.homeland.map((h) => `${h.ability}${h.level}`).join(' ')}`);
     }
-    anchor = fr.nextAnchor;
+  }
+  // Garde-fou : le wiki a déjà changé de structure sans prévenir. Mieux vaut échouer que publier
+  // des fiches sans compétences du Foyer.
+  const noHome = entries.filter((e) => !e.homeland.length).length;
+  if (entries.length < 150 || noHome > entries.length * 0.2) {
+    throw new Error(`Relevé suspect : ${entries.length} fiches, ${noHome} sans compétences du Foyer (structure du wiki changée ?)`);
   }
   entries.sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
   await mkdir(dirname(OUT), { recursive: true });

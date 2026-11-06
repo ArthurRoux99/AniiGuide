@@ -9,7 +9,7 @@
  },
  "ouvriers": [
   {
-   "aniimo": "014-sea-of-flowers-form",
+   "aniimo": "014-flowerfield-form",
    "nom": "Filoutus (Sea of Flowers Form)",
    "capacites": {
     "hauling": 2,
@@ -73,7 +73,7 @@
    "personnalite": null
   },
   {
-   "aniimo": "045-mountain-woods-form",
+   "aniimo": "045-timberline-form",
    "nom": "Voltige (Mountain Woods Form)",
    "capacites": {
     "lightning": 1,
@@ -206,7 +206,7 @@
    "personnalite": null
   },
   {
-   "aniimo": "029-sea-of-flowers-form",
+   "aniimo": "029-flowerfield-form",
    "nom": "Voletti (Sea of Flowers Form)",
    "capacites": {
     "leisure": 3,

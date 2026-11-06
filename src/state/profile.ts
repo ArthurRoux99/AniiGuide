@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ANIIMO_BY_ID } from '../data/aniimo';
+import { ANIIMO_BY_ID, currentId } from '../data/aniimo';
 import { parsePersonality } from '../engine/personality';
 import example from '../data/exemple-rv8.gen.json';
 
@@ -64,7 +64,7 @@ export function sanitizeProfile(input: unknown): Profile {
     coins: p.coins == null ? null : Number(p.coins) || 0,
     shinies: Math.max(0, Number(p.shinies) || 0),
     stock: Object.fromEntries(Object.entries(p.stock ?? {}).map(([k, v]) => [k, Math.max(0, Number(v) || 0)])),
-    collection: Array.isArray(p.collection) ? [...new Set(p.collection.map(String).filter((id) => ANIIMO_BY_ID.has(id)))] : [],
+    collection: Array.isArray(p.collection) ? [...new Set(p.collection.map((id) => currentId(String(id))).filter((id) => ANIIMO_BY_ID.has(id)))] : [],
     facilities: Object.fromEntries(
       Object.entries(p.facilities ?? {}).map(([id, f]) => [id, { count: Math.max(0, Number(f?.count) || 0), level: Math.max(1, Number(f?.level) || 1) }]),
     ),
@@ -76,8 +76,8 @@ export function sanitizeProfile(input: unknown): Profile {
     },
     usedCodes: Array.isArray(p.usedCodes) ? [...new Set(p.usedCodes.map((c) => String(c).toLowerCase()))] : [],
     workers: p.workers
-      .filter((w) => w && ANIIMO_BY_ID.has(String(w.aniimoId)))
-      .map((w) => ({ uid: String(w.uid || uid()), aniimoId: String(w.aniimoId), personality: w.personality ? parsePersonality(String(w.personality)) : null })),
+      .filter((w) => w && ANIIMO_BY_ID.has(currentId(String(w.aniimoId))))
+      .map((w) => ({ uid: String(w.uid || uid()), aniimoId: currentId(String(w.aniimoId)), personality: w.personality ? parsePersonality(String(w.personality)) : null })),
     updatedAt: new Date().toISOString(),
   };
 }
