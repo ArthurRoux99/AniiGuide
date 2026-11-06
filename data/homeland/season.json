@@ -1,0 +1,491 @@
+{
+ "source": "https://wikily.gg/aniimo/homeland-crafting (données du client du jeu) ; niveaux, graines et Notes : aniimoguide.com, gamewith.ai",
+ "fetchedAt": "2026-11-06T09:07:08.746Z",
+ "season": {
+  "id": "magical-wonder-night",
+  "name": "Nuit des Merveilles",
+  "ends": "2026-12-09T19:59:00Z",
+  "minHomeLevel": 10,
+  "currency": "Weird Jelly Beans",
+  "currencyPerDay": 1400,
+  "pointsKnown": false,
+  "orders": [
+   {
+    "item": "sea_salt_roasted_pumpkin",
+    "qty": 3,
+    "beans": 300,
+    "coins": 14160
+   },
+   {
+    "item": "candied_lanternfruit",
+    "qty": 2,
+    "beans": 300,
+    "coins": 18080
+   },
+   {
+    "item": "magic_pumpkin_lantern",
+    "qty": 6,
+    "beans": 300,
+    "coins": 15600
+   },
+   {
+    "item": "memory_lantern",
+    "qty": 3,
+    "beans": 300,
+    "coins": 14640
+   },
+   {
+    "item": "magic_pumpkin_cake",
+    "qty": 3,
+    "beans": 300,
+    "coins": 13440
+   },
+   {
+    "item": "gleam_fruit_nectar",
+    "qty": 3,
+    "beans": 300,
+    "coins": 14160
+   },
+   {
+    "item": "honey_glazed_pumpkin_cup",
+    "qty": 2,
+    "beans": 500,
+    "coins": 35440
+   },
+   {
+    "item": "golden_lantern_pumpkin_soup",
+    "qty": 2,
+    "beans": 500,
+    "coins": 14640
+   },
+   {
+    "item": "glowfruit_lantern_set",
+    "qty": 3,
+    "beans": 500,
+    "coins": 36585
+   }
+  ],
+  "recipeNotes": [
+   "crafting-table:magic_pumpkin_lantern",
+   "crafting-table:memory_lantern",
+   "blazing-stove:magic_pumpkin_cake",
+   "bouncy-brew-keg:gleam_fruit_nectar",
+   "blazing-stove:honey_glazed_pumpkin_cup",
+   "simmering-pot:golden_lantern_pumpkin_soup",
+   "crafting-table:glowfruit_lantern_set"
+  ]
+ },
+ "recipes": [
+  {
+   "id": "farmland:magic_pumpkin",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "magic_pumpkin",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": true,
+   "season": true,
+   "seconds": 2400,
+   "seedCost": 0,
+   "seedWheat": 4,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "farmland:memory_lanternfruit",
+   "facility": "farmland",
+   "kind": "grower",
+   "level": 5,
+   "output": {
+    "item": "memory_lanternfruit",
+    "qty": 8
+   },
+   "inputs": [],
+   "module": null,
+   "environment": "Adequate",
+   "verified": true,
+   "season": true,
+   "seconds": 2400,
+   "seedCost": 0,
+   "seedWheat": 4,
+   "steps": [
+    {
+     "step": "Reclaiming",
+     "ability": "earth",
+     "level": 1,
+     "workload": 5
+    },
+    {
+     "step": "Sowing",
+     "ability": "grass",
+     "level": 1,
+     "workload": 3
+    },
+    {
+     "step": "Reaping",
+     "ability": "dark",
+     "level": 1,
+     "workload": 3
+    }
+   ]
+  },
+  {
+   "id": "claw-game-cooker:sea_salt_roasted_pumpkin",
+   "facility": "claw-game-cooker",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "sea_salt_roasted_pumpkin",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "magic_pumpkin",
+     "qty": 8
+    },
+    {
+     "item": "sea_salt",
+     "qty": 23
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "pickling-jar:candied_lanternfruit",
+   "facility": "pickling-jar",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "candied_lanternfruit",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "memory_lanternfruit",
+     "qty": 8
+    },
+    {
+     "item": "rock_candy",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 203,
+   "ability": "dark",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:magic_pumpkin_lantern",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "magic_pumpkin_lantern",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "magic_pumpkin",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 68,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:memory_lantern",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 4,
+   "output": {
+    "item": "memory_lantern",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "memory_lanternfruit",
+     "qty": 8
+    },
+    {
+     "item": "cotton_thread",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 135,
+   "ability": "artisanship",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:magic_pumpkin_cake",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "magic_pumpkin_cake",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "magic_pumpkin",
+     "qty": 8
+    },
+    {
+     "item": "milled_rice",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 135,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "bouncy-brew-keg:gleam_fruit_nectar",
+   "facility": "bouncy-brew-keg",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "gleam_fruit_nectar",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "memory_lanternfruit",
+     "qty": 8
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 135,
+   "ability": "water",
+   "abilityLevel": 2
+  },
+  {
+   "id": "blazing-stove:honey_glazed_pumpkin_cup",
+   "facility": "blazing-stove",
+   "kind": "processor",
+   "level": 2,
+   "output": {
+    "item": "honey_glazed_pumpkin_cup",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "sea_salt_roasted_pumpkin",
+     "qty": 1
+    },
+    {
+     "item": "candied_lanternfruit",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 338,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "simmering-pot:golden_lantern_pumpkin_soup",
+   "facility": "simmering-pot",
+   "kind": "processor",
+   "level": 3,
+   "output": {
+    "item": "golden_lantern_pumpkin_soup",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "magic_pumpkin",
+     "qty": 8
+    },
+    {
+     "item": "memory_lanternfruit",
+     "qty": 8
+    },
+    {
+     "item": "fresh_water",
+     "qty": 8
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 203,
+   "ability": "fire",
+   "abilityLevel": 2
+  },
+  {
+   "id": "crafting-table:glowfruit_lantern_set",
+   "facility": "crafting-table",
+   "kind": "processor",
+   "level": 5,
+   "output": {
+    "item": "glowfruit_lantern_set",
+    "qty": 1
+   },
+   "inputs": [
+    {
+     "item": "memory_lantern",
+     "qty": 1
+    },
+    {
+     "item": "magic_pumpkin_lantern",
+     "qty": 1
+    }
+   ],
+   "module": null,
+   "environment": null,
+   "verified": true,
+   "season": true,
+   "workload": 243,
+   "ability": "artisanship",
+   "abilityLevel": 3
+  }
+ ],
+ "items": {
+  "magic_pumpkin": {
+   "name": "Magic Pumpkin",
+   "sellValue": 61,
+   "currency": "coins",
+   "points": 1
+  },
+  "memory_lanternfruit": {
+   "name": "Memory Lanternfruit",
+   "sellValue": 61,
+   "currency": "coins",
+   "points": 1
+  },
+  "sea_salt_roasted_pumpkin": {
+   "name": "Sea Salt Roasted Pumpkin",
+   "sellValue": 1180,
+   "currency": "coins",
+   "points": 0
+  },
+  "candied_lanternfruit": {
+   "name": "Candied Lanternfruit",
+   "sellValue": 2260,
+   "currency": "coins",
+   "points": 0
+  },
+  "magic_pumpkin_lantern": {
+   "name": "Magic Pumpkin Lantern",
+   "sellValue": 650,
+   "currency": "coins",
+   "points": 0
+  },
+  "memory_lantern": {
+   "name": "Memory Lantern",
+   "sellValue": 1220,
+   "currency": "coins",
+   "points": 0
+  },
+  "magic_pumpkin_cake": {
+   "name": "Magic Pumpkin Cake",
+   "sellValue": 1120,
+   "currency": "coins",
+   "points": 0
+  },
+  "gleam_fruit_nectar": {
+   "name": "Gleam Fruit Nectar",
+   "sellValue": 1180,
+   "currency": "coins",
+   "points": 0
+  },
+  "honey_glazed_pumpkin_cup": {
+   "name": "Honey-Glazed Pumpkin Cup",
+   "sellValue": 4430,
+   "currency": "coins",
+   "points": 0
+  },
+  "golden_lantern_pumpkin_soup": {
+   "name": "Golden Lantern Pumpkin Soup",
+   "sellValue": 1830,
+   "currency": "coins",
+   "points": 0
+  },
+  "glowfruit_lantern_set": {
+   "name": "Glowfruit Lantern Set",
+   "sellValue": 2710,
+   "currency": "coins",
+   "points": 0
+  }
+ },
+ "names": {
+  "magic_pumpkin": "Citrouille magique",
+  "memory_lanternfruit": "Fruit-lanterne du souvenir",
+  "sea_salt_roasted_pumpkin": "Citrouille rôtie au sel de mer",
+  "candied_lanternfruit": "Fruit-lanterne confit",
+  "magic_pumpkin_lantern": "Lanterne-citrouille magique",
+  "memory_lantern": "Lanterne du souvenir",
+  "magic_pumpkin_cake": "Gâteau de citrouille magique",
+  "gleam_fruit_nectar": "Nectar de fruit chatoyant",
+  "honey_glazed_pumpkin_cup": "Coupe de citrouille miellée",
+  "golden_lantern_pumpkin_soup": "Soupe dorée de citrouille aux fruits-lanternes",
+  "glowfruit_lantern_set": "Ensemble de lanternes fruit-lanterne"
+ },
+ "emode": {
+  "claw-game-cooker:sea_salt_roasted_pumpkin": 108,
+  "pickling-jar:candied_lanternfruit": 162,
+  "crafting-table:magic_pumpkin_lantern": 54,
+  "crafting-table:memory_lantern": 108,
+  "blazing-stove:magic_pumpkin_cake": 108,
+  "bouncy-brew-keg:gleam_fruit_nectar": 108,
+  "blazing-stove:honey_glazed_pumpkin_cup": 270,
+  "simmering-pot:golden_lantern_pumpkin_soup": 162,
+  "crafting-table:glowfruit_lantern_set": 162
+ }
+}

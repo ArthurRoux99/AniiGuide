@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ANIIMO_BY_ID } from '../data/aniimo';
-import { FACILITY_BY_ID, HOMELAND, facilityName, itemName } from '../data/homeland';
+import { FACILITY_BY_ID, HOMELAND, SEASON_CURRENCY, facilityName, itemName, seasonLive } from '../data/homeland';
 import { ABILITY_BY_ID, type AbilityId } from '../engine/abilities';
 import { PERSONALITY_BONUS as LETTERS } from '../engine/personality';
 import { ENV_STAFF, idealPool, plan, roadmap, rosterPool, setupWithOverrides, wholeUnits, type Plan as PlanResult, type PlanOptions, type PlanRow } from '../engine/homeland/optimize';
@@ -10,6 +10,7 @@ import { AbilityChip, Badge } from '../components/ui';
 import { fmtDuration } from '../components/format';
 import { climateLayout, type ClimateZone } from '../engine/homeland/climate';
 import { HomelandMap } from '../components/HomelandMap';
+import { SeasonOrders } from '../components/SeasonOrders';
 import PlanWorker from '../workers/plan.worker?worker&inline';
 import wasmUrl from 'highs/runtime?url';
 import { MyFacilities, Upgrades } from '../components/Upgrades';
@@ -29,9 +30,10 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   const { profile } = api;
   const hasRoster = profile.workers.length > 0;
   const [goal, setGoal] = useState<Goal>('levelUp');
-  const [seasonOn, setSeasonOn] = useState(false);
+  // Saison en cours : ses graines se paient dans sa monnaie, gagnée chaque jour ; activée d'office.
+  const [seasonOn, setSeasonOn] = useState(true);
   const [notes, setNotes] = useState(false);
-  const [wheatPerDay, setWheatPerDay] = useState<number | null>(null);
+  const [wheatPerDay, setWheatPerDay] = useState<number | null>(HOMELAND.season.currencyPerDay ?? null);
   const [who, setWho] = useState<'roster' | 'ideal'>(hasRoster ? 'roster' : 'ideal');
   const [watering, setWatering] = useState(true);
   const [unverified, setUnverified] = useState(false);
@@ -39,10 +41,11 @@ export function PlanPage({ api }: { api: ProfileApi }) {
   const [electric, setElectric] = useState(true);
   const rv = profile.rv;
   const maxed = rv >= 20;
-  // Saison en cours seulement (la Lune des moissons s'est terminée le 2 novembre 2026).
-  const seasonOpen = !HOMELAND.season.over && rv >= HOMELAND.season.minHomeLevel;
+  // Saison en cours seulement (jusqu'à sa date de fin).
+  const seasonOpen = seasonLive() && rv >= HOMELAND.season.minHomeLevel;
+  const pointsGoal = seasonLive() && HOMELAND.season.pointsKnown !== false;
   // L'objectif « points » suppose la saison active.
-  const seasonActive = seasonOpen && (seasonOn || goal === 'points');
+  const seasonActive = seasonOpen && (seasonOn || (pointsGoal && goal === 'points'));
 
   const roster = useMemo(
     () => rosterPool(profile.workers.map((w) => ({ homeland: ANIIMO_BY_ID.get(w.aniimoId)!.homeland, personality: w.personality }))),
@@ -121,9 +124,9 @@ export function PlanPage({ api }: { api: ProfileApi }) {
                 Monter au niv. {Math.min(20, rv + 1)} au plus vite
               </option>
               <option value="coins">Un maximum de pièces</option>
-              {!HOMELAND.season.over && (
+              {pointsGoal && (
                 <option value="points" disabled={!seasonOpen}>
-                  Points de la Lune des moissons{seasonOpen ? '' : ` (dès le niv. ${HOMELAND.season.minHomeLevel})`}
+                  Points de la {HOMELAND.season.name}{seasonOpen ? '' : ` (dès le niv. ${HOMELAND.season.minHomeLevel})`}
                 </option>
               )}
             </select>
@@ -155,14 +158,15 @@ export function PlanPage({ api }: { api: ProfileApi }) {
           )}
           {seasonOpen && (
             <label>
-              <input type="checkbox" checked={seasonActive} disabled={goal === 'points'} onChange={(e) => setSeasonOn(e.target.checked)} /> Lune des moissons (saison)
+              <input type="checkbox" checked={seasonActive} disabled={goal === 'points'} onChange={(e) => setSeasonOn(e.target.checked)} /> {HOMELAND.season.name} (saison, jusqu'au{' '}
+              {new Date(HOMELAND.season.ends ?? 0).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })})
             </label>
           )}
         </div>
         {seasonActive && (
           <div className="form-grid">
             <label className="stat">
-              <span>Blé de rayon de lune par jour pour les graines</span>
+              <span>{SEASON_CURRENCY} par jour pour les graines</span>
               <input
                 type="number"
                 min={0}
@@ -209,6 +213,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
       {result.feasible && result.food && <FoodBowl food={result.food} />}
 
       {result.feasible && <Comeback result={result} setup={options.setup} />}
+      <SeasonOrders rv={rv} />
 
       <Roadmap rv={rv} pool={who === 'roster' && hasRoster ? roster : null} shinies={profile.shinies} watering={watering} unverified={unverified} />
 
@@ -275,7 +280,7 @@ function Result({ result, goal, rv, who, pending }: { result: PlanResult; goal: 
           </div>
         ) : goal === 'points' && result.season ? (
           <div className="headline">
-            <span>Lune des moissons</span>
+            <span>{HOMELAND.season.name}</span>
             <strong>{nf.format(result.season.pointsPerHour)} points/h</strong>
             <span className="muted">
               {nf.format(result.season.pointsPerHour * 24)} par jour · {nf.format(result.coinsPerHour)} pièces/h
@@ -297,8 +302,9 @@ function Result({ result, goal, rv, who, pending }: { result: PlanResult; goal: 
         )}
         {result.season && (
           <p className="hint">
-            Lune des moissons : {nf.format(result.season.pointsPerHour * 24)} points et{' '}
-            <b>{nf.format(result.season.wheatPerHour * 24)} Blé de rayon de lune</b> en graines par jour.
+            {HOMELAND.season.name} : <b>{nf.format(result.season.wheatPerHour * 24)} {SEASON_CURRENCY}</b> en graines par jour
+            {HOMELAND.season.pointsKnown !== false && <> et {nf.format(result.season.pointsPerHour * 24)} points</>}. Recettes de saison
+            vendables jusqu'au {new Date(HOMELAND.season.ends ?? 0).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}.
           </p>
         )}
         {result.target && result.remaining && goal === 'levelUp' && (

@@ -86,12 +86,19 @@ await writeFile(join(ROOT, 'src/data/aniimo-details.gen.json'), JSON.stringify(d
 console.log(`src/data/aniimo-details.gen.json : ${Object.keys(details).length} fiches détaillées`);
 
 const homeland = await read('data/homeland/aniimax.json');
+// Saison du Logis en cours (scripts/fetch-season.mjs) : remplace la saison terminée d'Aniimax.
+const season = await read('data/homeland/season.json').catch(() => null);
+if (season && (homeland.season.over || !homeland.recipes.some((r) => r.season))) {
+  homeland.recipes = [...homeland.recipes.filter((r) => !r.season), ...season.recipes];
+  homeland.items = { ...homeland.items, ...season.items };
+  homeland.season = season.season;
+}
 const fr = await read('data/i18n/fr.json');
 // Noms officiels relevés sur Wikily (scripts/fetch-fr-names.mjs) ; ceux relevés en jeu priment.
 const wikily = await read('data/i18n/wikily-fr.json').catch(() => ({ facilities: {}, items: {} }));
 await writeFile(
   join(ROOT, 'src/data/homeland.gen.json'),
-  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...wikily.items, ...fr.objets } }, levels: (await read('data/homeland/facility-levels.json').catch(() => ({ levels: {} }))).levels, food: Object.fromEntries(Object.entries((await read('data/homeland/food.json').catch(() => ({ food: {} }))).food).map(([id, f]) => [id, f.value])), emode: await read('data/homeland/emode.json').then(({ generator, seconds }) => ({ generator, seconds })).catch(() => null) }) + '\n',
+  JSON.stringify({ ...homeland, names: { facilities: { ...wikily.facilities, ...fr.installations }, items: { ...season?.names, ...wikily.items, ...fr.objets } }, levels: (await read('data/homeland/facility-levels.json').catch(() => ({ levels: {} }))).levels, food: Object.fromEntries(Object.entries((await read('data/homeland/food.json').catch(() => ({ food: {} }))).food).map(([id, f]) => [id, f.value])), emode: await read('data/homeland/emode.json').then(({ generator, seconds }) => ({ generator, seconds: { ...seconds, ...season?.emode } })).catch(() => null) }) + '\n',
 );
 console.log(`src/data/homeland.gen.json : ${homeland.recipes.length} recettes`);
 
