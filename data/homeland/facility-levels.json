@@ -1,7 +1,7 @@
 {
  "source": "Wikily (données du client du jeu)",
  "url": "https://wikily.gg/fr/aniimo/homeland-crafting",
- "fetchedAt": "2026-10-25T09:49:45.845Z",
+ "fetchedAt": "2026-11-06T08:20:32.530Z",
  "levels": {
   "farmland": [
    {
@@ -38,6 +38,11 @@
     "stock": 35,
     "power": null,
     "cost": 480000
+   },
+   {
+    "stock": null,
+    "power": null,
+    "cost": null
    }
   ],
   "woodland": [
