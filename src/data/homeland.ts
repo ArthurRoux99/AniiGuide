@@ -27,7 +27,7 @@ export interface Recipe {
   workload?: number;
   ability?: AbilityId | null;
   abilityLevel?: number;
-  /** Recette de la saison (Lune des moissons) ; graines payées en Blé de lune. */
+  /** Recette de la saison du Logis ; graines payées dans la monnaie de la saison (`seedWheat`). */
   season?: boolean;
   seedWheat?: number;
 }
@@ -62,7 +62,22 @@ interface HomelandData {
   levelUpChains: string[][];
   moduleMaxLevels: Record<string, number[]>;
   specialRecipes: string[];
-  season: { name: string; minHomeLevel: number; recipeNotes: string[]; /** Saison terminée : plus proposée. */ over?: boolean };
+  season: {
+    name: string;
+    minHomeLevel: number;
+    recipeNotes: string[];
+    /** Saison terminée : plus proposée. */
+    over?: boolean;
+    /** Fin de la saison (ISO) : au-delà, elle n'est plus proposée. */
+    ends?: string;
+    /** Monnaie des graines et ce qu'on en gagne au moins par jour. */
+    currency?: string;
+    currencyPerDay?: number;
+    /** Points de saison connus pour toutes les recettes (sinon pas d'objectif « points »). */
+    pointsKnown?: boolean;
+    /** Commandes de saison : objet, quantité, récompense (monnaie de saison et Pièces de logis). */
+    orders?: { item: string; qty: number; beans: number; coins: number }[];
+  };
   names: { facilities: Record<string, string>; items: Record<string, string> };
   /** Par installation et par niveau (index 0 = niveau 1) : stock, puissance électrique, coût en Pièces de logis. */
   levels: Record<string, { stock: number | null; power: number | null; cost: number | null }[]>;
@@ -76,6 +91,10 @@ interface HomelandData {
 }
 
 export const HOMELAND = raw as unknown as HomelandData;
+/** La saison du Logis est-elle ouverte en ce moment ? */
+export const seasonLive = (now = Date.now()) => !HOMELAND.season.over && (!HOMELAND.season.ends || now < Date.parse(HOMELAND.season.ends));
+/** Monnaie des graines de la saison. */
+export const SEASON_CURRENCY = HOMELAND.season.currency ?? 'Blé de rayon de lune';
 export const FACILITY_BY_ID = new Map(HOMELAND.facilities.map((f) => [f.id, f]));
 export const RECIPES = HOMELAND.recipes;
 

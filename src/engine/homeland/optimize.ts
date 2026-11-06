@@ -1,6 +1,6 @@
 import { solveLP } from '../lp';
 import type { AbilityId } from '../abilities';
-import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, type Environment, type Recipe } from '../../data/homeland';
+import { FACILITY_BY_ID, HOMELAND, RECIPES, atRv, seasonLive, type Environment, type Recipe } from '../../data/homeland';
 import { uncoveredFactor, wateredSeconds, workSeconds } from './speed';
 import { layoutsFor, PAIR_COMBOS, PAIR_KINDS, PAIR_LAYOUTS, PLOT_KIND, type PlotKind } from './coverage';
 
@@ -138,9 +138,10 @@ export interface PlanOptions {
    */
   feeding?: boolean;
   /**
-   * Saison en cours (Lune des moissons, dès le niveau 10) : ses cultures et recettes, et les points
-   * de l'événement gagnés sur chaque objet de saison vendu. `notes` : recettes débloquées par une
-   * Note de recette. `wheatPerDay` : Blé de lune dépensable par jour en graines (null : sans limite).
+   * Saison du Logis en cours (dès le niveau 10, jusqu'à sa date de fin) : ses cultures et recettes,
+   * et les points de l'événement gagnés sur chaque objet de saison vendu. `notes` : recettes
+   * débloquées par une Note de recette. `wheatPerDay` : monnaie de saison dépensable par jour en
+   * graines (null : sans limite).
    */
   season?: { notes: boolean; wheatPerDay: number | null };
   /**
@@ -231,7 +232,7 @@ function recipeAllowed(r: Recipe, o: PlanOptions): boolean {
   if (r.module && (o.setup.modules[r.module.id] ?? 0) < r.module.level) return false;
   if (HOMELAND.specialRecipes.includes(r.id)) return false;
   if (r.season) {
-    if (!o.season || o.setup.rv < HOMELAND.season.minHomeLevel) return false;
+    if (!o.season || !seasonLive() || o.setup.rv < HOMELAND.season.minHomeLevel) return false;
     if (!o.season.notes && HOMELAND.season.recipeNotes.includes(r.id)) return false;
   }
   if (!r.verified && !o.includeUnverified) return false;
