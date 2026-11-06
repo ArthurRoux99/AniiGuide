@@ -19,7 +19,8 @@ import type { LuckyCounter, ProfileApi } from '../state/profile';
 
 const pct = (p: number) => `${(p * 100).toLocaleString('fr-FR', { maximumFractionDigits: p < 0.01 ? 2 : 0 })} %`;
 const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
-const day = (iso: string, shift = 0) => new Date(Date.parse(iso + 'T12:00:00Z') + shift * 86400e3).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+const day = (iso: string, shift = 0) =>
+  new Date(Date.parse(iso + 'T12:00:00Z') + shift * 86400e3).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
 
 /** Prismana : planning de la semaine, compteur Lucky / Super Lucky, énergie de zone, liste des formes. */
 export function Prismana({ api }: { api: ProfileApi }) {
@@ -85,9 +86,9 @@ export function Prismana({ api }: { api: ProfileApi }) {
       <section className="card">
         <h2>Compteur Lucky</h2>
         <p className="hint">
-          Chaque capture réussie peut donner un <b>Super Lucky</b> (tiré en premier) ou un <b>Lucky</b>. La chance baisse avec le nombre déjà obtenu dans la
-          semaine, mais une garantie le donne au plus tard au bout d'un nombre fixe de captures. Note tes captures ici pour savoir où tu en es. Un lancer
-          raté ne compte pas.
+          Chaque capture réussie peut donner un <b>Super Lucky</b> (tiré en premier) ou un <b>Lucky</b>. La chance baisse avec le nombre déjà obtenu
+          dans la semaine, mais une garantie le donne au plus tard au bout d'un nombre fixe de captures. Note tes captures ici pour savoir où tu en
+          es. Un lancer raté ne compte pas.
         </p>
         <label className="stat">
           <span>Serveur (remise à zéro le lundi 4 h)</span>
@@ -122,8 +123,8 @@ export function Prismana({ api }: { api: ProfileApi }) {
         </button>
         <p className="hint">
           Lucky : 1 % (garanti à la 200e capture) pour les 10 premiers de la semaine, puis 0,5 % (garanti à la 400e). Super Lucky : 0,2 % (500e) le
-          premier de la semaine, 0,1 % (1 000e) le deuxième, puis 0,05 % (3 000e). Un Lucky ou Super Lucky obtenu dans le monde d'un ami remplit l'énergie
-          de <b>ton</b> monde. Le jeu ne dit pas si les captures en cours vers la garantie repartent de zéro le lundi : on les garde.
+          premier de la semaine, 0,1 % (1 000e) le deuxième, puis 0,05 % (3 000e). Un Lucky ou Super Lucky obtenu dans le monde d'un ami remplit
+          l'énergie de <b>ton</b> monde. Le jeu ne dit pas si les captures en cours vers la garantie repartent de zéro le lundi : on les garde.
         </p>
         <p className="hint">
           Sources : annonce officielle des chances, reprise par{' '}
@@ -141,8 +142,8 @@ export function Prismana({ api }: { api: ProfileApi }) {
       <section className="card">
         <h2>Énergie prismatique d'une zone</h2>
         <p className="hint">
-          Chaque zone a sa jauge. Pleine ({nf.format(ENERGY_FULL)}), elle fait apparaître un Prismana à coup sûr. Un Lucky ajoute 302 en moyenne (275 à
-          500), un Super Lucky 1 500, un Nourrissage de la Branche 480 (+50 % pendant l'Abondance de la Veine).
+          Chaque zone a sa jauge. Pleine ({nf.format(ENERGY_FULL)}), elle fait apparaître un Prismana à coup sûr. Un Lucky ajoute 302 en moyenne (275
+          à 500), un Super Lucky 1 500, un Nourrissage de la Branche 480 (+50 % pendant l'Abondance de la Veine).
         </p>
         <div className="form-grid">
           <label className="stat">
@@ -174,7 +175,8 @@ export function Prismana({ api }: { api: ProfileApi }) {
         <ul className="plain">
           {prismana.map((a) => (
             <li key={a.id}>
-              <a href={`#aniidex/${a.id}`}>{a.name}</a> <span className="muted">· {a.habitats.length ? a.habitats.join(', ') : 'lieu non publié'}</span>
+              <a href={`#aniidex/${a.id}`}>{a.name}</a>{' '}
+              <span className="muted">· {a.habitats.length ? a.habitats.join(', ') : 'lieu non publié'}</span>
             </li>
           ))}
         </ul>
@@ -193,7 +195,14 @@ function Odds({ label, got, since, tier, onSince }: { label: string; got: number
       </span>
       <label>
         Captures depuis le dernier{' '}
-        <input type="number" min={0} inputMode="numeric" style={{ width: '100%', boxSizing: 'border-box' }} value={since} onChange={(e) => onSince(Math.max(0, Number(e.target.value) || 0))} />
+        <input
+          type="number"
+          min={0}
+          inputMode="numeric"
+          style={{ width: '100%', boxSizing: 'border-box' }}
+          value={since}
+          onChange={(e) => onSince(Math.max(0, Number(e.target.value) || 0))}
+        />
       </label>
       <span>
         Chance par capture : <b>{pct(tier.p)}</b> · garanti dans <b>{left}</b> captures

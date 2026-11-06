@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { facilityName, itemName } from '../data/homeland';
 import { climateLayout } from '../engine/homeland/climate';
 import { openCells, PLOT_GRID, PLOT_SIZE, type HomelandPlan, type PlacedPiece } from '../engine/homeland/homeland-plan';
@@ -105,6 +105,7 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
   const open = useMemo(() => new Set(openCells(rv).map((c) => c.plot)), [rv]);
   const [focus, setFocus] = useState<number | null>(null);
   const [hover, setHover] = useState<string | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
   // Bâtiments déjà posés en jeu, gardés pour ce plan précis (dans ce navigateur).
   const storeKey = `aniiguide.pose.${rv}.${Math.round(plan.walk)}.${plan.pieces.length}`;
   const [done, setDone] = useState<Set<string>>(() => {
@@ -184,13 +185,34 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
     focus != null
       ? PLOT_GRID.flatMap((row, j) => row.map((n, i) => ({ n, x: i * PLOT_SIZE.w, y: j * PLOT_SIZE.h }))).find((c) => c.n === focus)!
       : null;
-  const xs = plan.cells.flatMap((c) => [c.x, c.x + c.w]);
-  const ys = plan.cells.flatMap((c) => [c.y, c.y + c.h]);
+  // Vue d'ensemble : cadrée sur ce qui est posé (le reste du terrain ouvert est vide).
+  const xs = spots.flatMap((s) => [s.rect.x, s.rect.x + s.rect.w]);
+  const ys = spots.flatMap((s) => [s.rect.y, s.rect.y + s.rect.h]);
   const [x0, x1, y0, y1] = fp
     ? [fp.x - 2, fp.x + PLOT_SIZE.w + 0.5, fp.y - 2, fp.y + PLOT_SIZE.h + 0.5]
     : [Math.min(...xs) - 1, Math.max(...xs) + 1, Math.min(...ys) - 1, Math.max(...ys) + 1];
   const shown = focus != null ? spots.filter((s) => s.plot === focus) : spots;
   const left = spots.filter((s) => !done.has(s.key)).length;
+
+  const step = (s: Spot) => (
+    <li key={s.key} className={done.has(s.key) ? 'is-done' : undefined} onMouseEnter={() => setHover(s.key)} onMouseLeave={() => setHover(null)}>
+      <label>
+        <input type="checkbox" checked={done.has(s.key)} onChange={() => toggle(s.key)} />
+        <span className="hm-key" style={{ background: s.color }}>
+          {s.key === 'storage' ? '📦' : s.key === 'gen' ? '⚡' : s.key.startsWith('pole') ? '•' : num(plan.pieces[Number(s.key.slice(1))])}
+        </span>
+        <span>
+          <b>{s.label}</b>
+          {s.item && <span className="muted"> · {s.item}</span>}
+          {s.electric && ' ⚡'}
+          <br />
+          <small className="muted">
+            {focus == null && `parcelle ${s.plot}, `}colonne {fmtCase(s.col)}, ligne {fmtCase(s.row)} · {fmtCase(s.rect.w)}×{fmtCase(s.rect.h)} cases
+          </small>
+        </span>
+      </label>
+    </li>
+  );
 
   return (
     <>
@@ -207,7 +229,7 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
           );
         })}
       </div>
-      <div className="homeland-map">
+      <div className="homeland-map" ref={mapRef}>
         <svg viewBox={`${x0} ${y0} ${x1 - x0} ${y1 - y0}`} role="img" aria-label={focus != null ? `Parcelle ${focus}` : 'Plan du logis'}>
           {PLOT_GRID.flatMap((row, j) =>
             row.map((plot, i) => {
@@ -339,13 +361,34 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
           </g>
         </svg>
       </div>
+      <div className="row">
+        <button type="button" className="btn" onClick={() => mapRef.current?.requestFullscreen?.().catch(() => undefined)}>
+          🔍 Plein écran
+        </button>
+      </div>
+      <ul className="hm-legend">
+        {kinds.map((k, i) => {
+          const [facility, item] = k.split('|');
+          const n = plan.pieces.filter((p) => `${p.facility}|${p.item ?? ''}` === k).length;
+          return (
+            <li key={k}>
+              <span className="hm-key" style={{ background: colorOf(facility) }}>
+                {i + 1}
+              </span>
+              {n > 1 && `${n} × `}
+              {facilityName(facility).name}
+              {item && <span className="muted"> · {itemName(item).name}</span>}
+            </li>
+          );
+        })}
+      </ul>
       {plan.power?.generator && (
         <p className="hint">
           ⚡ Réseau électrique : le Générateur crépitant et {plan.power.poles.length} Poteau
           {plan.power.poles.length > 1 ? 'x' : ''} électrique
-          {plan.power.poles.length > 1 ? 's' : ''} ; en pointillés jaunes, la zone alimentée (carré de 11 cases autour du Générateur, de 7 autour
-          d'un Poteau). Un Poteau est relié au réseau quand sa zone chevauche celle du Générateur ou d'un Poteau déjà relié. Les installations
-          électriques (bord jaune) doivent toucher une zone.
+          {plan.power.poles.length > 1 ? 's' : ''} ; en pointillés jaunes, la zone alimentée (carré de 11 cases autour du Générateur, de 7 autour d'un
+          Poteau). Un Poteau est relié au réseau quand sa zone chevauche celle du Générateur ou d'un Poteau déjà relié. Les installations électriques
+          (bord jaune) doivent toucher une zone.
           {plan.pieces.some((p) => p.unpowered) && <b className="bad"> Bord rouge : hors réseau, plus de Poteaux autorisés à ce niveau.</b>}
         </p>
       )}
@@ -360,33 +403,29 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
         Position = coin haut-gauche du bâtiment, en cases depuis le coin haut-gauche de sa parcelle (colonne 1 à 20, ligne 1 à 15), vue de dessus
         comme la carte du logis. Choisis une parcelle pour la voir case par case. Coche ce qui est posé : c'est gardé sur cet appareil.
       </p>
-      <ul className="hm-steps">
-        {shown.map((s) => (
-          <li
-            key={s.key}
-            className={done.has(s.key) ? 'is-done' : undefined}
-            onMouseEnter={() => setHover(s.key)}
-            onMouseLeave={() => setHover(null)}
-          >
-            <label>
-              <input type="checkbox" checked={done.has(s.key)} onChange={() => toggle(s.key)} />
-              <span className="hm-key" style={{ background: s.color }}>
-                {s.key === 'storage' ? '📦' : s.key === 'gen' ? '⚡' : s.key.startsWith('pole') ? '•' : num(plan.pieces[Number(s.key.slice(1))])}
-              </span>
-              <span>
-                <b>{s.label}</b>
-                {s.item && <span className="muted"> · {s.item}</span>}
-                {s.electric && ' ⚡'}
-                <br />
-                <small className="muted">
-                  {focus == null && `parcelle ${s.plot}, `}colonne {fmtCase(s.col)}, ligne {fmtCase(s.row)} · {fmtCase(s.rect.w)}×{fmtCase(s.rect.h)}{' '}
-                  cases
-                </small>
-              </span>
-            </label>
-          </li>
-        ))}
-      </ul>
+      {focus != null ? (
+        <ul className="hm-steps">{shown.map(step)}</ul>
+      ) : (
+        <>
+          <ul className="hm-steps">{spots.filter((s) => s.key === 'storage').map(step)}</ul>
+          {plots.map((n, k) => {
+            const inPlot = spots.filter((s) => s.plot === n && s.key !== 'storage');
+            const todo = inPlot.filter((s) => !done.has(s.key)).length;
+            return (
+              <details key={n} className="hm-plotlist" open={k === 0}>
+                <summary>
+                  Parcelle {n}{' '}
+                  <span className="muted">
+                    · {inPlot.length} bâtiment{inPlot.length > 1 ? 's' : ''}
+                    {todo ? `, ${todo} à poser` : ', tout est posé ✓'}
+                  </span>
+                </summary>
+                <ul className="hm-steps">{inPlot.map(step)}</ul>
+              </details>
+            );
+          })}
+        </>
+      )}
       {done.size > 0 && (
         <button
           type="button"
@@ -404,22 +443,6 @@ function TerrainMap({ plan, rv }: { plan: HomelandPlan; rv: number }) {
         </button>
       )}
 
-      <ul className="hm-legend">
-        {kinds.map((k, i) => {
-          const [facility, item] = k.split('|');
-          const n = plan.pieces.filter((p) => `${p.facility}|${p.item ?? ''}` === k).length;
-          return (
-            <li key={k}>
-              <span className="hm-key" style={{ background: colorOf(facility) }}>
-                {i + 1}
-              </span>
-              {n > 1 && `${n} × `}
-              {facilityName(facility).name}
-              {item && <span className="muted"> · {itemName(item).name}</span>}
-            </li>
-          );
-        })}
-      </ul>
       {plan.unplaced.length > 0 && (
         <p className="bad">
           Pas de place pour : {plan.unplaced.map((u) => facilityName(u.facility).name).join(', ')}. Ouvre une parcelle de terrain de plus ou range des
