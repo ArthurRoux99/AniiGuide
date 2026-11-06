@@ -5,7 +5,9 @@ import { HOMELAND } from '../../data/homeland';
 
 describe('quoi améliorer en premier', () => {
   it('coûts d’amélioration connus (Ferme : 10 → 480 000 pièces)', () => {
-    expect(HOMELAND.levels.farmland.map((l) => l.cost)).toEqual([10, 60, 700, 6200, 23500, 107000, 480000]);
+    // Les 7 niveaux relevés ; une mise à jour du jeu peut en ajouter (niveau 8 apparu le 29/10/2026,
+    // coût encore inconnu).
+    expect(HOMELAND.levels.farmland.slice(0, 7).map((l) => l.cost)).toEqual([10, 60, 700, 6200, 23500, 107000, 480000]);
   });
 
   it('des Pépinières sous-améliorées : les améliorer fait gagner du temps', () => {

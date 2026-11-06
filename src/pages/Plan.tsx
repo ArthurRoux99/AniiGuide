@@ -85,6 +85,10 @@ export function PlanPage({ api }: { api: ProfileApi }) {
       worker.current.w.onmessage = (e: MessageEvent<{ id: number; result: PlanResult }>) => {
         if (e.data.id === job) setExact({ options, result: e.data.result });
       };
+      // Solveur indisponible : on garde le calcul rapide (et le plan du logis reste accessible).
+      worker.current.w.onerror = () => {
+        if (worker.current?.id === job) setExact({ options, result: plan(options) });
+      };
       worker.current.w.postMessage({ id: job, wasmUrl: new URL(wasmUrl, location.href).href, options });
     }, 400);
     return () => clearTimeout(t);
@@ -198,7 +202,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
 
       <MyFacilities api={api} />
 
-      <Result result={result} goal={goal} rv={rv} who={who} />
+      <Result result={result} goal={goal} rv={rv} who={who} pending={exact?.options !== options} />
 
       {result.feasible && <Upgrades options={options} />}
 
@@ -233,7 +237,7 @@ export function PlanPage({ api }: { api: ProfileApi }) {
 
 type Goal = 'levelUp' | 'coins' | 'points';
 
-function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv: number; who: 'roster' | 'ideal' }) {
+function Result({ result, goal, rv, who, pending }: { result: PlanResult; goal: Goal; rv: number; who: 'roster' | 'ideal'; pending: boolean }) {
   const whole = useMemo(() => wholeUnits(result.rows), [result.rows]);
   if (!result.feasible) {
     return (
@@ -386,7 +390,7 @@ function Result({ result, goal, rv, who }: { result: PlanResult; goal: Goal; rv:
 
       {(result.climate.length > 0 || result.pairs.length > 0) && <ClimatePlan result={result} whole={whole} />}
 
-      <HomelandMap result={result} whole={whole} rv={rv} />
+      <HomelandMap result={result} whole={whole} rv={rv} pending={pending} />
 
       <section className="card">
         <h2>À vendre</h2>

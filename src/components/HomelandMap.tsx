@@ -23,7 +23,7 @@ const ENV_FACILITIES = new Set(['heat-furnace', 'cooling-unit', 'sunlamp']);
  * Plan complet du logis : toutes les installations du plan sur le vrai terrain (parcelles ouvertes
  * à ce niveau), autour de l'Entrepôt, les plus fréquentées au plus près.
  */
-export function HomelandMap({ result, whole, rv }: { result: Plan; whole: Map<PlanRow, number>; rv: number }) {
+export function HomelandMap({ result, whole, rv, pending = false }: { result: Plan; whole: Map<PlanRow, number>; rv: number; pending?: boolean }) {
   const [plan, setPlan] = useState<HomelandPlan | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -61,8 +61,8 @@ export function HomelandMap({ result, whole, rv }: { result: Plan; whole: Map<Pl
         carreau = 1 case du mode Construire.
       </p>
       {!plan && (
-        <button type="button" className="btn btn--primary" onClick={compute} disabled={busy}>
-          {busy ? 'Calcul du plan…' : '🗺️ Calculer le plan du logis'}
+        <button type="button" className="btn btn--primary" onClick={compute} disabled={busy || pending}>
+          {busy ? 'Calcul du plan…' : pending ? 'Calcul exact des recettes en cours…' : '🗺️ Calculer le plan du logis'}
         </button>
       )}
       {error && <p className="bad">{error}</p>}
