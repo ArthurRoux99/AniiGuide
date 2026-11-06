@@ -1,6 +1,6 @@
 {
  "source": "https://wikily.gg/fr/aniimo/homeland-food",
- "fetchedAt": "2026-10-25T09:49:52.156Z",
+ "fetchedAt": "2026-11-06T08:34:50.451Z",
  "perWorkerPerMinute": 10,
  "food": {
   "apple_candy": {
@@ -22,6 +22,11 @@
    "name": "Pain",
    "value": 26740,
    "madeAt": "Attrape-popote"
+  },
+  "candied_lanternfruit": {
+   "name": "Fruit-lanterne confit",
+   "value": 86250,
+   "madeAt": "Pickling Jar"
   },
   "captain_spud": {
    "name": "Capitaine Patate",
@@ -61,6 +66,11 @@
   "cranberry_chocolate": {
    "name": "Chocolat à la canneberge",
    "value": 90420,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "cranberry_soft_cake": {
+   "name": "Gâteau moelleux à la canneberge",
+   "value": 52060,
    "madeAt": "Cuisinière flamboyante"
   },
   "creamy_potato_soup": {
@@ -143,6 +153,16 @@
    "value": 30240,
    "madeAt": "Attrape-popote"
   },
+  "magic_pumpkin": {
+   "name": "Citrouille magique",
+   "value": 1350,
+   "madeAt": "Ferme"
+  },
+  "magic_pumpkin_cake": {
+   "name": "Gâteau de citrouille magique",
+   "value": 30190,
+   "madeAt": "Cuisinière flamboyante"
+  },
   "maple_candy_roasted_potatoes": {
    "name": "Pommes de terre rôties au bonbon à l'érable",
    "value": 39600,
@@ -152,6 +172,11 @@
    "name": "Bonbon en étoile à l'érable",
    "value": 28460,
    "madeAt": "Attrape-popote"
+  },
+  "memory_lanternfruit": {
+   "name": "Fruit-lanterne du souvenir",
+   "value": 1350,
+   "madeAt": "Ferme"
   },
   "milled_rice": {
    "name": "Riz décortiqué",
@@ -166,6 +191,11 @@
   "moondew_radish_slices": {
    "name": "Tranches de radis de rosée lunaire",
    "value": 45280,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "orange_flower_rice_drink": {
+   "name": "Boisson de riz à la fleur d'oranger",
+   "value": 52060,
    "madeAt": "Cuisinière flamboyante"
   },
   "potato": {
@@ -233,10 +263,30 @@
    "value": 46200,
    "madeAt": "Attrape-popote"
   },
+  "sea_salt_roasted_pumpkin": {
+   "name": "Citrouille rôtie au sel de mer",
+   "value": 25920,
+   "madeAt": "Attrape-popote"
+  },
   "shredded_coconut": {
    "name": "Noix de coco râpée",
    "value": 10000,
    "madeAt": "Séchoir jukebox"
+  },
+  "shredded_coconut_cake": {
+   "name": "Gâteau à la noix de coco râpée",
+   "value": 52060,
+   "madeAt": "Cuisinière flamboyante"
+  },
+  "sorghum_flour": {
+   "name": "Farine de sorgho",
+   "value": 14900,
+   "madeAt": "Moulin-carrousel"
+  },
+  "sorghum_porridge": {
+   "name": "Bouillie de sorgho",
+   "value": 29810,
+   "madeAt": "Marmite à mijoter"
   },
   "soy_sauce_fried_rice": {
    "name": "Riz frit à la sauce soja",

@@ -3,7 +3,7 @@
  "url": "https://aniidex.com/tier-list/",
  "note": null,
  "pageDate": "2026-10-21",
- "fetchedAt": "2026-10-25T09:49:41.728Z",
+ "fetchedAt": "2026-11-06T08:34:38.748Z",
  "scale": [
   "S",
   "A",
@@ -33,7 +33,7 @@
    "tier": "S"
   },
   {
-   "id": "en:Sparkelf",
+   "id": "11001-basic-form",
    "tier": "S"
   },
   {
@@ -185,7 +185,7 @@
    "tier": "C"
   },
   {
-   "id": "en:Hexxin",
+   "id": "021-basic-form",
    "tier": "C"
   },
   {
@@ -367,8 +367,6 @@
  ],
  "unmatched": [
   "Soleon (Basic Form) : S",
-  "Sparkelf (Basic Form) : S",
-  "Fennelun (Basic Form) : A",
-  "Hexxin (Basic Form) : C"
+  "Fennelun (Basic Form) : A"
  ]
 }

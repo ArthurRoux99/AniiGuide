@@ -3,7 +3,7 @@
  "url": "https://www.hideoutgacha.com/games/aniimo/tier-list",
  "note": null,
  "pageDate": "2026-10-04",
- "fetchedAt": "2026-10-25T09:49:42.018Z",
+ "fetchedAt": "2026-11-06T08:34:38.943Z",
  "scale": [
   "S",
   "A",
@@ -29,19 +29,11 @@
    "tier": "S"
   },
   {
-   "id": "003-timberline-form",
-   "tier": "S"
-  },
-  {
    "id": "004-basic-form",
    "tier": "B"
   },
   {
    "id": "006-basic-form",
-   "tier": "S"
-  },
-  {
-   "id": "006-rainfall-form",
    "tier": "S"
   },
   {
@@ -113,15 +105,7 @@
    "tier": "B"
   },
   {
-   "id": "012-timberline-form",
-   "tier": "B"
-  },
-  {
    "id": "015-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "015-flowerfield-form",
    "tier": "B"
   },
   {
@@ -141,10 +125,6 @@
    "tier": "B"
   },
   {
-   "id": "018-rainfall-form",
-   "tier": "B"
-  },
-  {
    "id": "018-cloudmist-form",
    "tier": "B"
   },
@@ -158,18 +138,6 @@
   },
   {
    "id": "021-basic-form",
-   "tier": "B"
-  },
-  {
-   "id": "021-mountain-form",
-   "tier": "B"
-  },
-  {
-   "id": "021-prismana-form",
-   "tier": "B"
-  },
-  {
-   "id": "en:Hexxin",
    "tier": "B"
   },
   {
@@ -213,23 +181,11 @@
    "tier": "B"
   },
   {
-   "id": "027-flowerfield-form",
-   "tier": "B"
-  },
-  {
    "id": "029-basic-form",
    "tier": "C"
   },
   {
-   "id": "029-flowerfield-form",
-   "tier": "C"
-  },
-  {
    "id": "029-nighttime-form",
-   "tier": "C"
-  },
-  {
-   "id": "029-timberline-form",
    "tier": "C"
   },
   {
@@ -242,10 +198,6 @@
   },
   {
    "id": "034-basic-form",
-   "tier": "D"
-  },
-  {
-   "id": "en:Thornblade (Rainstorm Form)",
    "tier": "D"
   },
   {
@@ -270,10 +222,6 @@
   },
   {
    "id": "037-highland-form",
-   "tier": "B"
-  },
-  {
-   "id": "037-flowerfield-form",
    "tier": "B"
   },
   {
@@ -322,10 +270,6 @@
   },
   {
    "id": "046-prismana-form",
-   "tier": "A"
-  },
-  {
-   "id": "046-timberline-form",
    "tier": "A"
   },
   {
@@ -389,10 +333,6 @@
    "tier": "A"
   },
   {
-   "id": "062-timberline-form",
-   "tier": "A"
-  },
-  {
    "id": "062-prismana-form",
    "tier": "A"
   },
@@ -402,10 +342,6 @@
   },
   {
    "id": "063-snowfield-form",
-   "tier": "A"
-  },
-  {
-   "id": "063-timberline-form",
    "tier": "A"
   },
   {
@@ -449,10 +385,6 @@
    "tier": "B"
   },
   {
-   "id": "079-rainfall-form",
-   "tier": "B"
-  },
-  {
    "id": "079-prismana-form",
    "tier": "B"
   },
@@ -489,16 +421,13 @@
    "tier": "B"
   },
   {
-   "id": "en:Sparkelf",
+   "id": "11001-basic-form",
    "tier": "S"
   }
  ],
  "unmatched": [
-  "Hexxin (Basic Form) : B",
-  "Thornblade (Rainstorm Form) : D",
   "Malevsera (Basic Form) : S",
   "Fennelun (Basic Form) : S",
-  "Helion (Basic Form) : B",
-  "Sparkelf (Basic Form) : S"
+  "Helion (Basic Form) : B"
  ]
 }
