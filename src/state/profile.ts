@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ANIIMO_BY_ID, currentId } from '../data/aniimo';
 import { parsePersonality } from '../engine/personality';
 import example from '../data/exemple-rv8.gen.json';
+import type { Server } from '../engine/lucky';
 
 // Profil « Mon Logis », sauvegardé dans le navigateur. Tout est local : rien n'est envoyé.
 
@@ -29,7 +30,21 @@ export interface Profile {
   facilities: Record<string, { count: number; level: number }>;
   /** Chasse aux œufs : pièces coquille d'œuf, éclats prismana, rang. */
   eggHeist: { coins: number; shards: number; rank: number; talents?: string[] };
+  /**
+   * Compteur Lucky : serveur, début de la semaine comptée (ms), Lucky et Super Lucky obtenus cette
+   * semaine, captures réussies depuis le dernier de chaque.
+   */
+  lucky?: LuckyCounter;
   updatedAt: string;
+}
+
+export interface LuckyCounter {
+  server: Server;
+  week: number;
+  lucky: number;
+  superLucky: number;
+  sinceLucky: number;
+  sinceSuper: number;
 }
 
 const KEY = 'aniiguide.profile.v1';
@@ -74,6 +89,18 @@ export function sanitizeProfile(input: unknown): Profile {
       rank: Math.min(6, Math.max(0, Number(p.eggHeist?.rank) || 0)),
       talents: Array.isArray(p.eggHeist?.talents) ? p.eggHeist.talents.filter((t: unknown): t is string => typeof t === 'string') : [],
     },
+    ...(p.lucky && typeof p.lucky === 'object'
+      ? {
+          lucky: {
+            server: (['eu', 'apac', 'am'] as const).includes(p.lucky.server) ? p.lucky.server : 'eu',
+            week: Math.max(0, Number(p.lucky.week) || 0),
+            lucky: Math.max(0, Number(p.lucky.lucky) || 0),
+            superLucky: Math.max(0, Number(p.lucky.superLucky) || 0),
+            sinceLucky: Math.max(0, Number(p.lucky.sinceLucky) || 0),
+            sinceSuper: Math.max(0, Number(p.lucky.sinceSuper) || 0),
+          },
+        }
+      : {}),
     usedCodes: Array.isArray(p.usedCodes) ? [...new Set(p.usedCodes.map((c) => String(c).toLowerCase()))] : [],
     workers: p.workers
       .filter((w) => w && ANIIMO_BY_ID.has(currentId(String(w.aniimoId))))
@@ -125,6 +152,7 @@ export function useProfile() {
         return { ...p, facilities };
       }),
     setEggHeist: (patch: Partial<Profile['eggHeist']>) => update((p) => ({ ...p, eggHeist: { ...p.eggHeist, ...patch } })),
+    setLucky: (lucky: LuckyCounter) => update((p) => ({ ...p, lucky })),
     setShinies: (n: number) => update((p) => ({ ...p, shinies: Math.max(0, n) })),
     addWorker: (aniimoId: string) => update((p) => ({ ...p, workers: [...p.workers, { uid: uid(), aniimoId, personality: null }] })),
     removeWorker: (id: string) => update((p) => ({ ...p, workers: p.workers.filter((w) => w.uid !== id) })),
